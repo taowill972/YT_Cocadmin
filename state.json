@@ -3,7 +3,8 @@
     "NChuyBBcH64",
     "V6QoHjpODsI",
     "tNIKU-N_Yc4",
-    "h4z6ly0Kd7s"
+    "h4z6ly0Kd7s",
+    "rqE0Vw0p_OQ"
   ],
   "processed_videos": [
     {
@@ -50,6 +51,18 @@
       "duration_str": "00:08:36",
       "md_file": "YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 0,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "rqE0Vw0p_OQ",
+      "title": "J'upgrade mon homelab éclaté mais surpuissant",
+      "upload_date": "20260625",
+      "duration": 550,
+      "duration_str": "00:09:10",
+      "md_file": "YT_Cocadmin_Transcript/2026-06-25_YT-[rqE0Vw0p_OQ]_J'upgrade mon homelab éclaté mais surpuissant_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-06-25_YT-[rqE0Vw0p_OQ]_J'upgrade mon homelab éclaté mais surpuissant_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 0,
       "audit_score": 100.0,
       "audit_passed": true
@@ -200,7 +213,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": null,
-  "completed_count": 4,
+  "completed_count": 5,
   "total_catalog_count": 142,
   "status": "ready"
 }
