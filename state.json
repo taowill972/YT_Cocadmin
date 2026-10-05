@@ -1,7 +1,8 @@
 {
   "processed_ids": [
     "NChuyBBcH64",
-    "V6QoHjpODsI"
+    "V6QoHjpODsI",
+    "tNIKU-N_Yc4"
   ],
   "processed_videos": [
     {
@@ -25,6 +26,18 @@
       "md_file": "YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 2,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "tNIKU-N_Yc4",
+      "title": "Le nouvel outils préféré des vibe codeurs!",
+      "upload_date": "20260901",
+      "duration": 936,
+      "duration_str": "00:15:36",
+      "md_file": "YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 6,
       "audit_score": 100.0,
       "audit_passed": true
     }
@@ -174,7 +187,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": null,
-  "completed_count": 2,
+  "completed_count": 3,
   "total_catalog_count": 142,
   "status": "ready"
 }

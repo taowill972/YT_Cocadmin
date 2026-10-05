@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le nouvel outils préféré des vibe codeurs! — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Le nouvel outils préféré des vibe codeurs!</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=tNIKU-N_Yc4" target="_blank">Lien YouTube (<code>tNIKU-N_Yc4</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-09-01</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:15:36</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **Le nouvel outils préféré des vibe codeurs!**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:22</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est Temux, c&#x27;est un outil qui a presque 20 ans et qui est redevenu un peu de nulle part le nouvel outil préféré des VibeCodeur. Je vais juste montrer exactement comment l&#x27;utiliser, comme ça toi aussi tu pourras booster ta productivité. Donc là on est dans Temux, mais ce qu&#x27;on voit surtout c&#x27;est les différentes applications en ligne de commande que je suis en train d&#x27;utiliser. Et on voit qu&#x27;à gauche là j&#x27;ai Codex, à droite j&#x27;ai un outil pour voir les stats de mon système et en bas j&#x27;ai des petits graphes pour mon réseau.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:22 - 00:00:42</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est la première utilité de Temux, c&#x27;est qu&#x27;on peut découper une fenêtre de terminale en autant de shell qu&#x27;on veut. Donc là par exemple, si je veux créer une nouvelle fenêtre, et bien là, je suis dans un nouveau terminal. Si j&#x27;en veux un deuxième, boum, je peux couper en deux, je peux couper aussi dans l&#x27;autre sens, je peux recouper dans ce sens-là, etc. Je peux revenir dessus, je peux cliquer, je peux changer, je peux revenir là où j&#x27;y étais, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal macOS, shell Zsh, multiplexeur de terminaux Tmux.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Invite de commande `coca@canette repos %` et barre d&#x27;état Tmux affichant l&#x27;index des fenêtres `[0] 0:ping- 1:zsh*` et les informations système (nom d&#x27;hôte &quot;canette&quot;, date et heure).</p>
+                        <p><strong>Action / Démonstration :</strong> Initialisation et présentation d&#x27;une session Tmux propre avant d&#x27;illustrer la création de nouvelles fenêtres et le découpage de l&#x27;écran en plusieurs volets (splittage vertical/horizontal).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000032_seg2.jpg" alt="Terminal macOS exécutant une session Tmux avec une invite de commande zsh et la barre de statut verte active en bas de l&#x27;écran." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000032_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:32</span>
+                        <span class="caption-text">Terminal macOS exécutant une session Tmux avec une invite de commande zsh et la barre de statut verte active en bas de l&#x27;écran.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:42 - 00:01:01</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc le gros avantage de ça, c&#x27;est qu&#x27;on peut facilement passer d&#x27;une fenêtre à une autre, d&#x27;un panel à un autre, et tout ça 100% au clavier. Donc on n&#x27;a pas besoin de bouger notre main, d&#x27;aller sur la souris, d&#x27;aller cliquer sur un tab, etc. On peut vraiment faire tout ce qu&#x27;on veut au clavier. Mais ça ne s&#x27;arrête pas là. Parce que si par exemple je suis là et je sais pas, mon terminal il crache. Hop, boum, voilà c&#x27;est fermé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:01 - 00:01:20</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Voilà, oh non j&#x27;ai perdu mon terminal, j&#x27;ai perdu mes connexions etc. Mais en fait non, je peux juste revenir mon terminal, il va se rouvrir. Donc évidemment j&#x27;ai tout perdu sauf si je tape Tmux Attach pour me réattacher à ma station Tmux et là boum, je récupère tout. Je récupère tous mes onglets, je récupère tous mes panneaux, toutes mes fenêtres et mes applications elles ont continué de tourner pendant que mon terminal était complètement KO.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal (probablement iTerm2 ou Terminal.app) sous macOS.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `tmux attach`, informations de dernière connexion (`Last login`), prompt utilisateur (`coca@canette ~ %`).</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;utilisation de la commande `tmux attach` pour restaurer une session de travail persistante après une interruption du terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000106_seg4.jpg" alt="Plan sur le créateur devant un écran affichant un terminal macOS avec un prompt utilisateur et des informations de dernière connexion." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000106_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:06</span>
+                        <span class="caption-text">Plan sur le créateur devant un écran affichant un terminal macOS avec un prompt utilisateur et des informations de dernière connexion.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000111_seg4.jpg" alt="Gros plan sur un terminal macOS présentant la commande `tmux attach` tapée au prompt, avec le créateur en incrustation." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000111_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:11</span>
+                        <span class="caption-text">Gros plan sur un terminal macOS présentant la commande `tmux attach` tapée au prompt, avec le créateur en incrustation.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:20 - 00:01:46</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc si j&#x27;ai des problèmes qui étaient en train de tourner, ils n&#x27;ont pas du tout arrêté, si j&#x27;avais des connexions SSH en cours à des serveurs, elles sont restées actives. Et tout ça comme si de rien n&#x27;était alors que mon terminal entier était kill et KO. Justement, diviser l&#x27;écran pour avoir plus de terminaux et avoir des sessions qui sont persistantes, c&#x27;est exactement ce qu&#x27;on a envie quand on commence à goûter un peu au choix du vibe coding. Parce qu&#x27;on veut lancer plein d&#x27;argent en même temps qui vont faire différentes choses pour être plus productif. En même temps, si on veut faire autre chose et qu&#x27;on ferme notre ordi et qu&#x27;on a des connexions, des programmes, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:46 - 00:02:12</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et bah c&#x27;est chiant. On est obligé un peu de laisser notre ordi allumé pour que tout continue à tourner. Alors qu&#x27;avec Tmux par exemple je pourrais l&#x27;utiliser sur un serveur à distance qui va être mon serveur de développement et même si je paie internet, même si mon ordi explose, mes programmes, mes achats continuent à tourner sur mon serveur. Et quand je reviens sur le serveur depuis un autre ordi, je peux reprendre exactement depuis là où j&#x27;en étais. Donc on peut dire ok, t&#x27;es bien gentil, tu tapes des touches un peu au hasard sur ton clavier et ça fait des trucs dans Tmux, comment est-ce que ça marche concrètement ? Première chose, il faut l&#x27;installer si tu l&#x27;as pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, multiplexeur de terminaux (Tmux), moniteur système de type dashboard CLI.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes de parsing Python (`python3 parse_jobs.py`), logs de déploiement de templates, invite de commande shell (`cocadmin@laptop repo $`), graphiques d&#x27;activité CPU et mémoire.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;intérêt d&#x27;exécuter des processus persistants sur un serveur de développement distant via Tmux pour s&#x27;affranchir des coupures réseau ou de l&#x27;extinction de la machine locale.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000153_seg6.jpg" alt="Vue en angle du présentateur devant son écran affichant des logs d&#x27;exécution de scripts Python de parsing et de génération de templates HTML (`parse_jobs.py`)." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000153_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:53</span>
+                        <span class="caption-text">Vue en angle du présentateur devant son écran affichant des logs d&#x27;exécution de scripts Python de parsing et de génération de templates HTML (`parse_jobs.py`).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000159_seg6.jpg" alt="Plan centré montrant un écran divisé en multiplexage (Tmux) avec l&#x27;exécution de tâches automatisées à gauche et un tableau de bord de monitoring système (métriques CPU, mémoire, processus actifs) à droite." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000159_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:59</span>
+                        <span class="caption-text">Plan centré montrant un écran divisé en multiplexage (Tmux) avec l&#x27;exécution de tâches automatisées à gauche et un tableau de bord de monitoring système (métriques CPU, mémoire, processus actifs) à droite.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000205_seg6.jpg" alt="Présentateur mimant une action devant son terminal affichant l&#x27;invite de commande locale `cocadmin@laptop repo $`." loading="lazy" onclick="openLightbox('../screenshots/tNIKU-N_Yc4/tNIKU-N_Yc4_000205_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:05</span>
+                        <span class="caption-text">Présentateur mimant une action devant son terminal affichant l&#x27;invite de commande locale `cocadmin@laptop repo $`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:12 - 00:02:31</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si t&#x27;es sur Mac tu peux faire brou install Tmux. Si t&#x27;es sur Linux ou WSL tu peux faire apt install Tmux. Ok ? Comme d&#x27;habitude, rien de compliqué. Maintenant que tu l&#x27;as installé pour lancer tes mux, c&#x27;est très simple. Tu tapes juste tes mux. Et hop ! Là, tu vas t&#x27;ouvrir un nouveau terminal, une nouvelle session en bas. Et tu vas avoir cette fameuse ligne verte en bas ici.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:31 - 00:03:03</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça, c&#x27;est quelque chose évidemment que tu peux customiser comme tu veux, etc. Mais par défaut, c&#x27;est comme ça. Et là, tu vois ici, il y a marqué ZSH. Ça veut dire que le programme qui est en train de tourner dans mon premier espace, ma première fenêtre, c&#x27;est ZSH qui est le shell que j&#x27;utilise. Ce que je peux aussi faire, c&#x27;est lancer tes mux et donner un nom à ma session. Et comme ça, si j&#x27;ai différents projets, je peux avoir une session par projet et facilement passer de l&#x27;un à l&#x27;autre. On va dire New pour une nouvelle session. Et ensuite, &quot;-s&quot;, pour donner le nom et on va dire projet 1. Et là, ça m&#x27;a lancé, pareil, une nouvelle session, sauf que ici, elle s&#x27;appelle projet 1. Donc, je pourrais facilement y revenir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:03 - 00:03:32</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si maintenant, je veux créer un panneau, c&#x27;est comme ça que ça s&#x27;appelle dans Temux, on a des fenêtres et on a des panneaux. Donc là, si je veux diviser mon écran en deux, je vais créer un deuxième panneau. Et donc, dans Temux, tout va commencer par un raccourci clavier qu&#x27;on appelle parfois le leader qui va être par défaut CTRL B. Donc, je vais faire CTRL B, je relâche, et là ensuite je vais faire une commande qui va être juste pour Tmux. Donc là par exemple je vais faire % et % ça coupe l&#x27;écran en deux. Si je voulais couper l&#x27;écran horizontalement, je ferais encore commande B et cette fois guillemets et ça me coupe l&#x27;écran horizontalement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:32 - 00:04:06</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si je veux changer de panneau, encore une fois je vais faire CTRL B et ensuite je vais faire soit les flèches par exemple, la flèche du haut et là on voit que ce qui est surligné en vert là c&#x27;est le panneau dans lequel je suis en ce moment. Si je veux passer sur celui de gauche, je fais CTRL B et gauche et là je peux écrire dans celui de gauche. Ce que moi j&#x27;utilise souvent qui est un peu plus pratique, c&#x27;est de faire CTRL B O et en fait CTRL B O ça va juste passer de l&#x27;un à l&#x27;autre et tourner comme ça. Maintenant si je veux créer une deuxième fenêtre pour pouvoir faire autre chose, peut-être un autre projet ou faire un truc vite fait à côté, je vais faire encore une fois CTRL B et C pour Create, pour créer une nouvelle fenêtre. Et donc là, hop,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:06 - 00:04:27</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">je suis dans une nouvelle fenêtre. Si maintenant je veux revenir dans mon ancienne fenêtre, je vais faire CTRL B, P pour Previous, la précédente. Et si je veux retourner encore dans l&#x27;autre, je peux faire CTRL B N pour Next. Et donc comme ça avec N et P, on peut se balader de fenêtre en fenêtre. Imaginons que je veux sortir de Tmux, je vais faire CTRL B D pour me détacher de ma session. Ça ne veut pas dire que ce qui était dedans est parti, c&#x27;est encore là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:27 - 00:04:45</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">D&#x27;ailleurs si je fais Tmux LS, je peux voir la liste des sessions. J&#x27;ai la session que j&#x27;avais avant avec mes 10 000 tables et j&#x27;ai la session que j&#x27;ai créée qui s&#x27;appelle projet 1. Et si je veux revenir dedans, je vais faire Tmux Attach-T projet 1. Et boum, je retourne dans ma session.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:45 - 00:05:06</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc maintenant que tu sais utiliser Tmux, peut-être que tu te demandes « Mais attends, c&#x27;est quoi le rapport avec le vibe coding ? » Justement, un des trucs qu&#x27;on peut faire avec Tmux, c&#x27;est démarrer une session en lui donnant une commande directement à exécuter. Donc par exemple, si je fais Tmux, new, parce que je vais créer une nouvelle session, &quot;-s&quot;, pour lui donner un nom, on va dire session, et ensuite je peux lui donner la commande que je veux faire tourner dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:06 - 00:05:26</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Par exemple, ping 1.1.1.1. Et donc là, quand je fais ça, automatiquement, au lieu de me lancer par défaut mon bash ou mon shell ou mon zsh, et bien là ça me lance la commande que je veux passer qui est ping. Et donc ça j&#x27;ai réussi à le faire sans avoir à cliquer nulle part. Pour aller encore même un petit peu plus loin, je peux faire la même chose, mais ici il y a rajouté &quot;-d&quot;, pour pouvoir le lancer en arrière-plan.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:26 - 00:05:45</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là il n&#x27;y a rien qui se passe, mais si je fais tmux-ls, et bien j&#x27;ai ma session ici qui est créée par tmux, avec ping qui tourne dedans. Et donc si je fais tmux-attach session, et bien hop, j&#x27;arrive dans mon ping qui tourne depuis que je l&#x27;ai démarré tout à l&#x27;heure. Un autre exemple, si là je lance ce script, ça va automatiquement me lancer un benchmark de l&#x27;algorithme Bubble Sort.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:46 - 00:06:05</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc je vais avoir une fenêtre en bas avec Btop pour pouvoir voir mon utilisation de CPU, etc. Et au-dessus, je vais avoir une autre fenêtre qui va être en train d&#x27;exécuter l&#x27;algorithme Bubble Sort en Kotlin, qui a été créé par JetBrains, le sponsor de cette vidéo. Et quand on regarde ce benchmark, quelque chose qui est très intéressant, c&#x27;est les performances de Kotlin. Parce que ce qui se passe, c&#x27;est que la toute première itération de la boucle de l&#x27;algorithme Bubble Sort, c&#x27;est un petit peu lent parce que c&#x27;est interprété.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:05 - 00:06:28</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais ensuite, la JVM, une fois qu&#x27;elle a vu cette première itération, elle va générer du code machine à la volée pour optimiser la boucle spécifiquement pour mon processeur de ma machine. Ce qui fait qu&#x27;on a des performances qui sont très très proches des langages de bas niveau. Mais par contre, contrairement à un langage de bas niveau, mon code Kotlin, il peut compiler en bytecode pour la JVM, pour tourner sur mon ordi, sur Windows, sur Android, mais aussi en code natif pour tourner sur iOS ou alors en code JavaScript pour tourner dans un navigateur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:28 - 00:06:50</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, quelle que soit ma machine, j&#x27;aurai toujours les meilleures performances possibles en gardant juste une seule code base. Et aussi un code largement plus facile à maintenir que du code natif. Donc si ça t&#x27;intéresse, pour les 15 ans de Kotlin, JetBrains propose des cours qui sont gratuits pour Kotlin jusqu&#x27;au 9 octobre. Je te mets le lien dans la description. Et donc ça, j&#x27;ai pu le faire sans jamais cliquer nulle part. Je peux facilement lancer des terminaux avec des commandes dedans qui tournent pour toujours, facilement rentrer pour voir ce qui se passe et sortir pour pouvoir faire autre chose.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:50 - 00:07:14</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et si je peux faire tout ça directement avec des lignes de commandes, eh bien ça veut dire que tes agents IA aussi peuvent le faire. Par exemple, ton agent peut lancer ton serveur de dev, avoir les logs qui tournent dedans, et quand il a besoin, il peut facilement retourner dedans pour le redémarrer, ou alors il peut voir les logs. et tout ça en tapant juste une commande sans que ça le bloque ou que ça pourrisse sa fenêtre de contexte. Pour aller même encore plus loin, ton agent peut lancer d&#x27;autres agents dans d&#x27;autres terminaux et pouvoir surveiller ce qu&#x27;ils font, leur donner d&#x27;autres commandes, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:14 - 00:07:40</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc moi par exemple, je n&#x27;en suis pas encore là, mais souvent ce que je fais, c&#x27;est que je vais avoir mon codex par exemple, ou ça peut être ton cloud, qui va tourner dans un morceau du terminal. Et de l&#x27;autre côté, soit je vais avoir un autre agent pour pouvoir faire quelque chose qui n&#x27;a pas trop de rapport, ou souvent aussi je vais avoir juste un autre terminal pour pouvoir continuer à faire des choses manuellement. Et dans une autre fenêtre, c&#x27;est-à-dire fenêtre au sens de Tmux, et bah quand je fais CTRL-B-N et bah là je vais avoir pareil un ou deux ou trois terminaux qui vont m&#x27;afficher les logs des différents programmes sur lesquels je suis en train de travailler.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:40 - 00:08:01</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc je peux avoir par exemple les logs du frontend, les logs du backend, les logs de ma base de 2, etc. Donc je peux facilement voir tous mes logs dans ma deuxième fenêtre et facilement revenir ici dans mon codex pour pouvoir relancer d&#x27;autres prompts. Donc maintenant on sait comment et pourquoi l&#x27;utiliser. Moi pour aller un petit peu plus loin, il y a pas mal de paramètres et de personnalisation qu&#x27;on peut ajouter dans Temux. Donc moi en général j&#x27;aime bien avoir le minimum de configuration possible, si possible même aucune configuration.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:01 - 00:08:35</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">comme ça quand je change de machine, je ne suis pas perdu. Mais là j&#x27;ai ajouté un petit peu plus de trucs que d&#x27;habitude juste pour vous montrer ce qui est possible. Les deux paramètres que moi je vais mettre tout le temps, ça va être activer la souris. Donc en fait tu vas simplement créer un fichier dans ton répertoire personnel qui s&#x27;appelle .tmux.conf et dedans tu vas rajouter set-g mouse on ce qui va activer la souris. Donc là par exemple si j&#x27;ouvre un deuxième panneau, je peux choisir mon panneau en cliquant dessus tout simplement. Donc là à droite je peux écrire des commandes et là je peux revenir à gauche en cliquant dessus. Après en général c&#x27;est pas tant pouvoir cliquer parce qu&#x27;un des gros avantages de TEMUX c&#x27;est justement de tout pouvoir faire au</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:35 - 00:08:56</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">clavier et de ne pas perdre ce petit temps à devoir toucher ta souris de temps en temps. Mais moi j&#x27;utilise surtout pour pouvoir redimensionner les fenêtres parce que sans ça, sans la souris, il y a un raccourci pour le faire au clavier mais c&#x27;est vraiment bizarre. Je sais plus c&#x27;est quoi je crois c&#x27;est CTRL-B, ALT, gauche mais là même sur mon ordi ça marche pas donc je pense que sur Mac c&#x27;est encore différent c&#x27;est bizarre. Alors que là juste avec la souris, boum boum je peux redimensionner facilement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:56 - 00:09:27</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un truc qui te donne la souris aussi, c&#x27;est que tu peux facilement sélectionner du texte. Donc là par exemple, j&#x27;ai désactivé la souris. Imaginons que je voudrais sélectionner ces deux lignes ici. Si je vais jusque là, ça va. Mais dès que je sélectionne la deuxième ligne, tu vois qu&#x27;en fait ça me sélectionne ce qu&#x27;il y a dans l&#x27;autre terminal à côté. Donc c&#x27;est pas bon du tout. Donc pour pouvoir le réactiver, on peut faire encore une fois CTRL-B, deux points pour pouvoir donner une petite commande de configuration et dire set mouse on. Et là, boum, ça me réactive ma souris et je peux cliquer. Pour pas avoir à taper à chaque fois set mouse on, tu le mets dans ton ton fichier de config et c&#x27;est bon, c&#x27;est pour toujours.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:27 - 00:09:46</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un truc aussi qui est bien, c&#x27;est de mettre l&#x27;historique à 100 000 ou autant que tu veux parce que par défaut, comme c&#x27;est un très vieux programme, la limite je crois que c&#x27;est 2 000 ou 4 000, un truc comme ça. Et 2 000 lignes dans un terminal, ça va vraiment vite. Tu vas regarder des logs, tu affiches un truc, boum, ça va vraiment très très vite.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:46 - 00:10:10</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là tu vois par exemple, je suis dans mon codec, je veux voir ce qui s&#x27;est passé avant et bah je peux scroller, scroller, scroller, scroller, scroller, scroller jusqu&#x27;à 100 000 lignes par terminal. Le seul des avantages, c&#x27;est que ça consomme un petit peu de RAM sur la machine, mais sans mes lignes de texte, ça ne va jamais être un truc de fou. Donc ça pourrait même être 1 million, 10 millions, ça ne devrait pas vraiment gêner. Ensuite, dans les autres options qui ne sont pas indispensables, mais bon, c&#x27;est quand même bon à voir, c&#x27;est des options qui vont changer l&#x27;ordre des fenêtres.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:10 - 00:10:28</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc quand tu crées plusieurs fenêtres, par défaut, ta première fenêtre, ça va être la fenêtre 0 et ta deuxième fenêtre, ça va être la fenêtre 1 et la troisième, ça va être la 2, etc. Donc ce n&#x27;est pas super logique. En plus de ça, tu peux passer de fenêtre en fenêtre en faisant CTRL B 1, CTRL B 2, CTRL B 3, etc. Et si ta première fenêtre, c&#x27;est 0, tu dois faire CTRL B 0, c&#x27;est un peu loin sur le clavier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:28 - 00:10:47</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, tout ça, ça permet de faire en sorte qu&#x27;on commence à 1 et faire en sorte que quand tu fermes une fenêtre, par exemple, si tu fermes la 3, la 4 devient la 3. Comme ça, tu n&#x27;as pas des trous dans tes nombres de fenêtres. Ça, ça permet d&#x27;activer le mode 256 couleurs. Parfois, c&#x27;est déjà le cas par défaut, mais parfois, ce n&#x27;est pas le cas. Donc, quand tu le mets, tu es sûr que ça a toujours marché. Et ça peut servir dans certains programmes, par exemple, Btop.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:47 - 00:11:06</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est un programme en ligne de commande qui utilise pas mal de couleurs différentes. Et si tu n&#x27;as pas les 256 couleurs, c&#x27;est un petit peu plus moche. Mais ça va, ça reste utilisable aussi. Et ici pour Visual Activity, c&#x27;est peut-être plus quand tu démarres. Ça peut être cool quand je fais CTRL-B. Tu vois qu&#x27;en bas à gauche, ça s&#x27;allume. Ça veut dire que je sais que je suis en mode Tmux pour lancer une commande derrière.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:07 - 00:11:39</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si je fais échappe, je retourne en mode normal où les commandes ou les raccourcis clavier ou les choses que je vais faire, ça va rentrer directement dans mon application. Ça ne va pas rentrer dans Tmux. donc ça permet de visuellement savoir ce qu&#x27;on est en train de faire. Mais honnêtement quand tu as l&#x27;habitude après une ou deux semaines tu n&#x27;as plus vraiment besoin de ça. Donc ça c&#x27;est des trucs un peu de base mais comme je te dis, Tmux tu peux vraiment le customiser à fond et tu peux surtout rajouter des plugins pour pouvoir rajouter ou modifier des fonctionnalités. Et donc le premier plugin à installer c&#x27;est TPM qui va être en fait ton manager de plugins pour Tmux Plugin Manager qui va permettre de simplement installer des plugins avec cette petite commande</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:39 - 00:12:13</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">ici, Add Plugin. Et donc tu peux installer ton Plugin Manager avec ton Plugin Manager. Tu as juste à mettre cette commande-là. Ensuite, tu fais CTRL-B majuscule-I et hop, il va partir dans ta liste et installer les plugins qui ne sont pas encore installés. Un des plugins qui peut être intéressant, c&#x27;est justement TmuxSensible. C&#x27;est en fait une liste de configuration que la plupart des gens considèrent comme des trucs qui devraient presque être là par défaut, comme là ce que je viens de te montrer. Donc ça peut être intéressant à rajouter. Moi, j&#x27;aime bien savoir ce qu&#x27;il y a dans ma config, donc je ne l&#x27;ai pas ajouté. Ensuite, un plugin qui est un peu cool, si tu aimes bien avoir un terminal un peu fancy, c&#x27;est Tmux2K en référence à Powerline2K pour ceux qui connaissent.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:13 - 00:12:33</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">qui permet de customiser un peu plus la barre des tâches en bas. Là tu vois que ma barre des tâches, par rapport à celle que j&#x27;ai avant, qui est la barre par défaut, la fameuse barre verte, ben là elle est un petit peu plus custom. Elle est verte mais elle est verte sur noir et tu peux choisir la couleur, tu peux mettre des petites icônes, tu peux mettre par exemple ton utilisation de CPU, ton utilisation de ta RAM, dans quel dossier tu es, dans quelle branche de ton repo git tu es, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:33 - 00:12:54</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc tout ce qu&#x27;on voit après ici, c&#x27;est simplement juste pour mettre la couleur en vert sur noir, choisir le thème, il y a plusieurs thèmes aussi pour Tmux2K, et ensuite pour le dire que je veux la CPU, la RAM et le temps. Et donc du coup, on voit le CPU, la RAM et le temps ici. Et vraiment, les plugins et les customisations de Terminal, c&#x27;est vraiment un truc dans lequel tu peux plonger et ne plus jamais ressortir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:54 - 00:13:13</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc moi, je te conseille d&#x27;aller regarder ce repo qui s&#x27;appelle Awesome Temux et qui va retrouver plein de ressources, plein de configurations, plein d&#x27;outils, de plugins, de thèmes, etc. Et donc tu peux plonger là-dedans pendant des heures et des heures. Mais il faut quand même garder en tête que ce qui est intéressant, c&#x27;est utiliser le Terminal, pas juste changer les couleurs. Après, Tmux, ça reste un outil quand même qui a plus de 18 ans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:13 - 00:13:33</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc non seulement il aurait le droit de passer le permis, mais surtout, il y a des alternatives un peu plus modernes qui commencent à popper justement pour tout ce qui est vibe coding, utilisation des agents, etc. Et un des exemples, c&#x27;est Cmux, qui s&#x27;inspire un petit peu du nom de Tmux. Et il y a beaucoup de similarités avec Tmux, comme le fait que tu peux avoir différentes fenêtres, sauf que là, tu as des tables sur le côté pour tes différentes fenêtres, qui peuvent être par exemple tes différents projets.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:33 - 00:14:07</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et tu peux aussi découper avec des raccourcis un petit peu moins bizarres que sur Tmux, où tu peux simplement faire commander pour ajouter un terminal ou alors commande shift D pour le couper horizontalement. Et en plus, tu as des fonctionnalités un petit peu plus modernes comme par exemple tu peux avoir un navigateur parmi un des tables que tu veux utiliser. Et donc si tu es en train de coder, tu es en train d&#x27;essayer de voir le résultat, tu peux aller directement dans ton navigateur pour le voir tout en étant dans la même application sans avoir à switcher ou sans avoir à gauche un navigateur, un droit, un terminal, etc. Un autre truc qui est cool aussi dans CEMUX et qui ne pourra jamais être fait dans TEMUX, c&#x27;est que le zoom des fenêtres reste indépendant. Donc là par exemple,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:07 - 00:14:39</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">je peux avoir une grosse fenêtre et à gauche je peux avoir une petite fenêtre avec une petite police. Et ça comme Tmux et une application en ligne de commande et bah ça tourne dans ton terminal comme une seule et même application et donc du coup tu peux pas avoir différentes tailles de police pour certaines parties de l&#x27;écran. Un autre truc aussi que les gens aiment bien dans Tmux c&#x27;est qu&#x27;il y a des notifications quand t&#x27;es dans Cloud Code ou dans Codex et que l&#x27;agent est en train de te demander quelque chose et bah t&#x27;as une notification qui pop dans Tmux. Du coup si t&#x27;en a plusieurs qui tournent, tu peux facilement savoir lequel a besoin de ton attention. Mais en vrai ce genre de truc là tu peux l&#x27;avoir dans Tmux aussi si tu veux bidouiller un petit peu et Et personnellement, moi, ça fait très longtemps que j&#x27;utilise Tmux, donc je suis habitué aux raccourcis un petit peu plus tard.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:39 - 00:15:03</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et j&#x27;aime bien le fait que ce soit un outil qui est standard, que tu peux l&#x27;installer facilement partout. Par exemple, Tmux, ça ne marche que sur Mac. Là, Tmux, je peux l&#x27;avoir sur mon PC, sur mon Mac, sur mon serveur Linux à distance, ça marche partout pareil. Et surtout, Tmux, tu as la persistance, ce que tu n&#x27;as pas vraiment dans Tmux. C&#x27;est-à-dire que quand on ferme et qu&#x27;on le réouvre, il va garder l&#x27;arrangement des différentes fenêtres, mais il n&#x27;y a pas vraiment gardé la session qui tourne en arrière-plan.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:03 - 00:15:31</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, les trois fenêtres que j&#x27;ai sur le côté, on dirait que c&#x27;est la même chose, mais en fait, elles ont toutes redémarré. Donc s&#x27;il y avait un programme qui tournait dedans, il aurait été killé. Donc personnellement, je ne suis pas encore méga fan, mais peut-être que dans un futur proche, il va y avoir des outils un peu plus modernes qui vont pouvoir peut-être remplacer tes mux, mais je pense qu&#x27;on n&#x27;en est pas encore là. Si tu es développeur freelance et que tu sens qu&#x27;il y a de plus en plus de missions que tu loupes parce qu&#x27;elles demandent d&#x27;avoir des skills DevOps, deux ou trois fois par an, je fais une formation en petit groupe de six semaines pour pouvoir te rebooster, pour pouvoir pratiquer et apprendre tout ce que tu as besoin pour être OP en DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:31 - 00:15:34</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je te mets le lien en bas et pour tous les autres, je vous suggère d&#x27;aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
