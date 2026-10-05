@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `3 / 142` (`2.1%`)
+- **Vidéos traitées** : `4 / 142` (`2.8%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -22,6 +22,7 @@
 | 2026-10-05 | [NChuyBBcH64](https://www.youtube.com/watch?v=NChuyBBcH64) | **Pourquoi Nvidia à peur de ces nouvelles puces AI** | [2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `33` |
 | 2026-09-15 | [V6QoHjpODsI](https://www.youtube.com/watch?v=V6QoHjpODsI) | **Comment ChatGPT à HACKÉ sans faire exprès ?** | [2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `2` |
 | 2026-09-01 | [tNIKU-N_Yc4](https://www.youtube.com/watch?v=tNIKU-N_Yc4) | **Le nouvel outils préféré des vibe codeurs!** | [2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `6` |
+| 2026-08-25 | [h4z6ly0Kd7s](https://www.youtube.com/watch?v=h4z6ly0Kd7s) | **Arrête de confondre Proxy, Load Balancer ou API Gateway** | [2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*

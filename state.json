@@ -2,7 +2,8 @@
   "processed_ids": [
     "NChuyBBcH64",
     "V6QoHjpODsI",
-    "tNIKU-N_Yc4"
+    "tNIKU-N_Yc4",
+    "h4z6ly0Kd7s"
   ],
   "processed_videos": [
     {
@@ -38,6 +39,18 @@
       "md_file": "YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-09-01_YT-[tNIKU-N_Yc4]_Le nouvel outils préféré des vibe codeurs!_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 6,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "h4z6ly0Kd7s",
+      "title": "Arrête de confondre Proxy, Load Balancer ou API Gateway",
+      "upload_date": "20260825",
+      "duration": 516,
+      "duration_str": "00:08:36",
+      "md_file": "YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 0,
       "audit_score": 100.0,
       "audit_passed": true
     }
@@ -187,7 +200,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": null,
-  "completed_count": 3,
+  "completed_count": 4,
   "total_catalog_count": 142,
   "status": "ready"
 }
