@@ -1,0 +1,16 @@
+[Unit]
+Description=YouTube Cocadmin Passive Zero-Token Listener Daemon
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/YT_Cocadmin
+ExecStart=/usr/bin/python3 /root/YT_Cocadmin/daemon_listener.py
+Restart=always
+RestartSec=30
+StandardOutput=append:/var/log/yt_cocadmin_listener.log
+StandardError=append:/var/log/yt_cocadmin_listener.log
+
+[Install]
+WantedBy=multi-user.target

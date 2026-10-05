@@ -1,0 +1,20 @@
+# Secrets & API Keys
+gemini_keys.txt
+*.key
+*.token
+.env
+.gemini_keys
+
+# Cache & Py
+__pycache__/
+*.pyc
+
+# Medias & Work
+*.mp4
+*.m4a
+*.wav
+*.part
+*.ytdl
+temp_frames/
+/tmp/
+*.log
