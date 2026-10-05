@@ -21,7 +21,7 @@ CHANNEL_DOMAIN = "DevOps, SysAdmin, Linux, Cloud, Docker, Kubernetes, Homelab, B
 # Modèles IA (Strictement conformes aux consignes utilisateur)
 WHISPER_MODEL = "large-v3-turbo"
 GEMINI_MODEL = "gemini-3.5-flash-lite"
-FALLBACK_MODELS = ["gemini-2.5-flash-lite", "gemini-2.5-flash"]
+FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-2.5-flash"]
 MODEL_SIGNATURE = f"whisper-v3-large-turbo+{GEMINI_MODEL}"
 
 # Clés API & Réseau

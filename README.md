@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `1 / 142` (`0.7%`)
+- **Vidéos traitées** : `2 / 142` (`1.4%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -20,6 +20,7 @@
 | Date | Réf. Vidéo | Titre / Sujet | Fiche Markdown | Fiche Interactive HTML | Captures |
 | :--- | :--- | :--- | :--- | :--- | :---: |
 | 2026-10-05 | [NChuyBBcH64](https://www.youtube.com/watch?v=NChuyBBcH64) | **Pourquoi Nvidia à peur de ces nouvelles puces AI** | [2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `33` |
+| 2026-09-15 | [V6QoHjpODsI](https://www.youtube.com/watch?v=V6QoHjpODsI) | **Comment ChatGPT à HACKÉ sans faire exprès ?** | [2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `2` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*

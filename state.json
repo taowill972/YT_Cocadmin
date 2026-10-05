@@ -1,6 +1,7 @@
 {
   "processed_ids": [
-    "NChuyBBcH64"
+    "NChuyBBcH64",
+    "V6QoHjpODsI"
   ],
   "processed_videos": [
     {
@@ -12,6 +13,18 @@
       "md_file": "YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 33,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "V6QoHjpODsI",
+      "title": "Comment ChatGPT à HACKÉ sans faire exprès ?",
+      "upload_date": "20260915",
+      "duration": 815,
+      "duration_str": "00:13:35",
+      "md_file": "YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-09-15_YT-[V6QoHjpODsI]_Comment ChatGPT à HACKÉ sans faire exprès_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 2,
       "audit_score": 100.0,
       "audit_passed": true
     }
@@ -161,7 +174,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": null,
-  "completed_count": 1,
+  "completed_count": 2,
   "total_catalog_count": 142,
   "status": "ready"
 }
