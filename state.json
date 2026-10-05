@@ -1,6 +1,21 @@
 {
-  "processed_ids": [],
-  "processed_videos": [],
+  "processed_ids": [
+    "NChuyBBcH64"
+  ],
+  "processed_videos": [
+    {
+      "id": "NChuyBBcH64",
+      "title": "Pourquoi Nvidia à peur de ces nouvelles puces AI",
+      "upload_date": "20261005",
+      "duration": 845,
+      "duration_str": "00:14:05",
+      "md_file": "YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-10-05_YT-[NChuyBBcH64]_Pourquoi Nvidia à peur de ces nouvelles puces AI_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 33,
+      "audit_score": 100.0,
+      "audit_passed": true
+    }
+  ],
   "known_baseline_ids": [
     "NChuyBBcH64",
     "V6QoHjpODsI",
@@ -146,7 +161,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": null,
-  "completed_count": 0,
+  "completed_count": 1,
   "total_catalog_count": 142,
   "status": "ready"
 }
