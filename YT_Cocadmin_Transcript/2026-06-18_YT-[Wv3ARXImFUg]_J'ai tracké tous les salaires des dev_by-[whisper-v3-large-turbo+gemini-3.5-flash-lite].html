@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J&#x27;ai tracké tous les salaires des dev — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">J&#x27;ai tracké tous les salaires des dev</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=Wv3ARXImFUg" target="_blank">Lien YouTube (<code>Wv3ARXImFUg</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-06-18</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:08:29</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **J'ai tracké tous les salaires des dev**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:21</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est un site qui traque tous les salaires des devs en fonction des langages et des technos que j&#x27;ai créé il y a quelques mois. Mais le premier petit souci c&#x27;est que déjà ça traque que Paris. Et surtout au niveau infras c&#x27;est à moitié infaillible mais c&#x27;est aussi à moitié éclaté. Donc premièrement ce que je voulais faire c&#x27;était ajouter d&#x27;autres régions. Non seulement pour qu&#x27;on ait une meilleure idée des différences de salaire entre les régions. Mais aussi pour avoir plus de statistiques et plus fiable. Donc pour la partie scrapping ça n&#x27;a pas été trop trop compliqué à mettre à jour.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:21 - 00:00:56</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que j&#x27;ai utilisé le MCP de Bright Data qui sponsorise la vidéo on en reparlera plus tard. Donc j&#x27;ai juste dû faire 2-3 pompes pour lui dire ok bah fais moi la liste des régions Et puis à partir de maintenant pour chacune des régions tu vas récupérer toutes les offres d&#x27;emploi que tu peux trouver sur Indeed, LinkedIn et Freework Et comme parfois on a des fauchettes de salaires qui sont affichées Et bah ça nous donne une bonne idée de quel langage, quelle technologie, quelle région paye le plus Donc ça c&#x27;est cool mais comme maintenant on traque 15 régions au lieu de juste une Et bah ça fait 15 fois plus d&#x27;appels sur des serveurs Et donc c&#x27;est à peu près 15 fois plus lent à récupérer les données Donc forcément je me suis dit que j&#x27;allais paralléliser ça pour pouvoir faire plus de requêtes en même temps Pour que ça arrive plus vite Mais le petit souci, c&#x27;est que déjà je fais pas mal de requêtes pour avoir la liste des jobs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:56 - 00:01:14</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite, je fais une requête par job pour pouvoir récupérer un peu plus d&#x27;infos. Et ça sur trois sites différents. Donc quand tu multiplies par 15, tu multiplies par 15 les chances de te faire bannir ton IP. Donc ça, c&#x27;est un des nombreux soucis qu&#x27;on peut avoir quand on scrape des données. Donc là, ce que j&#x27;ai fait, c&#x27;est que j&#x27;ai simplement utilisé des proxys de NetData qui vont en fait me donner plein d&#x27;adresses IP différentes pour qu&#x27;à chaque fois que je fasse une requête, ça passe à travers une nouvelle IP.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:14 - 00:01:33</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme ça, je suis tranquille et je ne me fais jamais cramer. Donc maintenant, c&#x27;est cool parce que j&#x27;ai beaucoup plus d&#x27;infos. Donc j&#x27;avais déjà les salaires par langage et par technologie, mais maintenant ils sont un petit peu plus précis. Mais j&#x27;ai aussi pu rajouter ces statistiques par région pour savoir quelle région paye le plus ou le moins, en fonction de quelle technologie, avec différentes cartes, différents graphiques, pour pouvoir calculer aussi le nombre d&#x27;offres d&#x27;emploi en fonction des régions.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:33 - 00:01:56</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour voir aussi non seulement les salaires par langage, mais aussi le nombre d&#x27;offres d&#x27;emploi, parce que t&#x27;as des technos qui payent beaucoup plus que les autres, mais s&#x27;il n&#x27;y a jamais d&#x27;offres, ça sert à rien. Pour aussi potentiellement savoir si peut-être qu&#x27;il y a des régions où certaines technologies sont plus valorisées que d&#x27;autres. Donc maintenant le site a beaucoup plus d&#x27;infos, de statistiques, de graphiques, etc. Mais faut bien que je l&#x27;héberge quelque part et pas quelque part qui va cracher dès que je vais sortir cette vidéo et qu&#x27;il va y avoir direct des centaines ou des mille personnes qui vont cliquer dessus en même temps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:56 - 00:02:15</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc celle-là j&#x27;ai mis en place une affra incassable mais à la fois ultra fragile en même temps. Mais juste avant ça je vais trop parler vite fait du sponsor de la vidéo, Braille Data, que j&#x27;avais déjà utilisé dans la première version du projet. Et honnêtement sans ça je pense que j&#x27;aurais jamais commencé. Parce que scraper les sites c&#x27;est vraiment une galère. Entre naviguer entre les pages, nettoyer les données, éviter les bannes. Tout qui pète parce que tous les trois jours il y a une virgule qui change sur les sites.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:15 - 00:02:35</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça sur trois sites différents en même temps donc laisse tomber. Alors que là, j&#x27;ai utilisé leur scrapper managé. Donc en gros, si je veux récupérer les offres d&#x27;emploi de LinkedIn, ils me donnent une API toute faite. Et si demain, LinkedIn décide de déplacer le salaire et de le mettre à droite au lieu d&#x27;à gauche, bah, c&#x27;est pas mon problème. C&#x27;est Bright Data qui va mettre à jour leur scrapper et moi, j&#x27;ai rien à toucher. Au niveau infrat, comme je t&#x27;ai dit, moi, comme je scrappe une quinzaine de régions, j&#x27;ai énormément de chances de me faire ban.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:35 - 00:02:55</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et si je me fais ban mon IP de chez moi et que je peux plus aller sur LinkedIn, c&#x27;est quand même un petit peu chiant. Alors que là, avec leur proxy résidentiel, j&#x27;ai plus du tout à me soucier de ça. Ça me coûte littéralement quelques centimes par jour pour scraper tous les jobs de toutes les régions des trois différentes plateformes. Et surtout, je peux récupérer mes données beaucoup plus vite. En plus de ça, ils ont un MCP pour les agents IA. Et donc, ça permet de récupérer n&#x27;importe quelle donnée, n&#x27;importe quel site sans rien avoir à coder.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:55 - 00:03:27</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, c&#x27;est vraiment une solution tout en un pour tout ce qui est scrapping de données. Donc, si tu as des données à récupérer pour ton projet, je te recommande d&#x27;essayer Bright Data. Et avec le lien dans la description, tu as 15 dollars offerts. Ce qui est largement assez pour tester gratuitement un petit ou même un moyen projet. Et donc, pourquoi mon infra est infaillible ? Parce qu&#x27;en fait, je n&#x27;ai pas d&#x27;infra. j&#x27;utilise Cloudflare Pages qui est assez utile pour héberger des sites statiques et comme c&#x27;est hébergé par Cloudflare c&#x27;est redondé et mis en cache dans le monde entier, c&#x27;est super rapide, ça scale automatiquement et en plus c&#x27;est gratuit. Donc ce qui fait que le site il a quasi aucune chance de tomber. Et donc pourquoi est-ce que je dis que c&#x27;est quand même un peu éclaté ? C&#x27;est parce que quand je récupère tous ces jobs je les enregistre dans une base de données</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:27 - 00:04:01</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et si j&#x27;ai une base de données je peux pas avoir un site statique. Et donc au départ j&#x27;avais ma base de données, j&#x27;avais mon backend mais les données qui sont affichées sur le site elles sont pareilles pour tout le monde et elles changent pas jusqu&#x27;au lendemain. Donc au final ce que j&#x27;ai fait c&#x27;est que je continue à enregistrer les jobs dans une base de données, mais chaque jour je génère une page qui est statique qui contient toutes les informations qu&#x27;on va avoir dans la page et c&#x27;est ce fichier statique là que j&#x27;envoie chez Cloudflare et qui est servi à tout le monde. Le souci avec ça c&#x27;est que le script qui fait tout ça il tournait sur une VM de test qui tourne sur une machine de test chez moi dans mon placard ici. Donc autant dire que le truc est down toutes les deux semaines, il n&#x27;y a pas de backup, il n&#x27;y a rien quoi. Donc pour fixer ça j&#x27;ai passé le script de scrapping</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:01 - 00:04:35</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et de génération de la page sur GitHub Action qui est l&#x27;outil de CICID de GitHub et je l&#x27;ai configurer pour que chaque jour il lance ses étapes là de récupérer les données et générer la page et l&#x27;envoyer sur Cloudflare. Donc comme ça en théorie ça va marcher tous les jours. En théorie parce que GitHub en ce moment ils sont pas super up. Donc ça règle mon problème de fiabilité de mon pipeline et ça règle aussi mon problème de backup parce que du coup ma base de données c&#x27;est un fichier SQLite qui est dans mon repo et donc comme ça j&#x27;ai pas besoin de caisser la tête avec un backup non plus. Le souci encore avec ça c&#x27;est que maintenant que je scrape les 15 régions j&#x27;ai 15 fois plus de données et donc ma base de données est grossie de plus en plus. Et donc maintenant base</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:35 - 00:05:08</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">données fait 50, 60, 70 MO. Ce qui dépasse la limite de ce qu&#x27;on peut avoir dans un repo sur GitHub. Donc pour régler ce problème là, ce que j&#x27;ai fait c&#x27;est que j&#x27;ai utilisé Git LFS qui est un système qui va permettre de déporter ce fichier là dans un système de stockage différent. Comme ça Git va juste utiliser un pointeur vers ce fichier là et comme ça ton repo il reste d&#x27;une taille raisonnable. Et la limite de Git LFS dans GitHub je crois que c&#x27;est 1 giga donc ça me laisse quand même un petit peu le temps de voir venir. Donc là maintenant on a toutes les régions donc c&#x27;est par exemple tu es en Bretagne et je peux voir les différences de technologies qui sont les plus en demande en fonction de ton langage. Mais ce que j&#x27;ai surtout rajouté c&#x27;est la partie salaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:08 - 00:05:43</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là on peut voir que ça fait juste quelques semaines que j&#x27;ai commencé à récupérer les données donc on avait juste Paris avant et puis maintenant on commence à avoir de plus en plus pour les régions. Et des trucs qui sont un petit peu bizarres. Donc par exemple quand on va voir les salaires moyens par langage, si on regarde les salaires et qu&#x27;on classe par le salaire en CDI, et bien là on voit que PHP est numéro 1. C&#x27;est à dire que PHP paye le mieux et quand même de loin. Par contre si on classe en termes de salaire par freelance, on voit que PHP est dernier. PHP est le moins bien payé en salaire freelance. Donc à la base je me suis dit peut-être que c&#x27;est parce qu&#x27;il n&#x27;y a pas assez d&#x27;offres d&#x27;emploi avec des salaires mais j&#x27;ai plus de 1000 offres d&#x27;emploi</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:43 - 00:06:16</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pour développeurs PHP dans la base de données donc normalement ça devrait quand même être assez statistiquement significatif. Donc il y a potentiellement quelque chose à fouiller là-dedans. Peut-être que je ne sais pas, peut-être qu&#x27;il y a une plus grosse demande de PHP mais en freelance dans une certaine région ou quelque chose comme ça je sais pas mais c&#x27;est potentiellement quelque chose à creuser maintenant ici on voit les salaires par langage mais aussi en fonction de combien il y a d&#x27;offres donc c&#x27;est à dire que les points qui sont les plus en haut à droite c&#x27;est ceux qui à la fois beaucoup d&#x27;offres et à la fois des bons salaires et ceux qui sont en bas à gauche ça veut dire que c&#x27;est les moins bons salaires et en plus il y a pas beaucoup d&#x27;offres et donc idéalement on voudrait éviter ceux qui sont ici donc dans les pires on a php qui est le</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:16 - 00:06:53</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">moins bon salaire il ya quand même un certain nombre d&#x27;offres mais c&#x27;est pas le best mais encore une fois ça c&#x27;est les salaires en freelance donc potentiellement que le graphe serait peut-être inversé si j&#x27;avais fait ce graphe là avec les salaires cdi et on voit qu&#x27;on a aussi kotlin et peut-être potentiellement swift qui est un petit peu en dessous de la limite et dans les meilleurs entre guillemets on va avoir python qui est un petit peu plus payé que la moyenne et qui a quand même beaucoup beaucoup d&#x27;offres d&#x27;emploi après faut quand même garder en tête une chose c&#x27;est que entre le mieux payé qui est c++ mais il n&#x27;y a pas beaucoup d&#x27;offres donc c&#x27;est comme un peu niche. Et le moins bien payé qui est PHP, il y a peut-être 15% de différence entre le mieux</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:53 - 00:07:27</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">payé et le moins bien payé. Potentiellement ça veut dire que ça vaut peut-être pas le coup de choisir son langage en fonction de combien ça paie. Je vous ai mis la même chose pour la technologie, je vous laisserai aller voir si ça vous intéresse. Et ensuite pour les régions, donc on voit que Paris a les meilleurs salaires freelance à 453 euros par jour en moyenne et deuxième c&#x27;est Occitanie à 425. Mais on voit qu&#x27;il n&#x27;y a pas une si grosse différence, a peut-être 5% de différence. Si par exemple à Marseille le coût de la vie est peut-être 20% 30% moins qu&#x27;à Paris, peut-être que ça vaut le coup de gagner 5% moins. Donc à parer quelque chose qui est assez intéressant. Apparemment si on est en Bourgogne, c&#x27;est</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:27 - 00:08:02</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pas la fête. Les salaires sont la moitié moins, moins que moitié moins la moyenne de la France. Ça n&#x27;a peut-être pas le coup d&#x27;aller là-bas, spécifiquement pour trouver un job en tech. Ensuite on recevait les salaires par langage, par région, pour voir si potentiellement des petites différences ici. Et comme d&#x27;habitude, on a les différentes technologies qui sont intéressantes à savoir en tant que développeur de tel ou tel langage. Donc par exemple, si on est développeur Java, tu vois que le CSED et le DevOps vont en moyenne augmenter ton salaire de 3%. Donc on va dire ok, ce n&#x27;est pas une si grosse augmentation. Mais par contre, le nombre d&#x27;offres d&#x27;emplois auxquelles tu peux appliquer si tu as ça sur ton CV, c&#x27;est plus de 36%. Pareil si tu</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:02 - 00:08:28</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">développeurs Python, l&#x27;appareil DevOps, ça n&#x27;affecte pas vraiment ton salaire mais par contre, ça te rajoute 40% d&#x27;opportunités en plus. Ça permet de savoir exactement les technologies qui sont les plus en demande pour un développeur. Ce qui fait que maintenant mon site a beaucoup plus de data dans beaucoup plus de régions. Il y a aussi beaucoup plus de statistiques, de graphiques, c&#x27;est aussi beaucoup plus fiable non seulement au niveau des chiffres, des statistiques qu&#x27;on affiche mais aussi au niveau de l&#x27;infra, au niveau du pipeline de déploiement, etc. Donc si tu veux savoir comment j&#x27;ai commencé à mettre en place le projet, à galérer un peu avec les scrappers, etc. Je te laisse aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
