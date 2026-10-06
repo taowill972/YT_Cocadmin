@@ -12,7 +12,8 @@
     "de0Mm9xT_2U",
     "RlZfhw80c5E",
     "aN4PCILrbBg",
-    "1jW-Kh75oN0"
+    "1jW-Kh75oN0",
+    "s1YBeSDnGnY"
   ],
   "processed_videos": [
     {
@@ -170,6 +171,18 @@
       "screenshots_count": 0,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "s1YBeSDnGnY",
+      "title": "Cette techno sur ton cv vaut +600€/mois",
+      "upload_date": "20251209",
+      "duration": 815,
+      "duration_str": "00:13:35",
+      "md_file": "YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 0,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -317,7 +330,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-06T11:59:30Z",
-  "completed_count": 13,
+  "completed_count": 14,
   "total_catalog_count": 142,
   "status": "ready"
 }

@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cette techno sur ton cv vaut +600€/mois — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Cette techno sur ton cv vaut +600€/mois</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=s1YBeSDnGnY" target="_blank">Lien YouTube (<code>s1YBeSDnGnY</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-12-09</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:13:35</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **Cette techno sur ton cv vaut +600€/mois**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:20</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Moi je sais que maîtriser quelques technos DevOps pour un développeur, c&#x27;est OP. Mais en vrai, c&#x27;est plus un sentiment que quelque chose que je peux prouver concrètement. Ce qui serait bien, ce serait que je fasse un dashboard qui soit public, qui puisse récupérer un maximum d&#x27;offres d&#x27;emploi et pour chaque type de poste, qui peut montrer quelle technologie est la plus en demande et surtout celle qui paye le plus. Et comme ça, je pourrais mathématiquement prouver que connaître le DevOps, ça rapporte beaucoup plus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:20 - 00:00:39</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ou pas parce que ça se trouve, en voyant les chiffres, ça sera pas le cas. Cette vidéo est sponsorisée par Bright Data, ce qui va pas mal m&#x27;aider dans mon projet, mais je vous en reparle tout à l&#x27;heure. Donc le premier truc qu&#x27;on doit faire, c&#x27;est récupérer le maximum d&#x27;offres d&#x27;emploi. Et ça, ça s&#x27;appelle du scrapping. Et il y a deux, trois façons différentes de scrapper des sites. Le premier cas, c&#x27;est simplement récupérer le contenu de la page et puis extraire les données qu&#x27;on a besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:39 - 00:01:01</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça, c&#x27;est rarement le cas parce que maintenant, la plupart des sites, ils sont dynamiques, ils vont afficher une page qui est vide au début, puis ensuite, ils vont ajouter petit à petit les offres d&#x27;emploi dans la page. Ce qui fait que si on récupère juste le code de la page, les offres ne sont pas dedans. La deuxième chose qu&#x27;on peut faire, c&#x27;est trouver l&#x27;API que le site web utilise pour pouvoir récupérer les offres d&#x27;emploi. Et donc ça, en fouillant un petit peu dans le code de la page pour pouvoir savoir comment le site fonctionne, en général, on peut trouver d&#x27;où est-ce que le site récupère ces informations.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:01 - 00:01:21</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ensuite, on peut attaquer directement cette API. Et c&#x27;est beaucoup plus simple parce qu&#x27;on a les données déjà bien formatées pour pouvoir travailler dessus. Mais parfois, il y a des sites qui font en sorte que justement, ce ne soit pas super bien formaté, la page se charge en plusieurs morceaux, et après, chaque morceau est modifié, etc. Donc c&#x27;est un peu compliqué à récupérer. Et donc à ce moment-là, il faut utiliser une autre technique, c&#x27;est-à-dire carrément utiliser un navigateur, comme Chrome par exemple, pour pouvoir aller sur le site.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:21 - 00:01:41</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le JavaScript va faire tout ce qu&#x27;il a besoin pour pouvoir charger et afficher la page. Et une fois qu&#x27;elle est affichée, qu&#x27;elle est bien construite et affiche toutes les données qu&#x27;on veut, et bien là c&#x27;est beaucoup plus facile de pouvoir récupérer les éléments, récupérer tous les jobs dessus. Mais du coup c&#x27;est un petit peu plus compliqué. Il faut faire un script qui va aller récupérer exactement les bons éléments. Ces éléments peuvent bouger dans la page. Ton script peut marcher aujourd&#x27;hui mais dans une semaine ça ne remarche plus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:41 - 00:02:16</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que les noms des éléments ont bougé ou ont été renommés ou des choses comme ça. Donc cette manière est un petit peu plus chiante. Et ça consomme beaucoup plus de ressources parce que tu as tout un navigateur qui est là pour pouvoir générer la page. Donc c&#x27;est beaucoup plus chiant. Et le premier site sur lequel j&#x27;ai essayé de récupérer des offres d&#x27;emploi, c&#x27;est Indeed, ce qui est un des plus connus. Et sur Indeed, c&#x27;était chaud. Parce que justement, ils sont dans ce cas-là. Les Cetob, ils récupèrent les jobs d&#x27;une API, mais cette API, c&#x27;est pas vraiment une API pour pouvoir bien coder. Donc du coup, il aurait fallu utiliser la deuxième technique, celle d&#x27;avoir un navigateur qui rend dans la page pour pouvoir récupérer les éléments, etc. Mais chez Indeed, ils sont un petit peu vicieux parce que parmi la liste de jobs, ils rajoutent des éléments qui ressemblent à des offres d&#x27;emploi mais qui n&#x27;en sont pas. Donc c&#x27;était casse-tête. Mais moi, quand je me suis cru malin,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:16 - 00:02:38</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">je me suis dit Indeed ils ont une application mobile. Et assez souvent les applications mobiles elles vont accéder à une API qui est différente que celle qui est utilisée pour des navigateurs. Parce que forcément c&#x27;est affiché différemment. Donc si ça récupère les éléments qui sont faits pour être affichés sur un grand écran sur un navigateur, sur un mobile ça va être pourri. Et donc j&#x27;ai installé l&#x27;appli, j&#x27;ai inspecté le trafic pour pouvoir voir ce que ça récupérait et ça récupère quand même exactement le même format que celui qui est affiché sur les navigateurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:38 - 00:03:11</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc retour au point de départ. Donc là avant de commencer à moi-même coder mon scrapper etc parce que ça allait me casser un peu la tête, je regarde un petit peu sur GitHub pour voir ce qui se fait et je tombe sur un projet qui s&#x27;appelle Job Spy, qui est un petit script en petit ton qui permet directement de récupérer les oeuvres d&#x27;emploi de Indeed. Et donc je le teste et bizarrement ça marche du premier coup. Mais ça marche mais c&#x27;est quand même assez lent parce que ça doit faire la recherche, afficher la liste des emplois, aller sur chacune des pages d&#x27;emploi pour pouvoir récupérer les informations de quand ça a été posté, la description, etc. Et donc ce qu&#x27;on pourrait faire, c&#x27;est simplement faire beaucoup plus de requêtes beaucoup plus vite pour pouvoir récupérer les jobs beaucoup plus rapidement. Et si je fais ça de chez moi, je risque de me faire ban et après là ça va</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:11 - 00:03:35</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">commencer à être encore plus compliqué pour récupérer les oeuvres d&#x27;emploi. Mais c&#x27;est là où je me je me suis souvenu que dans un ancien projet, j&#x27;avais commencé à regarder différentes services pour pouvoir utiliser des proxys, et j&#x27;étais tombé sur Bright Data. Et un des services qui propose, c&#x27;est justement d&#x27;avoir plein de proxys, plein d&#x27;adresses IP partout dans le monde, très facilement. Donc je crée mon compte, je récupère un proxy, et juste en deux, trois clics, et en modifiant juste une seule ligne dans mon script, ça me permet de passer par 20 adresses IP différentes, et donc de récupérer le contenu 20 fois plus vite, et en étant 20 fois moins susceptible de me faire cramer.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:35 - 00:04:08</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et même si jamais je me fais bloquer une des idées IP, comme je peux l&#x27;avoir presque à l&#x27;infini, c&#x27;est plus du tout un problème. Et donc comme ça je récupère quelques centaines d&#x27;offres d&#x27;emploi et maintenant il faut que je les affiche. Donc je fais un petit frontend, je vibe code ça à l&#x27;arrache avec Codex et honnêtement avec Tchadjpt 5.1 ça marche vraiment bien. J&#x27;ai pas trop trop besoin de fouiller dans le code, juste de temps en temps il fait des trucs un petit peu bizarres mais tant que je suis là pour le recadrer, le garder dans le droit chemin, ça se passe bien. Et ça permet quand même d&#x27;aller beaucoup beaucoup plus vite que si c&#x27;était moi qui devais coder du frontend parce que c&#x27;est pas du tout pas du tout ma spécialité. Et je pense que la clé c&#x27;est de lui donner des tâches qui</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:08 - 00:04:40</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">sont de la bonne taille. Si elle lui donne une trop grosse tâche et qu&#x27;il n&#x27;y a pas assez de détails, et bien ça lui donne beaucoup trop d&#x27;opportunités de faire son truc qui va finir par soit pas marcher, soit être vraiment bizarre, soit bourré de failles de sécurité. Mais si on sait exactement ce qu&#x27;on veut faire, les outils qu&#x27;on veut utiliser, la bonne manière de faire, etc. Et bien en lui donnant juste des petits morceaux de tâche, ça permet d&#x27;avancer, itérer, essayer des choses très très rapidement. Donc maintenant il faut quand même plus de données que ça parce que j&#x27;ai quelques centaines de jobs mais c&#x27;est pas assez statistiquement significatif. J&#x27;aimerais en avoir le plus possible et je sais que sur LinkedIn il y a beaucoup d&#x27;offres d&#x27;emploi aussi. Et LinkedIn c&#x27;est presque encore pire que Indie, ça fait 50 000 requêtes à 50</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:40 - 00:05:06</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">trucs différents, c&#x27;est impossible de comprendre ce qui se passe et comment est-ce que la page est générée. Mais là encore une fois, en regardant les différentes fonctionnalités de Bright Data, je vois qu&#x27;ils ont des scrappers managés qui sont déjà faits. Donc là ça gare bien parce que j&#x27;ai pas de code à faire, j&#x27;ai pas besoin de le maintenir. Si jamais la page de LinkedIn elle change, mon scrapper va toujours marcher. Et je profite toujours de l&#x27;infrastructure de Bright Data, qui permet non seulement d&#x27;avoir plein de proxys et pas me faire bannir mon IP, mais aussi potentiellement de résoudre les captchas et toutes les mesures anti-robots qu&#x27;il y a sur plein de sites maintenant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:06 - 00:05:24</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en regardant, je me rends compte qu&#x27;ils avaient aussi un scrapper manager pour Indeed. Donc ça permettrait d&#x27;avoir un seul pipeline, un seul outil pour pouvoir récupérer mes données sur plein de sites différents et en même temps de garder le même format de données, même si ça vient de différents sites. Donc maintenant j&#x27;ai un peu plus de job, j&#x27;en ai à peu près 1000 et quelques. La première statistique que je peux faire, c&#x27;est regarder le nombre d&#x27;offres d&#x27;emploi postées en fonction du temps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:24 - 00:05:58</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais comme j&#x27;ai récupéré juste les offres des dernières quelques semaines, peut-être un mois, c&#x27;est pas encore une métrique qui est très utile. Mais si je maintiens mon projet à petit à petit, ce que j&#x27;aimerais bien faire, je vais pouvoir voir dans le temps l&#x27;évolution du nombre d&#x27;offres d&#x27;emploi en fonction du temps. Mais ce qui m&#x27;intéressait à la base, c&#x27;était de voir les différents mots clés qu&#x27;il y avait dans les offres d&#x27;emploi pour savoir lesquels revenaient le plus souvent. Et donc je retourne sur mon petit codex et je lui demande de faire un petit script qui va extraire la description de chacun des jobs pour trouver certains mots clés comme Docker, Kubernetes, Ansible et donc de créer une nouvelle base de données qui contient non seulement le titre de job, la description et aussi toutes les technologies qui sont mentionnées dans l&#x27;offre d&#x27;emploi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:58 - 00:06:29</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et maintenant je peux calculer le nombre de fois où ces mots clés y reviennent. Par exemple je peux prendre toutes les offres qui ont le mot clé Java dedans. Il y a des grandes chances pour que ce soit une offre de développement en Java. Et pour toutes ces offres-là, comptez le nombre de fois où revient chacune des technologies que j&#x27;ai trouvées. Donc combien de fois il y a Spring, combien de fois il y a SQL, combien de fois il y a Docker, combien de fois il y a Ansible. Et après je demande de faire un petit tableau et pour tous les langages, de me donner les technologies qui reviennent le plus souvent. Et donc là, on peut commencer à voir des choses intéressantes. Par exemple, pour les postes de développeurs Java, on voit que Spring revient dans 44% des offres d&#x27;emploi. Donc ça veut dire que c&#x27;est quelque chose qui est extrêmement demandé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:29 - 00:07:02</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui paraît logique parce que c&#x27;est un des frameworks Java les plus populaires. Mais ensuite en second on retrouve Angular. Et moi j&#x27;aurais pas pensé que Angular était beaucoup utilisé pour les développeurs Java. J&#x27;imagine que ça revient plus dans des postes de développeurs full stack qui vont faire un backend en Java et qui vont faire un frontend en Angular. Et ensuite parmi toutes les autres technologies qu&#x27;il y avait dans les offres d&#x27;emploi, on voit que DevOps revient dans 34% des jobs. C&#x27;est-à-dire qu&#x27;il y a quand même un tiers des jobs en Java qui demandent d&#x27;avoir des skills en DevOps. Ensuite on voit la même chose pour Git. Bon là ça c&#x27;est à peu près logique, j&#x27;imagine que 100% des jobs Java vont demander d&#x27;avoir un git. Mais derrière on a CI-CD, pareil pour un tiers encore. Et Docker, SQL et Kubernetes</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:02 - 00:07:26</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">reviennent eux aussi pour à peu près un tiers des jobs. Donc si on prend Kubernetes par exemple, si on assume que dans ces jobs-là qui ont mentionné spécifiquement Kubernetes, ça veut dire qu&#x27;ils ont besoin de quelqu&#x27;un qui connaît ça. Si on n&#x27;est pas au moins un tout petit peu familier avec Kubernetes, il y a un job sur trois sur lequel on n&#x27;aura pas exactement le bon profil. Évidemment en tant que développeur Java c&#x27;est plus important de connaître Spring que connaître Kubernetes, mais ça permet déjà de savoir en fonction de ce qu&#x27;on connaît déjà qu&#x27;est-ce qu&#x27;on peut rajouter pour avoir exactement le bon profil qui est recherché par les entreprises.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:26 - 00:07:47</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Maintenant qu&#x27;on a ça, c&#x27;est déjà pas mal, mais moi j&#x27;aimerais bien mettre un chiffre exact en euros pour pouvoir savoir exactement combien me rapporte chaque technologie. Le problème c&#x27;est que sur LinkedIn et sur Indeed, il n&#x27;y a très souvent pas les salaires. Mais il y a un autre site sur lequel il y a un peu plus d&#x27;informations qui s&#x27;appelle FreeWork, qui est un peu plus pour les freelances à la base. Mais l&#x27;avantage c&#x27;est que dans les offres freelance, très souvent il y a le TGM, c&#x27;est le tarif qu&#x27;on te paye à la journée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:47 - 00:08:07</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et avec ça on va savoir exactement combien les entreprises sont prêts à payer en plus pour avoir quelqu&#x27;un qui connaît telle ou telle technologie. Ce qui est cool, c&#x27;est que Freework, ils ont une API privée. Privé parce que ce n&#x27;est pas vraiment une API que tu es censé utiliser, mais en tout cas, c&#x27;est l&#x27;API qui est utilisée par le site web, qui est très facile à utiliser, qui formate bien les données, etc. Donc, je retourne sur Bright Data. Ils n&#x27;ont pas de scrappeurs préfets dédiés pour Freework.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:07 - 00:08:30</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Par contre, ce qui est cool, c&#x27;est qu&#x27;ils ont un outil qui permet d&#x27;en générer un. J&#x27;ai juste à donner l&#x27;URL de Freework avec la liste des jobs que je vais récupérer et une petite description de ce que j&#x27;ai besoin, le titre des jobs, la date de publication, c&#x27;est quoi les salaires, etc. Et en deux minutes, ça me génère un script qui utilise toute l&#x27;infrastructure de Bride Data pour pouvoir scraper ce site-là. Avec encore une fois, tous les avantages d&#x27;être dans Bride Data, la résolution des captchas, l&#x27;utilisation des proxys, le fait d&#x27;avoir un seul outil pour pouvoir récupérer sur différents sites, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:30 - 00:08:52</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là, je récupère d&#x27;un coup un petit peu plus de 1000 jobs, donc ce Freework a quand même pas mal d&#x27;offres. Après, c&#x27;est normal pour des offres freelance, j&#x27;imagine qu&#x27;il y en a un peu plus. Et donc, je rajoute tout ça dans ma base de données, qui contient déjà mes offres de LinkedIn et de Indeed. Sauf que maintenant, j&#x27;ai aussi des informations sur les salaires. Et donc, je peux retourner modifier mon front-end. Et ensuite je peux prendre toutes les offres de développeurs Java, calculer c&#x27;est quoi la moyenne de salaire de toutes les offres qui ne mentionnent pas Kubernetes, et calculer toutes les moyennes de salaire qui contiennent Kubernetes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:52 - 00:09:17</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et je peux afficher la différence entre les deux. Et ça si je le fais pour toutes les technos, on va pouvoir savoir exactement lesquelles sont les plus demandées, et lesquelles rapportent le plus. Donc comme je vous ai dit, cette vidéo est sponsorisée par Braille Data, et avant même qu&#x27;ils me contactent, j&#x27;avais déjà prévu d&#x27;utiliser leurs services. Et pour ce projet ça m&#x27;a énormément simplifié la tâche. Parce que moi ce qui m&#x27;intéressait surtout c&#x27;était analyser la data, trouver les informations pertinentes etc. Mais toute la partie technique du scrapping, gérer les captchas, éviter les blocages d&#x27;IP, passer par des proxys, etc. C&#x27;est la partie qui est un peu plus casse-tête.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:17 - 00:09:50</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour ça, Brianata, ça m&#x27;a simplifié la vie à tous les niveaux. D&#x27;abord sur l&#x27;infrastructure, parce qu&#x27;ils ont une infinité de proxys que tu peux payer à la demande. Pour mon projet, ça m&#x27;a coûté juste quelques centimes pour pouvoir récupérer mes données à travers plein d&#x27;adresses IP différentes. Ensuite, j&#x27;ai testé leurs scrappers qui sont managés, et ça, c&#x27;était quand même assez stylé. Parce que par exemple, pour LinkedIn, en juste 2-3 clics, j&#x27;avais déjà récupéré 800 jobs. Sans ça, j&#x27;aurais dû galérer à faire un script, à me faire bloquer etc. Ça m&#x27;aurait cassé la tête. Et une autre fonctionnalité que j&#x27;ai découvert en faisant cette vidéo, c&#x27;est qu&#x27;ils ont aussi un MCP pour pouvoir connecter un agent IA pour qu&#x27;il puisse parcourir le web et récupérer les données en temps réel. Donc moi j&#x27;ai vraiment</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:50 - 00:10:26</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">bien aimé. Je vous conseille d&#x27;aller jeter un œil si vous avez des datas à récupérer. Et avec le lien dans la description, tu as droit à des crédits offerts pour pouvoir tester ça gratuitement. Donc là sur mes jobs Zava par exemple, on voit que Spring, bon ok c&#x27;est demandé dans la moitié des jobs, mais la différence de salaire c&#x27;est juste 3%. C&#x27;est-à-dire qu&#x27;on s&#x27;attend à ce que tu saches Spring mais n&#x27;ont pas forcément te payer beaucoup plus pour ça. Par contre on remarque que toutes les offres qui contiennent DevOps, elles sont payées en moyenne 11% de plus que les offres qui contiennent pas DevOps. Donc ça peut être intéressant à savoir. Pareil pour CI-CD et Docker, on n&#x27;est pas loin aussi des 10%. Si on veut savoir si c&#x27;est significatif, là pour les offres Java, j&#x27;ai 700 offres qui contiennent Java quelque part dans la description. Et pour Docker par exemple,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:26 - 00:10:53</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">sur 154 jobs qui contiennent des salaires, il y en a 43 qui mentionnent Docker et il y en a 111 qui ne mentionnent pas Docker. Et ceux qui ne mentionnent pas Docker payent en moyenne 431 euros, et ceux qui mentionnent Docker payent en moyenne 470 euros. Donc là ça veut dire que pour quelqu&#x27;un qui est développeur Java freelance, le fait de savoir Docker, ça lui fait gagner en moyenne 600 balles le plus par mois. C&#x27;est quand même pas négligeable. Là ici pour Python, on voit que DevOps est numéro 1. Donc DevOps est un des termes qui revient le plus souvent dans les offres pour Python. Mais par contre ce qu&#x27;il faut garder en tête, c&#x27;est les statistiques de co-occurrence.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:53 - 00:11:12</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça veut dire que c&#x27;est aussi possible qu&#x27;il y ait des offres d&#x27;emploi pour un poste de DevOps qui comprennent le terme Python. Ce qui ferait du sens parce que dans le DevOps en général, quand on a des petits scripts à faire, très souvent ça va être en Python. Mais toutes les offres d&#x27;emploi que j&#x27;ai récupérées, c&#x27;est les offres d&#x27;emploi que j&#x27;ai récupérées avec le terme développeur. Donc l&#x27;écrasante majorité seront des offres de développeurs. À moins qu&#x27;il y ait des offres qui s&#x27;appellent développeurs experts DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:12 - 00:11:47</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En tout cas, s&#x27;il y en a, il ne devrait pas y en avoir beaucoup. Pour JavaScript, ici on voit que React est demandé dans 40% des jobs et ça booste ton salaire de 20%. Donc là, c&#x27;est une énorme différence. Si tu es développeur JavaScript et que tu ne fais pas de React, c&#x27;est chaud pour toi. On peut aussi voir que par exemple, les jobs JavaScript, en moyenne sont payés 446 euros par jour et 52 000 euros par an. Et les offres en TypeScript sont en moyenne à 450 euros par jour, un petit peu plus, et 54 000 euros par an, donc un petit peu plus. Mais comme on peut voir, je me base plus sur les TGM que sur les salaires annuels parce que là, par exemple, j&#x27;ai que 9 jobs</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:47 - 00:12:20</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">avec un salaire. Ce n&#x27;est pas encore super super fiable. Mais j&#x27;espère qu&#x27;avec le temps, en récupérant les offres d&#x27;emploi chaque semaine, dans quelques mois, j&#x27;aurai des stats avec des salaires annuels qui seront un petit peu plus fiables. Et toujours pour JavaScript, on voit que Docker n&#x27;est demandé que dans un quart des jobs, donc ça permet quand même de s&#x27;ouvrir a pas mal de jobs en plus. Mais la différence de salaire est énorme avec 15% de salaire en plus. Pareil en Go, très probablement ça va être plus des offres plus DevOps que plus de développement Go pur. Parce que c&#x27;est là où on retrouve quand même pas mal d&#x27;outils. DevOps, Terraform, Prometheus, Linux, Docker, etc. Donc peut-être que dans une prochaine version, je ferai la même chose mais pour les postes plus d&#x27;infrastructures, d&#x27;administrateur système, d&#x27;expert DevOps,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:20 - 00:12:55</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">expert cloud, etc. Pour Kotlin qui est du développement mobile, on voit pareil, AWS plus 16%, Kubernetes plus 18%. Donc là évidemment pour du développement mobile Android, souvent ça va être soit du Java, soit du Kotlin. Donc on voit que Java est très très demandée, 62% des jobs. Donc c&#x27;est quelque chose qu&#x27;il faut absolument en savoir, mais c&#x27;est pas quelque chose qui va payer énormément plus. Alors que le fait en tant que développeur mobile de savoir se débrouiller un petit peu en AWS ou en Kubernetes, ça booste énormément ton salaire. Plus 18%, plus 16% pour AWS. Là c&#x27;est carrément 1600 euros en plus par mois pour un développeur Kotlin qui a la</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:55 - 00:13:30</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">spécialité Kubernetes. Donc ça vaut le coup quand même de s&#x27;y mettre. Donc même si les différences de salaire sont plus basées sur les DGM que sur les salaires annuels, je pense que c&#x27;est quand même une bonne indication pour comprendre ce qui est demandé et les technologies pour lesquelles les entreprises sont prêtes à payer beaucoup plus. Encore merci à Brydata. Et si jamais ça t&#x27;a motivé à apprendre des technologies DevOps, quelques fois par an je fais une petite formation en groupe pour apprendre ces technologies comme Docker, Kubernetes, AWS, Terraform, Prometheus, Ansible, tout ça en juste 6 semaines et avec des projets concrets que tu pourras rajouter sur ton CV pour pouvoir avoir exactement le profil parfait. Si tu veux rejoindre la prochaine session, je te mets un petit lien dans l&#x27;inscription. Et si tu veux mieux comprendre exactement à</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:30 - 00:13:34</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">quoi sert chaque outil DevOps, je te laisse avoir cette vidéo qui explique tout ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

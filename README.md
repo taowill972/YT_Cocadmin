@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `13 / 142` (`9.2%`)
+- **Vidéos traitées** : `14 / 142` (`9.9%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -32,6 +32,7 @@
 | 2026-01-20 | [RlZfhw80c5E](https://www.youtube.com/watch?v=RlZfhw80c5E) | **Je tente de devenir un expert Kubernetes en 7 jours** | [2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `50` |
 | 2026-01-09 | [aN4PCILrbBg](https://www.youtube.com/watch?v=aN4PCILrbBg) | **La vraie différence entre une machine virtuelle et un conteneur.** | [2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `34` |
 | 2025-12-26 | [1jW-Kh75oN0](https://www.youtube.com/watch?v=1jW-Kh75oN0) | **Deviens celui qu’on appelle quand la BDD part en vrille** | [2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
+| 2025-12-09 | [s1YBeSDnGnY](https://www.youtube.com/watch?v=s1YBeSDnGnY) | **Cette techno sur ton cv vaut +600€/mois** | [2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
