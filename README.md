@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `6 / 142` (`4.2%`)
+- **Vidéos traitées** : `7 / 142` (`4.9%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -25,6 +25,7 @@
 | 2026-08-25 | [h4z6ly0Kd7s](https://www.youtube.com/watch?v=h4z6ly0Kd7s) | **Arrête de confondre Proxy, Load Balancer ou API Gateway** | [2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-08-25_YT-[h4z6ly0Kd7s]_Arrête de confondre Proxy, Load Balancer ou API Gateway_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2026-06-25 | [rqE0Vw0p_OQ](https://www.youtube.com/watch?v=rqE0Vw0p_OQ) | **J'upgrade mon homelab éclaté mais surpuissant** | [2026-06-25_YT-[rqE0Vw0p_OQ]_J'upgrade mon homelab éclaté mais surpuissant_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-06-25_YT-[rqE0Vw0p_OQ]_J'upgrade mon homelab éclaté mais surpuissant_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-06-25_YT-[rqE0Vw0p_OQ]_J'upgrade mon homelab éclaté mais surpuissant_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2026-06-18 | [Wv3ARXImFUg](https://www.youtube.com/watch?v=Wv3ARXImFUg) | **J'ai tracké tous les salaires des dev** | [2026-06-18_YT-[Wv3ARXImFUg]_J'ai tracké tous les salaires des dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-06-18_YT-[Wv3ARXImFUg]_J'ai tracké tous les salaires des dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-06-18_YT-[Wv3ARXImFUg]_J'ai tracké tous les salaires des dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
+| 2026-05-21 | [Kx8obgfUECU](https://www.youtube.com/watch?v=Kx8obgfUECU) | **3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions.** | [2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `15` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*

@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions. — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions.</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=Kx8obgfUECU" target="_blank">Lien YouTube (<code>Kx8obgfUECU</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-05-21</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:12:18</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Cinq jeunes entrepreneurs, confrontés à la nécessité de stocker un dataset titanesque de 30 pétaoctets (30 000 téraoctets) de vidéos pour entraîner un modèle d'IA comportementale (capable d'interagir avec un ordinateur comme un humain), ont été confrontés à des coûts prohibitifs de stockage cloud. Les estimations initiales auprès des hyperscalers (AWS S3, Azure) s'élevaient à plus de 1,1 million de dollars par mois, réduites à 270 000 dollars par mois après négociations chez Cloudflare. Plutôt que de plier face à cette facture récurrente, ils ont fait le pari audacieux de concevoir, monter et exploiter leur propre infrastructure de stockage on-premise en un seul week-end, baptisé le « Storage Stacking Saturday ».<br><br>Pour contourner la complexité et les coûts des solutions de stockage distribué traditionnelles (comme Ceph), ils ont opté pour une approche d'ingénierie pragmatique et minimaliste. En louant un espace en colocation doté d'une liaison Internet dédiée à 100 Gb/s et en s'approvisionnant en matériel d'occasion sur eBay (serveurs Xeon reconditionnés, châssis JBOD et disques durs), ils ont assemblé un cluster physique de 2 400 disques répartis sur 100 boîtes JBOD et 10 serveurs nœuds. Côté logiciel, ils ont rejeté les architectures complexes au profit d'une stack ultra-légère combinant le serveur web **Nginx** et un script de routage/gestion sur mesure de seulement 200 lignes écrit en **Rust**. <br><br>L'impact opérationnel et financier est radical : l'investissement initial total (matériel, câblage, frais d'installation et main-d'œuvre collaborative) s'élève à 426 500 dollars, assorti de frais récurrents mensuels (électricité et bande passante) de 17 000 dollars. L'infrastructure devient ainsi financièrement rentable en moins de deux mois par rapport à la solution Cloudflare, tout en démontrant qu'une tolérance aux pannes métier (permettre la perte de quelques pourcents de données non critiques pour l'entraînement d'une IA) permet d'affranchir les équipes des SLAs industriels hors de prix (les "13 neuf" de fiabilité d'AWS).<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **AWS S3 (Amazon Simple Storage Service)** : Service de stockage objet cloud hautement disponible et sécurisé, utilisé ici comme étalon de référence aux coûts exorbitants pour de tels volumes.<br>* **Cloudflare Object Storage** : Alternative cloud compatible S3 offrant des tarifs réduits mais restant économiquement non viable sur le long terme pour 30 Pb.<br>* **Châssis JBOD (Just a Bunch of Disks)** : Boîtiers matériels d'extension (100 unités utilisées, accueillant chacune 24 disques) permettant de connecter un grand nombre de disques durs à un serveur sans logique RAID matérielle complexe.<br>* **Serveurs d'occasion (eBay)** : Nœuds de calcul de seconde main (10 unités équipées de deux CPU Intel Xeon 20 cores / 40 threads et de 128 Go de RAM DDR4) achetés à bas coût après l'expiration de leur garantie constructeur.<br>* **Nginx** : Serveur web haute performance et ultra-rapide détourné ici pour servir directement les fichiers et requêtes de stockage.<br>* **Rust** : Langage de programmation système performant et sécurisé, utilisé pour rédiger un script minimaliste de 200 lignes orchestrant l'accès aux données.<br>* **Infrastructures de colocation (Datacenters tiers)** : Implantation physique louée pour héberger les racks, bénéficiant d'une alimentation électrique dédiée et d'une connectivité Internet symétrique à 100 Gb/s.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Adéquation SLA / Besoins Métier** : Ne payez jamais pour une haute disponibilité extrême (ex: 13 "neufs" chez AWS) si votre charge de travail tolère la perte de 1 % à 10 % de données non critiques et facilement régénérables.<br>* **Analyse du Coût Total de Possession (TCO)** : Un investissement matériel initial élevé (CapEx de ~426k$) est rapidement amorti face à des abonnements cloud récurrents (OpEx de 270k$/mois) dès lors que l'on accepte de porter la responsabilité opérationnelle de la maintenance.<br>* **Approche d'Ingénierie Minimaliste (KISS)** : Le remplacement d'un système de fichiers distribué complexe (comme Ceph ou Inio) par une stack basique (Nginx + script Rust de 200 lignes) réduit drastiquement la dette technique de compréhension et de diagnostic.<br>* **Mutualisation et Effet de Levier Humain** : L'organisation d'événements communautaires (« Storage Stacking Saturday ») permet de résoudre des goulots d'étranglement logistiques massifs (assemblage de 2 400 disques) à moindre coût grâce à l'aide collaborative.<br>* **Risques du Daisy-Chaining matériel** : Le chaînage en série des boîtiers JBOD (brancher une boîte à une autre à la suite) crée des goulots d'étranglement de performance et des points de défaillance uniques en cascade à éviter en production critique.<br>* **Gestion du Réseau sans DHCP** : L'absence de serveurs DHCP sur des switches d'occasion impose une rigueur absolue dans l'adressage IP statique, qui reste gérable sur de petites volumétries de serveurs.<br>* **Sécurité et Topologie Réseau (NAT vs IP Publiques)** : Assigner des adresses IP publiques directes à chaque machine sans NAT simplifie l'architecture mais exige un durcissement drastique et rigoureux des pare-feux pour éviter toute exposition non désirée.<br>* **Isolation des Flux de Gestion (Out-of-Band)** : Dissocier le réseau de données haute performance (100 Gb/s) d'un réseau secondaire plus lent dédié à l'administration et au debugging est une bonne pratique indispensable pour la maintenabilité.<br>* **Piège de la Densité et du Dimensionnement Disque** : L'utilisation de disques de 12 To (dans ce cas précis) peut s'avérer sous-optimale en termes de densité par rapport à des capacités supérieures, augmentant mécaniquement le nombre de composants mécaniques à manipuler et de points de panne potentiels.<br>* **Arbitrage entre Support Constructeur et Occasion** : Acheter du matériel d'occasion hors garantie (serveurs sur eBay) offre un ratio prix/performance imbattable, mais exige de sur-provisionner le stock de pièces détachées (hot-spare) pour anticiper les pannes matérielles courantes.
+            <div class="tools-badges-cloud"><span class="tool-tag">AWS S3 (Amazon Simple Storage Service)</span><span class="tool-tag">Cloudflare Object Storage</span><span class="tool-tag">Châssis JBOD (Just a Bunch of Disks)</span><span class="tool-tag">Serveurs d&#x27;occasion (eBay)</span><span class="tool-tag">Nginx</span><span class="tool-tag">Rust</span><span class="tool-tag">Infrastructures de colocation (Datacenters tiers)</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Adéquation SLA / Besoins Métier** : Ne payez jamais pour une haute disponibilité extrême (ex: 13 &quot;neufs&quot; chez AWS) si votre charge de travail tolère la perte de 1 % à 10 % de données non critiques et facilement régénérables.</span></li><li><span class="point-bullet">✦</span><span>Analyse du Coût Total de Possession (TCO)** : Un investissement matériel initial élevé (CapEx de ~426k$) est rapidement amorti face à des abonnements cloud récurrents (OpEx de 270k$/mois) dès lors que l&#x27;on accepte de porter la responsabilité opérationnelle de la maintenance.</span></li><li><span class="point-bullet">✦</span><span>Approche d&#x27;Ingénierie Minimaliste (KISS)** : Le remplacement d&#x27;un système de fichiers distribué complexe (comme Ceph ou Inio) par une stack basique (Nginx + script Rust de 200 lignes) réduit drastiquement la dette technique de compréhension et de diagnostic.</span></li><li><span class="point-bullet">✦</span><span>Mutualisation et Effet de Levier Humain** : L&#x27;organisation d&#x27;événements communautaires (« Storage Stacking Saturday ») permet de résoudre des goulots d&#x27;étranglement logistiques massifs (assemblage de 2 400 disques) à moindre coût grâce à l&#x27;aide collaborative.</span></li><li><span class="point-bullet">✦</span><span>Risques du Daisy-Chaining matériel** : Le chaînage en série des boîtiers JBOD (brancher une boîte à une autre à la suite) crée des goulots d&#x27;étranglement de performance et des points de défaillance uniques en cascade à éviter en production critique.</span></li><li><span class="point-bullet">✦</span><span>Gestion du Réseau sans DHCP** : L&#x27;absence de serveurs DHCP sur des switches d&#x27;occasion impose une rigueur absolue dans l&#x27;adressage IP statique, qui reste gérable sur de petites volumétries de serveurs.</span></li><li><span class="point-bullet">✦</span><span>Sécurité et Topologie Réseau (NAT vs IP Publiques)** : Assigner des adresses IP publiques directes à chaque machine sans NAT simplifie l&#x27;architecture mais exige un durcissement drastique et rigoureux des pare-feux pour éviter toute exposition non désirée.</span></li><li><span class="point-bullet">✦</span><span>Isolation des Flux de Gestion (Out-of-Band)** : Dissocier le réseau de données haute performance (100 Gb/s) d&#x27;un réseau secondaire plus lent dédié à l&#x27;administration et au debugging est une bonne pratique indispensable pour la maintenabilité.</span></li><li><span class="point-bullet">✦</span><span>Piège de la Densité et du Dimensionnement Disque** : L&#x27;utilisation de disques de 12 To (dans ce cas précis) peut s&#x27;avérer sous-optimale en termes de densité par rapport à des capacités supérieures, augmentant mécaniquement le nombre de composants mécaniques à manipuler et de points de panne potentiels.</span></li><li><span class="point-bullet">✦</span><span>Arbitrage entre Support Constructeur et Occasion** : Acheter du matériel d&#x27;occasion hors garantie (serveurs sur eBay) offre un ratio prix/performance imbattable, mais exige de sur-provisionner le stock de pièces détachées (hot-spare) pour anticiper les pannes matérielles courantes.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:18</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il y a 5 ados qui avaient besoin de stocker 30 000 terabytes. Et à la place de faire comme tout le monde et le mettre chez AWS ou chez Azure ou Grandflair, ils ont créé en un week-end leur propre data center. Il y a pas mal de choses qu&#x27;ils ont fait à l&#x27;arrache et qu&#x27;ils regrettent un peu, mais en termes de prix et de performance, ils sont largement au-dessus des géants du cloud. Donc pourquoi ils avaient besoin de tout ce stockage ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique de datacenter (châssis de serveurs rackables, disques durs, boîtes de matériel NetApp).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Assemblage physique de serveurs et installation de composants de stockage de données.</p>
+                        <p><strong>Action / Démonstration :</strong> Manipulation matérielle et assemblage de serveurs pour la mise en place d&#x27;une infrastructure de stockage locale (homelab/datacenter).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000009_seg1.jpg" alt="Jeunes ingénieurs/admins assemblant et préparant du matériel serveur et des baies de stockage dans un datacenter ou un local technique." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000009_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:09</span>
+                        <span class="caption-text">Jeunes ingénieurs/admins assemblant et préparant du matériel serveur et des baies de stockage dans un datacenter ou un local technique.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:18 - 00:00:46</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils ont monté une boîte, qui est d&#x27;ailleurs une association à but long la créative je crois, pour pouvoir faire le modèle ultime d&#x27;intelligence artificielle. Et pourquoi je dis ultime ? Ce n&#x27;est pas juste pour encore hyper un projet à la con, c&#x27;est qu&#x27;il s&#x27;est de faire une IA qui utilise un ordinateur comme un humain. C&#x27;est-à-dire en comprenant ce qu&#x27;il y a sur l&#x27;écran, et en tapant son clavier et en bougeant la souris. Donc s&#x27;il y a certaines IA text qui arrivent à faire un petit peu ça en ce moment, mais en fait c&#x27;est un petit peu à l&#x27;arrache où l&#x27;IA prend un screenshot de ton écran, ensuite pour cliquer sur un élément elle utilise une API de ton navigateur pour aller cliquer à ce endroit-là, ou alors on utilise ta ligne de commande pour faire certaines actions.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interfaces graphiques multiples, environnements de développement, jeux, outils de vision par ordinateur, fenêtres d&#x27;applications variées.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Collage d&#x27;écrans illustrant des cas d&#x27;usage d&#x27;IA (navigation dans des jeux, analyse d&#x27;images, manipulation d&#x27;OS, graphismes 3D, tableaux de bord).</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle par montage d&#x27;écran de la polyvalence d&#x27;une IA capable d&#x27;interagir avec divers logiciels et interfaces comme un humain.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000032_seg2.jpg" alt="Capture d&#x27;écran composite affichant une multitude de fenêtres, interfaces logicielles, jeux et environnements graphiques gérés ou analysés par une intelligence artificielle (vision par ordinateur, interactions multimodales)." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000032_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:32</span>
+                        <span class="caption-text">Capture d&#x27;écran composite affichant une multitude de fenêtres, interfaces logicielles, jeux et environnements graphiques gérés ou analysés par une intelligence artificielle (vision par ordinateur, interactions multimodales).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:46 - 00:01:10</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait ça passe toujours plus ou moins par du texte, par des API, des choses comme ça. Ce qui fait que des actions aussi simples que juste faire un drag and drop, ton IA aujourd&#x27;hui, elle ne peut pas le faire. Alors qu&#x27;une IA qui est vraiment faite pour ça, elle pourra à terme utiliser n&#x27;importe quelle application qu&#x27;un humain utilise. Donc aussi bien un navigateur qu&#x27;un logiciel de navigation 3D qu&#x27;aussi bien joué à Counter-Strike. Le problème pour pouvoir entraîner une IA comme ça, c&#x27;est que le de lui fournir beaucoup de texte, il faut lui fournir beaucoup de vidéos. Et la vidéo, ça prend mille fois plus de place que le texte.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Logiciel de modélisation 3D (Blender)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Vues multiples d&#x27;un modèle 3D d&#x27;engrenage en cours de conception, avec le texte explicatif &#x27;various rollouts&#x27;.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle du processus de modélisation 3D et des différentes étapes ou variantes (&#x27;rollouts&#x27;) d&#x27;un objet technique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000104_seg3.jpg" alt="Capture d&#x27;écran montrant une interface de modélisation 3D (Blender) divisée en quatre fenêtres avec le texte &#x27;various rollouts&#x27;." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000104_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:04</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant une interface de modélisation 3D (Blender) divisée en quatre fenêtres avec le texte &#x27;various rollouts&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:10 - 00:01:31</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ils ont récupéré un petit dataset de 30 petabytes de vidéos, c&#x27;est 30 000 terabytes de vidéos de personnes qui font des actions dans différents logiciels sur un ordinateur. Et Et maintenant qu&#x27;ils ont tout ça, il faut le stocker quelque part pour pouvoir le donner au modèle qu&#x27;on va entraîner. Et donc, comme tout le monde, ils vont sur AWS, ils regardent S3 qui a le service de stockage d&#x27;objets, de fichiers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console active affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme technique.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du stockage d&#x27;un dataset massif sur AWS par le créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:31 - 00:01:53</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils vont dans la petite calculette et ça leur dit qu&#x27;ils vont devoir payer 1.130.000 dollars par mois pour pouvoir stocker ça. Donc là déjà, ils se disent, bon, ils ont levé un petit peu d&#x27;argent, donc ils ne sont pas non plus à la rue, mais ils se disent, si on doit lâcher un million par mois, comment on va faire ? Donc ils regardent un petit peu d&#x27;autres fournisseurs. Azure, c&#x27;est pas à prépare. Ensuite, ils regardent Cloudflare, qui est quand même beaucoup moins cher pour un service qui est compatible à Best 3, qui est assez similaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AWS Pricing Calculator (interface web de tarification cloud Amazon Web Services).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Estimation de coût mensuel (&quot;Monthly cost&quot;) affichée à 1 135 974.40 USD, service Amazon Simple Storage Service (S3) mentionné.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et commentaire sur un devis cloud excessif lié au stockage de données sur AWS.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000137_seg5.jpg" alt="Capture d&#x27;écran de l&#x27;AWS Pricing Calculator montrant une estimation de coût mensuel cloud de 1 135 974,40 USD." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000137_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:37</span>
+                        <span class="caption-text">Capture d&#x27;écran de l&#x27;AWS Pricing Calculator montrant une estimation de coût mensuel cloud de 1 135 974,40 USD.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:53 - 00:02:11</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ils arrivent à avoir quelques discounts, quelques petites promotions, parce que c&#x27;est quand même un assez gros volume où tu peux avoir une petite promo. Et on leur donne un nouveau prix qui est beaucoup mieux, mais qui est de 270 000 dollars par mois encore. Donc, c&#x27;est toujours cher. Tu vois, ça fait un petit 2 millions par an pour stocker des vidéos, c&#x27;est quand même chiant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code source, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du présentateur concernant les coûts de stockage cloud et les remises négociées.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:11 - 00:02:32</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, ils réfléchissent et ils se disent, ok, ces services-là, ils sont faits pour un certain type d&#x27;utilisation, c&#x27;est-à-dire qu&#x27;ils ont une très grande disponibilité et une très bonne fiabilité. Par exemple, AWS, ils ont 13 neuf de fiabilité. Ça veut dire que chaque année, ils ont 0,000000 avec 13 0% de chance de perdre un des fichiers que tu leur as donnés.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Diapositive de présentation cloud AWS (Amazon S3).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte et métriques sur la durabilité d&#x27;Amazon S3 (99.999999999% / 11 9s), la sécurité, la disponibilité et les performances de stockage d&#x27;objets.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique des niveaux de durabilité et de fiabilité offerts par le stockage cloud AWS S3.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000227_seg7.jpg" alt="Diapositive technique présentant les caractéristiques d&#x27;Amazon S3, notamment sa durabilité (99.999999999% soit 11 neuf), sa disponibilité, sa sécurité et ses performances." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000227_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:27</span>
+                        <span class="caption-text">Diapositive technique présentant les caractéristiques d&#x27;Amazon S3, notamment sa durabilité (99.999999999% soit 11 neuf), sa disponibilité, sa sécurité et ses performances.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:32 - 00:02:51</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc autant dire que c&#x27;est quasi sûr qu&#x27;ils perdent aucun fichier. Parce qu&#x27;en gros, tes données, ils ne les mettent pas juste dans un disque dur. Ils les redondent dans plusieurs disques, dans plusieurs serveurs, dans plusieurs régions, dans plein d&#x27;endroits dans le monde. Ce qui fait que même s&#x27;il y a la 3e guerre mondiale, tes données seront encore là. Mais eux, dans leur cas, ils n&#x27;ont pas vraiment besoin de ça. Parce que toutes ces données qu&#x27;ils ont récupérées, elles sont faciles à récupérer et à régénérer.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface, terminal ou console affichés.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme d&#x27;architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept de haute disponibilité et de redondance géographique des données.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:51 - 00:03:10</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est juste des gens qui utilisent leur ordi. Et ce ne sont pas des données critiques. Imaginons qu&#x27;ils perdent 1%, 2%, 5%, 10% des vidéos qu&#x27;ils ont. Ils peuvent quand même continuer à entraîner leur modèle d&#x27;IA. Ça ne va pas faire une très grosse différence qui l&#x27;entraîne avec 95% des vidéos ou 100% des vidéos. Donc, ils n&#x27;ont pas besoin de cette extrême fiabilité que les fournisseurs de cloud utilisent.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une interface de réservation en ligne en caractères chinois.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Formulaire de recherche de vols (villes de départ et d&#x27;arrivée, dates, options de voyage).</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation ou démonstration sur un site web tiers pour illustrer le sujet abordé.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000256_seg9.jpg" alt="Capture d&#x27;écran montrant l&#x27;interface d&#x27;un site web de voyage (Ctrip/Trip.com en chinois) avec un curseur de souris pointant sur un champ de recherche de vol." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000256_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:56</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant l&#x27;interface d&#x27;un site web de voyage (Ctrip/Trip.com en chinois) avec un curseur de souris pointant sur un champ de recherche de vol.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:10 - 00:03:31</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, ils se disent, est-ce qu&#x27;on ne pourrait pas nous-mêmes fabriquer une solution qui pourrait matcher avec ce que nous, on a besoin de faire ? Donc là, ils commencent à regarder un petit peu dans tous les espaces de colocation. c&#x27;est les data centers qui existent où tu peux ramener tes serveurs, tes hacks. Tu fais juste louer l&#x27;espace et l&#x27;énergie pour pouvoir faire leur propre data center. Ils voient que le prix, ça peut préparer partout. Donc, ils prennent celui qui est le plus proche de leur loco pour pouvoir aller facilement débugger si jamais il y a un problème.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept d&#x27;hébergement en colocation (colocation de serveurs en data center) sans support technique visuel direct</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:31 - 00:03:53</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, en termes de coût, là, on leur dit, vous allez payer 7500 dollars par mois pour Internet. Ça fait cher Internet, mais c&#x27;est un Internet 100 gigabits dédié. Donc, c&#x27;est un Internet qui a de la patate, tu vois. Et vous allez payer 10 000 dollars par mois en électricité. Parce que comme on va voir, ils vont avoir besoin de beaucoup de serveurs et ces serveurs-là, il faut les alimenter. Donc ça veut dire qu&#x27;on passe de 270 000 dollars chez Cloudflare à juste 17 000 dollars par mois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Incrustation de texte vidéo (aucun terminal, code ou interface technique active).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Mention textuelle des coûts d&#x27;infrastructure (&#x27;10 000$ / MOIS ÉLECTRICITÉ&#x27;).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale des coûts d&#x27;infrastructure liés à la consommation électrique des serveurs en datacenter.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000342_seg11.jpg" alt="Plan face-caméra avec incrustation du texte &#x27;10 000$ / MOIS ÉLECTRICITÉ&#x27; illustrant les coûts énergétiques des serveurs." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000342_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:42</span>
+                        <span class="caption-text">Plan face-caméra avec incrustation du texte &#x27;10 000$ / MOIS ÉLECTRICITÉ&#x27; illustrant les coûts énergétiques des serveurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:53 - 00:04:14</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là c&#x27;est une réduction de plus que fois 10. Je sais pas, c&#x27;est 270 divisé par 17, 15. Donc c&#x27;est 15 fois moins cher par mois. Maintenant tu vas me dire, ok c&#x27;est 15 fois moins cher mais les serveurs ils sont pas gratuits, il faut les trouver quelque part. Et ils ont un certain prix. Et donc là ils commencent à regarder qu&#x27;est-ce qu&#x27;ils peuvent utiliser. Et en fait ils vont simplement sur eBay pour pouvoir acheter des serveurs de seconde main.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, commande ou architecture) n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale par le créateur sur l&#x27;optimisation des coûts des serveurs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:14 - 00:04:33</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que les serveurs d&#x27;occasion, une fois qu&#x27;ils sont passés leur période de garantie, les entreprises s&#x27;en débarrassent, elles les vendent pour vraiment presque rien, pour pouvoir acheter des nouveaux, pour pouvoir garder la garantie. Ce qui fait que tu peux te retrouver avec des serveurs qui ont juste quelques années, mais qui coûtent 10 fois, 20 fois moins cher que le prix neuf d&#x27;il y a quelques années. Et donc ils donnent la liste exacte. Ils en ont pour 300 000 dollars juste en disques durs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur sur l&#x27;achat de serveurs d&#x27;occasion en entreprise.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:33 - 00:04:53</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, ces disques, ils ont acheté 9 je crois. Et ils ont pris des disques durs de 12 Tera, ce qu&#x27;ils ont un petit peu regretté plus tard, je t&#x27;expliquerai juste après. Ensuite ils ont utilisé des G-Bod pour Just a Bunch of Discs. Donc en fait c&#x27;est comme un châssis dans lequel tu vas mettre tes disques, mais c&#x27;est pas un ordi en fait, c&#x27;est juste vraiment une boîte où tu peux brancher les disques. Et après cette boîte tu peux la brancher à une machine et cette machine là elle aura accès à tous les disques qui sont dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique (Disk Shelf / JBOD NetApp DS4246 et caddies de disques durs 3.5 pouces).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Présentation physique d&#x27;un boîtier d&#x27;extension de stockage JBOD (NetApp DS4246) et de caddies de disques durs pour homelab.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du matériel de stockage, illustration des disques durs 12 To et du concept de JBOD.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000448_seg14.jpg" alt="Vue matérielle (homelab) montrant des tiroirs de disques durs et un châssis JBOD NetApp DS4246." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000448_seg14.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:48</span>
+                        <span class="caption-text">Vue matérielle (homelab) montrant des tiroirs de disques durs et un châssis JBOD NetApp DS4246.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:53 - 00:05:12</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça permet de brancher plein de disques dans une seule machine. Donc ces châssis là ils ont acheté 100 parce qu&#x27;évidemment t&#x27;as 2400 disques donc il t&#x27;en faut pas mal. Et donc chaque châssis pouvait stocker 24 disques. Et ensuite comme là jusqu&#x27;à là ils ont toujours pas de machine, pas de serveur, ils ont acheté 10 serveurs pour 6000 balles sur repair. Donc ça fait 600 balles le serveur, c&#x27;est quand même pas trop cher. Surtout quoi ? Les serveurs sont pas mal.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;architecture de stockage et l&#x27;achat de châssis pour disques durs</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:12 - 00:05:32</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est des serveurs avec 128Go de RAM, DDR4, un petit peu ancienne, mais quand même bon. Et deux CPU Intel Xeon qui ont chacun 20 corps, 40 threads. Donc ça te fait 40 CPU par machine, 80 threads et 128Go de RAM par machine. Donc ils ont quand même une bonne infra costaud pour pouvoir héberger tous ces fichiers-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation vidéo de matériel serveur (carte mère de type serveur bi-socket Intel Xeon).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Illustration visuelle du matériel serveur : sockets CPU Intel Xeon E5, emplacements DIMM pour mémoire RAM.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur l&#x27;architecture matérielle des serveurs de l&#x27;infrastructure (processeurs Xeon, nombre de cœurs/threads et mémoire RAM).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000517_seg16.jpg" alt="Vue d&#x27;ensemble d&#x27;une carte mère de serveur bi-socket avec processeurs Intel Xeon et slots mémoire RAM." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000517_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:17</span>
+                        <span class="caption-text">Vue d&#x27;ensemble d&#x27;une carte mère de serveur bi-socket avec processeurs Intel Xeon et slots mémoire RAM.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000522_seg16.jpg" alt="Gros plan sur la carte mère serveur montrant les deux sockets Intel Xeon E5 et les slots pour modules mémoire LR/U/R DIMM (24x)." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000522_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:22</span>
+                        <span class="caption-text">Gros plan sur la carte mère serveur montrant les deux sockets Intel Xeon E5 et les slots pour modules mémoire LR/U/R DIMM (24x).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000527_seg16.jpg" alt="Zoom rapproché sur les processeurs Intel Xeon E5 et les bancs de mémoire vive DDR4 disposés autour des sockets." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000527_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:27</span>
+                        <span class="caption-text">Zoom rapproché sur les processeurs Intel Xeon E5 et les bancs de mémoire vive DDR4 disposés autour des sockets.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:32 - 00:05:54</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite, ils ont quelques petits frais supplémentaires. Le data center, il leur a chargé un petit frais d&#x27;installation. Ils ont eu besoin aussi de certains contracteurs, parce que pour pouvoir assembler tout ça, ça prend quand même du temps. 2400 disques, ça prend du temps à l&#x27;insérer un par un. Et ils ont eu aussi un autre 20 000 balles de câbles, de switches, de routers, etc. Et donc, en tout, ils en ont eu pour une facture de 426 500 dollars.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Photographie de l&#x27;espace de déballage et d&#x27;assemblage hardware en datacenter.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Emballages cartons, polystyrène expansé, et palettes de composants serveur à assembler.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle du travail d&#x27;assemblage physique et du déballage des disques durs et serveurs par les contracteurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000543_seg17.jpg" alt="Entrepôt ou zone de stockage montrant des cartons d&#x27;emballage et du matériel informatique en cours de déballage par des techniciens." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000543_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:43</span>
+                        <span class="caption-text">Entrepôt ou zone de stockage montrant des cartons d&#x27;emballage et du matériel informatique en cours de déballage par des techniciens.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:55 - 00:06:14</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, on se dit peut-être que c&#x27;est plus cher que Cloudflare, sauf que Cloudflare, souvenez-vous, c&#x27;est chaque mois qu&#x27;il faut payer les 300 000. Alors que là, 426 000, ils les payent une fois et les serveurs, ils les ont pour toujours. C&#x27;est-à-dire que le premier mois, ils payent un peu plus de 420 000, mais ensuite, tous les autres mois, ils ne payent que 17 000. Au bout de juste un mois et demi, c&#x27;est déjà rentable. Mais c&#x27;est rentable que si ça fonctionne et que les performances sont équivalents à ce qu&#x27;ils auraient eu dans le cloud.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les coûts comparatifs entre un service cloud mensuel (Cloudflare) et l&#x27;achat de serveurs physiques.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:14 - 00:06:35</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là, le premier problème, c&#x27;est que quand tu dois assembler 100 GBOD, 10 machines et 2400 disques durs, même si tu es 5, c&#x27;est mort. Il faut plus de main d&#x27;oeuvre. Ils se sont dit « vas-y, on va le faire en un week-end et on va appeler ça le Storage Stacking Saturday ». Donc la petite blague parce que c&#x27;est leur S3 à eux. En fait, ils ont invité tous leurs potes. Ils leur ont dit « venez ce week-end, on va assembler des disques.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil technique, terminal ou interface logicielle n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts d&#x27;infrastructure matérielle (assemblage de baies de stockage JBOD et disques durs).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:35 - 00:06:54</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On vous paiera la main d&#x27;œuvre, les pizzas et on vous filera même des disques durs à la fin. Et donc c&#x27;est comme ça qu&#x27;ils ont réussi à tout assembler et à avoir une infra qui fonctionne en juste un week-end pour beaucoup moins cher. Et donc comment est-ce que ça fonctionne ? Ils n&#x27;ont pas utilisé des logiciels comme Cephe ou comme Inio qui sont des systèmes de fichiers distribués qui permet du point de vue d&#x27;un OS de voir tout ça comme un seul gros disque dur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil technique, terminal ou console affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:54 - 00:07:14</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que c&#x27;est des logiciels qui sont distribués, qui sont souvent assez compliqués à gérer, à mettre en place, à apprendre, etc. Et ils ont des besoins qui sont vraiment très simples. Il faut juste qu&#x27;ils aient la liste des fichiers et qu&#x27;ils soient capables de récupérer celui qu&#x27;ils ont besoin. Donc ils ont utilisé Nginx, qui est un serveur web très connu, très simple, très performant aussi. Et ils ont rajouté par-dessus un petit script en Rust de 200 lignes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;utilisation d&#x27;un serveur web Nginx pour répondre à des besoins simples de distribution de fichiers.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:14 - 00:07:34</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">D&#x27;un côté, on peut se dire, c&#x27;est peut-être plus compliqué si tu fais ton propre truc que si tu utilises des technologies qui existent déjà, comme Seth. Mais d&#x27;un autre côté, si c&#x27;est juste un petit script de 200 lignes, c&#x27;est potentiellement beaucoup plus simple. Pour ce qui est du réseau, les switches qu&#x27;ils avaient achetés d&#x27;occasion, ils n&#x27;avaient pas de DHCP, manque de bol. faire de l&#x27;adressage IP manuel. Ce qui n&#x27;est pas si grave parce qu&#x27;ils ont juste une dizaine de serveurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans support visuel technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:34 - 00:07:53</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils n&#x27;ont aussi pas utilisé de NAT. En général, ce que tu fais, c&#x27;est que tu as une adresse publique qui est accessible via Internet. Et ensuite, derrière, tu as tes serveurs qui se partagent cette adresse IP. Là, ils ont donné une adresse IP à chacune de leurs machines pour qu&#x27;elle soit chacune accessible directement depuis Internet. C&#x27;est du point de vue sécurité pas fou. Mais d&#x27;un autre côté, le NAT, à la base, ce n&#x27;est pas censé être une fonction de sécurité.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou graphique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique textuel ou visuel affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts réseaux (NAT, adresses IP publiques vs privées).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:53 - 00:08:17</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, à partir du moment où tu as un bon firewall, normalement, c&#x27;est correct. Ils ont aussi un autre réseau secondaire de gestion qui est beaucoup plus lent que leur réseau 100 gigabits, mais qui est juste pour pouvoir faire une modif quand ils ont besoin, pour débugger, etc. Une autre chose un peu bizarre dans leur infra, c&#x27;est qu&#x27;ils ont fait du daisy-chaining. C&#x27;est-à-dire qu&#x27;au lieu de brancher chaque serveur à une dizaine de boîtes de disques, ils ont branché le serveur à une boîte qui est branchée à une autre boîte, qui est branchée à une autre boîte, qui est branchée à une autre boîte.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Incrustation textuelle à l&#x27;écran illustrant un concept d&#x27;infrastructure réseau.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte affiché : &quot;Daisy Chaining (Connexion en chaîne)&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du concept de topologie réseau en cascade (Daisy Chaining) utilisée dans l&#x27;infrastructure présentée.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000811_seg24.jpg" alt="Plan face-caméra du présentateur avec incrustation du texte technique &quot;Daisy Chaining (Connexion en chaîne)&quot;." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000811_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:11</span>
+                        <span class="caption-text">Plan face-caméra du présentateur avec incrustation du texte technique &quot;Daisy Chaining (Connexion en chaîne)&quot;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:17 - 00:08:36</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui fait que pour pouvoir accéder aux données qui sont dans une certaine boîte, ça doit passer à travers toutes les autres boîtes pour pouvoir entrer dans le serveur. Donc ça fonctionne, c&#x27;est quelque chose qu&#x27;ils regrettent un petit peu, de ne pas avoir eu la possibilité en interne d&#x27;avoir un réseau un peu plus performant. Mais globalement, en termes de performance, ils sont assez satisfaits parce qu&#x27;ils n&#x27;ont pas trop dépensé plus que ce qu&#x27;ils pensaient.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du présentateur concernant l&#x27;architecture réseau et le routage des données, sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:36 - 00:08:56</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça n&#x27;a pas non plus pris beaucoup plus de temps que ce qu&#x27;ils pensaient parce que ce n&#x27;est pas leur projet de base. Pour eux, c&#x27;est vraiment juste un side project de week-end à faire. Et ça marche très bien, même mieux que ce qu&#x27;ils avaient quand ils avaient commencé à faire quelques tests chez Cloudflare où parfois ils étaient limités en termes de bande passante parce que Cloudflare ne pouvait juste pas assumer un aussi gros débit. Là, c&#x27;est leur propre serveur, leur propre connexion dédiée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans manipulation ou démonstration technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:56 - 00:09:14</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et donc ils sont 100 gigabits juste pour eux tout le temps. Et donc, c&#x27;est vraiment beaucoup plus performant que ce qu&#x27;ils auraient pu avoir dans le cloud pour beaucoup plus cher. Donc, à ce niveau-là, c&#x27;est vraiment très beau. Et maintenant, ça nous mène aux leçons qu&#x27;ils ont tirées de cette expérience et aux petits regrets, les petites choses qu&#x27;ils auraient pu améliorer. Le truc qui a été le plus chiant, c&#x27;est vraiment l&#x27;installation. Parce que 2400 disques, c&#x27;est vraiment énorme.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, de code ou d&#x27;architecture affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale et discussion sur l&#x27;infrastructure réseau et les performances comparées entre cloud et infrastructure dédiée.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:14 - 00:09:35</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que chaque disque, il faut mettre 4 vis dedans pour pouvoir les mettre dans un petit plateau. Et ce petit plateau-là, ensuite, tu viens le mettre dans le serveur. Et ça, même si ça prend 2 minutes à faire, x 2400 fois, ça prend plus qu&#x27;un week-end. Donc au final, même si ces G-Bod là étaient les moins chers et les disques de 12 Tera étaient les moins chers au giga, ils regrettent un petit peu parce que s&#x27;ils avaient dépensé un tout petit peu plus, ils auraient pu prendre des G-Bod qui se chargent par le dessus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique (châssis serveur et tiroirs de disques durs).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Châssis de stockage JBOD NetApp DS4246 avec emplacements pour disques durs.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle et manipulation d&#x27;un boîtier de stockage externe pour illustrer les contraintes d&#x27;installation des disques durs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_000919_seg28.jpg" alt="Présentation matérielle d&#x27;un tiroir de stockage JBOD NetApp DS4246 pour homelab." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_000919_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:19</span>
+                        <span class="caption-text">Présentation matérielle d&#x27;un tiroir de stockage JBOD NetApp DS4246 pour homelab.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:35 - 00:09:54</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc dans ce cas là, tu n&#x27;as pas besoin de visser, tu fais juste le glisser directement dans le port SATA. Donc ça prend beaucoup moins de temps. Et en plus de ça, s&#x27;ils avaient utilisé des disques plus gros, de disques par exemple de 24 Tera, de 32 Tera, et bien ça divise par deux ton nombre de disques. Donc au final, s&#x27;ils avaient ces G-Bod là qui peuvent héberger 96 disques au lieu de 24, ça aurait divisé par quatre le nombre de G-Bod qu&#x27;ils auraient besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts techniques (stockage SATA, JBOD, densité de disques).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:54 - 00:10:29</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">par 4 le nombre d&#x27;installations dans les racks, le nombre de câbles à brancher, etc. Et s&#x27;ils avaient utilisé des disques de 24 Tera au lieu de 12, ils auraient eu deux fois moins de disques, donc ils auraient consommé deux fois moins d&#x27;énergie, ils auraient eu deux fois moins de disques à installer et ça aurait divisé par 10 la complexité de câbles, de châssis, d&#x27;espace, de rack, ils auraient payé aussi moins cher par mois. Ils auraient eu aussi besoin de 10 fois moins de main d&#x27;oeuvre pour pouvoir installer tous ces disques parce qu&#x27;ils auraient besoin de beaucoup moins d&#x27;espace, beaucoup moins d&#x27;énergie. Même s&#x27;ils auraient coûté un tout petit peu plus cher, ça aurait été beaucoup plus simple. Donc c&#x27;est une des choses qu&#x27;ils regrettent le plus. Ensuite la deuxième chose c&#x27;est qu&#x27;ils ont utilisé de la fibre parce que forcément tu dis 100 gigas je peux pas faire ça avec un câble ethernet sauf qu&#x27;ils ont pas mal de problèmes de réseau parce qu&#x27;en fait tu</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;impact de la densité des disques durs (capacité, consommation énergétique, complexité de câblage) dans un datacenter.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:29 - 00:11:04</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">peux pas brancher direct la fibre dans ton serveur il faut la mettre dans un transceiver et le transceiver il a un firmware il faut que le firmware il matche avec le firmware du switch dans lequel tu le mets et en fonction des marques des modèles et tout c&#x27;est un peu casse tête et pour les distances qu&#x27;ils ont à parcourir en fait tu peux utiliser des câbles en cuivre faut juste qu&#x27;ils soient de bonne qualité qu&#x27;ils soient pas trop longs et ça peut fonctionner en 100 gigabits et t&#x27;as pas eu tout ce souci de firmware etc potentiellement je crois qu&#x27;il ya des transceivers qui sont un peu générique dans lequel tu peux mettre à la volée exactement le bon firmware que tu as besoin. Mais bon, c&#x27;est sûr que si tu peux juste avoir un câble Ethernet, c&#x27;est beaucoup moins cher, beaucoup plus simple et ça marche tout le temps. Ensuite le Daisy Chaining, comme je te disais plus tôt, c&#x27;est quelque chose qu&#x27;ils regardent un petit peu. Ils auraient préféré avoir un réseau</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur l&#x27;utilisation des transceivers et de leurs contraintes de micrologiciel avec les switches réseau.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:04 - 00:11:36</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">en interne qui est potentiellement un peu plus performant que ce qu&#x27;ils peuvent utiliser avec leur adresse IP publique de 100 gigas. Mais bon, pour le coup, tant que tu peux tirer 100 gigabits dessus, ça va. Un truc qui était chiant aussi, c&#x27;est que pendant l&#x27;installation, tu as besoin de débugger pas mal de choses parce que forcément ça ne marche jamais du premier coup. Et ce qui les freiner souvent, c&#x27;est de devoir trouver simplement un écran, un clavier pour pouvoir aller se brancher dans chacune des machines, pour pouvoir débugger dans le data center. Le fait d&#x27;avoir une espèce de KVM portable ou un chariot pour pouvoir brancher direct sur les serveurs, ça leur aurait sauvé pas mal de temps au moment de l&#x27;installation. Et moi, ce que je trouve intéressant dans cette histoire,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface graphique n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur concernant la configuration réseau et le debugging d&#x27;installation.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:36 - 00:12:10</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est que le cloud, c&#x27;est une très bonne solution. C&#x27;est géré pour toi, tu n&#x27;as pas de problème, c&#x27;est automatiquement mis à jour, automatiquement géré, automatiquement sauvegardé, blablabla. Et toutes ces fonctionnalités, elles ont un coût. Et parfois, on n&#x27;a pas besoin de ces fonctionnalités. Donc en fait on finit par payer quelque chose dont on n&#x27;a pas forcément besoin. Et donc c&#x27;est intéressant de temps en temps de remettre tout ça en cause et de se dire qu&#x27;est-ce que j&#x27;ai vraiment besoin et est-ce que je pourrais pas moi-même très rapidement faire quelque chose qui va être mieux parce qu&#x27;ils ont eu des meilleures performances que ce qu&#x27;ils ont dans le cloud pour beaucoup beaucoup beaucoup moins cher parce qu&#x27;ils ont pas toutes les fonctionnalités qu&#x27;ils ont pas besoin. Si t&#x27;es dev freelance et que l&#x27;infra s&#x27;intéresse et que t&#x27;aimerais apprendre le DevOps pour pouvoir vraiment valoriser ton profil,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur sur les coûts et les fonctionnalités du cloud.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:10 - 00:12:18</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">deux ou trois fois par an je fais une formation en petits groupes où on voit tous les outils DevOps les plus en demande. Je te mets un petit lien dans la description pour être prévenu de la prochaine session.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran externe affichant un diagramme d&#x27;architecture cloud/réseau et ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma d&#x27;architecture technique avec des serveurs web derrière un load balancer.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de concepts d&#x27;architecture réseau et de distribution de charge pour les formations.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Kx8obgfUECU/Kx8obgfUECU_001214_seg34.jpg" alt="Le créateur devant son poste de travail présentant un schéma d&#x27;architecture réseau avec un load balancer et des instances." loading="lazy" onclick="openLightbox('../screenshots/Kx8obgfUECU/Kx8obgfUECU_001214_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:14</span>
+                        <span class="caption-text">Le créateur devant son poste de travail présentant un schéma d&#x27;architecture réseau avec un load balancer et des instances.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
