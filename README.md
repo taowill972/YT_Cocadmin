@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `9 / 142` (`6.3%`)
+- **Vidéos traitées** : `10 / 142` (`7.0%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -28,6 +28,7 @@
 | 2026-05-21 | [Kx8obgfUECU](https://www.youtube.com/watch?v=Kx8obgfUECU) | **3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions.** | [2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-05-21_YT-[Kx8obgfUECU]_3 ados créent un NAS de 30Pb en un weekends et économisent 3 Millions._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `15` |
 | 2026-04-17 | [Awu5RoPmy-0](https://www.youtube.com/watch?v=Awu5RoPmy-0) | **Comment ChatGPT tourne sur UN SEUL serveur de base de données ??** | [2026-04-17_YT-[Awu5RoPmy-0]_Comment ChatGPT tourne sur UN SEUL serveur de base de données_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-04-17_YT-[Awu5RoPmy-0]_Comment ChatGPT tourne sur UN SEUL serveur de base de données_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-04-17_YT-[Awu5RoPmy-0]_Comment ChatGPT tourne sur UN SEUL serveur de base de données_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `9` |
 | 2026-04-13 | [gDtE9XEpL_M](https://www.youtube.com/watch?v=gDtE9XEpL_M) | **Le nouveau Claude hack les logiciels les plus sécurisés au monde** | [2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `8` |
+| 2026-02-19 | [de0Mm9xT_2U](https://www.youtube.com/watch?v=de0Mm9xT_2U) | **Passe ta certif tellement facilement qu’on va t’accuser de triche** | [2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `27` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*

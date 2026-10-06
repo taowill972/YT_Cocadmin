@@ -1,0 +1,2537 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passe ta certif tellement facilement qu’on va t’accuser de triche — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Passe ta certif tellement facilement qu’on va t’accuser de triche</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=de0Mm9xT_2U" target="_blank">Lien YouTube (<code>de0Mm9xT_2U</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-02-19</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:21:09</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>La préparation aux certifications Kubernetes exige traditionnellement des mois d'efforts et des dizaines d'heures de formation théorique. La vidéo de la chaîne *cocadmin* propose un changement radical de paradigme en détaillant une méthodologie accélérée pour réussir les examens KCNA, CKA et CKAD en seulement quelques jours. Le problème concret réside dans la procrastination, l'inefficacité des parcours d'apprentissage linéaires et la mauvaise gestion du stress ou des spécificités techniques le jour J (bogues matériels, gestion du temps, ergonomie du terminal distant).<br><br>La solution technique et organisationnelle s'articule autour d'un parcours d'apprentissage hybride et ultra-optimisé : planification impérative de la date d'examen pour s'imposer un cadre temporel, consommation accélérée des cours vidéo (x2/x3), validation rapide des acquis par des quiz ciblés, et usage intensif d'environnements de test en conditions réelles (*Killer.sh*, *Killer Coda*, *Cloud Code*). Pour l'épreuve elle-même, l'intervenant démontre des techniques chirurgicales de navigation dans la documentation officielle, l'utilisation stratégique du terminal Linux, l'évitement des pièges de configuration matérielle (comme les claviers internationaux) et la gestion granulaire des points par question pour maximiser le score.<br><br>L'impact opérationnel pour un SysAdmin, un ingénieur DevOps ou un développeur est majeur : cette approche permet non seulement d'obtenir des certifications reconnues sur le marché sans sacrifier des mois de productivité, mais elle renforce également les compétences pratiques d'ingénierie par la répétition ciblée d'exercices d'infrastructure sous contrainte de temps. L'apprentissage se transforme ainsi en un exercice d'efficacité opérationnelle pure, directement transposable aux interventions de production sur les clusters Kubernetes.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Kubernetes (KCNA, CKA, CKAD)** : Les certifications de référence de la Cloud Native Computing Foundation (CNCF) validant les compétences sur les objets, l'administration et le développement d'applications sur Kubernetes.<br>* **Killer.sh** : La plateforme d'examen blanc officielle fournie avec l'achat de la certification, offrant des conditions de difficulté et des sets de questions très proches de l'examen réel.<br>* **Killer Coda** : Une plateforme interactive gratuite proposant des scénarios d'exercices ciblés par chapitres pour réviser des points techniques spécifiques en quelques minutes.<br>* **Cloud Code** : Une plateforme de formation e-learning (disponible aussi sur Udemy) combinant cours écrits, vidéos et exercices pratiques par catégorie.<br>* **VS Code / Desktop Virtuel Linux** : Les environnements de travail et interfaces graphiques mis à disposition dans la machine virtuelle de l'examen.<br>* **Clipboard Manager** : Un utilitaire intégré au système Linux distant permettant de conserver un historique des copier-coller pour réutiliser des blocs de texte d'une question à l'autre.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Programmer la date avant tout** : Fixer une date d'examen à un mois dès le départ pour s'obliger à structurer son temps et éliminer le piège de la procrastination perpétuelle.<br>* **Adapter le format d'apprentissage au profil** : Privilégier les ressources écrites pour scanner rapidement ce que l'on maîtrise déjà, et réserver les cours vidéo aux sujets totalement inconnus.<br>* **Valider par les quiz** : Utiliser les questions d'entraînement et les quiz de fin de chapitre pour identifier immédiatement les lacunes techniques sans perdre de temps à relire l'intégralité des cours.<br>* **Accélération des vidéos (x2 / x3)** : Diviser par deux ou trois le temps passé sur les formations vidéo (souvent longues de 20 à 30 heures) grâce à l'utilisation de plugins de lecture rapide.<br>* **Tirer parti des 36 heures de session sur Killer.sh** : Lancer l'examen blanc pendant un week-end et exploiter la persistance de la session pour analyser toutes les questions à son rythme au-delà du temps imparti.<br>* **Préparer un environnement de test rigoureux** : Lancer le logiciel de surveillance jusqu'à 30 minutes avant l'heure prévue pour parer aux pannes techniques (caméra, micro, redémarrage d'ordinateur) et éviter l'élimination directe.<br>* **Valider la disposition du clavier** : Utiliser un clavier américain classique pour l'examen afin d'éviter les bugs critiques de saisie (caractères spéciaux, guillemets) causés par des configurations internationales ou françaises dans le bureau virtuel distant.<br>* **Ne jamais abandonner une question difficile** : Réaliser au moins les étapes simples d'une question complexe pour grappiller des points précieux, quitte à la *flaguer* et y revenir ou l'abandonner si elle est totalement hors de portée.<br>* **Maîtriser la navigation dans la documentation officielle** : S'entraîner en amont à trouver instantanément les bons manifestes YAML dans les sections *Concepts* ou *Tasks* de la doc Kubernetes pour éviter des recherches chronophages le jour J.<br>* **Tout faire via le terminal Linux** : Éviter l'utilisation de VS Code pour la manipulation des fichiers de configuration et privilégier la ligne de commande (générateurs d'objets `kubectl run --dry-client`, édition rapide).<br>* **Activer le gestionnaire de presse-papiers (*Clipboard Manager*)** : Utiliser l'historique de copier-coller dans l'environnement Linux distant pour réutiliser facilement des chaînes de caractères d'une question précédente.<br>* **Disposer d'un espace physique irréprochable** : S'isoler dans une pièce propre, sans désordre, écrans superflus ou tableaux visibles en arrière-plan pour éliminer le stress lié aux exigences des surveissants distants.
+            <div class="tools-badges-cloud"><span class="tool-tag">Kubernetes (KCNA, CKA, CKAD)</span><span class="tool-tag">Killer.sh</span><span class="tool-tag">Killer Coda</span><span class="tool-tag">Cloud Code</span><span class="tool-tag">VS Code / Desktop Virtuel Linux</span><span class="tool-tag">Clipboard Manager</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Programmer la date avant tout** : Fixer une date d&#x27;examen à un mois dès le départ pour s&#x27;obliger à structurer son temps et éliminer le piège de la procrastination perpétuelle.</span></li><li><span class="point-bullet">✦</span><span>Adapter le format d&#x27;apprentissage au profil** : Privilégier les ressources écrites pour scanner rapidement ce que l&#x27;on maîtrise déjà, et réserver les cours vidéo aux sujets totalement inconnus.</span></li><li><span class="point-bullet">✦</span><span>Valider par les quiz** : Utiliser les questions d&#x27;entraînement et les quiz de fin de chapitre pour identifier immédiatement les lacunes techniques sans perdre de temps à relire l&#x27;intégralité des cours.</span></li><li><span class="point-bullet">✦</span><span>Accélération des vidéos (x2 / x3)** : Diviser par deux ou trois le temps passé sur les formations vidéo (souvent longues de 20 à 30 heures) grâce à l&#x27;utilisation de plugins de lecture rapide.</span></li><li><span class="point-bullet">✦</span><span>Tirer parti des 36 heures de session sur Killer.sh** : Lancer l&#x27;examen blanc pendant un week-end et exploiter la persistance de la session pour analyser toutes les questions à son rythme au-delà du temps imparti.</span></li><li><span class="point-bullet">✦</span><span>Préparer un environnement de test rigoureux** : Lancer le logiciel de surveillance jusqu&#x27;à 30 minutes avant l&#x27;heure prévue pour parer aux pannes techniques (caméra, micro, redémarrage d&#x27;ordinateur) et éviter l&#x27;élimination directe.</span></li><li><span class="point-bullet">✦</span><span>Valider la disposition du clavier** : Utiliser un clavier américain classique pour l&#x27;examen afin d&#x27;éviter les bugs critiques de saisie (caractères spéciaux, guillemets) causés par des configurations internationales ou françaises dans le bureau virtuel distant.</span></li><li><span class="point-bullet">✦</span><span>Ne jamais abandonner une question difficile** : Réaliser au moins les étapes simples d&#x27;une question complexe pour grappiller des points précieux, quitte à la *flaguer* et y revenir ou l&#x27;abandonner si elle est totalement hors de portée.</span></li><li><span class="point-bullet">✦</span><span>Maîtriser la navigation dans la documentation officielle** : S&#x27;entraîner en amont à trouver instantanément les bons manifestes YAML dans les sections *Concepts* ou *Tasks* de la doc Kubernetes pour éviter des recherches chronophages le jour J.</span></li><li><span class="point-bullet">✦</span><span>Tout faire via le terminal Linux** : Éviter l&#x27;utilisation de VS Code pour la manipulation des fichiers de configuration et privilégier la ligne de commande (générateurs d&#x27;objets `kubectl run --dry-client`, édition rapide).</span></li><li><span class="point-bullet">✦</span><span>Activer le gestionnaire de presse-papiers (*Clipboard Manager*)** : Utiliser l&#x27;historique de copier-coller dans l&#x27;environnement Linux distant pour réutiliser facilement des chaînes de caractères d&#x27;une question précédente.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:18</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je viens juste de passer les certifications Kubernetes KCNA, CKA et CKAD et je vais te partager mes 30 petites astuces secrètes personnelles que j&#x27;ai utilisées pour pouvoir les passer en juste quelques jours au lieu de plusieurs mois. Si vous avez suivi avant, ça m&#x27;aurait sûrement évité de louper la CK la première fois. À mon avis, la toute première chose qu&#x27;il faut faire, c&#x27;est programmer son jour de passage.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale du sujet de la vidéo (astuces pour certifications Kubernetes).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:18 - 00:00:38</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que si tu ne fais pas ça, tu vas toujours avoir du temps pour pouvoir la passer, tu vas toujours remettre au lendemain et ça ne va jamais arriver. Alors que si dès début, tu te fixes une date, tu te dis « ok, je vais le faire en un mois » et que tu te mets ta date de passage dans un mois, tu n&#x27;auras pas le choix de te forcer, de trouver du temps pour pouvoir réviser, pour pouvoir le faire. Ensuite, pour les cours, tu peux trouver pas mal de ressources. Personnellement, moi j&#x27;ai trouvé que les ressources écrites sont plus efficaces pour les choses qu&#x27;on connaît déjà.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et conseils de productivité sans manipulation d&#x27;outils techniques.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:39 - 00:01:02</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça permet de scanner beaucoup plus vite, donc facilement pouvoir trouver exactement ce qu&#x27;on a besoin d&#x27;apprendre. Par contre, pour ce qui est des choses complètement nouvelles, c&#x27;est mieux d&#x27;avoir des ressources vidéo. C&#x27;est plus facile de suivre, de rester concentré et de comprendre avec à la fois l&#x27;image et le son. Donc si tu n&#x27;as pas du tout ou très peu d&#x27;expérience avec Kubernetes, je te conseillerais plus des cours vidéo. Si tu as quand même un peu de la bouteille, je te conseillerais de passer à travers d&#x27;abord les cours écrits et ensuite pour les trucs qui te manquent, de regarder la version vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur les différents formats de ressources d&#x27;apprentissage.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:02 - 00:01:23</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Au passage, pour les choses que tu connais déjà, je te conseille aussi de faire directement un quiz, de ne pas passer trop de temps à vérifier que tu connais exactement toutes les lignes du cours. Si tu fais un quiz, ça va rapidement te donner une idée de ce que tu connais, ce que tu ne connais pas et ce sur quoi il va falloir réviser un petit peu. Quand je dis un quiz, c&#x27;est les questions de la certification qui correspondent au chapitre que tu es en train de réviser. Pour ce qui est des cours vidéo, le problème c&#x27;est que ça prend beaucoup de temps à passer, c&#x27;est souvent des cours de 20h, 30h.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal KodeKloud Hands-On lab (Kubernetes environment) avec un prompt `controlplane ~ -&gt; k run`.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande Kubernetes tronquée : `k run`.</p>
+                        <p><strong>Action / Démonstration :</strong> Préparation ou exécution d&#x27;une commande de création de pod Kubernetes dans un environnement de lab interactif.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000108_seg4.jpg" alt="Interface d&#x27;un terminal en ligne (KodeKloud Hands-On lab) montrant une ligne de commande Kubernetes avec l&#x27;alias `k run`." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000108_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:08</span>
+                        <span class="caption-text">Interface d&#x27;un terminal en ligne (KodeKloud Hands-On lab) montrant une ligne de commande Kubernetes avec l&#x27;alias `k run`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:23 - 00:01:52</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc je te recommande absolument de t&#x27;habituer à les écouter en vitesse x2. Il y a des plugins que tu peux installer dans ton rédicateur, tu peux mettre un peu plus vite x2, x3. Mais ça c&#x27;est plus si la personne parle un peu lentement ou si tu es vraiment habitué. Mais du coup si tu fais tout en x2, tu passes de 20 à 10 heures, ça fait quand même sauver pas mal de temps. Donc déjà juste avec ces astuces, si tu programmes ta certification, ce qui fait que tu vas devoir te mettre dessus direct parce que tu as l&#x27;impression, qu&#x27;ensuite que tu fais des questions d&#x27;entraînement au lieu de direct rentrer dans les cours pour savoir exactement ce qui te manque, et qu&#x27;enfin pour les choses qui te manquent, tu les regardes en 2x ou en 3x, ça va faire passer ta période d&#x27;apprentissage de 30 heures ou plus à juste quelques jours.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou outil affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans manipulation ou démonstration technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:52 - 00:02:11</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui ne fait pas de sens parce que quelques jours, c&#x27;est plus que 30 heures. Mais bon, on a compris. À juste quelques heures. Pour ce qui est des ressources, il y a évidemment Tiller.sh qui permet de passer des exams d&#x27;entraînement qui sont compris au moment où tu achètes la certification. Ce qui est cool, c&#x27;est que tu as droit à deux examens avec deux sets de questions complètement différentes. Donc tu as un groupe de 22 questions et tu as un autre groupe de 22 questions.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une plateforme de préparation aux certifications Kubernetes et Cloud Native.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Badges et descriptifs des examens CKAD (Certified Kubernetes Application Developer) et CNPE (Certified Cloud Native Platform Engineer) avec options de simulation.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des ressources d&#x27;entraînement et des simulateurs d&#x27;examens disponibles pour les certifications Kubernetes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000202_seg6.jpg" alt="Capture d&#x27;écran montrant les simulateurs d&#x27;examens Kubernetes (CKAD Simulator et CNPE Simulator) avec descriptions et badges officiels." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000202_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:02</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant les simulateurs d&#x27;examens Kubernetes (CKAD Simulator et CNPE Simulator) avec descriptions et badges officiels.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:11 - 00:02:31</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et quand tu commences, tu as un compte à rebours de deux heures. Mais quand le compte à rebours expire, tu peux quand même continuer. Ça permet juste de savoir si tu as été assez rapide ou non. Mais c&#x27;est quand même cool de pouvoir continuer. Ta session reste ouverte pendant 36 heures, donc un jour et demi. Ça peut être bien de peut-être commencer pendant un week-end. Comme ça, tu peux continuer l&#x27;après-midi, le lendemain, pour vraiment passer à travers toutes les questions. Dans le passé, ces exams-là, ils étaient plus faciles que la vraie certification.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou code affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, diagramme ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:31 - 00:02:51</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais je pense que maintenant, c&#x27;est à peu près le même niveau. La seule différence, c&#x27;est que dans la vraie certification, tu vas avoir 16, 17 questions. Alors que là, dans ton exemple, tu vas avoir 22 questions. Mais sinon, en termes de difficulté, c&#x27;est quand même assez similaire. Ensuite, tu as Killer Coda, qui est très similaire à Killer.sh, où tu vas pouvoir trouver des questions plus spécifiques. Donc là, ça ne va pas vraiment être un exam entier, ça va plus être deux, trois questions sur un sujet.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la plateforme Killer Coda (KLLR CODA).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page d&#x27;accueil des scénarios CKA (Certified Kubernetes Administrator) avec description des exercices d&#x27;entraînement Kubernetes.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation de la plateforme Killer Coda et de ses fonctionnalités pour préparer la certification Kubernetes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000246_seg8.jpg" alt="Interface de la plateforme Killer Coda présentant les scénarios d&#x27;entraînement pour la certification CKA (Certified Kubernetes Administrator)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000246_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:46</span>
+                        <span class="caption-text">Interface de la plateforme Killer Coda présentant les scénarios d&#x27;entraînement pour la certification CKA (Certified Kubernetes Administrator).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:51 - 00:03:12</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça peut être cool si tu veux réviser vraiment un chapitre en particulier, tu peux faire des questions qui sont juste pour ce chapitre-là, et ça prend juste quelques minutes, et c&#x27;est gratuit. Ensuite, pour les cours, moi j&#x27;ai utilisé Cloud Code. L&#x27;avantage, c&#x27;est que justement, ils ont les cours vidéo, mais aussi les versions écrites, donc ça permet un peu de switcher pour pouvoir aller plus vite quand on a besoin. Et ils ont aussi pas mal d&#x27;exopratiques qui sont spécifiques à chaque catégorie, donc ça permet d&#x27;être sûr qu&#x27;on a bien assimilé tous les concepts de chaque chapitre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web KodeKloud (plateforme de formation certifiante Cloud/Kubernetes), schéma explicatif interactif et terminal virtuel intégré.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma du contrôleur Kubernetes illustrant les interactions entre le Node-Controller, le kube-apiserver et les nœuds worker, ainsi que la commande `kubectl get nodes` listant les workers et leur état.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication pédagogique du fonctionnement interne de Kubernetes (architecture du Controller Manager et gestion des statuts de nœuds) dans le cadre de la préparation à la certification CKA.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000302_seg9.jpg" alt="Interface de la plateforme KodeKloud montrant un schéma d&#x27;architecture Kubernetes (Node-Controller et kube-apiserver) pour la certification CKA, avec un menu de modules à gauche et un terminal intégré affichant `kubectl get nodes`." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000302_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:02</span>
+                        <span class="caption-text">Interface de la plateforme KodeKloud montrant un schéma d&#x27;architecture Kubernetes (Node-Controller et kube-apiserver) pour la certification CKA, avec un menu de modules à gauche et un terminal intégré affichant `kubectl get nodes`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:12 - 00:03:31</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">La différence avec Killer.sh et Killer Coda, c&#x27;est que j&#x27;ai trouvé que les questions ressemblaient un petit peu moins à celles qu&#x27;on trouve dans la vraie certification. Celles qu&#x27;on voit sur Killer.sh, c&#x27;est vraiment le même format, c&#x27;est vraiment très très très proche de ce qu&#x27;il y a dans la vraie certification. Alors que dans Cloud Code, ils vont faire des questions qui sont plus spécifiques au chapitre, ce qui fait que parfois elles vont même être un petit peu plus difficiles que ce qu&#x27;on va voir dans la vraie certif.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou commande visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur s&#x27;exprime face caméra en expliquant les différences entre les plateformes de préparation aux certifications.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:31 - 00:03:50</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour Cloud Code, c&#x27;est pas trop trop cher. Ils ont une espèce de version avec Kia, honnêtement, GTC, ça sert un peu à rien. Donc tu peux juste prendre l&#x27;abonnement normal, ça suffit largement. Et ce cours sur la CK, il est aussi disponible sur Udemy pour encore un petit peu moins cher. Ça dépend parce qu&#x27;il y a les promos qui changent tout le temps, mais tu peux facilement trouver à 10, 15 balles. Et je pense que ça te donne droit aux labs qui sont sur Cloud Code aussi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la plateforme d&#x27;apprentissage en ligne Udemy.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page de cours Udemy pour la certification CKA (Certified Kubernetes Administrator) avec les détails de notation (4.7/5), le nombre d&#x27;apprenants (414k+) et les options d&#x27;achat/abonnement (12,99 €).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle de la plateforme Udemy et du cours de préparation à la certification CKA recommandé pendant la discussion.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000345_seg11.jpg" alt="Capture d&#x27;écran du navigateur affichant la page Udemy du cours &#x27;Certified Kubernetes Administrator (CKA) with Practice Tests&#x27; créé par Mumshad Mannambeth (KodeKloud Training)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000345_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:45</span>
+                        <span class="caption-text">Capture d&#x27;écran du navigateur affichant la page Udemy du cours &#x27;Certified Kubernetes Administrator (CKA) with Practice Tests&#x27; créé par Mumshad Mannambeth (KodeKloud Training).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:50 - 00:04:10</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça, c&#x27;est à vérifier. Une autre source que j&#x27;ai bien aimée aussi, c&#x27;est une que j&#x27;ai faite quand j&#x27;ai loupé ma CK pour la première fois. Je suis passé à travers toutes les catégories et sous-catégories des questions qu&#x27;il y a dans la CK. Et pour chacune de ces catégories, j&#x27;ai essayé de trouver des questions qui correspondaient. Et de cette manière, ça m&#x27;a permis d&#x27;être sûr que j&#x27;avais aucun trou dans mes connaissances, parce qu&#x27;il n&#x27;y avait pas un truc que j&#x27;ai oublié de réviser. Parce que comme du coup, je n&#x27;ai pas fait tout exactement dans l&#x27;ordre, ça se peut qu&#x27;il y ait des trucs qu&#x27;on peut oublier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Outil de mindmapping / tableau blanc interactif</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma arborescent détaillant les catégories d&#x27;examen CKA : &quot;Services &amp; Networking&quot;, &quot;Pod connectivity&quot;, &quot;Network policies&quot;, avec des sous-tâches associées.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la méthode de révision basée sur l&#x27;analyse exhaustive des catégories et sous-catégories de l&#x27;examen CKA.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000405_seg12.jpg" alt="Carte mentale (mindmap) montrant la catégorisation des sujets CKA (Services &amp; Networking, Pod connectivity, Network policies) avec des exemples de questions pratiques." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000405_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:05</span>
+                        <span class="caption-text">Carte mentale (mindmap) montrant la catégorisation des sujets CKA (Services &amp; Networking, Pod connectivity, Network policies) avec des exemples de questions pratiques.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:11 - 00:04:36</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si ça t&#x27;intéresse, je te mets le lien dans la description pour que tu puisses regarder ça aussi. Ensuite, pour ce qui est du jour J, un des trucs les plus importants, c&#x27;est d&#x27;avoir un environnement clean, calme, avec personne qui va venir te déranger, avec pas de bordel en dessous de ton bureau ou derrière toi ou quoi. Comme ça, ça t&#x27;évite d&#x27;avoir la pression supplémentaire du surveillant qui va te dire « Ah, derrière toi, il y a un tableau, derrière toi, il y a une télé, etc. » Autre petite astuce aussi, tu peux démarrer ton examen jusqu&#x27;à 30 minutes avant la date que tu as planifiée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale face caméra sans manipulation technique ni affichage d&#x27;interface.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:36 - 00:04:58</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Moi, je te conseille de le démarrer avant parce que moi, ça m&#x27;est arrivé la première fois que j&#x27;ai passé ma CK, que mon ordi bug, que mon micro ne marche pas et que j&#x27;ai besoin de redémarrer mon ordi. Donc, ça m&#x27;a rajouté encore plus de stress parce que 30 minutes après la date que tu as programmée, tu ne peux plus passer la certification du tout. Ça te compte comme si tu avais loupé. Donc, ce n&#x27;est pas la fin du monde parce que tu as droit à deux passages et ce serait bête de perdre un passage juste parce que tu arrivais un peu en retard.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et retour d&#x27;expérience sur le passage de la certification CKA, conseils sur la gestion du temps et des préparatifs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:58 - 00:05:22</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un autre truc aussi qui est vraiment important, c&#x27;est de tester l&#x27;environnement. Tu as deux moyens de le tester. La première façon, c&#x27;est justement sur Killer.sh, comme on a vu, qui va être vraiment très similaire à l&#x27;environnement que tu vas avoir dans la certification. Ça permet de t&#x27;habituer à être en remote desktop, à utiliser le contrôle HIV, etc. Mais tu peux aussi faire un test avec le vrai logiciel de test pour être sûr qu&#x27;il fonctionne sur ton ordi, qu&#x27;il s&#x27;installe bien, qu&#x27;il est bien mis à jour, que ta webcam est bien détectée, que ton micro fonctionne, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web avec l&#x27;interface Killer.sh (CKA Simulator A), terminal Linux, panneau de questions d&#x27;examen Kubernetes.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes Linux et Kubernetes (`ls /`, `k get svc`), affichage des services Kubernetes (ClusterIP 10.96.0.1) et consignes d&#x27;exercice de certification CKA.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;environnement de test Killer.sh simulant l&#x27;interface de l&#x27;examen Kubernetes CKA avec un terminal et des exercices pratiques.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000510_seg15.jpg" alt="Interface de simulation Killer.sh pour la certification CKA affichant un panneau de questions à gauche et un terminal Linux interactif à droite." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000510_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:10</span>
+                        <span class="caption-text">Interface de simulation Killer.sh pour la certification CKA affichant un panneau de questions à gauche et un terminal Linux interactif à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:23 - 00:05:58</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, je te conseille de le faire peut-être la veille ou quelque chose comme ça. Comme ça, tu es sûr que l&#x27;ordi que tu vas utiliser pour la certification fonctionne bien que tu es bien habitué etc par exemple moi je me suis rendu compte que j&#x27;utilisais un clavier américain international et donc les guillemets ça marchait pas dans la machine virtuelle en remote desktop que on confondit même si j&#x27;avais deux coureurs salles le jour de l&#x27;examen j&#x27;étais niqué je pouvais juste pas faire de guillemets genre j&#x27;allais perdre vraiment en plein de points à cause de ça donc pour le coup c&#x27;était comme moi je te conseille d&#x27;utiliser un clavier américain classique c&#x27;est un clavier français ou un clavier spécial test l&#x27;avant pour bien assurer que le copier coller fonctionne les caractères spéciaux fonctionnent</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale des bonnes pratiques à suivre la veille d&#x27;une certification technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:58 - 00:06:27</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">etc. Ensuite quand t&#x27;es dans la certification, la fois où j&#x27;ai passé où j&#x27;étais vraiment stressé, il y avait des questions où j&#x27;ai vraiment paniqué. J&#x27;ai lu le premier livre de la question, je me faisais « Ah ouais ça c&#x27;est mort, je connais pas c&#x27;est trop dur ». Je passais à la question suivante. Alors que si tu réussis même juste des petites étapes de la question, ça compte pour des points. Donc ça vaut le coup, même pour une question qui a l&#x27;air super dure ou quoi, d&#x27;au moins essayer pour voir ce que tu peux faire dedans pour pouvoir récupérer le maximum de points possible. Si par contre tu vois que la question c&#x27;est vraiment ça concerne quelque chose que t&#x27;as jamais vu, que t&#x27;as jamais fait, mieux c&#x27;est vraiment de la flaguer et de passer à la suivante parce que tu vas perdre vraiment trop de temps à aller dans la documentation etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface de quiz/examen technique (type Killer.sh ou plateforme de lab Kubernetes).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Instructions d&#x27;exercice Kubernetes : extraction de contextes kubeconfig, nom du contexte courant, et décodage base64 de certificat client.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;un exemple concret de question d&#x27;examen de certification Kubernetes (CKA).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000605_seg17.jpg" alt="Question d&#x27;examen CKA (Certified Kubernetes Administrator) affichée à l&#x27;écran concernant l&#x27;extraction d&#x27;informations d&#x27;un fichier kubeconfig." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000605_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:05</span>
+                        <span class="caption-text">Question d&#x27;examen CKA (Certified Kubernetes Administrator) affichée à l&#x27;écran concernant l&#x27;extraction d&#x27;informations d&#x27;un fichier kubeconfig.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:27 - 00:06:49</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en parlant de documentation, il faut justement que tu t&#x27;entraînes à aller chercher dans la documentation. Parce que tu as droit à la doc pendant la certification, sauf que si c&#x27;est quelque chose que tu dois apprendre ou que tu dois découvrir un petit peu pendant la certif, c&#x27;est mort. Tu n&#x27;as vraiment pas beaucoup de temps pour faire toutes les questions. Donc si tu vas dans la doc, c&#x27;est parce que tu sais exactement ce que tu veux chercher, ce que tu veux aller copier dedans. Donc pour ça, je te conseille de vraiment passer du temps dans la doc pour pouvoir naviguer dedans et trouver exactement ce que tu as besoin le plus rapidement possible.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la documentation officielle Kubernetes (kubernetes.io).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Résultats de recherche pour la requête &quot;kind: pvc&quot;, listant des rubriques telles que Persistent Volumes, Configuration de Pods avec du stockage persistant, et erreurs de liaison PVC.</p>
+                        <p><strong>Action / Démonstration :</strong> Recherche rapide dans la documentation officielle Kubernetes pour trouver des exemples de manifestes PersistentVolumeClaim (PVC) en vue de la préparation d&#x27;une certification.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000633_seg18.jpg" alt="Page de résultats de recherche sur le site officiel de documentation Kubernetes montrant des articles sur les Persistent Volumes et PVC." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000633_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:33</span>
+                        <span class="caption-text">Page de résultats de recherche sur le site officiel de documentation Kubernetes montrant des articles sur les Persistent Volumes et PVC.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:49 - 00:07:25</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Par exemple, il y a certains types d&#x27;objets dans Kubernetes. le plus rapide c&#x27;est d&#x27;aller dans la doc pour pouvoir copier coller du yamel pour pouvoir ensuite le coller dans ton terminal donc parfois dans la partie concept il ya des bons exemples parfois il y en a pas parfois il faut aller dans la partie tasque ou là c&#x27;est plus qu&#x27;une espèce d&#x27;exo qui a dans la doc ou là il ya des meilleurs exemples et donc ça si tu le sectes a l&#x27;habitude d&#x27;aller exactement sur le bon lien quand tu cherches quelque chose ça te fait gagner énormément temps ensuite maintenant dans le terminal ce que tu dois tout faire dans le terminal techniquement tu as accès à vs code etc mais si tu dois copier coller les trucs dans vs code franchement tu vas jamais t&#x27;en sortir donc oublie tu vas vraiment devoir tout faire dans le terminal première chose c&#x27;est d&#x27;activer le clipboard manager dans la machine virtuelle linux quota tu peux activer</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la structure de la documentation officielle Kubernetes (concepts et tâches).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:25 - 00:07:49</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">un petit programme qui permet de garder un historique de tes copier coller ce qui fait quand tu copies plusieurs choses tu peux venir coller quelque chose que tu as copié dans une question précédente par exemple ça pareil c&#x27;est quelque chose que tu peux t&#x27;entraîner à faire quand tu es dans killer.sh notre petite astuce qui fait gagner un peu de temps dans le terminal c&#x27;est d&#x27;activer la copie à la sélection donc pareil tu as dans les paramètres du terminal et c&#x27;est le tout dernier paramètre donc ça prend vraiment trois secondes à activer et ça va faire qu&#x27;à chaque fois que tu vas surligner quelque chose avec ta souris dans le terminal, ça va le copier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web du simulateur CKA (killer.sh) et terminal Linux GNOME Terminal.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes de base Linux (`ls /`), menus d&#x27;édition et options de configuration du terminal.</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans l&#x27;environnement d&#x27;examen CKA et configuration des options de copie/collage et du terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000731_seg20.jpg" alt="Interface de l&#x27;exercice CKA Simulator avec un terminal Linux affichant la commande `ls /`." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000731_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:31</span>
+                        <span class="caption-text">Interface de l&#x27;exercice CKA Simulator avec un terminal Linux affichant la commande `ls /`.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000737_seg20.jpg" alt="Menu &quot;Edit&quot; ouvert dans le terminal du simulateur d&#x27;examen CKA." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000737_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:37</span>
+                        <span class="caption-text">Menu &quot;Edit&quot; ouvert dans le terminal du simulateur d&#x27;examen CKA.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000743_seg20.jpg" alt="Fenêtre de préférences du terminal montrant les paramètres de défilement et du presse-papiers." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000743_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:43</span>
+                        <span class="caption-text">Fenêtre de préférences du terminal montrant les paramètres de défilement et du presse-papiers.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:49 - 00:08:14</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que comme le copier-coller dans le bureau à distance, il n&#x27;est vraiment pas très pratique. Parce que si tu es dans un navigateur, il faut juste que tu fasses CTRL-C, mais si tu es dans le terminal, il faut que tu fasses CTRL-SHIFT-C. Et parfois, ça bug, ça t&#x27;ajoute des caractères. Donc, c&#x27;est beaucoup plus pratique de juste pouvoir sélectionner ce que tu as besoin et hop, tu peux directement le coller. Une autre chose aussi, c&#x27;est de dézoomer dans le terminal avec CTRL-C. Pareil, ça prend juste une seconde. Ça permet de pouvoir voir beaucoup plus d&#x27;informations dans ton terminal, surtout si tu as un laptop avec pas un super gros écran.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux graphique, interface de bureau distant.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes kubectl (k get pods), noms de pods Kubernetes (msg-processor, msg-worker), blocs de clés/certificats en base64.</p>
+                        <p><strong>Action / Démonstration :</strong> Sélection de texte directement dans le terminal pour illustrer la manipulation du copier-coller dans un environnement distant.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000802_seg21.jpg" alt="Terminal Linux affichant la sortie de la commande k get pods et une sélection de texte à la souris." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000802_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:02</span>
+                        <span class="caption-text">Terminal Linux affichant la sortie de la commande k get pods et une sélection de texte à la souris.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000808_seg21.jpg" alt="Terminal Linux affichant du contenu encodé en base64 issu d&#x27;un fichier de configuration Kubernetes (kubeconfig)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000808_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:08</span>
+                        <span class="caption-text">Terminal Linux affichant du contenu encodé en base64 issu d&#x27;un fichier de configuration Kubernetes (kubeconfig).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:14 - 00:08:51</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pour le coup une autre astuce ça pourrait être potentiellement d&#x27;utiliser le plus grand laptop ou le plus grand écran que tu as parce que tu as vraiment pas beaucoup d&#x27;espace quand par exemple tu affiches le code yaml d&#x27;un objet ça prend facile 50 sans ligne donc si tu as un tout petit terminal c&#x27;est dur c&#x27;est dur à voir parlant de visibilité aussi un truc qui m&#x27;a pas mal gêné c&#x27;est que par défaut le fond d&#x27;écran du terminal c&#x27;est un espèce de gris foncé et la couleur de la police c&#x27;est un espèce de gris clair donc tu as un espèce de gris sur gris où tu vois pas grand chose donc un autre que je changeais aussi direct dès le début de la certif c&#x27;est de mettre le fond écran du terminal en noir et pour moi en tout cas sur mon ordi ça rendait le terminal beaucoup plus lisible en particulier quant à une police qui est plus petite ça c&#x27;est pour l&#x27;application terminale en</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (GNOME Terminal), interface d&#x27;exercice Kubernetes / CKA.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier YAML de configuration Kubernetes affichant des certificats et clés utilisateur encodés en base64, instruction d&#x27;examen CKA dans le volet de gauche.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication sur la nécessité d&#x27;un grand écran pour visualiser confortablement les fichiers YAML longs de Kubernetes dans le terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000842_seg22.jpg" alt="Capture d&#x27;écran d&#x27;un environnement de terminal Linux affichant un fichier de configuration YAML volumineux (type kubeconfig) avec des données encodées en base64." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000842_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:42</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un environnement de terminal Linux affichant un fichier de configuration YAML volumineux (type kubeconfig) avec des données encodées en base64.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:51 - 00:09:26</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">elle-même maintenant dans le shell une astuce qui permet de gagner pas mal de temps d&#x27;éviter de scroller parce que pareil quand tu es dans un bureau à distance le scroll bug un peu il n&#x27;est pas très doux donc le plus je peux éviter de scroller le plus ça me fait sauver du temps donc quelque chose que je fais souvent c&#x27;est d&#x27;utiliser un pageur comme laisse par exemple ce qui fait que si par exemple je vais afficher le yamel d&#x27;un objet au lieu de juste l&#x27;afficher directement dans mon terminal je fais un pipe laisse ce qui fait que ça me l&#x27;affiche dans un pager comme une espèce de lecteur de fichiers texte donc comme ça tu peux scroller au clavier soit ligne par ligne soit page par page tu peux aussi chercher le don etc et ensuite quand tu fais q tu quittes et tu retrouves ton terminal exactement la dernière commande que tu as fait</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (GNOME Terminal ou émulateur similaire sous environnement Ubuntu/Debian pour CKA).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Affichage d&#x27;un fichier YAML de configuration (`kubeconfig`) avec des sections utilisateurs, clusters, et des données de certificats (`client-certificate-data`, `client-key-data`).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation de la problématique du défilement (scroll) dans un terminal distant et introduction des commandes de pagination (`less`, `more`) pour naviguer efficacement sans utiliser la souris.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000917_seg23.jpg" alt="Terminal Linux affichant un fichier de configuration YAML de cluster Kubernetes (Kubeconfig) contenant des données sensibles encodées en base64 (certificats et clés clients)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000917_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:17</span>
+                        <span class="caption-text">Terminal Linux affichant un fichier de configuration YAML de cluster Kubernetes (Kubeconfig) contenant des données sensibles encodées en base64 (certificats et clés clients).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:26 - 00:10:01</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">sans avoir à scroller 50 mille pour pouvoir voir les commandes que tu as fait juste avant donc pour moi ça fait gagner pas mal de temps ensuite même les petites astuces qui sont pas valables juste pour l&#x27;assertif mais qui aide à gagner du temps donc ça va être d&#x27;utiliser contrôler contre r ça permet de chercher dans ton historique une commande que tu as fait donc c&#x27;était vite à avoir à faire flèche du haut flèche du haut dix fois pour retrouver une commande donc si tu veux récupérer une commande dans lequel il va marquer pot dedans tu fais contrôler r pod et boum ça te la récupère direct contrôle a et contrôle e ça permet d&#x27;aller directement au début et à la fin de ta ligne comme tu es souvent en train d&#x27;éditer des longues commandes cube ctl la vitesse du curseur par défaut elle est vraiment lente donc si tu dois faire gauche gauche gauche gauche ou droit droit</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash/sh), interface d&#x27;examen (CKA).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `cat /opt/course/1/kubeconfig | less` dans le terminal.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;affichage d&#x27;un fichier de configuration Kubernetes de manière paginée dans le terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000952_seg24.jpg" alt="Terminal Linux montrant l&#x27;utilisation de la commande cat avec redirection vers less pour afficher un fichier de configuration Kubernetes." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_000952_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:52</span>
+                        <span class="caption-text">Terminal Linux montrant l&#x27;utilisation de la commande cat avec redirection vers less pour afficher un fichier de configuration Kubernetes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:01 - 00:10:36</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">droit droit droit pour pouvoir aller d&#x27;un côté ou de l&#x27;autre de ta commande tu vas perdre énormément de temps. Échap point c&#x27;est aussi un raccourci que j&#x27;utilise tout le temps qui permet de récupérer le dernier argument de la commande précédente. Donc si par exemple tu viens de créer un fichier YAML avec VI et le nom du fichier et le nom du fichier peut-être qui peut être un peu long parce qu&#x27;il y a son chemin etc. Ensuite si tu veux l&#x27;appliquer tu fais kubectl apply-f et là tu fais échap point et ça te copie tout le chemin du fichier que tu viens d&#x27;éditer et ça te le met dans ta commande actuelle. Par là ça te fait gagner un petit peu de temps. Un autre raccourci qui ne sert pas super souvent mais que dans une ou deux questions peut être utile c&#x27;est sudo point exclamation point exclamation et ça permet si tu as fait une commande et que tu as oublié de la</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun terminal, console ou interface logicielle visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible (discussion théorique sur des raccourcis shell).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur sur l&#x27;utilisation de raccourcis clavier Linux/Bash (Échap + point pour récupérer le dernier argument).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:36 - 00:11:10</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">faire en sudo parce que par exemple tu voulais redémarrer un service site en train de débuguer un club led par exemple chose comme ça au lieu d&#x27;avoir à le retapper toute la commande et de mettre sudo au départ tu peux juste faire sudo pour l&#x27;exclamation point exclamation et ça va trop faire la dernière commande que tu as fait mais en mode sudo aussi est souvent des questions du style créer un petit script qui vous permet de récupérer l&#x27;état des pods dans tel namespace et enregistrer le à tel endroit est ce que je faisais au départ je faisais ma commande pour pouvoir faire mon script une fois que ça marchait je copiais et ensuite j&#x27;ouvrais mon fichier et je venais de coller ça peut perdre un petit peu de temps parce que même si j&#x27;ai la copie à la sélection automatique c&#x27;est si tu sélectionne mal oublié un caractère au début ou à la fin que je suis comme</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux / GNOME Terminal avec interface graphique de bureau.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `systemctl restart kubelet` demandant une authentification par mot ainsi que le prompt `candidate@cka9412:~$`.</p>
+                        <p><strong>Action / Démonstration :</strong> Exécution d&#x27;une commande systemctl sur un service critique (kubelet) nécessitant des privilèges d&#x27;administration.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001045_seg26.jpg" alt="Terminal Linux affichant une invite de commande et l&#x27;exécution d&#x27;une commande systemctl nécessitant une authentification root." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001045_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:45</span>
+                        <span class="caption-text">Terminal Linux affichant une invite de commande et l&#x27;exécution d&#x27;une commande systemctl nécessitant une authentification root.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:10 - 00:11:32</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">ça c&#x27;est trop que tu peux te faire avoir bêtement parce que tu avais la bonne commande mais juste d&#x27;ailleurs il manquait un caractère que juste comme ça donc pour éviter ça maintenant ce que je fais une fois que ma commande et fonctionne bien eh ben je vais au début de ma commande avec contrôle a et je fais juste écho guillemets je vais à la fin avec contrôle e je rajoute un guillemet et ensuite je rajoute chevron et le chemin vers lequel ils veulent que tu enregistres ton script Si je fais comme maintenant, je suis sûr que ça va être exactement la bonne commande que je vais mettre dans mon fichier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif au sein d&#x27;une interface d&#x27;examen (type CKA/Killer.sh).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes affichées : `k get deploy -n default` et `echo &quot;k get deploy -n default&quot;`.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et démonstration de la technique d&#x27;encapsulation par des guillemets pour sécuriser ou inspecter une commande avant exécution.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001121_seg27.jpg" alt="Démonstration dans un terminal Linux de l&#x27;encapsulation d&#x27;une commande Kubernetes (kubectl abrégé en &#x27;k&#x27;) entre des guillemets précédés de la commande &#x27;echo&#x27;." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001121_seg27.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:21</span>
+                        <span class="caption-text">Démonstration dans un terminal Linux de l&#x27;encapsulation d&#x27;une commande Kubernetes (kubectl abrégé en &#x27;k&#x27;) entre des guillemets précédés de la commande &#x27;echo&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:32 - 00:11:50</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et je n&#x27;ai pas besoin d&#x27;utiliser copier-coller. Et je peux ensuite derrière exécuter mon fichier pour être vraiment sûr que tout a bien fonctionné, que ça fait bien ce que je fais. Et comme ça, je suis serein. Un truc aussi qui m&#x27;a aidé, c&#x27;est que sur mon Mac, j&#x27;ai inversé la touche Fn et la touche Control. Comme ça, la touche Control est au même endroit que sur les claviers sur PC. Et c&#x27;est aussi un peu plus facile pour pouvoir faire des Ctrl-C, Ctrl-V, Ctrl-Shift-C, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> macOS System Settings (Préférences Système / Réglages du Clavier) et terminal Bash en arrière-plan.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fenêtre de configuration macOS affichant les options du clavier (raccourcis, touches de fonction, touches de modification) et lignes de commande Bash dans le terminal sous-jacent.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration des paramètres clavier sur macOS, ciblant la modification des touches (Fn et Control) tel qu&#x27;expliqué dans le discours.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001141_seg28.jpg" alt="Capture d&#x27;écran montrant les réglages Système de macOS avec le panneau de configuration du clavier ouvert au premier plan, superposé à un terminal en arrière-plan." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001141_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:41</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant les réglages Système de macOS avec le panneau de configuration du clavier ouvert au premier plan, superposé à un terminal en arrière-plan.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:51 - 00:12:10</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est quelque chose qui m&#x27;a aidé un peu dans la certification, mais que je te recommande même en dehors. parce que la touche contrôle, je trouve qu&#x27;elle est vraiment mal placée sur les claviers des MacBooks. Donc tout ça, c&#x27;était pour l&#x27;échelle. Maintenant, pour KubeCTL en particulier, ça va être vraiment la commande que tu vas utiliser 50 000 fois dans l&#x27;adcertif. Il va souvent te demander de créer des objets, créer des pods, créer des déploiements, créer des services, des ingress, des choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;ergonomie des claviers MacBook et l&#x27;utilisation intensive de la commande kubectl.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:10 - 00:12:30</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">À aucun moment, tu dois écrire des YAML à la main. Ça, c&#x27;est d&#x27;être, c&#x27;est trop facile de faire des erreurs, c&#x27;est trop dur de retenir ça de tête. Donc il faut toujours que tu partes de quelque chose qui est déjà fait. Donc il faut vraiment que tu connaisses par cœur les méthodes qui permettent de créer tous ces types d&#x27;objets qu&#x27;on peut te demander de faire dans l&#x27;assertif. Donc pour ça, tu dois utiliser kubectl create. Ça, ça permet de créer déjà une bonne partie des objets qu&#x27;on peut te demander.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface, terminal ou outil technique visible à l&#x27;écran.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les bonnes pratiques d&#x27;infrastructure (évitement de la saisie manuelle de fichiers YAML).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:30 - 00:12:53</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu as aussi run, ça qui va pouvoir te permettre de créer des pods. Et tu as aussi expose, qui va permettre de créer des services. Techniquement, tu peux aussi faire create service. Mais expose, je crois que ça permet directement de faire un service de type cluster IP. Donc ça peut être un petit peu plus rapide si tu sais exactement ce que tu veux faire. Il y a certains types d&#x27;objets Kubernetes que tu ne peux pas faire avec kubectl. Et donc pour cela, il faut absolument que tu saches exactement où chercher et quoi taper dans la barre de recherche de la documentation.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique des commandes Kubernetes `kubectl run` et `kubectl expose` par le formateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:53 - 00:13:13</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pour pouvoir trouver directement un bon exemple de ce que tu as besoin. Donc souvent pour ce qui est autour des volumes, les physicals, volumes claims, etc., tu vas devoir aller dans la doc. Pour ce qui est des alias, ce n&#x27;était pas le cas avant, mais maintenant, il y a un alias qui est déjà activé qui permet juste de faire K au lieu de Cube, CTL. Et donc ça, dans Killer.sh et aussi dans le vrai environnement de certification, c&#x27;est déjà ajouté. L&#x27;autocomplétion est aussi déjà activée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune (prise de vue face-caméra uniquement).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun (discussion orale sur les alias Kubernetes, notamment `k` pour `kubectl`, et la recherche de configurations de volumes dans la documentation).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale concernant l&#x27;utilisation des alias préconfigurés et la recherche d&#x27;exemples de Physical Volumes et Volume Claims dans la documentation Kubernetes officielle.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:13 - 00:13:41</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Avant pareil, il fallait que tu l&#x27;actives toi-même, maintenant c&#x27;est fait automatiquement. Et je te conseille de l&#x27;utiliser le maximum possible. Quand tu t&#x27;entraînes, toujours essayez de faire Tab pour pouvoir compléter le nom des namespace, le nom des pods, le nom des déploiements, etc. Si jamais tu aimes bien aussi utiliser la technique du dry run, donc pour rappel, quand tu vas créer un objet, au lieu de le créer, tu peux rajouter &quot;-dryrun=&quot;client=&quot;yaml&quot;, ce qui permet de ne pas directement créer l&#x27;objet dans le cluster, mais de te donner le yaml qui correspondrait à cet objet, comme ça tu peux le modifier, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande Kubernetes illustrée en surimpression : `kubectl create svc mon-service --dry-run=client -o yaml`</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur l&#x27;utilisation des commandes kubectl avec l&#x27;option dry-run pour générer des manifests YAML.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:42 - 00:14:03</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et évidemment, c&#x27;est super chiant à taper, par contre ce qui peut être bien c&#x27;est de le copier, comme ça tu l&#x27;as dans ton historique de terminal, et donc tu peux venir le récupérer facilement si jamais tu l&#x27;utilises souvent. Pour le coup, cette technique du dry run, je la déconseille un petit peu parce que je trouve qu&#x27;il y a une manière qui est beaucoup plus rapide de récupérer des YAML et de les modifier. C&#x27;est de directement créer l&#x27;objet. Donc tu fais ton kubectl create ou run ou expose, ce que tu veux.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;utilisation de l&#x27;historique du terminal et la technique du dry run.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:03 - 00:14:25</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça va créer l&#x27;objet. Évidemment, il ne va pas être comme tu veux. Mais ensuite, tu refais ta commande, mais au lieu de create, tu fais edit. Et donc là, ça va t&#x27;ouvrir via et tu pourras faire ta modification et enregistrer et ça va le faire directement. J&#x27;ai jamais eu de fois où je ne voulais vraiment pas le créer avant de le modifier parce qu&#x27;en général, tu le crées même s&#x27;il n&#x27;est pas correct. Ça ne cause pas vraiment de problème. Et c&#x27;est plus rapide que de rajouter le fameux tiret tiret dryrun égale client tiret O YAML, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console active visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Mention textuelle de la commande &quot;kubectl edit mon-service&quot; en surimpression graphique.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur de la méthode pour modifier un objet Kubernetes directement après sa création.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:25 - 00:14:43</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Par contre, je déconseille fortement de éditer des objets qui sont déjà créés dans le cluster qu&#x27;on t&#x27;a donné pour la question. Parce que ça m&#x27;est déjà arrivé d&#x27;éditer quelque chose et j&#x27;ai le réflexe de toujours sauvegarder ce que je fais à chaque fois que je modifie une ligne. C&#x27;est pas forcément un très bon réflexe. Et donc ça m&#x27;est arrivé d&#x27;effacer des morceaux d&#x27;un objet qui était déjà là, pré-créé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (fenêtre XFCE Terminal), interface web d&#x27;examen de type Killer.sh pour la certification CKA.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes kubectl (`k get deploy`, `k get `) et énoncé d&#x27;une question d&#x27;examen sur la mise à jour d&#x27;un nœud Kubernetes.</p>
+                        <p><strong>Action / Démonstration :</strong> Manipulation de commandes kubectl dans un terminal pour interroger les déploiements d&#x27;un cluster Kubernetes dans le cadre d&#x27;un exercice pratique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001429_seg36.jpg" alt="Interface montrant un panneau de question d&#x27;examen Kubernetes et un terminal Linux exécutant des commandes kubectl." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001429_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:29</span>
+                        <span class="caption-text">Interface montrant un panneau de question d&#x27;examen Kubernetes et un terminal Linux exécutant des commandes kubectl.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:44 - 00:15:12</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et dans la question, la plupart du temps, ça te dit ne modifiez pas les objets qui sont déjà présents ou ne modifiez pas ces parties-là, etc. Une fois que je l&#x27;avais modifié, pour pouvoir le remettre comme il était au départ, c&#x27;est super chaud. Donc ce que je te conseille, c&#x27;est si c&#x27;est des objets qui existent déjà, de faire juste un get-o-yaml et ensuite tu peux l&#x27;envoyer dans un fichier pour pouvoir faire tes motifs. Si jamais ça t&#x27;arrive de modifier un objet que tu n&#x27;aurais pas dû, tu peux regarder dans l&#x27;annotation pour pouvoir savoir exactement comment tout était configuré, pour pouvoir le réparer, mais bon, ça prend quand même pas mal de temps à faire, c&#x27;est ce que j&#x27;ai fini par faire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique active (simple incrustation textuelle de sous-titre/commande).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande kubectl affichée en incrustation : `kubectl get svc mon-service -o yaml &gt; mon-service.yaml`</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la bonne pratique de sauvegarde d&#x27;objets Kubernetes existants avant modification, avec illustration textuelle de la commande de sauvegarde.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:13 - 00:15:36</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça te fait perdre du temps, ça te rajoute du stress, donc le mieux c&#x27;est juste de ne jamais éditer avec kubectl edit les objets qui sont préexistants. Très souvent, on va te demander de faire des opérations dans un namespace particulier. Et donc, moi j&#x27;ai pris l&#x27;habitude de faire k-n et le nom du namespace avant même de mettre toutes les options que je veux dans ma commande. Parce qu&#x27;en fait, le-n namespace, tu peux le mettre un peu là où tu veux dans la commande, mais si tu le mets à la fin, c&#x27;est beaucoup plus difficile de réutiliser tes commandes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou code affiché (plans de type face-caméra uniquement).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique visuel ou ligne de commande affichée à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les risques de l&#x27;utilisation de la commande &quot;kubectl edit&quot; sur des objets préexistants en production et sur les bonnes pratiques de gestion des namespaces.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:36 - 00:15:59</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et comme ça, quand je vais faire une nouvelle commande kubectl, même si c&#x27;est une commande qui n&#x27;a pas trop de rapport avec celle que je viens de faire, je peux quand même garder mon k-n et le nom du namespace. Alors que s&#x27;il était au milieu ou à la fin de ma commande, j&#x27;aurais dû le retaper manuellement. Ça permet encore une fois de gagner une petite seconde ou deux dans ta commande. Et souvent, ce n&#x27;est même pas tant les une ou deux secondes que tu gagnes, mais c&#x27;est aussi l&#x27;espace mental de devoir refaire des choses, retaper quelque chose, faire trois actions au lieu d&#x27;une, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:59 - 00:16:17</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre chose qui est aussi très très bien important, ça m&#x27;a coûté pas mal de points dans ma CKAD, c&#x27;est de toujours vérifier ce qu&#x27;on fait. Même si tu es sûr de toi, tu penses que tu as réglé le problème, toujours faire une commande supplémentaire, un kubectl get ou un kubectl describe, pour vraiment s&#x27;assurer que la modification que tu viens de faire, elle a bien été faite, dans le bon namespace, sur le bon objet, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou commande visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de conseils pour la certification CKAD (vérification systématique des modifications).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:17 - 00:16:35</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On pourrait vraiment éviter de perdre des points bêtement parce que tu n&#x27;étais pas dans bon espèce ou tu as oublié un caractère ou quelque chose comme ça. Ou si tu es en train de gérer des services ou des ingresses ou des choses comme ça, toujours faire un petit curl pour vérifier que la requête est bien passée, bien arrivée dans ton pod comme il faut, etc. Donc bref, savoir vérifier ce qu&#x27;on vient de faire, que ce qu&#x27;on vient de faire a bien été fait et fonctionne correctement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique ou de code visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les bonnes pratiques de vérification réseau (curl, services, ingresses Kubernetes).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:36 - 00:16:55</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre erreur que j&#x27;avais tendance à beaucoup faire et qui m&#x27;a fait perdre beaucoup de temps, c&#x27;est de ne pas lire la question en entier. Parce que souvent, je vais lire le début de la question et je vais vite vouloir commencer pour pouvoir gagner du temps. Mais en fait, en lisant la question au complet, ça permet de savoir que, par exemple, je n&#x27;ai pas besoin de créer moi-même mon fichier. Peut-être que le fichier, il existe déjà quelque part. Ou de faire attention à quelque chose en particulier parce que parfois, c&#x27;est à la fin de la question que ça nous dit attention à ne pas faire ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface graphique visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique/pédagogique sur la méthodologie de résolution de problèmes et de passage d&#x27;examens techniques.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:55 - 00:17:27</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, je pensais que je gagnais du temps en répondant à la question avant d&#x27;avoir tout le lire. Mais en fait, tu perds du temps parce que tu dois modifier ce que tu as fait. Donc, vraiment lire la question en entier avant de commencer à y répondre. Et une fois qu&#x27;on a fini d&#x27;y répondre, de relier à la fin pour s&#x27;assurer que toutes les petites erreurs qu&#x27;on peut te faites, les noms des namespaces, les noms des objets, etc., que tout matche bien pour être sûr que tu as tous les points. Maintenant, je pense que c&#x27;est super important d&#x27;être confortable dans Vim parce que comme tu fais tout dans le terminal, si tu n&#x27;es pas super confortable avec Vim ou que tu n&#x27;as pas les bonnes astuces pour pouvoir aller faire tes opérations rapidement, tu vas perdre du temps, tu vas devoir trop réfléchir et ça augmente tes chances de louper l&#x27;assertif.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et méthodologique sur la gestion du temps lors de la lecture et de la réponse aux questions.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:27 - 00:17:47</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc entraîne-toi avec vraiment les bases de Vim, pas besoin d&#x27;être un tueur. Ce que moi je trouve qui est le plus utile, ça va être évidemment copier-coller dans Vim avec le mouvement Y pour Yank. Je ne sais pas pourquoi il s&#x27;appelle Yank, mais en tout cas copier dans Vim, c&#x27;est Y. Donc on peut soit copier un mot avec YW, W pour Word, ou on peut copier le plus souvent une ligne avec YY, ça va nous copier toute la ligne.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, éditeur de texte en ligne de commande (Vim/Nano).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier de configuration YAML Kubernetes (API version apps/v1, kind: Deployment, métadonnées, replicas, selecteurs et conteneurs httpd:2-alpine).</p>
+                        <p><strong>Action / Démonstration :</strong> Édition et manipulation d&#x27;un manifeste de déploiement Kubernetes pour illustrer l&#x27;utilisation des commandes de base de l&#x27;éditeur de texte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001742_seg44.jpg" alt="Terminal Linux affichant une session d&#x27;édition d&#x27;un manifeste Kubernetes (Deployment) au format YAML." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001742_seg44.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:42</span>
+                        <span class="caption-text">Terminal Linux affichant une session d&#x27;édition d&#x27;un manifeste Kubernetes (Deployment) au format YAML.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:48 - 00:18:13</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si on veut déplacer une ligne, donc en fait faire un espèce de couper-coller, on peut faire Delete, donc D, D, ça va nous effacer toute la ligne. Et ensuite, on peut utiliser P pour pouvoir la coller, là où on a besoin. Ça va rechercher, ça permet aussi de gagner dans un moment temps, au lieu de faire Feshjuba, Feshjuba, Feshjuba pour aller là où tu veux, et bien tu peux juste faire Slash le mot que tu cherches, ça va t&#x27;amener directement là où tu veux. Et aussi, très important, comme on gère du YAML, savoir indenter et désindenter des lignes ou carrément des blocs de lignes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale des raccourcis clavier de Vim pour couper, copier et coller des lignes.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:13 - 00:18:42</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que comme tu es toujours en train de copier-coller du YAML, très souvent, des blocs de code ne sont pas tout à fait bien indentés par rapport à ce que tu as copié dans la doc ou des choses comme ça. Pour indenter juste une ligne, c&#x27;est chevron droite, chevron droite. Ou si tu veux indenter tout un bloc, tu appuies sur V pour passer en mode sélection. Tu sélectionnes tout ce que tu as besoin, et ensuite tu fais chevron juste une fois, et ça va te décaler tout ce bloc-là. Quelque chose qui sert de temps en temps, c&#x27;est que si tu fais un HTML et qu&#x27;il est mal formé, parce que tu as mal copié quelque chose, ou tu as mal indenté, ou il y a quelque chose qui bug, en tout cas, ça va souvent te dire, il y a un problème à la ligne 83.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, éditeur de texte Vim, interface de terminal graphique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Code YAML de configuration de déploiement Kubernetes (spec, containers, image, resources, restartPolicy, etc.) et indicateur de mode visuel Vim.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;utilisation des commandes Vim pour la sélection et l&#x27;indentation de blocs de code YAML dans un contexte Kubernetes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001820_seg46.jpg" alt="Gros plan sur un éditeur de texte en ligne de commande affichant du code YAML avec des paramètres de conteneur Kubernetes (spec, containers, image httpd)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001820_seg46.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:20</span>
+                        <span class="caption-text">Gros plan sur un éditeur de texte en ligne de commande affichant du code YAML avec des paramètres de conteneur Kubernetes (spec, containers, image httpd).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001827_seg46.jpg" alt="Vue globale du terminal Linux en mode édition Vim montrant un fichier YAML de configuration Kubernetes avec une sélection visuelle de blocs de texte active en bas de l&#x27;écran (-- VISUAL --)." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001827_seg46.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:27</span>
+                        <span class="caption-text">Vue globale du terminal Linux en mode édition Vim montrant un fichier YAML de configuration Kubernetes avec une sélection visuelle de blocs de texte active en bas de l&#x27;écran (-- VISUAL --).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:42 - 00:19:06</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, pareil, si tu vas à la ligne 83, dans Vim, tu fais 2 points, 83, boum, ça t&#x27;amène directement là. Ça te fait gagner pas mal de temps, plutôt que de faire 83 fois flèche du bas, flèche du bas, flèche du bas. Un petit renconcer aussi qui n&#x27;est pas méga populaire, mais que j&#x27;aime bien utiliser, tu sais peut-être déjà, mais quand tu fais DW, ça va te delete un word, tu t&#x27;es effacé un mot, ou si tu fais DB, ça va te delete le mot qui est avant ton curseur, mais tu peux aussi faire DIW et ça va te effacer le mot dans lequel tu es en ce moment.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de texte / terminal avec coloration syntaxique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Manifeste Kubernetes au format YAML (spec de déploiement, containers, image httpd:2-alpine, imagePullPolicy, resources, dnsPolicy, restartPolicy).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et manipulation de fichiers de configuration pour la gestion de conteneurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001854_seg47.jpg" alt="Affichage d&#x27;un fichier de configuration YAML dans un éditeur (type Vim/VSCode) montrant un manifeste Kubernetes." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001854_seg47.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:54</span>
+                        <span class="caption-text">Affichage d&#x27;un fichier de configuration YAML dans un éditeur (type Vim/VSCode) montrant un manifeste Kubernetes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:07 - 00:19:31</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si par exemple, tu es dans le mot Kubernetes et que tu es sur le caractère E, au lieu d&#x27;aller à la fin du mot ou au début du mot pour pouvoir faire DW, tu peux juste faire DIW et ça va t&#x27;effacer le mot dans lequel tu es en ce moment. Ça suffit parce qu&#x27;on est souvent en train d&#x27;éditer des fiches YAML et devoir remplacer des éléments à certains endroits. Un autre petit raccourci qui est un petit peu plus niche, un petit peu plus anecdotique, mais qui fait gagner pas mal de temps, c&#x27;est pouvoir incrémenter et décrémenter des chiffres.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de commandes Vim (raccourci diw pour supprimer un mot) pour l&#x27;édition de fichiers YAML Kubernetes.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-49">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:32 - 00:19:55</span>
+                <span class="segment-idx">Segment #49</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc avec CTRL A et CTRL X. Souvent tu vas avoir par exemple un service qui va pointer vers le port 80-80 et dans la question on va te dire qu&#x27;il faut que ça pointe vers le 80-81. Donc là, au lieu de faire flèche du bas, flèche du bas, flèche du bas pour aller jusqu&#x27;à là où il y avait 80, ensuite W, ou alors flèche droite pour aller à cet endroit-là, venir en mode insertion avec I, effacer le dernier 0, rajouter le chiffre 1, sortir du mode insertion, sauvegarder et quitter, c&#x27;est genre 5 en d&#x27;action.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, éditeur de texte en ligne de commande pour Kubernetes (`kubectl edit`).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier YAML de définition d&#x27;un Service Kubernetes (`apiVersion: v1`, `kind: Service`, `name: mon-service`, `port: 8080`, `targetPort: 8080`).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la modification rapide d&#x27;une configuration de port dans un service Kubernetes pour remplacer le port 8080 par 8081.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001943_seg49.jpg" alt="Terminal Linux affichant l&#x27;édition d&#x27;un fichier manifeste Kubernetes YAML (service `mon-service`) avec une configuration de port pointant vers 8080." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_001943_seg49.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:43</span>
+                        <span class="caption-text">Terminal Linux affichant l&#x27;édition d&#x27;un fichier manifeste Kubernetes YAML (service `mon-service`) avec une configuration de port pointant vers 8080.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-50">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:55 - 00:20:28</span>
+                <span class="segment-idx">Segment #50</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu peux simplement faire slash pour rechercher. 80 pour arriver directement où tu as besoin. Là tu fais CTRL A et ça va incrémenter 80 80, donc ça vers 80 81. Et ensuite autre petite astuce dans l&#x27;astuce, tu peux faire 2.x au lieu de faire 2.wq. Ça te fait économiser un caractère. Et donc là c&#x27;est juste trois étapes, chercher, incrémenter, quitter au lieu de 50 étapes à faire flèche flèche flèche flèche. Et si tu veux vraiment pratiquer ça un petit peu, franchement je trouve que ça vaut le coup de prendre même juste 30 minutes et utiliser Vim Tutor. Sur toutes les machines où tu as Vim installé, tu peux taper et ça va te faire un tutoriel de Vim avec des petits exercices à faire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale d&#x27;une astuce de manipulation textuelle ou d&#x27;édition (recherche, incrémentation et fermeture).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-51">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:28 - 00:20:47</span>
+                <span class="segment-idx">Segment #51</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est vraiment le coup de passer à travers les premiers exercices pour pouvoir se familiariser, s&#x27;habituer aux raccourcis les plus utiles et aussi découvrir des raccourcis qui sont peut-être un peu plus niches mais qui font gagner un peu plus de temps. Et comme je disais tout à l&#x27;heure, le but, c&#x27;est pas juste de devoir gagner une demi-seconde à droite ou à gauche, même si sur toute la durée de la certification, ça fait quand même gagner des précieuses minutes qui peuvent faire la différence entre passer ou louper.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts généraux sur les raccourcis et l&#x27;efficacité, sans manipulation sur un outil.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-52">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:47 - 00:21:06</span>
+                <span class="segment-idx">Segment #52</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais c&#x27;est aussi, ça te libère un peu l&#x27;esprit. Si tu sais comment faire des actions sans réfléchir en une ou deux étapes au lieu de 10 étapes, ça te libère énormément d&#x27;espace mental pour pouvoir réfléchir à autre chose. Comme je l&#x27;ai dit tout à l&#x27;heure, je te mets en description le guide avec des exemples de questions pour chacune des sous-catégories que tu peux avoir dans la CK. Et si tu veux savoir comment ça s&#x27;est passé quand j&#x27;ai passé mes trois certifs, je te laisse aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Application de mindmapping / tableau blanc en ligne (type Miro ou équivalent).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma heuristique (mindmap) titré &quot;Cheat Sheet CKA cocadmin&quot; listant les commandes et concepts Kubernetes par catégories (Storage, Troubleshooting, Cluster Architecture, Services &amp; Networking, etc.).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle et explication d&#x27;une antisèche (cheat sheet) structurée pour simplifier et accélérer les actions sur Kubernetes (certification CKA).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_002102_seg52.jpg" alt="Vue d&#x27;une mindmap interactive (type whiteboard/diagramme) représentant la &quot;Cheat Sheet CKA cocadmin&quot; structurée par thématiques Kubernetes." loading="lazy" onclick="openLightbox('../screenshots/de0Mm9xT_2U/de0Mm9xT_2U_002102_seg52.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:21:02</span>
+                        <span class="caption-text">Vue d&#x27;une mindmap interactive (type whiteboard/diagramme) représentant la &quot;Cheat Sheet CKA cocadmin&quot; structurée par thématiques Kubernetes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
