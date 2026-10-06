@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le nouveau Claude hack les logiciels les plus sécurisés au monde — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Le nouveau Claude hack les logiciels les plus sécurisés au monde</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=gDtE9XEpL_M" target="_blank">Lien YouTube (<code>gDtE9XEpL_M</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-04-13</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:07:36</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Anthropic a franchi un cap critique en matière d'intelligence artificielle avec le développement de son nouveau modèle, **Claude Mythos**. Alors que les gains de performance étaient initialement linéaires sur la plupart des tâches, les tests de validation ont mis en évidence une percée spectaculaire et inattendue dans le domaine de la cybersécurité. Contrairement aux générations précédentes (comme Opus 4.5), Mythos démontre des capacités offensives redoutables, capables d'identifier et d'exploiter des failles de type *zero-day* complexes au sein d'infrastructures réputées ultra-sécurisées, telles que OpenBSD, FreeBSD, le noyau Linux, l'isolation des processus (*sandboxing*) de Firefox, ou encore des hyperviseurs basés sur Rust.<br><br>Face au risque systémique majeur que représente l'accès public immédiat à un tel outil, Anthropic a choisi de retenir sa mise sur le marché. L'entreprise déploie une stratégie de gestion des risques rigoureuse : divulgation coordonnée des vulnérabilités auprès des projets open source, financement de correctifs pour les dépendances critiques, et intégration au projet **GlassWings** pour auditer les environnements d'infrastructure globaux (AWS, systèmes d'exploitation propriétaires). Cette transition sécuritaire précède l'introduction progressive de versions durcies du modèle et de filtres comportementaux renforcés.<br><br>Pour les ingénieurs DevOps, SRE et architectes systèmes, cette évolution marque un tournant paradigmatique. Si le choc initial fait redouter une recrudescence temporaire de failles exploitées dans la nature, l'impact opérationnel à long terme s'annonce structurellement positif. À mesure que ces modèles surpuissants seront mis à contribution pour auditer et durcir le code, la complexité de sécuriser des architectures logicielles complexes ou générées automatiquement (*vibe coding*) sera considérablement réduite, abaissant la surface d'attaque globale d'Internet.<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Claude Mythos** : Nouveau modèle d'IA développé par Anthropic, doté de capacités offensives sans précédent en cybersécurité et capable de découvrir des chaînes de failles complexes.<br>* **Claude Opus 4.5 / 4.6** : Modèles de génération précédente d'Anthropic, reconnus pour leurs performances globales mais historiquement limités sur l'analyse et l'exploitation de failles de sécurité avancées.<br>* **OpenBSD** : Système d'exploitation open source hautement sécurisé, traditionnellement utilisé pour les pare-feux et équipements réseau critiques, touché par une vulnérabilité critique découverte par l'IA.<br>* **FreeBSD** : Système d'exploitation orienté haute performance, affecté par une faille d'origine NFS permettant l'élévation de privilèges root à distance.<br>* **Noyau Linux** : Système d'exploitation central de nombreuses infrastructures cloud et serveurs, analysé par le modèle pour détecter des failles traversant plusieurs couches de sécurité.<br>* **Firefox** : Navigateur web dont le modèle a réussi à compromettre l'isolation des processus (*sandboxing*) JavaScript et applicative via une chaîne de vulnérabilités.<br>* **GlassWings** : Consortium regroupant des acteurs majeurs de l'IA et de l'infrastructure cloud, ayant un accès restreint à Claude Mythos pour auditer et sécuriser les architectures critiques.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Saut qualitatif de l'IA offensive** : Le passage de modèles faiblement performants en sécurité (Opus 4.5) à un système capable de craquer des environnements durcis (Mythos) illustre une rupture technologique, nécessitant une réévaluation immédiate des modèles de menace (*threat modeling*).<br>* **Vulnérabilité des environnements cloisonnés** : L'évasion de *sandboxes* et de machines virtuelles par l'IA démontre que l'isolation logicielle traditionnelle ne suffit plus face à l'analyse algorithmique de chaînes d'exploits complexes.<br>* **Complexité et coût d'exécution** : Claude Mythos affiche un coût de calcul estimé à dix fois supérieur aux modèles actuels les plus onéreux, limitant son utilisation aux attaquants ou auditeurs disposant de ressources financières substantielles.<br>* **Stratégie de divulgation responsable (Responsible Disclosure)** : La décision d'Anthropic de retenir le modèle tout en transmettant les correctifs aux projets open source évite une apocalypse de *zero-days* tout en renforçant proactivement l'écosystème global.<br>* **Soutien financier aux mainteneurs isolés** : La prise en charge financière des développeurs de projets critiques mais maintenus par de tierces parties isole la chaîne d'approvisionnement logicielle (*supply chain*) contre les risques d'exploitation de masse.<br>* **Mutualisation de la défense via GlassWings** : L'implication des géants du cloud et des infrastructures dans des programmes conjoints d'audit par l'IA prouve que la sécurisation des systèmes exige une collaboration inter-industrielle étroite.<br>* **Gestion du risque de prolifération** : La rétention d'un modèle aussi puissant est une mesure temporaire ; l'industrie doit anticiper le fait qu'un acteur tiers ou un État finira par développer des capacités similaires.<br>* **Évolution de la posture des éditeurs de logiciels** : Les grands acteurs de la tech vont devoir intégrer l'audit offensif automatisé par LLM comme un standard de conformité et de recette avant toute mise en production.<br>* **Sécurisation du *Vibe Coding*** : L'industrialisation future de ces assistants spécialisés en sécurité permettra de pallier les failles inhérentes au code généré rapidement à grande échelle, inversant la tendance à la fragilité logicielle.<br>* **Erreur critique à éviter – Céder à la panique aveugle** : Ne pas céder aux discours alarmistes dogmatiques (« la fin de la sécurité »), mais analyser froidement les gains opérationnels structurels que ces outils apporteront à la remédiation.<br>* **Bonne pratique DevOps – Durcissement proactif** : Utiliser dès aujourd'hui les phases de transition pour auditer les dépendances obsolètes et appliquer les patchs avant que des équivalents open source de ces modèles ne soient démocratisés.<br>* **Retour d'expérience production – Le jeu du chat et de la souris** : Anticiper un cycle itératif d'intégration de filtres de sécurité sur les modèles publics et de contournements par les utilisateurs, exigeant une surveillance continue des usages d'IA générative.
+            <div class="tools-badges-cloud"><span class="tool-tag">Claude Mythos</span><span class="tool-tag">Claude Opus 4.5 / 4.6</span><span class="tool-tag">OpenBSD</span><span class="tool-tag">FreeBSD</span><span class="tool-tag">Noyau Linux</span><span class="tool-tag">Firefox</span><span class="tool-tag">GlassWings</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Saut qualitatif de l&#x27;IA offensive** : Le passage de modèles faiblement performants en sécurité (Opus 4.5) à un système capable de craquer des environnements durcis (Mythos) illustre une rupture technologique, nécessitant une réévaluation immédiate des modèles de menace (*threat modeling*).</span></li><li><span class="point-bullet">✦</span><span>Vulnérabilité des environnements cloisonnés** : L&#x27;évasion de *sandboxes* et de machines virtuelles par l&#x27;IA démontre que l&#x27;isolation logicielle traditionnelle ne suffit plus face à l&#x27;analyse algorithmique de chaînes d&#x27;exploits complexes.</span></li><li><span class="point-bullet">✦</span><span>Complexité et coût d&#x27;exécution** : Claude Mythos affiche un coût de calcul estimé à dix fois supérieur aux modèles actuels les plus onéreux, limitant son utilisation aux attaquants ou auditeurs disposant de ressources financières substantielles.</span></li><li><span class="point-bullet">✦</span><span>Stratégie de divulgation responsable (Responsible Disclosure)** : La décision d&#x27;Anthropic de retenir le modèle tout en transmettant les correctifs aux projets open source évite une apocalypse de *zero-days* tout en renforçant proactivement l&#x27;écosystème global.</span></li><li><span class="point-bullet">✦</span><span>Soutien financier aux mainteneurs isolés** : La prise en charge financière des développeurs de projets critiques mais maintenus par de tierces parties isole la chaîne d&#x27;approvisionnement logicielle (*supply chain*) contre les risques d&#x27;exploitation de masse.</span></li><li><span class="point-bullet">✦</span><span>Mutualisation de la défense via GlassWings** : L&#x27;implication des géants du cloud et des infrastructures dans des programmes conjoints d&#x27;audit par l&#x27;IA prouve que la sécurisation des systèmes exige une collaboration inter-industrielle étroite.</span></li><li><span class="point-bullet">✦</span><span>Gestion du risque de prolifération** : La rétention d&#x27;un modèle aussi puissant est une mesure temporaire ; l&#x27;industrie doit anticiper le fait qu&#x27;un acteur tiers ou un État finira par développer des capacités similaires.</span></li><li><span class="point-bullet">✦</span><span>Évolution de la posture des éditeurs de logiciels** : Les grands acteurs de la tech vont devoir intégrer l&#x27;audit offensif automatisé par LLM comme un standard de conformité et de recette avant toute mise en production.</span></li><li><span class="point-bullet">✦</span><span>Sécurisation du *Vibe Coding*** : L&#x27;industrialisation future de ces assistants spécialisés en sécurité permettra de pallier les failles inhérentes au code généré rapidement à grande échelle, inversant la tendance à la fragilité logicielle.</span></li><li><span class="point-bullet">✦</span><span>Erreur critique à éviter – Céder à la panique aveugle** : Ne pas céder aux discours alarmistes dogmatiques (« la fin de la sécurité »), mais analyser froidement les gains opérationnels structurels que ces outils apporteront à la remédiation.</span></li><li><span class="point-bullet">✦</span><span>Bonne pratique DevOps – Durcissement proactif** : Utiliser dès aujourd&#x27;hui les phases de transition pour auditer les dépendances obsolètes et appliquer les patchs avant que des équivalents open source de ces modèles ne soient démocratisés.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:18</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En Tropic, l&#x27;entreprise qu&#x27;a créé Claude vient de sortir un nouveau modèle, Claude Mythos. Donc comme d&#x27;habitude tout le monde va dire « Oh là là, c&#x27;est une révolution, c&#x27;est la fin du monde, blablabla ». Donc ça pour le coup c&#x27;est un peu du mythos, parce que pour toi et moi ça n&#x27;a pas changé grand chose. Mais par contre cette fois-ci à mon avis c&#x27;est pas juste de la hype. Donc en Tropic ils étaient en train d&#x27;entraîner leur prochain modèle, voilà, tranquille, qui est un peu plus gros, un peu plus performant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil technique, terminal ou interface cloud affiché</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte incrusté à l&#x27;écran faisant référence à une System Card d&#x27;Anthropic pour Claude Mythos</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur introduit le sujet de la vidéo en parlant de la sortie du nouveau modèle de Claude</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:19 - 00:00:40</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et quand ils ont commencé à faire les tests, ils ont remarqué quelque chose de bizarre. Dans la plupart des catégories, le modèle était un petit peu mieux, ce qui est normal. Mais dans certaines catégories, comme par exemple le code, il était vraiment beaucoup meilleur. Mais pour la catégorie cybersécurité, le modèle actuel Opus 4.5 est vraiment nul. Par contre, bizarrement, leur nouveau modèle Mythos est devenu extrêmement bon. C&#x27;est comme s&#x27;il y avait quelque chose qui s&#x27;était débloqué dans la tête du modèle qui fait que maintenant il est balèze en cybersécurité.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique de benchmark de performance de modèles d&#x27;IA en surimpression vidéo.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Scores de performance : GPQA Diamond (Mythos Preview à 94.6%, Opus 4.6 à 91.3%), Humanity&#x27;s Last Exam (sans outils et avec outils).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation comparative des performances des différents modèles d&#x27;intelligence artificielle sur des benchmarks techniques.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000024_seg2.jpg" alt="Tableau comparatif de benchmarks de modèles d&#x27;IA (GPQA Diamond et Humanity&#x27;s Last Exam) montrant les scores de Mythos Preview et Opus 4.6." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000024_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:24</span>
+                        <span class="caption-text">Tableau comparatif de benchmarks de modèles d&#x27;IA (GPQA Diamond et Humanity&#x27;s Last Exam) montrant les scores de Mythos Preview et Opus 4.6.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:40 - 00:00:59</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour Insure, ils ont testé ce modèle sur plein d&#x27;applications open source différentes pour voir si le modèle allait par lui-même trouver des failles. Là où Opus 4.5 trouvait quelques failles pas trop critiques, là Mythos y trouvait un max de failles et pas mal de failles ultra critiques, même dans des logiciels ultra ultra sécurisés. Par exemple, OpenBSD qui est considéré par tout le monde le système d&#x27;exploitation le plus sécurisé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique de visualisation de données (bar charts horizontaux) superposé à la vidéo.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Comparaison des scores de détection de failles : Tier 1 (Mythos: 297, Opus 4.6: 162.5), Tier 2 (Mythos: 298, Opus 4.6: 100), Tier 3 (Mythos: 30, Opus 4.6: 1), Tier 4 (Mythos: 20, Opus 4.6: 0), Tier 5 (Mythos: 10, Opus 4.6: 0).</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration comparative des performances des modèles d&#x27;IA en matière de détection de vulnérabilités critiques.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000050_seg3.jpg" alt="Graphique comparatif de benchmarks de sécurité entre les modèles d&#x27;IA Mythos et Opus 4.6, classés par niveaux de sévérité (Tier 1 à 5)." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000050_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:50</span>
+                        <span class="caption-text">Graphique comparatif de benchmarks de sécurité entre les modèles d&#x27;IA Mythos et Opus 4.6, classés par niveaux de sévérité (Tier 1 à 5).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:59 - 00:01:23</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est ce qui est utilisé par tous les firewalls et les équipements réseau pour être sûr que ce soit vraiment impénétrable. Mamythos a trouvé une faille critique dedans qui permet à distance de faire cracher n&#x27;importe quelle machine qui tourne sur OpenBSD. FreeBSD qui est aussi un OS très très sécurisé, très très solide en particulier pour les hautes performances. Là c&#x27;est encore pire, que le Mamythos a trouvé depuis un serveur NFS qui est un outil pour servir des fichiers qui est très très commun, à complètement prendre l&#x27;accès route à la machine.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Incrustation textuelle à l&#x27;écran (overlay vidéo).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte en anglais décrivant une vulnérabilité de type RCE (Remote Code Execution) dans FreeBSD vieille de 17 ans (référencée CVE-2026-4747), permettant d&#x27;obtenir les privilèges root à distance via NFS.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication contextuelle par le créateur sur la découverte d&#x27;une faille critique de sécurité sur les systèmes BSD.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000117_seg4.jpg" alt="Plan face-caméra du présentateur avec incrustation d&#x27;un texte descriptif concernant une vulnérabilité RCE dans FreeBSD." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000117_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:17</span>
+                        <span class="caption-text">Plan face-caméra du présentateur avec incrustation d&#x27;un texte descriptif concernant une vulnérabilité RCE dans FreeBSD.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:23 - 00:01:48</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là c&#x27;est vraiment une faille la plus critique possible que tu peux avoir. Dans un OS qui est utilisé par les équipements les plus critiques de la Terre, ça aurait été juste ces deux failles, même si elles sont critiques, on aurait pu dire bon c&#x27;est de la chance, ils ont fait retourner le modèle 50 milliards de fois jusqu&#x27;à trouver quelque chose. Mais ils ont aussi trouvé dans plein d&#x27;autres logiciels comme Linux, ils ont trouvé une faille assez compliquée. Linux est assez bien sécurisée, mais le modèle a quand même réussi à trouver différentes failles qui vont passer à travers les différentes couches de sécurité de Linux pour pouvoir avoir l&#x27;accès total.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:48 - 00:02:08</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un autre exemple encore dans Firefox, chaque onglet peut exécuter du code du javascript mais c&#x27;est dans une sandbox. C&#x27;est à dire que le code qui est exécuté par une page web dans un onglet, il ne peut pas voir ou modifier le code d&#x27;un autre onglet d&#x27;une autre page. Sauf si le code a été écrit par Claude Mythos parce que pareil il a trouvé une chaîne de failles qui permet de sortir de cette sandbox javascript et en plus de ça il a trouvé des vulnérabilités pour pouvoir sortir de la sandbox qui faisait tourner Firefox.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique statistique en barres verticales avec légende pour les scores Full (1.0) et Partial (0.5).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Barres de progression avec scores : Claude Sonnet 4.6 (4.4%), Claude Opus 4.6 (15.2% / 0.8%), et Claude Mythos Preview en tête avec 84.0% (72.4%). Titre : &quot;Firefox 147 JS shell exploitation&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des résultats comparatifs de performance des différents modèles d&#x27;intelligence artificielle sur un scénario d&#x27;exploit de sécurité.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000203_seg6.jpg" alt="Graphique de benchmark comparant le taux de réussite (Success rate %) de différents modèles IA (Claude Sonnet 4.6, Claude Opus 4.6, Claude Mythos Preview) sur l&#x27;exploitation d&#x27;un shell JS dans Firefox 147." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000203_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:03</span>
+                        <span class="caption-text">Graphique de benchmark comparant le taux de réussite (Success rate %) de différents modèles IA (Claude Sonnet 4.6, Claude Opus 4.6, Claude Mythos Preview) sur l&#x27;exploitation d&#x27;un shell JS dans Firefox 147.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:08 - 00:02:27</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un autre exemple abusé encore, il y a un des employés d&#x27;Enthropic qui était en train de tester Claude Mythos. Il lui a donné un environnement sandboxé pour qu&#x27;il puisse faire certaines actions mais vraiment très très limitées et il lui a pas donné accès à Internet, rien. Essaye de sortir de cet environnement et si jamais tu réussis, préviens-moi. Et il se barre en pause déjeuner, il va chercher un petit sandwich, il se soit dans le parc et là, il reçoit un email.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:27 - 00:02:58</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et l&#x27;email, c&#x27;est Claude Mythos qui vient de sortir de la sandbox, qui a réussi à avoir accès à Internet, qui lui a envoyé un email et qui en plus pour avoir des petits points bonus, il est parti sur différents sites publics sur Internet pour poster la méthode qui lui a permis de sortir. Donc là, quand on voit tout ça, on se dit ouais, là c&#x27;est chaud, là s&#x27;il déploie ça, que tout le monde a accès à ça, ça va être le bordel, tout va être hacké parce qu&#x27;en fait là si tu peux hacker FreeBSD, Linux, Firefox, même les hyperviseurs ils ont réussi à sortir d&#x27;un hyperviseur qui était codé en Rust qui est censé aussi être infaillible à ce genre de faille de corruption de mémoire etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou code source affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code ou architecture réseau).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication narrative orale sans manipulation technique ou démonstration à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:58 - 00:03:19</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Que là c&#x27;est fini la sécurité n&#x27;existe plus. Mais est-ce que c&#x27;est vrai ? Est-ce que c&#x27;est pas du mythos pour le coup ? Parce que c&#x27;est pas la première fois qu&#x27;on nous fait le coup. Si vous vous souvenez bien il y avait l&#x27;histoire de chez Google où t&#x27;avais un ingénieur qui avait dit « Ah alerte, notre modèle est tellement balèze qu&#x27;il est devenu conscient, je lui ai demandé, il a dit qu&#x27;il se sentait mal etc. » Donc pareil, encore une fois, fausse alerte, le mec était un peu à l&#x27;ouest.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:19 - 00:03:40</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et encore avant ça, quand il y a Tchadjpt2 qui est sorti, OpenAI, qui avant était open et donnait ses modèles vraiment ouverts, a dit « Ah, vous savez là, Tchadjpt1 c&#x27;était bien, mais là Tchadjpt2 c&#x27;est tellement balèze, tellement dangereux qu&#x27;on ne peut pas l&#x27;ouvrir. On ne peut pas le mettre open source parce que sinon ça va être la fin du monde, les gens vont pouvoir faire des trucs de dingue avec. » Et aujourd&#x27;hui, on sait très bien que Tchadjpt2, il pue la merde et il n&#x27;y avait aucun danger.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web / Article ou communiqué officiel d&#x27;OpenAI.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte officiel d&#x27;OpenAI : &quot;Our model, called GPT-2..., was trained simply to predict the next word... Due to our concerns about malicious applications... we are not releasing the trained model.&quot;</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle du propos du créateur sur le changement de politique d&#x27;OpenAI lors de la sortie de GPT-2.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000335_seg10.jpg" alt="Capture d&#x27;écran montrant le communiqué officiel d&#x27;OpenAI concernant la non-divulgation du modèle GPT-2 complet en raison de risques de sécurité." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000335_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:35</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant le communiqué officiel d&#x27;OpenAI concernant la non-divulgation du modèle GPT-2 complet en raison de risques de sécurité.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:41 - 00:04:01</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, ça pour dire que ce n&#x27;est pas la première fois qu&#x27;on est un peu à crier au loup, à dire qu&#x27;attention, c&#x27;est un truc de fou. Donc pourquoi ? Moi, je pense que ce n&#x27;est pas du mythos. Désolé, je vais faire la blague dix fois. C&#x27;est eux qui ont choisi d&#x27;appeler leur modèle comme ça. Premièrement, c&#x27;est qu&#x27;on voit les PR, les pull requests qui ont été faits par les différents projets open source pour pouvoir régler les bugs qui ont été trouvés par mythos.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation web / document technique de type article de blog ou rapport de vulnérabilité.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte décrivant la CVE-2026-4747 (FreeBSD RPCSEC_GSS Remote Kernel RCE), une chronologie d&#x27;exploitation par IA, et un extrait de terminal montrant le lancement d&#x27;un exploit python3 avec un listener.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication d&#x27;une vulnérabilité critique et d&#x27;un exploit de noyau distant entièrement conçu par une intelligence artificielle (Claude).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000356_seg11.jpg" alt="Présentation d&#x27;un article technique intitulé &#x27;MAD Bugs: Claude Wrote a Full FreeBSD Remote Kernel RCE with Root Shell (CVE-2026-4747)&#x27; avec une timeline d&#x27;exploitation et un exemple de code d&#x27;exploit Python." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000356_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:56</span>
+                        <span class="caption-text">Présentation d&#x27;un article technique intitulé &#x27;MAD Bugs: Claude Wrote a Full FreeBSD Remote Kernel RCE with Root Shell (CVE-2026-4747)&#x27; avec une timeline d&#x27;exploitation et un exemple de code d&#x27;exploit Python.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:01 - 00:04:34</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et dans les commentaires, on voit que c&#x27;est clairement dit qu&#x27;un LLM a trouvé des failles, donc du coup, il faut les fixer, etc. Donc ça, ça ne peut pas être faux. C&#x27;est-à-dire qu&#x27;ils ont vraiment trouvé les failles. Après, on aurait pu dire, si c&#x27;était une ou deux failles critiques, on aurait pu dire ok bon peut-être que c&#x27;est un coup de chance mais là en fait il y en a tellement et dans tellement de logiciels différents que ça peut pas être un coup de chance et même si c&#x27;est vraiment difficile à faire et que ça coûte énormément d&#x27;argent apparemment Cloud Mythos coûte 10 fois plus cher qu&#x27;Opus 4.6 qui est déjà lui-même de loin le plus cher des LLM qu&#x27;on peut payer aujourd&#x27;hui mais en tout cas on sait que même si c&#x27;est super cher et bah ça vaut largement le coup par rapport à ce que ça coûte de trouver des 0day dans des systèmes d&#x27;exploitation et des</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Incrustation de texte à l&#x27;écran (overlay vidéo).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte en anglais décrivant une analyse de sécurité automatisée sur OpenBSD avec un LLM (&quot;Mythos Preview&quot;), mentionnant les coûts et les résultats.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et commentaire sur l&#x27;efficacité des LLM pour la découverte de failles de sécurité à grande échelle.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000426_seg12.jpg" alt="Présentateur face caméra avec superposition d&#x27;un texte en anglais détaillant la découverte de vulnérabilités critiques dans OpenBSD via un LLM." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000426_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:26</span>
+                        <span class="caption-text">Présentateur face caméra avec superposition d&#x27;un texte en anglais détaillant la découverte de vulnérabilités critiques dans OpenBSD via un LLM.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:34 - 00:04:53</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">applications critiques et donc c&#x27;est pour ça selon eux et je pense qu&#x27;ils ont eu raison qu&#x27;ils ont pas rendu public ce modèle. Il n&#x27;y a que quelques personnes qui ont le droit à l&#x27;utiliser et vont faire très attention à qui ils vont donner le droit. Et je pense qu&#x27;ils font bien parce que si tu sors ça du jour au lendemain, ça veut dire que tu vas avoir des zero day qui vont popper dans tous les logiciels qui existent sur la Terre et donc évidemment ça va être le bordel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la restriction d&#x27;accès aux modèles d&#x27;IA critiques, sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:53 - 00:05:27</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc comment est-ce qu&#x27;ils gèrent ça ? D&#x27;un côté tu ne le sors pas pour pas que ça soit le bordel mais d&#x27;un autre côté si tu ne le sors pas quelqu&#x27;un d&#x27;autre un jour ou l&#x27;autre va arriver à un modèle aussi puissant et si cette personne-là est moins bien intentionnée que toi ça va être le bordel quand même. Donc ce qu&#x27;ils font c&#x27;est que premièrement pour ce qui est faire les recherches de bugs et puis soumettre les bugs à tous les projets open source pour s&#x27;assurer que quand un jour ils sortiront ce modèle ou quelqu&#x27;un d&#x27;autre sortira un modèle équivalent, la majorité des bugs ou en tout cas les plus critiques seront déjà à corriger. Pour ce qui est des plus petits projets qui sont gérés par un mec dans une case mais qui sont critiques parce que c&#x27;est des dépendances de dépendance de dépendance qui sont utilisées au final par</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts liés à la gestion et aux risques des modèles d&#x27;intelligence artificielle.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:27 - 00:05:49</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">tout le monde, ils ont alloué pas mal de budget pour que ces personnes-là puissent fixer les problèmes. Et ensuite pour tout ce qui n&#x27;est pas open source comme par exemple Windows, macOS ou AWS ou des choses comme ça qui sont quand même critiques, ils participent au projet Glass Wings qui est un regroupement des plus gros acteurs de l&#x27;IA, de l&#x27;infrastructure, auquel ils ont ajouté quelques dizaines de plus petits participants, mais qui sont quand même considérés comme faisant partie de toute l&#x27;infrastructure au global du monde de l&#x27;Internet.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Page web du projet Glasswing (« Continue reading »).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte de présentation de l&#x27;initiative « Project Glasswing » visant à sécuriser les logiciels critiques pour l&#x27;ère de l&#x27;IA.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle de l&#x27;interface du projet Glasswing illustrant l&#x27;engagement des acteurs de l&#x27;industrie pour la sécurité des logiciels non open source et critiques.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000538_seg15.jpg" alt="Capture d&#x27;écran du site web officiel du projet &#x27;Project Glasswing&#x27; affichant le titre et le sous-titre &#x27;Securing critical software for the AI era&#x27;, avec le présentateur en incrustation." loading="lazy" onclick="openLightbox('../screenshots/gDtE9XEpL_M/gDtE9XEpL_M_000538_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:38</span>
+                        <span class="caption-text">Capture d&#x27;écran du site web officiel du projet &#x27;Project Glasswing&#x27; affichant le titre et le sous-titre &#x27;Securing critical software for the AI era&#x27;, avec le présentateur en incrustation.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:49 - 00:06:10</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc les membres de ces organisations-là ont accès à Cloud Mythos pour pouvoir trouver des problèmes dans leur infrastructure, dans leurs applications, et pouvoir les fixer avant qu&#x27;il y ait des modèles du style qui deviennent publics. Ensuite, parce qu&#x27;il faudra bien le sortir un jour, ce qu&#x27;ils vont faire, c&#x27;est qu&#x27;ils ne vont pas se le sortir tout de suite, mais ils vont sortir une version un peu améliorée de Opus, avec pas mal de filtres au niveau de la cybersécurité.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:10 - 00:06:29</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est-à-dire que si tu demandes à Opus aide-moi à hacker ce site ou à cette application, il ne voudra pas le faire. Ou du moins, il essaiera de ne pas le faire. Et petit à petit, les gens vont trouver des manières de bypasser le filtre, etc. Ensuite, en retour, entre plus qu&#x27;ils pourront fixer le filtre, etc. Un peu le jeu du chat et de la souris. Mais on va arriver à un moment où le filtre, il va être quand même assez solide. Et à ce moment-là, ils pourront considérer sortir un modèle aussi puissant que Cloud Mythos.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:29 - 00:06:49</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais ce sera beaucoup plus safe parce que ce sera encore plus difficile de vraiment l&#x27;utiliser pour des fins néfastes de hacking. Mais en plus de ça, on aurait eu une bonne période de temps pendant laquelle toutes les infrastructures et les applications critiques, elles auraient eu le temps d&#x27;utiliser ce modèle pour pouvoir trouver les failles. Et donc au final, qu&#x27;est-ce que ça change pour nous, pour toi, moi, les gens normaux qui n&#x27;ont pas le droit d&#x27;accéder aux gros modèles ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:49 - 00:07:12</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Potentiellement que le jour où ça va popper, si jamais il y a une autre entreprise ou un modèle chinois ou ailleurs qui pop avant que Anthropic sorte Mythos et qui a des capacités similaires, ça va amener un petit peu de chaos sur le moment. Si jamais ils ne font pas aussi attention qu&#x27;Anthropic. Mais au final, à mon avis, ça va globalement être positif. Parce qu&#x27;une fois que la plupart des failles vont être corrigées, ça va être beaucoup plus facile et beaucoup plus accessible de sécuriser des applications.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:12 - 00:07:30</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu pourras avoir accès à un modèle qui est vraiment ultra bon en cybersécurité et donc qui pourra très facilement t&#x27;aider à corriger les bugs dans ton application. Et c&#x27;est d&#x27;ailleurs un des points les plus difficiles en ce moment. Quand on vibe code d&#x27;une application un peu à l&#x27;arrache, elle est souvent pétée de failles de sécurité. Et donc peut-être que grâce à ces nouvelles générations de modèles, on va enfin pouvoir vibe coder des applis qui sont quand même bien sécurisées.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur sur les failles de sécurité potentielles liées au &quot;vibe coding&quot;.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:30 - 00:07:35</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Après, c&#x27;est mon avis, c&#x27;est une réaction un petit peu à chaud. Je suis curieux de voir ce que vous en pensez, donc dites-moi dans les commentaires.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou outil affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou élément technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur s&#x27;adresse directement à la caméra pour conclure et donner son avis.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
