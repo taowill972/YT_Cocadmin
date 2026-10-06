@@ -10,7 +10,8 @@
     "Awu5RoPmy-0",
     "gDtE9XEpL_M",
     "de0Mm9xT_2U",
-    "RlZfhw80c5E"
+    "RlZfhw80c5E",
+    "aN4PCILrbBg"
   ],
   "processed_videos": [
     {
@@ -142,6 +143,18 @@
       "md_file": "YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 50,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "aN4PCILrbBg",
+      "title": "La vraie différence entre une machine virtuelle et un conteneur.",
+      "upload_date": "20260109",
+      "duration": 1097,
+      "duration_str": "00:18:17",
+      "md_file": "YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 34,
       "audit_score": 100.0,
       "audit_passed": true
     }
@@ -290,8 +303,8 @@
     "MAPbo8cNkJ8",
     "4jlPZtc17l8"
   ],
-  "last_run_timestamp": "2026-10-05T23:56:03Z",
-  "completed_count": 11,
+  "last_run_timestamp": "2026-10-06T11:59:30Z",
+  "completed_count": 12,
   "total_catalog_count": 142,
   "status": "ready"
 }

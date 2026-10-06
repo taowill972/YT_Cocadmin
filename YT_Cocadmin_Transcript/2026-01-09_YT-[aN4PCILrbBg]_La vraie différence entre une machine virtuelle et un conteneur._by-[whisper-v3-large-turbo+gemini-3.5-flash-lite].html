@@ -1,0 +1,2577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La vraie différence entre une machine virtuelle et un conteneur. — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">La vraie différence entre une machine virtuelle et un conteneur.</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=aN4PCILrbBg" target="_blank">Lien YouTube (<code>aN4PCILrbBg</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2026-01-09</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:18:17</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **La vraie différence entre une machine virtuelle et un conteneur.**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:21</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il n&#x27;y a pas longtemps on va poser la question c&#x27;est quoi la différence entre une machine virtuelle et un conteneur ? Comment est-ce que ça marche un peu sous le capot ? Et en fait c&#x27;est un petit peu plus compliqué que ça. Parce qu&#x27;il y a plusieurs types de machines virtuelles différentes et plusieurs types de conteneurs différents et ça se mélange un petit peu. Donc on a ce qu&#x27;on appelle parfois le bare metal, c&#x27;est-à-dire vraiment le matos, ton laptop, un serveur, un Raspberry Pi. Et on a les machines virtuelles qui font semblant d&#x27;être du matos mais qui ne le sont pas vraiment.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schémas conceptuels et illustrations graphiques d&#x27;architecture système (Docker, Bare Metal, VM).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Concepts d&#x27;infrastructure et d&#x27;exécution : conteneurs Docker, machines virtuelles (VM) et serveurs physiques (Bare Metal).</p>
+                        <p><strong>Action / Démonstration :</strong> Introduction et contextualisation de la différence technologique et architecturale entre la virtualisation matérielle et la conteneurisation d&#x27;applications.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000005_seg1.jpg" alt="Modélisation 3D d&#x27;un bloc de conteneurs avec le logo Docker (à gauche) et d&#x27;un bloc représentant une machine virtuelle (à droite) pour illustrer la conteneurisation face à la virtualisation classique." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000005_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:05</span>
+                        <span class="caption-text">Modélisation 3D d&#x27;un bloc de conteneurs avec le logo Docker (à gauche) et d&#x27;un bloc représentant une machine virtuelle (à droite) pour illustrer la conteneurisation face à la virtualisation classique.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000015_seg1.jpg" alt="Schémas d&#x27;architecture illustrant à gauche un serveur physique (« Bare Metal » en vert) et à droite une machine virtuelle (« VM » en rose)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000015_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:15</span>
+                        <span class="caption-text">Schémas d&#x27;architecture illustrant à gauche un serveur physique (« Bare Metal » en vert) et à droite une machine virtuelle (« VM » en rose).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:21 - 00:00:46</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et on a ensuite des conteneurs qui sont complètement différents des machines virtuelles mais qui leur semblent aussi sur certains points. Donc premièrement, le bare metal, c&#x27;est simple. On a notre système d&#x27;exploitation ici, notre kernel, donc notre noyau. Et notre noyau, lui, il a directement accès au bare metal, il a directement accès aux ressources, à la mémoire, au CPU. Donc s&#x27;il veut aller écrire un fichier sur le disque, il a un driver qui lui permet de parler avec le disque d&#x27;UE et d&#x27;écrire des données à l&#x27;intérieur et de les récupérer quand il a besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma didactique d&#x27;architecture système</p>
+                        <p><strong>Contenu textuel & Code :</strong> Concepts de &quot;Bare Metal&quot; avec illustrations de composants matériels (processeur, barrette de RAM, boîtier serveur) et du &quot;Kernel&quot; (symbolisé par le pingouin Tux de Linux) pointant directement vers le matériel.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique du fonctionnement du Bare Metal et de l&#x27;interaction directe entre le système d&#x27;exploitation hôte et le matériel physique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000027_seg2.jpg" alt="Schéma conceptuel d&#x27;architecture illustrant l&#x27;accès direct d&#x27;un noyau (Kernel Linux) aux ressources physiques d&#x27;un serveur (CPU, RAM) en mode Bare Metal." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000027_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:27</span>
+                        <span class="caption-text">Schéma conceptuel d&#x27;architecture illustrant l&#x27;accès direct d&#x27;un noyau (Kernel Linux) aux ressources physiques d&#x27;un serveur (CPU, RAM) en mode Bare Metal.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:46 - 00:01:18</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc notre application, ce qu&#x27;on veut faire tourner ici, ça peut être un serverware par exemple, il va parler à notre kernel, à notre système d&#x27;exploitation. Et c&#x27;est le kernel qui, de la part de notre application, va aller accéder aux ressources, va aller allouer de la mémoire dans la RAM, faire des calculs sur le CPU et aller écrire ou lire des fichiers sur le disque dur. Et donc en gros notre kernel c&#x27;est lui qui a le driver, donc c&#x27;est un programme aussi, qui permet de discuter avec les différents matériels, donc le disque dur, le CPU, la RAM, etc. La carte réseau, etc. Donc à ce niveau là, notre kernel, lui il a les performances au maximum parce qu&#x27;il accède directement au matériel et notre application,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Logiciel de dessin et de présentation visuelle (type Excalidraw).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme d&#x27;architecture système comprenant :
+- Une application (&quot;app&quot;) dans un conteneur/fenêtre virtuelle.
+- Une flèche dirigée vers le &quot;Kernel&quot; représenté par la mascotte Tux.
+- Une flèche du Kernel vers l&#x27;infrastructure &quot;Bare Metal&quot;, illustrée par des icônes de serveur, de processeur (CPU) et de barrette de mémoire vive (RAM).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique des mécanismes d&#x27;appels système (syscalls) par lesquels une application sollicite le noyau de l&#x27;OS pour orchestrer l&#x27;allocation de mémoire et l&#x27;exécution de calculs CPU sur du matériel physique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000054_seg3.jpg" alt="Schéma conceptuel d&#x27;architecture illustrant le fonctionnement d&#x27;une application communiquant avec le noyau Linux (Kernel) pour requérir et utiliser les ressources matérielles physiques (Bare Metal : CPU, RAM, serveur)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000054_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:54</span>
+                        <span class="caption-text">Schéma conceptuel d&#x27;architecture illustrant le fonctionnement d&#x27;une application communiquant avec le noyau Linux (Kernel) pour requérir et utiliser les ressources matérielles physiques (Bare Metal : CPU, RAM, serveur).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:18 - 00:01:41</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">elle a un petit peu moins de performances technique parce qu&#x27;elle doit passer par le kernel, mais le kernel est bien optimisé, il simplifie plein de choses, il abstrait toute la complexité de devoir savoir est-ce qu&#x27;on a la permission de voir ce fichier, où est ce fichier physiquement sur le disque dur, est-ce que ce fichier on est accédé il y a pas très longtemps et dans ce cas là elle va peut-être se trouver dans la RAM et donc on va pouvoir accéder plus rapidement. Il y a plein de choses qui font qu&#x27;au final notre application même si elle n&#x27;a pas accès direct au matériel elle a quand même un accès qui est très performant et jusqu&#x27;à là facile à comprendre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma d&#x27;architecture système explicatif en arrière-plan (tableau virtuel).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme conceptuel présentant les blocs :
+- &quot;app&quot; (Espace utilisateur / User space)
+- &quot;Kernel&quot; (Noyau Linux / Système d&#x27;exploitation)
+- &quot;Bare Metal&quot; (Matériel physique : CPU, RAM, Stockage)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du rôle d&#x27;intermédiaire et d&#x27;abstraction du noyau Linux (Kernel) qui, bien qu&#x27;introduisant une légère baisse de performance due aux transitions de contexte, simplifie la gestion du matériel (permissions, accès disque, allocation mémoire) pour les applications.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000129_seg4.jpg" alt="Schéma d&#x27;architecture système illustrant l&#x27;abstraction entre l&#x27;application (&quot;app&quot;), le noyau Linux (&quot;Kernel&quot; représenté par Tux) et le matériel physique (&quot;Bare Metal&quot; représenté par un processeur, de la mémoire et un serveur)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000129_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:29</span>
+                        <span class="caption-text">Schéma d&#x27;architecture système illustrant l&#x27;abstraction entre l&#x27;application (&quot;app&quot;), le noyau Linux (&quot;Kernel&quot; représenté par Tux) et le matériel physique (&quot;Bare Metal&quot; représenté par un processeur, de la mémoire et un serveur).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:41 - 00:02:15</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Maintenant on a les machines virtuelles. Elles vont fonctionner grâce à un hyperviseur, en gros c&#x27;est un programme qui va faire semblant que c&#x27;est une machine physique et donc comme ça on va pouvoir lancer un nouvel OS qui va croire qu&#x27;il est dans une machine physique mais en fait il parle avec l&#x27;hyperviseur. Et l&#x27;hyperviseur lui ensuite va faire les actions de la part de la machine virtuelle. Mais on a deux types d&#x27;hyperviseurs. On a les hyperviseurs de type 1 par exemple ESXi de VMware, Hyper-V de Microsoft, KVM ou même Xen. Et on a ici les hyperviseurs de type 2 et les exemples ce serait VirtualBox, VMware mais Workstation ou Fusion sur Mac ou alors QMU. Donc pourquoi on</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique / Support de présentation d&#x27;architecture système.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Classification des hyperviseurs :
+  - Type 1 (Bare Metal) : ESX, HyperV, KVM, XEN
+  - Type 2 (Hosted) : Virtualbox, VMware Workstation/Fusion, QEMU
+- Illustration d&#x27;une machine virtuelle (VM)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique et comparaison des deux grandes familles d&#x27;hyperviseurs (Type 1 s&#x27;exécutant directement sur le matériel physique vs Type 2 s&#x27;exécutant par-dessus un système d&#x27;exploitation hôte).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000206_seg5.jpg" alt="Schéma d&#x27;architecture de virtualisation listant de manière claire la classification des hyperviseurs de Type 1 (ESX, HyperV, KVM, XEN) et de Type 2 (Virtualbox, VMware Workstation/Fusion, QEMU)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000206_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:06</span>
+                        <span class="caption-text">Schéma d&#x27;architecture de virtualisation listant de manière claire la classification des hyperviseurs de Type 1 (ESX, HyperV, KVM, XEN) et de Type 2 (Virtualbox, VMware Workstation/Fusion, QEMU).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:15 - 00:02:45</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est parce qu&#x27;en fait un hyperviseur de type 1 va tourner directement au même niveau qu&#x27;un kernel. Il est comme intégré au kernel, c&#x27;est lui le kernel. Et donc l&#x27;hyperviseur lui-même a accès aux ressources, il peut allouer la mémoire, il peut parler au CPU, etc. Ce qui fait que notre application, elle est ici, elle parle à l&#x27;OS qui est dans la machine virtuelle. L&#x27;OS il croit qu&#x27;il est sur une machine physique mais en fait il parle à l&#x27;hyperviseur. Quand il écrit dans un fichier dans un disque dur, il pense qu&#x27;il écrit vraiment dans un vrai disque. En fait c&#x27;est l&#x27;hyperviseur qui récupère cette requête et qui vient la faire ensuite sur le vrai matos.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:45 - 00:03:20</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc on voit ici qu&#x27;on a une petite perte de performance parce qu&#x27;on passe de notre application à l&#x27;OS dans la machine virtuelle et dans la machine virtuelle à l&#x27;hyperviseur et de l&#x27;hyperviseur au matériel. Donc on a quelques sauts comme ça et à chaque fois qu&#x27;on a un saut évidemment on perd un peu de performance. Les hyperviseurs de type 1 c&#x27;est ceux qui sont les plus performants et c&#x27;est souvent des OS dédiés. Comme par exemple quand on a ESXi c&#x27;est pas vraiment un OS sur lequel on peut se loguer, aller lancer un navigateur par exemple. Mais tout à l&#x27;heure j&#x27;ai dit que Hyper-V c&#x27;était un hyperviseur de type 1 alors que Hyper-V tourne sur Windows Desktop. En fait ce qui se passe quand on active Hyper-V sur Windows, ce qu&#x27;il va faire, c&#x27;est qu&#x27;il va prendre votre OS actuel qui est installé directement sur le hardware et il va créer une machine virtuelle. Et donc comme</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:20 - 00:03:53</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">il y a des bonnes performances, on ne se rend pas vraiment compte mais parfois il y a des choses qui vont plus fonctionner, on va plus se rendre compte. Peut-être parfois il y a certains jeux qui ont pu marcher ou certaines applications qui vont plus marcher parce qu&#x27;elles s&#x27;attendaient à parler à du matos directement. Et là en fait ta machine que tu utilises, même si tu vois l&#x27;écran, les applications, ton naviguer et tout, en fait tu es dans une machine virtuelle. Et donc quand tu vas démarrer d&#x27;autres machines virtuelles, elles sont au même niveau que ton OS que tu utilises, ton Windows que tu utilises pour faire tourner des applications. Et donc comme elles ne passent pas à travers ton OS, elles ont un accès un peu plus direct au matériel et donc tu as des bonnes performances. Donc dans ces hyper-revisors là, il y a très très peu de pertes de performance,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc interactif / Schéma d&#x27;architecture système.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme d&#x27;architecture contenant :
+- L&#x27;annotation &quot;Type 1&quot;
+- Un bloc principal &quot;Hyperviseur&quot; englobant une machine virtuelle (&quot;VM&quot;)
+- Des icônes de composants matériels physiques (processeur et barrette de mémoire RAM)
+- Des vecteurs (flèches) représentant l&#x27;intermédiation de l&#x27;hyperviseur entre la VM et le matériel physique.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique des mécanismes de virtualisation matérielle, détaillant pourquoi certaines applications ou jeux optimisés pour le &quot;bare-metal&quot; échouent ou perdent en performance lorsqu&#x27;ils tentent d&#x27;accéder directement au matériel physique sans passer par l&#x27;abstraction de l&#x27;hyperviseur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000328_seg8.jpg" alt="Schéma conceptuel d&#x27;une architecture de virtualisation de Type 1 (bare-metal) illustrant les interactions et limitations d&#x27;accès direct d&#x27;une machine virtuelle (VM) aux composants matériels physiques (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000328_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:28</span>
+                        <span class="caption-text">Schéma conceptuel d&#x27;une architecture de virtualisation de Type 1 (bare-metal) illustrant les interactions et limitations d&#x27;accès direct d&#x27;une machine virtuelle (VM) aux composants matériels physiques (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:53 - 00:04:27</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est vraiment quelques pourcents. C&#x27;est à dire que si je faisais tourner un programme nativement et un programme dans une machine virtuelle et que je faisais un benchmark de CPU, si le benchmark sur le bare metal il fait 100 points, et bah la VM ferait 97 points. Donc c&#x27;est vraiment presque pareil. C&#x27;est le neuf le plus pourri que tu as jamais vu. Voilà. Là où tu as le plus de pertes de performance potentielle, c&#x27;est quand ton programme, il veut accéder par exemple aux disques durs ou il veut accéder à sa carte réseau parce qu&#x27;en fait son disque dur et sa carte réseau n&#x27;existent pas. Donc c&#x27;est des cartes réseau et des disques durs, des périphériques virtuels. Périphériques virtuels, ça veut dire que c&#x27;est un programme qui tourne, que l&#x27;hyperviseur fait tourner et donc c&#x27;est</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:27 - 00:04:54</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">du code. Et ce code-là, il ne sera jamais aussi optimisé qu&#x27;une vraie puce de carte réseau ou qu&#x27;un vrai contrôleur de SSD par exemple. Et donc là par contre, on a beaucoup plus de pertes de performance et ça peut vraiment varier. On peut perdre peut-être juste 5-10%, mais on peut perdre aussi 50-70%. Au passage aussi, en termes de sécurité, c&#x27;est extrêmement difficile depuis une application dans une machine virtuelle de sortir et donc d&#x27;aller par exemple parler à une autre machine virtuelle ou aller chercher des fichiers qui sont dans l&#x27;hyperviseur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique / Schéma d&#x27;architecture système</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme d&#x27;architecture contenant les annotations « Type 1 », « VM », « Hyperviseur », ainsi que des illustrations d&#x27;un processeur (CPU) et d&#x27;une barrette de mémoire (RAM).</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et explication de la perte de performance (overhead) induite par la couche de virtualisation de l&#x27;hyperviseur par rapport à un accès matériel direct.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000447_seg10.jpg" alt="Schéma explicatif d&#x27;un hyperviseur de Type 1 montrant l&#x27;interaction entre une machine virtuelle (VM), la couche hyperviseur et les composants matériels (processeur et RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000447_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:47</span>
+                        <span class="caption-text">Schéma explicatif d&#x27;un hyperviseur de Type 1 montrant l&#x27;interaction entre une machine virtuelle (VM), la couche hyperviseur et les composants matériels (processeur et RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:54 - 00:05:14</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est extrêmement difficile parce que ça fait 30 ans qu&#x27;on utilise ces technologies et que c&#x27;est ultra rare que maintenant il y a des failles dans les hyperviseurs. Et quand ça arrive, c&#x27;est vraiment assez grave. Tous les hébergeurs, tous les fournisseurs de cloud utilisent des hyperviseurs et donc si tu as un client qui peut sortir et aller dans la machine de l&#x27;autre client, c&#x27;est un peu une catastrophe. Mais quand ça arrive, ce qui est très très rare. La plupart du temps, ça vient justement de ces programmes-là parce qu&#x27;en fait, on émule du matériel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique de présentation d&#x27;architecture système.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma avec les composants :
+- CPU (processeur) et RAM (mémoire physique)
+- Bloc d&#x27;un hyperviseur de &quot;Type 1&quot; avec une flèche pointant vers le matériel physique
+- Bloc interne représentant une machine virtuelle (VM)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du fonctionnement des hyperviseurs de Type 1 et de l&#x27;isolation des machines virtuelles vis-à-vis du matériel, dans le cadre d&#x27;une analyse sur la criticité des failles de sécurité de type &quot;VM Escape&quot; (évasion de machine virtuelle).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000509_seg11.jpg" alt="Schéma d&#x27;architecture d&#x27;un hyperviseur de Type 1 (Bare Metal) illustrant l&#x27;accès direct du système de virtualisation aux ressources physiques (CPU, RAM) pour exécuter une machine virtuelle (VM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000509_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:09</span>
+                        <span class="caption-text">Schéma d&#x27;architecture d&#x27;un hyperviseur de Type 1 (Bare Metal) illustrant l&#x27;accès direct du système de virtualisation aux ressources physiques (CPU, RAM) pour exécuter une machine virtuelle (VM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:15 - 00:05:36</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, depuis l&#x27;intérieur, on peut communiquer avec notre matériel, mais on peut le faire d&#x27;une manière qui va faire bugger le programme parce que c&#x27;est un programme. Et donc, potentiellement, si on arrive à faire bugger ce programme, comme ce programme, il tourne sur l&#x27;hyperviseur, et bien potentiellement, on peut accéder à des données qui sont sur l&#x27;hyperviseur. Mais comme je te disais, déjà ultra rare, les VM, c&#x27;est ce qu&#x27;il y a de plus sécurisé pour pouvoir encapsuler une application sans qu&#x27;elle puisse jamais parler à une autre application sur la même machine physique.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Non applicable</p>
+                        <p><strong>Contenu textuel & Code :</strong> Non applicable</p>
+                        <p><strong>Action / Démonstration :</strong> Non applicable</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:36 - 00:06:08</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Maintenant il y a les hyperviseurs de type 2. C&#x27;est ce qu&#x27;on utilise plus sur nos machines desktop, sur ton ordi, chez toi pour pouvoir faire des tests. Tu vas avoir ton application qui parle à l&#x27;OS qui est dans la machine virtuelle. Et l&#x27;OS de la machine virtuelle, il parle à son matériel qui est en fait soit des périphériques virtualisées, soit directement à l&#x27;hyperviseur. Et l&#x27;hyperviseur lui c&#x27;est une simple application au niveau de ton OS principal. Et donc il doit parler avec ton OS qui lui ensuite va accéder au matériel. Donc en fait tu as une couche en plus où l&#x27;appli parle à son OS et l&#x27;OS parle à l&#x27;hyperviseur. L&#x27;hyperviseur parle à lui-même son OS, et ensuite on arrive dans le matériel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Outil de dessin et d&#x27;annotation de diagramme d&#x27;architecture.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Représentations graphiques du matériel (CPU, RAM) à gauche.
+- Flèche pointant de l&#x27;OS (Système d&#x27;exploitation hôte) vers le matériel physique.
+- Blocs d&#x27;encapsulation illustrant la hiérarchie : OS hôte -&gt; Hyperviseur (Type 2) -&gt; Machine Virtuelle (VM) -&gt; Application.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique de la virtualisation de Type 2 (ex: VirtualBox, VMware Workstation) où l&#x27;hyperviseur s&#x27;exécute comme une application sur un système d&#x27;exploitation hôte standard pour gérer les machines virtuelles et leurs périphériques virtualisés.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000544_seg13.jpg" alt="Schéma d&#x27;architecture conceptuel d&#x27;un hyperviseur de Type 2 (hébergé) mettant en évidence l&#x27;empilement des couches logicielles au-dessus du matériel physique (CPU/RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000544_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:44</span>
+                        <span class="caption-text">Schéma d&#x27;architecture conceptuel d&#x27;un hyperviseur de Type 2 (hébergé) mettant en évidence l&#x27;empilement des couches logicielles au-dessus du matériel physique (CPU/RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:08 - 00:06:27</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc on a une un petit peu plus grosse paire de performances. Par contre, c&#x27;est beaucoup plus facile à installer parce que c&#x27;est une simple application. Et comme on est sur une machine desktop où on va démarrer 50 000 machines virtuelles, en général, ça ne pose pas vraiment de problème. Maintenant, comme je l&#x27;ai dit tout à l&#x27;heure, il y a plusieurs types de machines virtuelles. Donc là jusqu&#x27;à présent, je parlais des machines virtuelles classiques où la machine virtuelle, elle a un OS, l&#x27;OS démarre les applications, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:27 - 00:06:46</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais il y a un autre type qui s&#x27;appelle les micro-VM. Ça, c&#x27;est le signe mu pour micro, pour ceux qui ont dormi en cours de physique comme moi. Et dans une micro VM, c&#x27;est le même concept qu&#x27;une machine virtuelle classique, sauf qu&#x27;on enlève tout ce qui n&#x27;est absolument pas essentiel pour faire fonctionner juste notre application. Donc ça veut dire que le BIOS, il n&#x27;y en a pas. Les drivers pour les périphériques USB, il n&#x27;y en a pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique d&#x27;illustration d&#x27;architecture système.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma d&#x27;architecture matérielle et logicielle représentant :
+- Les ressources physiques : processeur (CPU) et barrette de mémoire vive (RAM).
+- Une couche d&#x27;abstraction de type Hyperviseur.
+- Une bulle applicative isolée symbolisant la micro-VM (notée µM).
+- Une liste d&#x27;éléments d&#x27;un système d&#x27;exploitation classique rayés pour indiquer leur absence : BIOS, USB, GPU, SystemD, Windows.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication conceptuelle du fonctionnement d&#x27;une micro-VM (µVM) par rapport à une machine virtuelle traditionnelle, en démontrant visuellement l&#x27;élimination de toutes les couches logicielles, pilotes et systèmes d&#x27;initialisation non indispensables au strict fonctionnement de l&#x27;application cible.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000632_seg15.jpg" alt="Schéma d&#x27;architecture d&#x27;une micro-VM (notée µM) s&#x27;exécutant sur un hyperviseur, illustrant le retrait des composants non essentiels (BIOS, USB, GPU, SystemD, Windows) pour optimiser les ressources matérielles (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000632_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:32</span>
+                        <span class="caption-text">Schéma d&#x27;architecture d&#x27;une micro-VM (notée µM) s&#x27;exécutant sur un hyperviseur, illustrant le retrait des composants non essentiels (BIOS, USB, GPU, SystemD, Windows) pour optimiser les ressources matérielles (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:46 - 00:07:06</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">La prise en compte du PCI Express pour avoir des GPU ou des cartes réseau ou d&#x27;autres cartes de je ne sais pas quoi, boum, ça on oublie aussi, il n&#x27;y en a pas. Et au lieu de booter tout un OS et donc d&#x27;avoir un outil comme par exemple SystemD qui va démarrer tous les programmes pour que mon OS fonctionne, il n&#x27;y en a pas aussi. On va démarrer juste un seul programme. Ce programme, il aura toutes ses librairies déjà impactées à l&#x27;intérieur pour qu&#x27;il puisse fonctionner et il n&#x27;y aura rien d&#x27;autre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique / Schéma d&#x27;architecture.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Représentations de CPU et de mémoire RAM reliés à un bloc &quot;Hyperviseur&quot; contenant une microVM (&quot;µM&quot;).
+- Liste de composants et d&#x27;OS barrés ou entourés en rouge : BIOS, USB, GPU, SystemD, Windows.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse conceptuelle de la réduction de la surface d&#x27;émulation dans les technologies de micro-virtualisation (comme AWS Firecracker), démontrant la suppression du support PCI/GPU et des systèmes d&#x27;initialisation classiques (SystemD) au profit d&#x27;un démarrage direct et minimaliste.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000651_seg16.jpg" alt="Schéma explicatif d&#x27;un hyperviseur de microVMs illustrant la suppression des composants matériels et logiciels superflus (BIOS, USB, GPU, SystemD, Windows) pour minimiser l&#x27;empreinte et le temps de démarrage." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000651_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:51</span>
+                        <span class="caption-text">Schéma explicatif d&#x27;un hyperviseur de microVMs illustrant la suppression des composants matériels et logiciels superflus (BIOS, USB, GPU, SystemD, Windows) pour minimiser l&#x27;empreinte et le temps de démarrage.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:06 - 00:07:26</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et le support de Windows aussi, on oublie. C&#x27;est des machines virtuelles qui peuvent marcher que sur Linux. Et donc, on a le carnet Linux, minifié au minimum avec on enlève tout ce qui ne sert à rien, et notre application qui impacte directement tout ce qu&#x27;elle a besoin pour pouvoir fonctionner. L&#x27;avantage de ça, c&#x27;est qu&#x27;on garde l&#x27;isolation qui est très très forte des machines virtuelles. Donc, ça veut dire que notre application qui est là dans ma micro VM, c&#x27;est quasi impossible qu&#x27;elle puisse sortir pour faire autre chose sur ma machine haute.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique d&#x27;architecture système avec incrustation vidéo du présentateur.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Représentation schématique d&#x27;un CPU et d&#x27;une barrette de RAM.
+- Bloc d&#x27;un hyperviseur lié aux ressources matérielles.
+- Une microVM (notée &quot;μVM&quot;) exécutée par l&#x27;hyperviseur.
+- Liste de composants et fonctionnalités désactivés ou absents (barrés) : BIOS, USB, GPU, SystemD, Windows.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la structure d&#x27;une microVM (de type Firecracker) qui utilise un noyau Linux minimaliste (&quot;minifié au minimum&quot;) et s&#x27;affranchit des couches classiques d&#x27;une machine virtuelle traditionnelle pour ne conserver que l&#x27;isolation stricte et l&#x27;application.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000721_seg17.jpg" alt="Schéma explicatif d&#x27;une architecture de micro-machine virtuelle (microVM ou μVM) s&#x27;exécutant sur un hyperviseur, illustrant l&#x27;exclusion des composants non essentiels (BIOS, USB, GPU, SystemD, Windows) pour réduire la surface d&#x27;attaque et optimiser le démarrage du noyau Linux minifié." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000721_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:21</span>
+                        <span class="caption-text">Schéma explicatif d&#x27;une architecture de micro-machine virtuelle (microVM ou μVM) s&#x27;exécutant sur un hyperviseur, illustrant l&#x27;exclusion des composants non essentiels (BIOS, USB, GPU, SystemD, Windows) pour réduire la surface d&#x27;attaque et optimiser le démarrage du noyau Linux minifié.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:26 - 00:07:50</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais on a l&#x27;avantage d&#x27;être ultra léger, de peser pas beaucoup parce qu&#x27;une image de machine virtuelle, ça fait facile 5, 10 gigas, alors qu&#x27;une image de micro VM, il n&#x27;y a presque rien dedans, ça peut faire juste quelques mégas. Ça démarre aussi très très rapidement parce qu&#x27;il n&#x27;y a rien à démarrer, il n&#x27;y a rien à abouter, il n&#x27;y a pas de différents programmes à démarrer dans mon OS, il y a juste un seul programme. Et comme je n&#x27;ai pas d&#x27;OS à démarrer, je consomme aussi moins de RAM, il n&#x27;y a que mon application qui va utiliser de la mémoire vive, et donc c&#x27;est aussi mieux optimisé à ce niveau-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma d&#x27;architecture conceptuel et système présenté sur un tableau numérique en arrière-plan.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Icônes de CPU, de barrette de RAM, boîte englobante de machine virtuelle, mention « µVM » (micro VM), et liste d&#x27;éléments épurés ou désactivés : BIOS, USB, GPU, SystemD, Windows.</p>
+                        <p><strong>Action / Démonstration :</strong> Comparaison technique de la légèreté et de la vitesse de boot des micro VMs par rapport aux machines virtuelles traditionnelles, en expliquant la suppression de l&#x27;émulation des périphériques non indispensables.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000732_seg18.jpg" alt="Schéma explicatif en arrière-plan détaillant l&#x27;absence de composants et d&#x27;initialisations lourdes (BIOS, USB, GPU, SystemD, Windows barrés) dans l&#x27;architecture d&#x27;une micro VM comparée à une VM classique." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000732_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:32</span>
+                        <span class="caption-text">Schéma explicatif en arrière-plan détaillant l&#x27;absence de composants et d&#x27;initialisations lourdes (BIOS, USB, GPU, SystemD, Windows barrés) dans l&#x27;architecture d&#x27;une micro VM comparée à une VM classique.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000738_seg18.jpg" alt="Plan resserré mettant en évidence le schéma d&#x27;une micro VM (notée µVM) et l&#x27;allocation minimale des ressources CPU et RAM." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000738_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:38</span>
+                        <span class="caption-text">Plan resserré mettant en évidence le schéma d&#x27;une micro VM (notée µVM) et l&#x27;allocation minimale des ressources CPU et RAM.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000744_seg18.jpg" alt="Visualisation des optimisations de démarrage d&#x27;une micro VM, illustrant la suppression des couches d&#x27;émulation matérielle non essentielles (BIOS, USB, GPU) et logicielles (SystemD, Windows)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000744_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:44</span>
+                        <span class="caption-text">Visualisation des optimisations de démarrage d&#x27;une micro VM, illustrant la suppression des couches d&#x27;émulation matérielle non essentielles (BIOS, USB, GPU) et logicielles (SystemD, Windows).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:50 - 00:08:09</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je ne sais pas s&#x27;il y a d&#x27;autres fournisseurs de cloud qui utilisent ce concept de micro VM, très probablement. Et donc les outils principaux, l&#x27;hyperviseur les plus connus pour pouvoir lancer des micro-VM, c&#x27;est Firecracker qui a été développé par AWS. Et donc ils l&#x27;utilisent en interne pour Lambda, qui est leur service de serverless, et pour Fargate, qui est leur service de conteneur à ce service.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Support de présentation visuelle (type tableau noir numérique) avec incrustation webcam de l&#x27;intervenant.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Schéma d&#x27;une fenêtre système étiquetée « μVM » (Micro-VM).
+- Mentions textuelles des technologies clés : « Firecracker (Lambda/Fargate) » et « Katacontainer » (Kata Containers).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et contextualisation des hyperviseurs de micro-VMs, en expliquant le rôle de Firecracker au sein de l&#x27;infrastructure AWS (pour Lambda et ECS Fargate) et en introduisant l&#x27;alternative Kata Containers.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000755_seg19.jpg" alt="Présentation schématique sur tableau blanc virtuel des technologies de micro-machines virtuelles (μVM) associées aux environnements de conteneurs et de serverless." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000755_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:55</span>
+                        <span class="caption-text">Présentation schématique sur tableau blanc virtuel des technologies de micro-machines virtuelles (μVM) associées aux environnements de conteneurs et de serverless.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:09 - 00:08:29</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc avec Lambda, je peux juste leur donner une fonction, par exemple une fonction en Python qui fait quelque chose. Et eux, ils vont pouvoir démarrer une micro-VM. Dans cette micro-VM, ils ont mon programme en Python. Mon programme en Python, il y a très peu de chances qu&#x27;ils puissent sortir de la micro-VM pour faire autre chose, aller potentiellement voler des données à d&#x27;autres clients, des choses comme ça. Et c&#x27;est très léger parce que j&#x27;ai juste mon programme en Python qui tourne dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:29 - 00:08:52</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je n&#x27;ai pas d&#x27;OS, donc ils peuvent le démarrer très très rapidement. Ça ne prend pas beaucoup de temps pour pouvoir les stocker, les télécharger. Et donc, ils peuvent en avoir plein sur la même machine physique et donc mettre plein de clients sur la même machine. Et quand il n&#x27;y a plus de place sur la machine, ils peuvent enlever un client qui n&#x27;est pas trop trop utilisé et remettre un autre à la place. Et puis, ils remettent l&#x27;autre à un client si jamais il y a une requête qui vient d&#x27;arriver. Parce que comme c&#x27;est très très rapide à démarrer, au moment où ils reçoivent la requête, ils peuvent remettre la fonction directement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:52 - 00:09:13</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et Fargate, c&#x27;est leur service de conteneur à service. Donc, on peut leur donner une image d&#x27;un conteneur, une image Docker, par exemple, qu&#x27;on a créée, et ils vont l&#x27;exécuter. Mais comme on va voir juste après, les conteneurs, c&#x27;est un petit peu moins sécurisé que les machines virtuelles pour pouvoir sortir dedans. Donc, ce qu&#x27;ils font, c&#x27;est que ce conteneur, ils le font tourner dans une micro-VM. Et donc, du coup, ils n&#x27;ont pas l&#x27;avantage de pouvoir utiliser tout l&#x27;écosystème des conteneurs, d&#x27;utiliser une image Docker, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc virtuel de présentation d&#x27;architecture logicielle</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Schémas dessinés d&#x27;une machine virtuelle (µVM) et d&#x27;un conteneur
+- Mentions textuelles : &quot;Firecracker (Lambda/Fargate)&quot; et &quot;Katacontainer&quot;</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la sécurité des conteneurs et l&#x27;utilisation de micro-machines virtuelles (µVM) comme Firecracker par AWS (Fargate/Lambda) pour isoler les conteneurs de manière plus sécurisée qu&#x27;un cloisonnement standard.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000903_seg22.jpg" alt="Schéma explicatif illustrant une micro-VM (µVM) à côté d&#x27;un conteneur traditionnel, associé aux mentions de Firecracker (Lambda/Fargate) et Katacontainer." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000903_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:03</span>
+                        <span class="caption-text">Schéma explicatif illustrant une micro-VM (µVM) à côté d&#x27;un conteneur traditionnel, associé aux mentions de Firecracker (Lambda/Fargate) et Katacontainer.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:13 - 00:09:36</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Que ce soit rapide à démarrer, que ce soit performant, mais que ce soit sécurisé aussi et qu&#x27;on puisse jamais sortir et puis aller faire autre chose sur la machine. Et il y a un autre outil aussi qui s&#x27;appelle KataContainer, qui est un peu bizarre dans ce sens parce qu&#x27;on voit ici Container, donc on se dit, c&#x27;est des containers du coup, est-ce que tu nous mens ? Et en fait, c&#x27;est un projet qui permet justement, comme dans Fargate, de pouvoir démarrer des conteneurs dans des micro-VM.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:36 - 00:09:55</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite, on vient enfin aux conteneurs. Donc, pareil, il y a deux types de conteneurs différents. Il y a ce qu&#x27;on appelle les AppContainer, donc les containers pour applications, qui sont les conteneurs les plus populaires, ce programme que tu as déjà entendu parler jusqu&#x27;à présent. Et on a aussi les systèmes containers. Ça, c&#x27;est un autre type de conteneur qui est un peu moins connu, mais qui a son utilité aussi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Support de présentation visuelle de type tableau noir numérique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Schéma d&#x27;un bloc de conteneurisation légendé &quot;Conteneur&quot;.
+- Liste textuelle comparative distinguant :
+  - App Containers
+  - System Containers</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique et classification des types de conteneurs pour clarifier la différence entre la conteneurisation orientée application (type Docker) et celle orientée système (type LXC/LXD).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_000951_seg24.jpg" alt="Schéma conceptuel sur tableau blanc présentant les deux grandes catégories de conteneurs : &quot;App Containers&quot; (conteneurs d&#x27;application) et &quot;System Containers&quot; (conteneurs système)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_000951_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:51</span>
+                        <span class="caption-text">Schéma conceptuel sur tableau blanc présentant les deux grandes catégories de conteneurs : &quot;App Containers&quot; (conteneurs d&#x27;application) et &quot;System Containers&quot; (conteneurs système).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:56 - 00:10:16</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc les outils qui nous permettent de lancer des conteneurs s&#x27;appellent des runtime. Et le plus populaire, c&#x27;est Docker. Quand on pense conteneur, on pense aussi beaucoup à Kubernetes. Mais Kubernetes, ce n&#x27;est pas un runtime, c&#x27;est un orchestrateur. Et donc Kubernetes peut utiliser un runtime. Donc Kubernetes va utiliser un nouveau programme, un runtime, pour pouvoir arrêter, lancer, déplacer des conteneurs. Et pendant un moment Kubernetes utilisait Docker en tant que runtime.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma d&#x27;architecture technique incrusté en arrière-plan.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste de technologies de conteneurisation et d&#x27;orchestration : &quot;docker&quot;, &quot;kubernetes&quot;, &quot;containerD&quot;, &quot;podman&quot;, &quot;CRI-O&quot;, &quot;App Containers&quot;, avec des représentations graphiques de processeur (CPU) et de barrette de mémoire (RAM).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la distinction fondamentale entre un orchestrateur (Kubernetes) et les runtimes de conteneurs (Docker, containerd, CRI-O), détaillant comment ils exploitent les ressources physiques de la machine.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001011_seg25.jpg" alt="Schéma conceptuel en arrière-plan illustrant l&#x27;écosystème des conteneurs (Docker, Kubernetes, containerd, Podman, CRI-O) en relation avec les composants matériels (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001011_seg25.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:11</span>
+                        <span class="caption-text">Schéma conceptuel en arrière-plan illustrant l&#x27;écosystème des conteneurs (Docker, Kubernetes, containerd, Podman, CRI-O) en relation avec les composants matériels (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:16 - 00:10:38</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et maintenant en fonction de la distribution Kubernetes que tu utilises, ça va utiliser ContainerD ou Creo ou d&#x27;autres runtime. On peut même techniquement utiliser KVM en tant que runtime pour Kubernetes. Et donc au lieu de lancer des containers, ça va lancer des machines virtuelles. Donc ContainerD, c&#x27;est je pense le plus populaire des runtime pour pouvoir lancer des containers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc virtuel de présentation d&#x27;architecture.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma &quot;App Containers&quot;, &quot;Conteneur&quot;, &quot;Kernel&quot;, icônes symbolisant le processeur et la mémoire RAM, et liste textuelle : docker, kubernetes, containerD, podman, CRI-o, runc, crun.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative et explicative des runtimes de conteneurs (ContainerD, CRI-O, runc) compatibles et utilisables sous Kubernetes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001022_seg26.jpg" alt="Schéma technique illustrant l&#x27;architecture d&#x27;un conteneur applicatif (&quot;App Containers&quot;) lié au Kernel (CPU/RAM) avec une liste ordonnée des runtimes et outils de conteneurisation (docker, kubernetes, containerD, podman, CRI-o, runc, crun)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001022_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:22</span>
+                        <span class="caption-text">Schéma technique illustrant l&#x27;architecture d&#x27;un conteneur applicatif (&quot;App Containers&quot;) lié au Kernel (CPU/RAM) avec une liste ordonnée des runtimes et outils de conteneurisation (docker, kubernetes, containerD, podman, CRI-o, runc, crun).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001032_seg26.jpg" alt="Schéma technique identique à l&#x27;image #1, affichant un trait de surbrillance rouge sous le composant &quot;containerD&quot; pour marquer l&#x27;explication sur ce runtime spécifique." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001032_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:32</span>
+                        <span class="caption-text">Schéma technique identique à l&#x27;image #1, affichant un trait de surbrillance rouge sous le composant &quot;containerD&quot; pour marquer l&#x27;explication sur ce runtime spécifique.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:38 - 00:10:58</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Podman qui est surtout populaire en local, donc sur ton laptop pour pouvoir développer des choses comme ça. Crio, qui est l&#x27;équivalent de ContainerD, mais qui a été fait par Red Hat. On a aussi RunC. Techniquement, Crio et ContainerD sont basés sur RunC. C&#x27;est un peu plus bas niveau pour pouvoir démarrer les conteneurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:58 - 00:11:19</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Alors que Crio et ContainerD, une fois que le conteneur est démarré, il faut s&#x27;occuper de faire en sorte qu&#x27;il ait un système de fichiers correct, qu&#x27;il ait un réseau qui puisse accéder à l&#x27;extérieur, etc. Et on a Cron aussi, qui est un autre runtime, qui est un peu plus léger que RunC pour pouvoir démarrer un peu plus rapidement des conteneurs. J&#x27;imagine que c&#x27;est un peu plus utile si on est sur de l&#x27;embarqué, sur des Raspberry Pi, sur des petites machines, des choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma explicatif d&#x27;architecture système / Tableau d&#x27;illustration pédagogique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Mentions textuelles des outils : &quot;App Containers&quot;, &quot;docker&quot;, &quot;kubernetes&quot;, &quot;containerD&quot;, &quot;podman&quot;, &quot;CRI-O&quot;, &quot;runc&quot;. Représentations graphiques simplifiées d&#x27;un CPU et d&#x27;un module de mémoire RAM reliés par des flux d&#x27;exécution.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique de la transition entre l&#x27;orchestration des conteneurs, la configuration de leur environnement (système de fichiers, réseau extérieur par les runtimes de haut niveau comme ContainerD ou CRI-O) et leur exécution effective par des runtimes de bas niveau légers (comme runc ou crun).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001114_seg28.jpg" alt="Schéma d&#x27;architecture des composants et runtimes de conteneurisation mettant en relation les orchestrateurs, moteurs de conteneurs (Docker, Kubernetes, Podman), les runtimes de haut niveau (containerD, CRI-O), de bas niveau (runc) et les ressources matérielles (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001114_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:14</span>
+                        <span class="caption-text">Schéma d&#x27;architecture des composants et runtimes de conteneurisation mettant en relation les orchestrateurs, moteurs de conteneurs (Docker, Kubernetes, Podman), les runtimes de haut niveau (containerD, CRI-O), de bas niveau (runc) et les ressources matérielles (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:19 - 00:11:41</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc un conteneur, ça utilise un fonctionnement complètement différent d&#x27;une machine virtuelle, parce qu&#x27;à la base, c&#x27;est une fonctionnalité du kernel Linux directement. C&#x27;est pour ça que pendant longtemps, c&#x27;était quelque chose qui existait seulement sur Linux. Maintenant, techniquement, il y a aussi des conteneurs Windows, mais pas grand monde utilise ça. Et quand on utilise des conteneurs sur Windows en général, c&#x27;est des conteneurs Linux, mais qui tournent dans une machine virtuelle, qui est une machine virtuelle Linux, parce que c&#x27;est une fonctionnalité du kernel Linux.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma architectural (diagramme)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture des &quot;App Containers&quot; montrant l&#x27;application dans un conteneur et son lien direct au &quot;Kernel&quot;, avec des composants CPU et RAM. Liste des technologies de conteneurisation : docker, kubernetes, containerD, podman, CRI-o, runc, crun.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication visuelle et didactique des concepts fondamentaux des conteneurs Linux et de leur écosystème technique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001124_seg29.jpg" alt="Diagramme schématique expliquant le fonctionnement et l&#x27;architecture des conteneurs d&#x27;application Linux, illustrant leur interaction directe avec le Kernel et listant les principaux outils et runtimes associés." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001124_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:24</span>
+                        <span class="caption-text">Diagramme schématique expliquant le fonctionnement et l&#x27;architecture des conteneurs d&#x27;application Linux, illustrant leur interaction directe avec le Kernel et listant les principaux outils et runtimes associés.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:41 - 00:12:01</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça s&#x27;appelle d&#x27;ailleurs les C-Groups. Et cette fonctionnalité, elle permet simplement que quand on démarre un programme, une application, le kernel va dire, ok, cette application-là, elle va être dans un groupe, un C-Group, et elle pourra rien voir de ce qu&#x27;il y a en dehors de ce C-Group. Elle pourra voir aucun des fichiers qu&#x27;il y a à l&#x27;extérieur, elle pourra voir aucune des autres applications qui sont à l&#x27;extérieur. Elle va voir que ce que le kernel va décider qu&#x27;elle puisse voir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma explicatif sur tableau blanc virtuel (overlay graphique).</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Composants matériels représentés : CPU, barrette de mémoire RAM.
+- Concepts système Linux : Kernel, cgroup.
+- Technologies de conteneurisation listées : docker, kubernetes, containerD, podman, CRI-o, runc, crun.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique du rôle des cgroups (Control Groups) du noyau Linux pour segmenter, isoler et limiter l&#x27;accès aux ressources matérielles et aux fichiers système pour les processus exécutés dans un conteneur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001146_seg30.jpg" alt="Schéma conceptuel d&#x27;architecture illustrant le fonctionnement des groupes de contrôle (cgroups) du noyau Linux pour l&#x27;isolation et la limitation des ressources physiques (processeur, RAM) allouées aux conteneurs applicatifs." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001146_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:46</span>
+                        <span class="caption-text">Schéma conceptuel d&#x27;architecture illustrant le fonctionnement des groupes de contrôle (cgroups) du noyau Linux pour l&#x27;isolation et la limitation des ressources physiques (processeur, RAM) allouées aux conteneurs applicatifs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:01 - 00:12:23</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui fait qu&#x27;une application qui est dans un conteneur, elle parle directement avec le kernel de l&#x27;autre de la machine. Il n&#x27;y a pas d&#x27;intermédiaire, elle ne parle pas à un OS qui parle à un OS, qui parle à un hyperviseur, qui parle vraiment à du matériel. Donc en théorie, en termes de performance pure, si je fais un benchmark avec une application qui est dans un containerisé et qu&#x27;elle a 100 points et que je fais le même benchmark directement sur mon bar métal, sur mon matos, je vais avoir 100 points aussi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:23 - 00:12:45</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça va être exactement la même chose parce que dans le cas de mon app ici qui tourne directement dans mon OS, elle parle directement à mon kernel et l&#x27;app qui est dans mon container, elle parle aussi directement à mon container. Il n&#x27;y a pas d&#x27;intermédiaire. Donc en termes de performance, c&#x27;est encore mieux que les machines virtuelles. Et donc comme notre application ici, elle parle directement au kernel de la machine haute. Un des désavantages, entre guillemets, c&#x27;est que si j&#x27;ai plusieurs conteneurs, ils vont tous partager le même kernel, donc la même version du kernel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau noir (ou fond de présentation visuelle simulant un tableau noir)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme d&#x27;architecture : &quot;App Containers&quot;, &quot;Conteneur&quot;, &quot;App&quot;, &quot;Kernel&quot;. Symboles de composants matériels (CPU, RAM). Liste de technologies de conteneurisation : docker, kubernetes, containerD, podman, CRI-o, runc, crun. Flèche indiquant la liaison directe &quot;Conteneur -&gt; Kernel&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication visuelle et technique de l&#x27;architecture des applications conteneurisées et de leur interaction directe avec le kernel pour justifier des avantages en termes de performances.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001234_seg32.jpg" alt="Le créateur explique, avec en fond un diagramme illustrant l&#x27;architecture des conteneurs, incluant des schémas de CPU et de mémoire, ainsi qu&#x27;une liste de technologies de conteneurisation." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001234_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:34</span>
+                        <span class="caption-text">Le créateur explique, avec en fond un diagramme illustrant l&#x27;architecture des conteneurs, incluant des schémas de CPU et de mémoire, ainsi qu&#x27;une liste de technologies de conteneurisation.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001239_seg32.jpg" alt="Gros plan sur un diagramme d&#x27;architecture de conteneurs, montrant la relation entre une application, son conteneur et la communication directe avec le kernel. Des schémas de CPU et RAM sont visibles, ainsi qu&#x27;une liste de runtimes et orchestrateurs." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001239_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:39</span>
+                        <span class="caption-text">Gros plan sur un diagramme d&#x27;architecture de conteneurs, montrant la relation entre une application, son conteneur et la communication directe avec le kernel. Des schémas de CPU et RAM sont visibles, ainsi qu&#x27;une liste de runtimes et orchestrateurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:45 - 00:13:08</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si j&#x27;ai besoin d&#x27;applications qui ont elles besoin de versions différentes du kernel, je ne vais pas pouvoir utiliser des conteneurs par exemple. L&#x27;autre convénient, c&#x27;est qu&#x27;en termes de sécurité, la conteneurisation, c&#x27;est une technologie qui est un peu plus jeune. Et donc c&#x27;est déjà arrivé, ça a probablement continué à arriver, même si c&#x27;est quand même de plus en plus rare, qu&#x27;une application dans un conteneur puisse exploiter un bug dans la conteneurisation et donc puisse potentiellement sortir et affecter des fichiers ou des problèmes qui sont sur la même machine haute.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma d&#x27;architecture système (diapositive explicative) avec incrustation vidéo du présentateur dans le coin supérieur gauche.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Représentations graphiques de composants matériels : CPU, barrette de RAM.
+- Bloc central représentant un conteneur et ses applications (&quot;App&quot; / &quot;Conteneur&quot;) relié par une flèche au &quot;Kernel&quot; hôte.
+- Liste textuelle des technologies et runtimes de conteneurs : `docker`, `kubernetes`, `containerD`, `podman`, `CRI-o`, `runc`, `crun`.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et explication conceptuelle des limites des conteneurs, notamment la dépendance vis-à-vis du noyau (Kernel) unique de la machine hôte et les implications de sécurité associées à cette technologie plus jeune que la virtualisation traditionnelle.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001302_seg33.jpg" alt="Schéma technique d&#x27;architecture détaillant le fonctionnement des conteneurs d&#x27;applications (&quot;App Containers&quot;) partageant le Kernel de l&#x27;hôte avec accès aux ressources physiques (CPU, RAM) et répertoriant les principaux runtimes et orchestrateurs (Docker, Kubernetes, containerD, Podman, CRI-O, runc, crun)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001302_seg33.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:02</span>
+                        <span class="caption-text">Schéma technique d&#x27;architecture détaillant le fonctionnement des conteneurs d&#x27;applications (&quot;App Containers&quot;) partageant le Kernel de l&#x27;hôte avec accès aux ressources physiques (CPU, RAM) et répertoriant les principaux runtimes et orchestrateurs (Docker, Kubernetes, containerD, Podman, CRI-O, runc, crun).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:08 - 00:13:27</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;avais déjà fait une vidéo il y a quelques années sur une des failles qui permettait de faire ça. Ça a quand même peu de choses à arriver, c&#x27;est assez rare. Mais si on est très, très soucieux de sa sécurité, si par exemple, j&#x27;offre un service où je vais mettre des conteneurs de différents clients différents sur la même infrastructure, et bien là, peut-être que je vais vouloir plutôt utiliser des machines virtuelles ou plutôt des micro-VM. Parce que les micro-VM ont un peu ces deux avantages-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Diagramme conceptuel, liste de technologies de conteneurisation.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture d&#x27;un conteneur d&#x27;application, référence aux outils d&#x27;orchestration et runtimes de conteneurs (Docker, Kubernetes, containerd, Podman, CRI-O, runc).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication des principes et des outils utilisés pour l&#x27;isolation et la gestion des conteneurs, notamment dans le contexte de l&#x27;hébergement mutualisé de services clients.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001317_seg34.jpg" alt="Diagramme conceptuel illustrant l&#x27;encapsulation d&#x27;une application dans un conteneur (&quot;App Containers&quot;), accompagné d&#x27;une liste exhaustive des technologies et runtimes de conteneurisation clés comme Docker, Kubernetes, containerd, Podman, CRI-O et runc." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001317_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:17</span>
+                        <span class="caption-text">Diagramme conceptuel illustrant l&#x27;encapsulation d&#x27;une application dans un conteneur (&quot;App Containers&quot;), accompagné d&#x27;une liste exhaustive des technologies et runtimes de conteneurisation clés comme Docker, Kubernetes, containerd, Podman, CRI-O et runc.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:27 - 00:13:50</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">La légèreté des conteneurs, un petit peu moins léger, mais quand même très, très léger, mais la sécurité des machines virtuelles. Un autre gros avantage des conteneurs, c&#x27;est que mon application qui est dans mon conteneur ici, ça peut être le seul programme qui tourne dans mon conteneur. Je n&#x27;ai pas besoin d&#x27;avoir tout un OS qui tourne dans mon conteneur, j&#x27;ai juste mon application. En termes de taille, c&#x27;est très petit, parce que je vais juste avoir mon application et ce qu&#x27;elle a besoin. Je vais avoir un seul programme qui tourne, le 50 000 programmes que l&#x27;OS a besoin pour tourner, donc je vais avoir des meilleures performances aussi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique d&#x27;architecture technique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Schéma représentant un conteneur contenant uniquement l&#x27;application (&quot;app&quot;), relié au &quot;Kernel&quot;, lui-même connecté à des représentations simplifiées de CPU et de mémoire RAM.
+- Liste de technologies : docker, kubernetes, containerD, podman, CRI-o, runc, crun.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication conceptuelle du fonctionnement d&#x27;un conteneur, mettant en avant sa légèreté par rapport à une machine virtuelle traditionnelle du fait qu&#x27;il ne nécessite pas l&#x27;exécution d&#x27;un système d&#x27;exploitation complet, mais uniquement de l&#x27;application cible (&quot;app&quot;) s&#x27;appuyant sur le noyau de l&#x27;hôte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001333_seg35.jpg" alt="Schéma conceptuel d&#x27;un conteneur applicatif (&quot;App Containers&quot;) s&#x27;exécutant au-dessus du Kernel de la machine hôte pour accéder aux ressources physiques (processeur, mémoire RAM). À droite, une liste d&#x27;outils et d&#x27;environnements d&#x27;exécution est affichée (docker, kubernetes, containerD, podman, CRI-o, runc, crun)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001333_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:33</span>
+                        <span class="caption-text">Schéma conceptuel d&#x27;un conteneur applicatif (&quot;App Containers&quot;) s&#x27;exécutant au-dessus du Kernel de la machine hôte pour accéder aux ressources physiques (processeur, mémoire RAM). À droite, une liste d&#x27;outils et d&#x27;environnements d&#x27;exécution est affichée (docker, kubernetes, containerD, podman, CRI-o, runc, crun).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:50 - 00:14:12</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en termes de nombre de conteneurs que je peux mettre sur une même machine, ça va être beaucoup plus qu&#x27;une machine virtuelle, parce qu&#x27;encore une fois, comme je n&#x27;ai pas d&#x27;OS, imaginons que dans une machine virtuelle, j&#x27;ai besoin d&#x27;au moins, disons, 2 gigas pour l&#x27;OS, et ensuite peut-être que j&#x27;ai besoin d&#x27;un giga pour mon application, et bien ça veut dire que pour chacune des machines virtuelles, il faut que je réserve 3 gigas. Alors que là, avec mon conteneur, si mon application utilise 1 giga, et bien chaque conteneur va utiliser 1 giga de mémoire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:13 - 00:14:31</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Du coup, je peux techniquement mettre 3 fois plus de conteneurs que ce que je peux mettre de machines virtuelles, dans ce cas-là. En pratique, ça peut même potentiellement être plus, parce que les 1 giga de mémoire que mon conteneur a besoin ici, si mes conteneurs sont très similaires et ont besoin d&#x27;accéder exactement aux mêmes librairies, ces librairies-là peuvent être charlées une seule fois en mémoire. Et donc, si j&#x27;ai 50 conteneurs, je ne vais quand même consommer que 1 Go de RAM.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:31 - 00:14:52</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Alors que si j&#x27;avais des machines virtuelles, 50 conteneurs, ça ferait 150 Go de RAM. Donc non seulement on a des meilleures performances en termes de CPU, mais en termes de RAM, on l&#x27;utilise aussi beaucoup moins avec des conteneurs qu&#x27;avec des machines virtuelles. Et en plus de ça, on économise aussi avec le disque dur, parce que l&#x27;image d&#x27;un conteneur, c&#x27;est souvent quelques mégas, quelques dizaines de mégas, alors qu&#x27;une image de machine virtuelle, c&#x27;est en gigas, si ce n&#x27;est parfois en dizaines de gigas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma d&#x27;architecture technique dessiné sur tableau noir virtuel.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Mots-clés de l&#x27;écosystème cloud-native : `docker`, `kubernetes`, `containerd`, `podman`, `CRI-o`, `runc`.
+- Icônes et schémas matériels : Processeur (CPU), barrette de mémoire vive (RAM) pointée par une flèche verte, et des blocs de conteneurs avec allocations de RAM simulées (ex: 1G, 2G).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique et comparative de l&#x27;efficacité énergétique et matérielle des conteneurs face aux machines virtuelles (VMs), en démontrant l&#x27;optimisation drastique de la RAM, du CPU et de l&#x27;espace disque grâce au partage du noyau de l&#x27;OS hôte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001436_seg38.jpg" alt="Schéma d&#x27;architecture sur tableau noir numérique présentant les technologies de conteneurisation (Docker, Kubernetes, containerd, podman, CRI-O, runc) et des concepts d&#x27;allocation de ressources matérielles (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001436_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:36</span>
+                        <span class="caption-text">Schéma d&#x27;architecture sur tableau noir numérique présentant les technologies de conteneurisation (Docker, Kubernetes, containerd, podman, CRI-O, runc) et des concepts d&#x27;allocation de ressources matérielles (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001447_seg38.jpg" alt="Plan rapproché sur l&#x27;intervenant avec le même schéma d&#x27;architecture système (CPU, bloc &quot;conteneur&quot;) visible en arrière-plan flouté." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001447_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:47</span>
+                        <span class="caption-text">Plan rapproché sur l&#x27;intervenant avec le même schéma d&#x27;architecture système (CPU, bloc &quot;conteneur&quot;) visible en arrière-plan flouté.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:52 - 00:15:11</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite, on a un autre type de conteneur. Au lieu des conteneurs d&#x27;application, on a les conteneurs de système, les système containers. Donc là, on va quand même utiliser la technologie des conteneurs, la technologie des C-Groups qui est dans le canal Linux. Donc on va bénéficier de tous les avantages, c&#x27;est très rapide, c&#x27;est très léger. Mais au lieu d&#x27;avoir juste notre application, on va avoir notre réduction et on va aussi démarrer tout un OS à l&#x27;intérieur du conteneur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:11 - 00:15:44</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc on va retrouver init, système D, et donc tous les programmes qui tournent sur une machine Linux classique. Ce qui fait que j&#x27;ai les avantages du conteneur, moins le temps de boot par exemple, parce qu&#x27;il faut quand même que là je démarre mon OS, donc ça prend quand même un certain temps. mais ça va quand même être plus rapide que sur une machine virtuelle. Et je vais avoir les avantages d&#x27;avoir tout un OS. Donc si par exemple mon application veut utiliser CronTab, c&#x27;est un autre programme qui tourne dans mon OS, et bien il est là, je peux l&#x27;utiliser. Donc en termes de compatibilité, les applications qui tournent dans un système container, elles n&#x27;ont même pas vraiment besoin d&#x27;être containerisées particulièrement, de savoir qu&#x27;elles sont dans un container, parce qu&#x27;elles vont avoir l&#x27;impression d&#x27;être dans un OS classique</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:44 - 00:16:02</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">avec tous les fichiers et tous les programmes qu&#x27;il y a dans un OS classique. Et ça c&#x27;est possible avec des outils comme LXC. Je ne sais pas si vraiment il y a d&#x27;autres outils qui permettent de faire ça, mais qui sont toujours actuellement en développement. Mais LXC, c&#x27;est vraiment le runtime qui va permettre de démarrer ces fameux systèmes containers. Et on a LXD, qui va plutôt être l&#x27;outil qu&#x27;on va utiliser pour pouvoir démarrer ces containers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:02 - 00:16:22</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">L&#x27;avantage aussi, ce qui est cool, c&#x27;est que LXD peut aussi démarrer des machines virtuelles. Donc ça veut dire qu&#x27;avec le même outil, on peut utiliser à la fois des containers et à la fois des machines virtuelles. C&#x27;est un outil que moi j&#x27;utilise par exemple pour faire mes formations. Je donne accès à des machines virtuelles à mes étudiants pour qu&#x27;ils fassent leurs projets dessus. Et il y a certains projets où je peux leur donner des conteneurs qui vont être des systèmes containers. C&#x27;est-à-dire que pour eux, ça va être comme une machine virtuelle, mais en fait, c&#x27;est un conteneur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:23 - 00:16:43</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, j&#x27;ai les avantages de ça consommer moins, je peux en mettre plus sur la même machine, etc. Et pour certains projets qui ont besoin d&#x27;avoir vraiment une machine virtuelle, je peux utiliser exactement le même outil LXD. Et là, à ce moment-là, ça sera une machine virtuelle. Il y a certains projets, par exemple, quand on utilise Kubernetes ou quand on utilise Docker, c&#x27;est un peu compliqué d&#x27;avoir Docker à l&#x27;intérieur de Docker ou dans l&#x27;intérieur de Kubernetes. Et donc, du coup, c&#x27;est plus simple d&#x27;avoir une machine virtuelle que d&#x27;avoir un conteneur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:43 - 00:17:04</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">même un système container, c&#x27;est en général pas vraiment faisable ou du moins pas faisable de manière sécurisée. Et au passage, il y a aussi une version qui s&#x27;appelle Incus qui est un fork de LXD parce que LXD a été récupéré par Ubuntu, il me semble. Donc pour pouvoir continuer à être open source, il y a le projet Incus qui permet de faire la même chose et donc de pouvoir avoir un cluster de machines et de pouvoir démarrer des machines virtuelles et des systèmes containers dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau blanc numérique interactif de présentation d&#x27;architecture informatique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Schéma fonctionnel avec les termes : &quot;System Containers&quot;, &quot;Conteneur&quot;, &quot;Kernel&quot;, &quot;LXC&quot;, &quot;Lxd&quot;, &quot;INCUS&quot;.
+- Représentations graphiques de composants matériels : processeur (CPU) et mémoire vive (RAM).
+- Logo officiel de Linux (Tux) à l&#x27;intérieur du bloc conteneur.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication conceptuelle de la virtualisation par conteneurs système (LXC) et présentation de l&#x27;alternative open-source Incus, née suite à la reprise du projet LXD par Canonical (Ubuntu).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001648_seg44.jpg" alt="Schéma explicatif de l&#x27;architecture d&#x27;un conteneur système (System Container) basé sur LXC, illustrant son interaction directe avec le noyau (Kernel) Linux et les ressources physiques (CPU, RAM)." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001648_seg44.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:48</span>
+                        <span class="caption-text">Schéma explicatif de l&#x27;architecture d&#x27;un conteneur système (System Container) basé sur LXC, illustrant son interaction directe avec le noyau (Kernel) Linux et les ressources physiques (CPU, RAM).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/aN4PCILrbBg/aN4PCILrbBg_001659_seg44.jpg" alt="Plan de présentation montrant les mentions de LXC, LXD et de son fork open-source Incus sur le tableau de présentation en arrière-plan." loading="lazy" onclick="openLightbox('../screenshots/aN4PCILrbBg/aN4PCILrbBg_001659_seg44.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:59</span>
+                        <span class="caption-text">Plan de présentation montrant les mentions de LXC, LXD et de son fork open-source Incus sur le tableau de présentation en arrière-plan.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:05 - 00:17:24</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc pour résumer, on a d&#x27;un côté les machines virtuelles qui peuvent être soit des VM complètes avec tout un OS, etc. ou qui peuvent être des micro-EM. Donc là, on a tout enlevé, presque même pas d&#x27;OS et donc du coup, c&#x27;est très très léger. Et de l&#x27;autre côté, on a les conteneurs avec les systèmes conteneurs qui, eux, justement, contiennent un OS et ressemblent à une machine physique.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:24 - 00:17:44</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et on a les applications containers qui, eux, ont juste l&#x27;application qui tourne dedans. Et donc là, en fonction de ce qu&#x27;on a besoin, est-ce qu&#x27;on a besoin d&#x27;avoir quelque chose qui ressemble à un OS ou est-ce que ça peut être correct d&#x27;avoir juste l&#x27;application dans notre conteneur ou dans notre VM ? Et ensuite, est-ce qu&#x27;on veut utiliser la technologie de virtualisation, donc d&#x27;avoir un hyperviseur, ou est-ce qu&#x27;on veut utiliser la technologie de conteneurisation qui est contenue dans le kernel Linux.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:44 - 00:18:04</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En fonction de ces deux paramètres, on va pouvoir choisir si on veut une VM classique, une micro-VM, un système container ou un application container. Si tu veux apprendre des outils DevOps avec moi, comme par exemple Ansible, Docker, Kubernetes, Prometheus ou GitLab, 3-4 fois par an, je fais une formation sur le DevOps en petits groupes. On apprend ça ensemble en live, on fait des exercices, des projets. Donc si ça t&#x27;intéresse, je te laisse un lien dans la description.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:04 - 00:18:13</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et je ne sais pas exactement quelle vidéo te recommander, mais normalement, YouTube a décidé que cette vidéo, c&#x27;est celle qui t&#x27;intéresserait le plus. Donc, je te laisse découvrir ça et on se retrouve là-bas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

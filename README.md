@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `11 / 142` (`7.7%`)
+- **Vidéos traitées** : `12 / 142` (`8.5%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -30,6 +30,7 @@
 | 2026-04-13 | [gDtE9XEpL_M](https://www.youtube.com/watch?v=gDtE9XEpL_M) | **Le nouveau Claude hack les logiciels les plus sécurisés au monde** | [2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-04-13_YT-[gDtE9XEpL_M]_Le nouveau Claude hack les logiciels les plus sécurisés au monde_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `8` |
 | 2026-02-19 | [de0Mm9xT_2U](https://www.youtube.com/watch?v=de0Mm9xT_2U) | **Passe ta certif tellement facilement qu’on va t’accuser de triche** | [2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `27` |
 | 2026-01-20 | [RlZfhw80c5E](https://www.youtube.com/watch?v=RlZfhw80c5E) | **Je tente de devenir un expert Kubernetes en 7 jours** | [2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `50` |
+| 2026-01-09 | [aN4PCILrbBg](https://www.youtube.com/watch?v=aN4PCILrbBg) | **La vraie différence entre une machine virtuelle et un conteneur.** | [2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2026-01-09_YT-[aN4PCILrbBg]_La vraie différence entre une machine virtuelle et un conteneur._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `34` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
