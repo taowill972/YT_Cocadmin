@@ -9,7 +9,8 @@
     "Kx8obgfUECU",
     "Awu5RoPmy-0",
     "gDtE9XEpL_M",
-    "de0Mm9xT_2U"
+    "de0Mm9xT_2U",
+    "RlZfhw80c5E"
   ],
   "processed_videos": [
     {
@@ -129,6 +130,18 @@
       "md_file": "YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
       "html_file": "YT_Cocadmin_Transcript/2026-02-19_YT-[de0Mm9xT_2U]_Passe ta certif tellement facilement qu’on va t’accuser de triche_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
       "screenshots_count": 27,
+      "audit_score": 100.0,
+      "audit_passed": true
+    },
+    {
+      "id": "RlZfhw80c5E",
+      "title": "Je tente de devenir un expert Kubernetes en 7 jours",
+      "upload_date": "20260120",
+      "duration": 1631,
+      "duration_str": "00:27:11",
+      "md_file": "YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2026-01-20_YT-[RlZfhw80c5E]_Je tente de devenir un expert Kubernetes en 7 jours_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 50,
       "audit_score": 100.0,
       "audit_passed": true
     }
@@ -278,7 +291,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-05T23:56:03Z",
-  "completed_count": 10,
+  "completed_count": 11,
   "total_catalog_count": 142,
   "status": "ready"
 }
