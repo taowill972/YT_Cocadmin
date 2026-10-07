@@ -16,7 +16,8 @@
     "s1YBeSDnGnY",
     "_qInmqQIam8",
     "565fkoevF0Y",
-    "lL3ElCmq6jc"
+    "lL3ElCmq6jc",
+    "3RUuv9Y4Uww"
   ],
   "processed_videos": [
     {
@@ -222,6 +223,18 @@
       "screenshots_count": 43,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "3RUuv9Y4Uww",
+      "title": "Recalé de mon entretien à cause de cette question de Linux",
+      "upload_date": "20251004",
+      "duration": 1336,
+      "duration_str": "00:22:16",
+      "md_file": "YT_Cocadmin_Transcript/2025-10-04_YT-[3RUuv9Y4Uww]_Recalé de mon entretien à cause de cette question de Linux_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-10-04_YT-[3RUuv9Y4Uww]_Recalé de mon entretien à cause de cette question de Linux_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 41,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -369,7 +382,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-07T00:26:30Z",
-  "completed_count": 17,
+  "completed_count": 18,
   "total_catalog_count": 142,
   "status": "ready"
 }

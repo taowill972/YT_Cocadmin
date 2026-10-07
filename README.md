@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `17 / 142` (`12.0%`)
+- **Vidéos traitées** : `18 / 142` (`12.7%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -36,6 +36,7 @@
 | 2025-11-19 | [_qInmqQIam8](https://www.youtube.com/watch?v=_qInmqQIam8) | **Pourquoi le serverless de Cloudflare est de loin le meilleur** | [2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2025-10-29 | [565fkoevF0Y](https://www.youtube.com/watch?v=565fkoevF0Y) | **La VRAIE raison du crash d'AWS** | [2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2025-10-21 | [lL3ElCmq6jc](https://www.youtube.com/watch?v=lL3ElCmq6jc) | **La réponse à la question la plus posée en entretien** | [2025-10-21_YT-[lL3ElCmq6jc]_La réponse à la question la plus posée en entretien_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-10-21_YT-[lL3ElCmq6jc]_La réponse à la question la plus posée en entretien_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-10-21_YT-[lL3ElCmq6jc]_La réponse à la question la plus posée en entretien_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `43` |
+| 2025-10-04 | [3RUuv9Y4Uww](https://www.youtube.com/watch?v=3RUuv9Y4Uww) | **Recalé de mon entretien à cause de cette question de Linux** | [2025-10-04_YT-[3RUuv9Y4Uww]_Recalé de mon entretien à cause de cette question de Linux_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-10-04_YT-[3RUuv9Y4Uww]_Recalé de mon entretien à cause de cette question de Linux_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-10-04_YT-[3RUuv9Y4Uww]_Recalé de mon entretien à cause de cette question de Linux_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `41` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*

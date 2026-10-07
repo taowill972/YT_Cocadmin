@@ -1,0 +1,2926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recalé de mon entretien à cause de cette question de Linux — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Recalé de mon entretien à cause de cette question de Linux</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=3RUuv9Y4Uww" target="_blank">Lien YouTube (<code>3RUuv9Y4Uww</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-10-04</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:22:16</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Cette vidéo aborde une question technique redoutable souvent posée lors des entretiens pour des postes d'administrateur système Linux : l'explication détaillée de la structure et du rôle des différents répertoires du système de fichiers. L'intervenant partage son expérience personnelle d'un échec en entretien pour illustrer l'importance de maîtriser ces fondamentaux au-delà d'une simple utilisation quotidienne, transformant cette anecdote en une session de mentorat technique de haut niveau.<br><br>La démonstration se concentre d'abord sur le système de fichiers virtuel `/proc`, explorant en profondeur son architecture basée sur les processus (`PID`), l'inspection des variables d'environnement (`environ`), et l'analyse des descripteurs de fichiers (`fd`) pour le debugging avancé. Elle démystifie ensuite l'héritage historique de Linux en expliquant la complexité des répertoires binaires et des bibliothèques (`/bin`, `/sbin`, `/lib`, `/lib64`), leur fusion avec l'arborescence `/usr` (redéfini de *User* vers *Unix System Resources* via des liens symboliques), pour enfin clarifier le rôle moderne du répertoire `/home` et de la gestion des utilisateurs.<br><br>Pour un ingénieur DevOps, Cloud ou un administrateur système, la maîtrise de ces concepts est cruciale pour le dépannage de production (troubleshooting), l'audit de sécurité des applications et la compréhension fine du comportement du noyau Linux. Savoir naviguer dans `/proc` sans outils de haut niveau permet d'intervenir sur des systèmes gravement dégradés, tandis que comprendre la hiérarchie des exécutables et des bibliothèques évite des erreurs de configuration critiques lors du déploiement de conteneurs ou de serveurs nus (*bare-metal*).<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **`/proc` (Virtual Filesystem)** : Système de fichiers virtuel géré par le noyau Linux, exposé en mémoire vive pour fournir des informations en temps réel sur les processus et l'état du matériel.<br>* **`ps`** : Utilitaire standard de rapport des processus actifs sous Linux, s'appuyant directement sur les données du répertoire `/proc`.<br>* **`which`** : Commande permettant de localiser le chemin absolu d'un fichier exécutable correspondant à une commande donnée dans le `PATH`.<br>* **`Nginx`** : Serveur web haute performance utilisé ici comme cas d'étude pour l'analyse des processus et de l'arborescence PID.<br>* **`VS Code / Code-Server`** : Environnement de développement et son démon, utilisé pour démontrer l'inspection des descripteurs de fichiers ouverts et de la mémoire.<br>* **`/bin` & `/sbin`** : Répertoires historiques de binaires essentiels (système et administration), aujourd'hui convertis en liens symboliques vers `/usr/bin` et `/usr/sbin`.<br>* **`/usr` (Unix System Resources)** : Arborescence principale contenant les programmes, bibliothèques et ressources partagées du système.<br>* **`/home`** : Répertoire racine abritant les dossiers personnels des utilisateurs interactifs de la machine et leurs fichiers de configuration (`.bashrc`, clés SSH).<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **La nature virtuelle de `/proc`** : Les fichiers et dossiers chiffrés observés dans `/slash/proc` n'occupent aucun espace disque réel ; ils sont générés dynamiquement à la volée par le noyau Linux pour refléter l'état instantané du système.<br>* **Distinction sémantique de `proc`** : Le nom `/proc` désigne principalement les **processus** (`processes`) en cours d'exécution et non le processeur (`CPU`), bien qu'il contienne des fichiers d'introspection matérielle comme `cpuinfo`.<br>* **Introspection par PID** : Chaque processus actif possède un répertoire dédié nommé d'après son identifiant (`PID`), permettant d'inspecter unitairement son comportement via des commandes textuelles simples (`cat`).<br>* **Analyse de la ligne de commande (`cmdline`)** : Le fichier `cmdline` au sein d'un répertoire PID expose la commande exacte ainsi que les arguments et drapeaux (flags) passés au démarrage (ex. : mode *daemon*), facilitant l'audit de configuration.<br>* **Sécurité des variables d'environnement (`environ`)** : Les variables d'environnement ne constituent en aucun cas un moyen de stockage sécurisé ; tout processus ou administrateur disposant des droits de lecture peut inspecter en clair les secrets, tokens ou clés API passés de cette manière via `/proc/[pid]/environ`.<br>* **Diagnostic des fuites et bugs via les descripteurs de fichiers (`fd`)** : Le sous-dossier `fd` liste l'ensemble des descripteurs de fichiers ouverts par un processus (sockets, pipes, fichiers de logs, bibliothèques partagées), outil suprême de debugging pour une application sans logs explicites.<br>* **La fusion historique de `/bin` et `/sbin`** : Sur les distributions Linux modernes, `/bin` et `/sbin` ne sont que des liens symboliques pointant respectivement vers `/usr/bin` et `/usr/sbin`, une évolution rendue nécessaire par la saturation des anciennes partitions.<br>* **Évolution sémantique de `/usr`** : Originellement réservé aux répertoires personnels des utilisateurs (*User*), `/usr` a basculé vers la définition *Unix System Resources* face à l'explosion de la taille des logiciels, cédant la place à `/home` pour les données utilisateurs.<br>* **Ségrégation des architectures processeur (`lib64`)** : L'apparition des processeurs 64 bits a nécessité la création de répertoires dédiés (`lib64`) pour éviter les conflits de liaisons dynamiques avec les bibliothèques 32 bits héritées.<br>* **Rôle critique des fichiers de configuration utilisateur** : Les fichiers cachés du répertoire home comme `.bashrc` ou `.profile` permettent d'exécuter des scripts d'initialisation à la connexion, tandis que le dossier `.ssh/` gère l'authentification cryptographique par clés publiques et privées (`authorized_keys`).<br>* **Gestion des comptes système vs interactifs** : Seuls les utilisateurs réels (humains) se voient attribuer par défaut un répertoire personnel sous `/home`, les comptes de service (ex. : `www-data`) en étant généralement privés pour des raisons de sécurité et de propreté architecturale.<br>* **Bonne pratique de troubleshooting production** : En cas de défaillance critique d'un démon ou d'impossibilité d'exécuter les outils de monitoring standards (`ps`, `top`), la navigation directe dans l'arborescence `/proc` garantit une capacité de diagnostic de dernier recours (*fail-safe*).
+            <div class="tools-badges-cloud"><span class="tool-tag">`/proc` (Virtual Filesystem)</span><span class="tool-tag">`ps`</span><span class="tool-tag">`which`</span><span class="tool-tag">`Nginx`</span><span class="tool-tag">`VS Code / Code-Server`</span><span class="tool-tag">`/bin` &amp; `/sbin`</span><span class="tool-tag">`/usr` (Unix System Resources)</span><span class="tool-tag">`/home`</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>La nature virtuelle de `/proc`** : Les fichiers et dossiers chiffrés observés dans `/slash/proc` n&#x27;occupent aucun espace disque réel ; ils sont générés dynamiquement à la volée par le noyau Linux pour refléter l&#x27;état instantané du système.</span></li><li><span class="point-bullet">✦</span><span>Distinction sémantique de `proc`** : Le nom `/proc` désigne principalement les **processus** (`processes`) en cours d&#x27;exécution et non le processeur (`CPU`), bien qu&#x27;il contienne des fichiers d&#x27;introspection matérielle comme `cpuinfo`.</span></li><li><span class="point-bullet">✦</span><span>Introspection par PID** : Chaque processus actif possède un répertoire dédié nommé d&#x27;après son identifiant (`PID`), permettant d&#x27;inspecter unitairement son comportement via des commandes textuelles simples (`cat`).</span></li><li><span class="point-bullet">✦</span><span>Analyse de la ligne de commande (`cmdline`)** : Le fichier `cmdline` au sein d&#x27;un répertoire PID expose la commande exacte ainsi que les arguments et drapeaux (flags) passés au démarrage (ex. : mode *daemon*), facilitant l&#x27;audit de configuration.</span></li><li><span class="point-bullet">✦</span><span>Sécurité des variables d&#x27;environnement (`environ`)** : Les variables d&#x27;environnement ne constituent en aucun cas un moyen de stockage sécurisé ; tout processus ou administrateur disposant des droits de lecture peut inspecter en clair les secrets, tokens ou clés API passés de cette manière via `/proc/[pid]/environ`.</span></li><li><span class="point-bullet">✦</span><span>Diagnostic des fuites et bugs via les descripteurs de fichiers (`fd`)** : Le sous-dossier `fd` liste l&#x27;ensemble des descripteurs de fichiers ouverts par un processus (sockets, pipes, fichiers de logs, bibliothèques partagées), outil suprême de debugging pour une application sans logs explicites.</span></li><li><span class="point-bullet">✦</span><span>La fusion historique de `/bin` et `/sbin`** : Sur les distributions Linux modernes, `/bin` et `/sbin` ne sont que des liens symboliques pointant respectivement vers `/usr/bin` et `/usr/sbin`, une évolution rendue nécessaire par la saturation des anciennes partitions.</span></li><li><span class="point-bullet">✦</span><span>Évolution sémantique de `/usr`** : Originellement réservé aux répertoires personnels des utilisateurs (*User*), `/usr` a basculé vers la définition *Unix System Resources* face à l&#x27;explosion de la taille des logiciels, cédant la place à `/home` pour les données utilisateurs.</span></li><li><span class="point-bullet">✦</span><span>Ségrégation des architectures processeur (`lib64`)** : L&#x27;apparition des processeurs 64 bits a nécessité la création de répertoires dédiés (`lib64`) pour éviter les conflits de liaisons dynamiques avec les bibliothèques 32 bits héritées.</span></li><li><span class="point-bullet">✦</span><span>Rôle critique des fichiers de configuration utilisateur** : Les fichiers cachés du répertoire home comme `.bashrc` ou `.profile` permettent d&#x27;exécuter des scripts d&#x27;initialisation à la connexion, tandis que le dossier `.ssh/` gère l&#x27;authentification cryptographique par clés publiques et privées (`authorized_keys`).</span></li><li><span class="point-bullet">✦</span><span>Gestion des comptes système vs interactifs** : Seuls les utilisateurs réels (humains) se voient attribuer par défaut un répertoire personnel sous `/home`, les comptes de service (ex. : `www-data`) en étant généralement privés pour des raisons de sécurité et de propreté architecturale.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:19</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">À l&#x27;époque où je cherchais mon tout premier job d&#x27;administrateur système, j&#x27;ai eu une entrevue technique, et une des questions c&#x27;était d&#x27;expliquer à quoi servent les différents répertoires dans Linux. Et même si j&#x27;avais déjà pas mal d&#x27;expérience avec Linux, pour la plupart je ne savais pas exactement comment répondre, et évidemment j&#x27;ai été recalé. Pour éviter que ça t&#x27;arrive un jour, on va commencer avec le répertoire proc. Donc si on se met dans slash proc, on va voir qu&#x27;il y a plein de chiffres.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Introduction narrative de la vidéo sur l&#x27;expérience d&#x27;entretien technique du créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:20 - 00:00:38</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En fait tous ces répertoires et ces fichiers qui sont dans proc, ils ne sont pas vraiment vrais. C&#x27;est ce qu&#x27;on appelle un système de fichier virtuel. Et donc quand on demande au kernel de nous lisser ce qu&#x27;il y a dans ce répertoire, il nous répond des choses qui n&#x27;existent pas vraiment sur notre disque dur, mais qui correspondent à des processus, c&#x27;est ça que veut dire proc, qui tournent actuellement sur notre machine. Donc en fait, c&#x27;est pas proc pour processeur, c&#x27;est plus proc pour processus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, de code ou de terminal visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le présentateur sur le fonctionnement du système de fichiers virtuel /proc sous Linux.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:38 - 00:00:59</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et d&#x27;ailleurs, dans l&#x27;interview, j&#x27;avais dit que ce répertoire donnait des informations sur les processeurs, ce qui est un petit peu vrai, parce que comme on voit ici, il y a un fichier qui s&#x27;appelle CPU info, qui donne effectivement des informations sur le processeur, la fréquence, l&#x27;ombre de cache, etc. Mais principalement, ça donne des infos sur les processus. Donc on peut utiliser la commande ps pour avoir la liste des processus qui tournent sur notre machine. Et donc on voit ici qu&#x27;ils ont des PID pour processus ID.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (Bash) avec affichage de l&#x27;arborescence et des commandes système.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes `cd /proc`, `ls`, `cat cpuinfo` et `ps aux` avec détails sur les CPU Intel Xeon E5-2698 v3 et les processus PID.</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans le système de fichiers virtuel /proc pour illustrer les informations matérielles et les processus du système d&#x27;exploitation.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000043_seg3.jpg" alt="Exploration du répertoire /proc sous Linux listant les fichiers et processus virtuels du système." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000043_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:43</span>
+                        <span class="caption-text">Exploration du répertoire /proc sous Linux listant les fichiers et processus virtuels du système.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000048_seg3.jpg" alt="Affichage du contenu du fichier /proc/cpuinfo révélant les caractéristiques techniques du processeur Intel Xeon." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000048_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:48</span>
+                        <span class="caption-text">Affichage du contenu du fichier /proc/cpuinfo révélant les caractéristiques techniques du processeur Intel Xeon.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000054_seg3.jpg" alt="Exécution de la commande ps aux affichant la liste des processus actifs du système Linux." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000054_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:54</span>
+                        <span class="caption-text">Exécution de la commande ps aux affichant la liste des processus actifs du système Linux.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:59 - 00:01:20</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et tous ces chiffres qu&#x27;on voit ici qui vont de 1 jusqu&#x27;à un gros chiffre, et bien c&#x27;est des chiffres qui permettent d&#x27;identifier chacun des processus. Et donc on voit par exemple ici que j&#x27;ai Nginx qui tourne, qui est un serveur web, et il tourne avec le processus 222 7567. Et donc si je regarde ici dans mon répertoire, et bien j&#x27;ai un répertoire qui correspond à 222 7567. Et donc si je vais dedans, et bien là je vais avoir tout un tas d&#x27;informations liées à ce processus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (CLI)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ps aux&#x27; et &#x27;ls&#x27; exécutées dans le répertoire /proc, affichant les identifiants de processus (PID) comme celui de Nginx (2227567).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la correspondance entre les PID des processus Linux et les répertoires virtuels du même nom présents dans le système de fichiers /proc.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000104_seg4.jpg" alt="Terminal Linux affichant la sortie d&#x27;une commande de type &#x27;ps aux&#x27; listant les processus actifs du système avec leurs PID, dont Nginx." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000104_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:04</span>
+                        <span class="caption-text">Terminal Linux affichant la sortie d&#x27;une commande de type &#x27;ps aux&#x27; listant les processus actifs du système avec leurs PID, dont Nginx.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000115_seg4.jpg" alt="Terminal Linux affichant le contenu du répertoire /proc via la commande &#x27;ls&#x27;, révélant les dossiers numériques correspondant aux PID des processus ainsi que les fichiers virtuels du noyau." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000115_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:15</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /proc via la commande &#x27;ls&#x27;, révélant les dossiers numériques correspondant aux PID des processus ainsi que les fichiers virtuels du noyau.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:20 - 00:01:39</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est dans ce répertoire que la commande PS, le programme PS, vient chercher pour pouvoir avoir ces informations. Par exemple, si on fait cat status, là on a des informations de base comme c&#x27;est quoi son nom, son ID, etc. Si on regarde stat M, on peut voir par exemple les informations de mémoire, combien de mémoire ce processus est en train d&#x27;utiliser, combien il a réservé, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande &#x27;cat status&#x27; exécutée dans /proc/2227567, affichant les métadonnées du processus nginx (Name: nginx, State: S, Pid: 2227567, VmSize, etc.)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du contenu du répertoire /proc et lecture des informations d&#x27;état d&#x27;un processus via &#x27;cat status&#x27;.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000130_seg5.jpg" alt="Terminal Linux affichant le contenu du répertoire /proc/[PID] et l&#x27;exécution de la commande &#x27;cat status&#x27; pour un processus nginx." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000130_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:30</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /proc/[PID] et l&#x27;exécution de la commande &#x27;cat status&#x27; pour un processus nginx.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:39 - 00:01:58</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est un peu plus détaillé dans le man ici pour savoir exactement quel chiffre correspond à quoi. On peut voir aussi comment la commande a été appelée par exemple avec CMDLine. Donc là ici on voit que Nginx a été démarré. depuis usr slash bin nginx, mais on voit aussi les arguments qui ont été donnés, tiré g, daemon un, etc. Ce qui veut dire qu&#x27;il est démarré en arrière-plan. Mais aussi, il y a pas mal de choses qu&#x27;on ne peut pas voir avec PS ni avec d&#x27;autres outils.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:58 - 00:02:20</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si on regarde un autre processus, ps-hoax-creep-code, j&#x27;ai un processus ici qui s&#x27;appelle code-server, blablabla, qui tourne avec l&#x27;ID 702. Donc si je vais dans 702, je retrouve exactement la même chose, pour pouvoir voir les informations de mémoire, combien ça consommait de CPU et plein d&#x27;autres choses. Ce qui peut servir de temps en temps pour pouvoir débugger, c&#x27;est de voir les variables d&#x27;environnement qui ont été passées à ce processus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif (CLI)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ps aux | grep code&#x27; et &#x27;ls&#x27; exécutées dans l&#x27;arborescence du système de fichiers virtuel /proc du noyau Linux.</p>
+                        <p><strong>Action / Démonstration :</strong> Recherche et inspection d&#x27;un processus spécifique (code-server PID 702) via le système de fichiers /proc pour analyser ses informations d&#x27;exécution.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000204_seg7.jpg" alt="Terminal Linux affichant la liste des processus en cours filtrés via la commande ps aux | grep code, montrant le processus code-server avec le PID 702." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000204_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:04</span>
+                        <span class="caption-text">Terminal Linux affichant la liste des processus en cours filtrés via la commande ps aux | grep code, montrant le processus code-server avec le PID 702.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000209_seg7.jpg" alt="Terminal Linux affichant le contenu du répertoire virtuel /proc/702 pour inspecter en détail l&#x27;état et les métriques du processus code-server." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000209_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:09</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire virtuel /proc/702 pour inspecter en détail l&#x27;état et les métriques du processus code-server.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:20 - 00:02:39</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si on a lancé un programme, par exemple, une application web ou quelque chose comme ça, on lui a passé les variables d&#x27;environnement. Et sur notre machine, on veut essayer de débuguer pour voir qu&#x27;est-ce que la machine a vraiment reçu. Et bien, on peut voir ici avec le fichier environ. Et donc là, on voit toutes les variables d&#x27;environnement qui ont été passées à mon processus. Donc ça, c&#x27;est quelque chose à garder en tête parce que souvent, on se dit passer les variables d&#x27;environnement à mon processus, c&#x27;est une bonne pratique.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash/shell) sous VS Code ou environnement similaire.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27; dans le dossier /proc/702 listant les descripteurs de processus et &#x27;cat environ&#x27; affichant les variables d&#x27;environnement brutes (USER, HOME, PATH, etc.).</p>
+                        <p><strong>Action / Démonstration :</strong> Inspection du répertoire procédural (/proc) pour déboguer et vérifier les variables d&#x27;environnement transmises à un processus en cours d&#x27;exécution.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000230_seg8.jpg" alt="Terminal Linux affichant le contenu du répertoire /proc/702 et la lecture du fichier environ pour inspecter les variables d&#x27;environnement d&#x27;un processus." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000230_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:30</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /proc/702 et la lecture du fichier environ pour inspecter les variables d&#x27;environnement d&#x27;un processus.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:39 - 00:03:01</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je peux passer des clés, je peux passer des tokens, des secrets, des choses comme ça parce que les variables d&#x27;environnement sont sécurisés. mais en fait, il n&#x27;y a rien de particulièrement sécurisé aux variables d&#x27;environnement. C&#x27;est juste une façon pratique de passer des informations à un programme sans avoir à complètement recompiler le programme. Et si jamais on a besoin de voir quelles sont les variables qui ont été passées, ça, c&#x27;est une bonne manière. Quelque chose qui est utile aussi, quand on fait un debug un peu plus poussé, c&#x27;est de voir quels fichiers sont ouverts par ce processus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la sécurité relative des variables d&#x27;environnement.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:02 - 00:03:20</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Imagine que tu as un processus, que tu as récupéré je ne sais pas trop où, et tu veux essayer de comprendre qu&#x27;est-ce qu&#x27;il fait, parce qu&#x27;il n&#x27;y a pas vraiment de log, il bug, mais tu ne sais pas vraiment pourquoi. Tu peux voir dans le dossier FD, qui correspond au file descriptor, c&#x27;est-à-dire les fichiers qui ont été ouverts par ce processus. Et donc là, si on voit ici, tous ces chiffres-là, c&#x27;est des fichiers qui correspondent à des fichiers qui sont ouverts par ce processus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif avec incrustation vidéo du présentateur dans le coin inférieur droit.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27;, &#x27;cat environ&#x27; et &#x27;cd fd&#x27; exécutées dans le répertoire virtuel du système de fichiers /proc/702.</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration du système de fichiers /proc pour analyser l&#x27;état d&#x27;un processus et ses descripteurs de fichiers (fd) afin de diagnostiquer un problème.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000311_seg10.jpg" alt="Terminal Linux affichant le contenu du répertoire /proc/702 pour inspecter un processus et navigation vers le dossier des descripteurs de fichiers (fd)." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000311_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:11</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /proc/702 pour inspecter un processus et navigation vers le dossier des descripteurs de fichiers (fd).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:21 - 00:03:45</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, c&#x27;est VS Code. Si par exemple, j&#x27;ouvre un fichier dans mon répertoire, je vais avoir un ID qui va correspondre à ce fichier-là. Si par exemple VS Code a besoin de librairie pour pouvoir fonctionner, pareil, chaque librairie correspond à un fichier et chaque fichier va avoir son file descripteur ici. Donc je vais pouvoir savoir quel fichier a été ouvert par mon processus, ce qui peut parfois être assez utile. Donc là, par exemple, si je vais dans 0, si je fais LSLA, Et je vois que 0, c&#x27;est dev nul.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:45 - 00:04:03</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ici, on a des sockets, des pipes. Et ici, on voit, par exemple, on a des fichiers. Des fichiers de log. Parce que mon processus a ouvert ces fichiers de log pour pouvoir écrire dedans. Donc, il y a pas mal de choses super intéressantes à voir dans le slashprog. Je vous invite à fouiller un petit peu plus. Un autre truc qui est un petit peu bizarre dans les répertoires, si on voit qu&#x27;on a répertoire ici, slash bin, on a un autre répertoire qui s&#x27;appelle bin.usr ismerge.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes `ls -al /proc/702/fd` et `ls`, affichant respectivement la liste des file descriptors d&#x27;un processus et l&#x27;arborescence racine Linux.</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration du système de fichiers virtuel `/proc` pour inspecter les ressources système et les descripteurs de fichiers ouverts par un processus.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000349_seg12.jpg" alt="Affichage du contenu du dossier de descripteurs de fichiers `/proc/702/fd` via la commande `ls -al`, révélant des sockets, des pipes et des fichiers de log ouverts." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000349_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:49</span>
+                        <span class="caption-text">Affichage du contenu du dossier de descripteurs de fichiers `/proc/702/fd` via la commande `ls -al`, révélant des sockets, des pipes et des fichiers de log ouverts.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000359_seg12.jpg" alt="Affichage de la racine du système de fichiers `/` via la commande `ls`, montrant les répertoires standards de Linux (bin, etc, proc, sys, etc.)." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000359_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:59</span>
+                        <span class="caption-text">Affichage de la racine du système de fichiers `/` via la commande `ls`, montrant les répertoires standards de Linux (bin, etc, proc, sys, etc.).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:03 - 00:04:23</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">OK, c&#x27;est bizarre. On voit qu&#x27;on a aussi un sbin. Et encore plus bizarre, si on va dans usr, eh bien, on voit que dans usr, on a aussi un bin et un usr sbin. Donc c&#x27;est quoi ce bordel ? Pourquoi est-ce qu&#x27;il y a des bin sbin, usr sbin ? Qu&#x27;est-ce qui se passe ? En fait, à la base, usr, c&#x27;était le répertoire utilisateur. C&#x27;est un peu l&#x27;équivalent du home qu&#x27;on a aujourd&#x27;hui.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique textuel ou graphique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le présentateur sur l&#x27;historique et la structure des répertoires Linux (/bin, /sbin, /usr/bin, /usr/sbin).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:23 - 00:04:42</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais au tout début, on n&#x27;avait pas encore home. Donc tout ce qui était les fichiers des utilisateurs, les personnes qui utilisaient la machine, ils veulent sauvegarder les fichiers sur lesquels ils sont en train de travailler. Ils allaient les mettre dans usr, usr pour user. Ensuite, dans slash bin, on avait tous les binaires, donc tous les programmes qu&#x27;on a besoin pour faire fonctionner notre machine. Donc par exemple, quand je fais ls, ls c&#x27;est un binaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun terminal, interface cloud ou outil DevOps affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique de l&#x27;historique du répertoire /usr et des binaires sous Unix/Linux.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:42 - 00:05:04</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est un programme qui demande au kernel d&#x27;aller regarder dans le disque dur et de me donner la liste des fichiers qui sont dans le répertoire où je suis actuellement. Si je veux savoir où est ce binaire ls, il y a une commande qui s&#x27;appelle which. Et si on lui demande où est ls, ça me dit qu&#x27;en fait ls est dans slash usr slash bin slash ls. On peut même faire which which pour savoir où est la commande which en elle-même et elle est dans usr bin which.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif avec affichage de l&#x27;arborescence racine et de l&#x27;utilisateur root.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes exécutées : ls (listant les dossiers bin, etc, usr, var, etc.), cd usr/, puis de nouveau ls (listant bin, games, include, lib, local, sbin, share, src).</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration de l&#x27;arborescence du système de fichiers Linux pour illustrer l&#x27;emplacement des répertoires système et des exécutables.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000448_seg15.jpg" alt="Terminal Linux affichant la racine du système de fichiers et la navigation dans le répertoire /usr avec la commande ls." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000448_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:48</span>
+                        <span class="caption-text">Terminal Linux affichant la racine du système de fichiers et la navigation dans le répertoire /usr avec la commande ls.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:05 - 00:05:28</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc à la base, tous ces processus-là, ils étaient dans slash bin, donc tous les processus que les utilisateurs allaient avoir besoin. Et dans Sbin, c&#x27;était juste les processus que les administrateurs de la machine allaient avoir besoin. Comme par exemple, gérer les IP tables, passer en mode sudo, des choses comme ça. Par exemple, si on fait which IP table, hop, bon, IP table, on voit que c&#x27;est dans Sbin. Si je fais la commande IP, qui permet de voir la configuration réseau de ma machine, pareil, c&#x27;est dans Sbin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes exécutées : ls, cd usr/, which ls, which which, which sudo, which iptables (retournant /usr/sbin/iptables).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et démonstration de la localisation des fichiers binaires utilisateur et administrateur (/bin vs /sbin) à l&#x27;aide de la commande which.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000522_seg16.jpg" alt="Terminal Linux affichant l&#x27;arborescence racine (/), le contenu du répertoire /usr et l&#x27;utilisation de la commande &#x27;which&#x27; pour localiser des binaires comme ls, which, sudo et iptables." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000522_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:22</span>
+                        <span class="caption-text">Terminal Linux affichant l&#x27;arborescence racine (/), le contenu du répertoire /usr et l&#x27;utilisation de la commande &#x27;which&#x27; pour localiser des binaires comme ls, which, sudo et iptables.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:28 - 00:05:53</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Sauf que là, on voit que c&#x27;est dans usr slash Sbin, pas dans Sbin. En fait, si on revient à la racine de mon système de fichiers, si je fais ls-la pour pouvoir avoir plus d&#x27;informations sur chacun des fichiers, on voit qu&#x27;en fait bin, c&#x27;est un lien symbolique vers usr bin. Et que sbin, c&#x27;est un lien symbolique vers usr sbin. À la base, au tout début de Linux, au tout début de Unix même, parce que Linux est basé sur Unix, c&#x27;est là-bas où on mettait nos programmes, dans slash bin et slash sbin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif (fenêtre de terminal standard).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `ls -la` exécutée à la racine (`/`), affichant la structure des dossiers et les liens symboliques (`bin -&gt; usr/bin`, `sbin -&gt; usr/sbin`).</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur liste le contenu de la racine du système de fichiers pour démontrer que les répertoires binaires et sbinaires sont des liens symboliques vers `/usr`.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000540_seg17.jpg" alt="Terminal Linux affichant le résultat de la commande &#x27;ls -la&#x27; à la racine du système, montrant les liens symboliques &#x27;bin&#x27; et &#x27;sbin&#x27; vers &#x27;/usr/bin&#x27; et &#x27;/usr/sbin&#x27;." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000540_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:40</span>
+                        <span class="caption-text">Terminal Linux affichant le résultat de la commande &#x27;ls -la&#x27; à la racine du système, montrant les liens symboliques &#x27;bin&#x27; et &#x27;sbin&#x27; vers &#x27;/usr/bin&#x27; et &#x27;/usr/sbin&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:53 - 00:06:14</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais petit à petit, on a commencé à mettre tellement de choses là-bas qu&#x27;il n&#x27;y avait pas assez d&#x27;espace sur la partition pour pouvoir tout garder. Et donc les gens ont commencé à mettre leur programme supplémentaire dans slash usr, parce que c&#x27;était le répertoire home, donc c&#x27;était sur une partition différente pour pouvoir avoir leurs propres fichiers. Et donc ils ont commencé à les mettre dans slash usr bin, slash usr sbin pour pouvoir avoir plus de programmes que ce qu&#x27;il y avait déjà de base.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:14 - 00:06:43</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc on s&#x27;est retrouvés comme ça avec 4 répertoires différents pour mettre nos programmes. Et donc dans les distributions récentes, ils ont un petit peu nettoyé ça entre guillemets. Et donc slash bin et slash sbin sont en fait des liens qui vont vers usr. Et donc c&#x27;est dans usr bin et usr sbin qu&#x27;on a vraiment les exécutables. D&#x27;un côté pour les utilisateurs et de l&#x27;autre côté pour les administrateurs. Il s&#x27;est passé exactement la même chose pour slash lib qui contient les librairies, donc tous les paquets, les modules que nos programmes ont besoin d&#x27;utiliser parce que les programmes peuvent partager certains modules pour éviter d&#x27;avoir à recoder tout le temps la même chose.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif avec affichage de la caméra du présentateur en incrustation (PiP).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `ls -la` exécutée à la racine (`/`), révélant que `bin -&gt; usr/bin`, `lib -&gt; usr/lib`, `lib64 -&gt; usr/lib64` et `sbin -&gt; usr/sbin` sont des liens symboliques.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la structure des répertoires standard Linux et de la fusion récente des dossiers binaires vers /usr.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000621_seg19.jpg" alt="Affichage du contenu de la racine du système de fichiers Linux montrant les liens symboliques de fusion vers /usr." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000621_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:21</span>
+                        <span class="caption-text">Affichage du contenu de la racine du système de fichiers Linux montrant les liens symboliques de fusion vers /usr.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:43 - 00:07:07</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc petit à petit se sont retrouvés dans usr slash lib et donc on a un lien symbolique ici. Pareil pour lib64, ça c&#x27;est juste quand les processeurs 64 bits sont arrivés. Pour ne pas mélanger les librairies 32 bits avec les librairies 64 bits, on a créé un deuxième dossier et donc lui aussi se retrouve dans slash usr slash lib64. Et donc USR qui était à la base le répertoire Home se retrouve maintenant avec des programmes, avec des modules, avec des librairies, donc avec un peu pas mal de bordel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:07 - 00:07:25</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc c&#x27;est pour cette raison qu&#x27;au bout d&#x27;un moment on s&#x27;est dit bon bah là USR ça ne correspond plus vraiment à un répertoire personnel pour les utilisateurs. Donc à partir de maintenant on va faire semblant et on va dire que c&#x27;est plus USR pour User, c&#x27;est USR pour Unix System Resources. Et on va maintenant créer un nouveau dossier qui s&#x27;appelle Slash Home qui lui va contenir les répertoires et les fichiers des utilisateurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:25 - 00:07:46</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc si on va dans « Slash Home », on va retrouver un répertoire pour chacun des utilisateurs qui est créé sur la machine. Donc là par exemple, j&#x27;ai un seul utilisateur, c&#x27;est l&#x27;utilisateur qui s&#x27;appelle Ubuntu, et donc dans Ubuntu, j&#x27;ai les répertoires personnels. Donc là ici, je ne vois rien, mais techniquement si je fais « LSLA », j&#x27;ai quand même un « Bash Logout », « Bash RC », « Profile », etc. Les plus intéressants, c&#x27;est « Bash RC » et « Profile » aussi techniquement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux distant (SSH/shell) avec vignette incrustée du présentateur en bas à droite</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;cd /home/&#x27; et &#x27;ls&#x27; exécutées en tant que root, affichant le répertoire &#x27;ubuntu&#x27;</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans le répertoire home pour lister les dossiers personnels des utilisateurs présents sur la machine</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000730_seg22.jpg" alt="Un terminal Linux affichant le contenu du répertoire /home/ avec la présence du dossier utilisateur &#x27;ubuntu&#x27;" loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000730_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:30</span>
+                        <span class="caption-text">Un terminal Linux affichant le contenu du répertoire /home/ avec la présence du dossier utilisateur &#x27;ubuntu&#x27;</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:46 - 00:08:08</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est deux fichiers dans lesquels on peut mettre des petits morceaux de script pour pouvoir configurer ce qui va se passer au moment où on va se loguer sur la machine. J&#x27;ai oublié c&#x27;est quoi la petite différence entre les deux, mais je crois qu&#x27;il y en a un qui se charge avant l&#x27;autre ou quelque chose comme ça. Mais globalement, il sert à faire la même chose. Et on retrouve aussi SSH. Donc, c&#x27;est là où on va retrouver, par exemple, les clés SSH qui nous permettent de nous connecter à d&#x27;autres machines. Ou même, dans Authorize Key, d&#x27;accepter les clés SSH d&#x27;autres utilisateurs pour qu&#x27;ils puissent se connecter en tant que cet utilisateur-là sur cette machine.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:08 - 00:08:30</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, j&#x27;ai dit tous les utilisateurs, mais il y a une petite exception. Premièrement, ce n&#x27;est pas tous les utilisateurs. Là, on voit ici qu&#x27;il y a pas mal d&#x27;utilisateurs sur la machine. mais il n&#x27;y a que l&#x27;utilisateur Ubuntu qui a son répertoire Home. Donc c&#x27;est que si je crée un utilisateur vraiment qui va être utilisé par une vraie personne que je vais avoir un répertoire Home. Et sinon je peux avoir des utilisateurs comme par exemple ici WWData qui est l&#x27;utilisateur qui est utilisé par le processus Nginx pour pouvoir servir les fichiers qu&#x27;il a besoin, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (Ubuntu) avec affichage du fichier de configuration des utilisateurs (/etc/passwd).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de configuration du fichier /etc/passwd affichant les UID, GID, répertoires home et shells des différents comptes système et utilisateurs.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et analyse par l&#x27;expert de la structure des comptes utilisateurs sous Linux, en montrant la différence entre les comptes de services (nologin) et le compte réel &#x27;ubuntu&#x27; doté d&#x27;un répertoire personnel (/home/ubuntu).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000814_seg24.jpg" alt="Affichage du contenu du fichier /etc/passwd dans un terminal Linux montrant la liste des utilisateurs système (root, daemon, bin, etc.) avec leurs shells configurés à /usr/sbin/nologin." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000814_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:14</span>
+                        <span class="caption-text">Affichage du contenu du fichier /etc/passwd dans un terminal Linux montrant la liste des utilisateurs système (root, daemon, bin, etc.) avec leurs shells configurés à /usr/sbin/nologin.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000819_seg24.jpg" alt="Continuation de la liste du fichier /etc/passwd dans le terminal Linux, mettant en évidence la ligne de l&#x27;utilisateur standard &#x27;ubuntu&#x27; avec son répertoire personnel /home/ubuntu et son shell /bin/bash." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000819_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:19</span>
+                        <span class="caption-text">Continuation de la liste du fichier /etc/passwd dans le terminal Linux, mettant en évidence la ligne de l&#x27;utilisateur standard &#x27;ubuntu&#x27; avec son répertoire personnel /home/ubuntu et son shell /bin/bash.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:31 - 00:08:50</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et l&#x27;autre exception, c&#x27;est pour l&#x27;utilisateur root, l&#x27;utilisateur super admin. Donc on n&#x27;a pas de slash home slash root, on a directement slash root. Donc à la racine de mon système de fichiers. Pourquoi est-ce qu&#x27;on a fait ça ? Ça paraît un peu compliqué, bizarre. c&#x27;est parce que très souvent, notre répertoire home, on va le monter dans un disque différent de mon répertoire slash qui va contenir tous les fichiers de mon système.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes exécutées : `ls -la .ssh/`, `cat .ssh/authorized_keys`, `less /etc/passwd`, `cd /root/`.</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation vers le répertoire personnel de l&#x27;utilisateur root (`/root/`) suite à l&#x27;affichage des informations utilisateur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000835_seg25.jpg" alt="Terminal Linux affichant des commandes de navigation et de vérification du répertoire root." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000835_seg25.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:35</span>
+                        <span class="caption-text">Terminal Linux affichant des commandes de navigation et de vérification du répertoire root.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:50 - 00:09:10</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme ça, c&#x27;est une bonne pratique. On peut séparer les fichiers de mon système avec les fichiers personnels. Et donc, c&#x27;est plus facile pour pouvoir backuper. On peut backuper juste un seul système de fichiers et récupérer tous les répertoires et fichiers des utilisateurs sans backuper le système d&#x27;exploitation. Sauf que si jamais on a un problème avec la machine, et donc que le disque qui contient notre répertoire home, il est inaccessible pour une raison ou pour une autre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur les bonnes pratiques de séparation des fichiers système et personnels pour la stratégie de sauvegarde.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:10 - 00:09:28</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">le disque de DM ne marche pas, il est sur le réseau, le réseau e-bug, il peut y avoir plein de raisons pour lesquelles on n&#x27;a pas accès. Pour pouvoir accéder à la machine, il faut que l&#x27;utilisateur root soit sur le même système des fichiers que le système d&#x27;exploitation. Comme ça, dans tous les cas, l&#x27;utilisateur root pourra toujours se connecter, il aura ses fichiers, etc. Donc c&#x27;est pour ça que c&#x27;est séparé. Ensuite, on a quelques autres répertoires qui n&#x27;ont rien de trop spécial.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:28 - 00:09:49</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si je vais par exemple dans slash opt, c&#x27;est opt pour optionnel. Et à la base, c&#x27;est un répertoire qui a été utilisé pour stocker tous les fichiers, fonctionnalités, etc., qui était optionnel. Donc maintenant, il y a encore quelques petits programmes qui vont s&#x27;installer là-bas par défaut, mais c&#x27;est de moins en moins utilisé. On a aussi TMP. TMP pour Temporary. Donc c&#x27;est tous les fichiers répertoires qu&#x27;on a besoin de manipuler, mais juste de manière temporaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (fenêtre sombre avec police monospaced)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27;, &#x27;ls /opt/&#x27;, &#x27;ls /tmp&#x27; et affichage des fichiers temporaires, sockets IPC de VS Code et dossiers systemd.</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration des répertoires optionnels (/opt) et temporaires (/tmp) du système de fichiers Linux.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000934_seg28.jpg" alt="Terminal Linux affichant le contenu de la racine (ls) et le contenu du répertoire /opt/ montrant containerd." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000934_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:34</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu de la racine (ls) et le contenu du répertoire /opt/ montrant containerd.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000944_seg28.jpg" alt="Terminal Linux affichant le contenu du répertoire /tmp/ avec divers sockets et dossiers systemd-private." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_000944_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:44</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /tmp/ avec divers sockets et dossiers systemd-private.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:49 - 00:10:10</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et sur la plupart des systèmes, ce répertoire-là, il est complètement effacé au redémarrage de la machine. Ça dépend de ta distribution, etc. Parfois c&#x27;est effacé au redémarrage, parfois pas. Mais en gros, il ne faut pas s&#x27;attendre à ce que les fichiers qui soient là-dedans restent très très longtemps. Donc souvent, les programmes vont stocker des fichiers et des répertoires là-dedans pour pouvoir fonctionner. et puis si jamais ils rebootent et ils perdent ces fichiers-là, c&#x27;est pas trop trop grave, ils en ont juste besoin pendant qu&#x27;ils fonctionnent.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du comportement des répertoires temporaires sous Linux au redémarrage de la machine.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:10 - 00:10:33</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un autre répertoire qui est un petit peu plus intéressant, c&#x27;est le répertoire Sys. Sys pour système. Et donc de la même manière que Slash Proc, Slash Sys, c&#x27;est un système de fichiers virtuel. Donc c&#x27;est toujours des fichiers qui n&#x27;existent pas vraiment sur le disque dur. Si jamais je débranche le disque dur de ma machine et que je le branche dans une autre et que je regarde ce qu&#x27;il y a dedans, il n&#x27;y a pas Slash Sys dedans. C&#x27;est vraiment le kernel, le système d&#x27;exploitation, qui fait semblant qu&#x27;il y a des fichiers qui s&#x27;appellent comme ça pour qu&#x27;on puisse interagir avec lui.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (ligne de commande).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes `ls`, `cd sys/`, et affichage des sous-dossiers de `/sys` (block, bus, class, dev, devices, firmware, fs, hypervisor, kernel, module, power).</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration du système de fichiers virtuel `/sys` sous Linux pour illustrer sa structure et son rôle dans la gestion du système.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001016_seg30.jpg" alt="Terminal Linux affichant le contenu du répertoire racine (`ls`), puis la navigation et l&#x27;énumération du système de fichiers virtuel `/sys` (`cd sys/`, `ls`)." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001016_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:16</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire racine (`ls`), puis la navigation et l&#x27;énumération du système de fichiers virtuel `/sys` (`cd sys/`, `ls`).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:33 - 00:10:56</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que comme sur des serveurs Linux, on n&#x27;a souvent pas d&#x27;interface graphique, il n&#x27;y a rien sur lequel on peut cliquer pour pouvoir modifier les paramètres de nos systèmes. Et donc c&#x27;est pour ça que dans Linux, tout est un fichier, même ce qui n&#x27;est pas vraiment des fichiers comme les paramètres du système. Ils sont quand même représentés sous forme de fichiers. Donc il y a énormément de choses dedans, mais quelques exemples que je peux donner, c&#x27;est par exemple si on veut voir la fréquence de notre CPU, on peut utiliser 4 qui est juste une commande pour afficher le contenu d&#x27;un fichier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de ligne de commande (shell) sous macOS/Linux avec l&#x27;invite de commande utilisateur (`thomas@sprite:~ $`).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Invite de commande bash active, aucun script ni sortie de commande affichée pour l&#x27;instant.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la gestion des serveurs Linux sans interface graphique, préparation de l&#x27;utilisation du terminal pour illustrer les concepts.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001050_seg31.jpg" alt="Écran montrant un terminal de commande vide avec le présentateur en incrustation (picture-in-picture) dans le coin inférieur droit." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001050_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:50</span>
+                        <span class="caption-text">Écran montrant un terminal de commande vide avec le présentateur en incrustation (picture-in-picture) dans le coin inférieur droit.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:56 - 00:11:16</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc si on va dans SysDevice, Système, CPU, blablabla, on peut avoir la fréquence de mon CPU. Donc là on voit qu&#x27;on est à 600 000 Hz, donc 600 MHz parce que c&#x27;est un Raspberry Pi. Un autre exemple, par exemple sur mon Raspberry Pi, physiquement, il y a des LEDs qui clignotent pour indiquer s&#x27;il est allumé, s&#x27;il y a de l&#x27;activité, des choses comme ça. Et bien ces LEDs, on peut interagir avec directement via SlashSys.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts matériels (fréquence CPU d&#x27;un Raspberry Pi, LEDs d&#x27;activité physique).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:16 - 00:11:37</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc avec la commande ECHO, c&#x27;est juste la commande pour afficher quelque chose. On va afficher 0 et ici on va utiliser le chevron qui va prendre le résultat de la commande qui est à gauche. donc ça va juste être la chaîne de caractère 0, et qui va l&#x27;écrire dans un fichier. Et donc, elle va l&#x27;écrire dans ce fichier-là. Et donc, c&#x27;est à travers ce fichier qu&#x27;on peut ajuster la luminosité de ma LED Power sur mon Raspberry Pi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux distant (SSH) sur macOS.</p>
+                        <p><strong>Contenu textuel & Code :</strong> `cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq` (résultat 600000) et `echo 0 &gt; /sys/class/leds/PWR/brightness`.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la redirection de flux (`&gt;`) pour écrire la valeur 0 dans le fichier de contrôle de la LED d&#x27;alimentation système (`/sys/class/leds/PWR/brightness`).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001121_seg33.jpg" alt="Terminal Linux affichant une commande pour modifier la luminosité d&#x27;une LED système via sysfs." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001121_seg33.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:21</span>
+                        <span class="caption-text">Terminal Linux affichant une commande pour modifier la luminosité d&#x27;une LED système via sysfs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:37 - 00:11:58</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là, si j&#x27;écho 0 dedans, ça va l&#x27;éteindre, mettre sa luminosité au minimum. Évidemment, il faut être sudo pour pouvoir le faire. Donc, si je fais sudo !, ça c&#x27;est une commande qui permet de refaire la même commande que je viens de faire juste avant, mais avec sudo en plus. Mais pour le coup, ça ne marche quand même pas, parce que ça va faire sudo juste pour la partie écho. Donc ça va écho en tant que root, mais ensuite l&#x27;écriture se fait en tant que l&#x27;utilisateur normal.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Bash sous Linux</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `echo 0 &gt; /sys/class/leds/PWR/brightness` retournant l&#x27;erreur `-bash: /sys/class/leds/PWR/brightness: Permission denied`.</p>
+                        <p><strong>Action / Démonstration :</strong> Tentative d&#x27;écriture directe dans un fichier du noyau sysfs sans privilèges administrateur (root), entraînant un échec de type &quot;Permission denied&quot;.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001142_seg34.jpg" alt="Terminal Linux affichant une erreur de permission refusée lors de la tentative de modification de la luminosité d&#x27;une LED système." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001142_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:42</span>
+                        <span class="caption-text">Terminal Linux affichant une erreur de permission refusée lors de la tentative de modification de la luminosité d&#x27;une LED système.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:59 - 00:12:22</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait, il faut vraiment que je fasse sudo sous, donc sous pour switch user, passer à l&#x27;utilisateur root. Et là, je peux vraiment écho 0 dans ma LED et ma LED c&#x27;est 1. A l&#x27;inverse, si je veux rallumer ma LED, je fais écho 1, j&#x27;écris dans ce même fichier et ça va me rallumer ma LED à pleine patate. Ensuite, si je vais dans slash boot, c&#x27;est comme son nom l&#x27;indique, le répertoire qui garde tout ce qu&#x27;on a besoin pour pouvoir booter.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:22 - 00:12:42</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et donc on a besoin de deux choses pour pouvoir booter. Un kernel, ça c&#x27;est le noyeu de notre système d&#x27;exploitation et un bootloader. Ça c&#x27;est ce qui va permettre depuis notre BIOS de pouvoir charger notre kernel qui va pouvoir lui charger tous les programmes de notre OS. Donc ce qu&#x27;on voit ici là, VM-6.80111 générique, ça c&#x27;est une version du kernel. Ensuite on a un autre ici, 0.83, c&#x27;est une autre version du kernel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27; et &#x27;cd /boot&#x27; affichant les images du noyau Linux (vmlinuz-6.8.0-71-generic, vmlinuz-6.8.0-83-generic), les fichiers System.map, config et initrd.img.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la structure de démarrage d&#x27;un système Linux et visualisation des fichiers du noyau dans le répertoire /boot.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001237_seg36.jpg" alt="Terminal Linux affichant le contenu du répertoire /boot avec les versions du noyau vmlinuz (6.8.0-71 et 6.8.0-83), les fichiers initrd et la configuration GRUB." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001237_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:37</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire /boot avec les versions du noyau vmlinuz (6.8.0-71 et 6.8.0-83), les fichiers initrd et la configuration GRUB.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:42 - 00:13:00</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je pourrais configurer ma machine pour qu&#x27;elle boot sur l&#x27;une ou l&#x27;autre version. Et en général on peut garder plusieurs versions au cas où quand on fait une mise à jour, s&#x27;il y a un problème, sa nouvelle version elle ne marche pas avec ma machine ou quelque chose comme ça, et bien je peux facilement revenir à mon ancienne version. Pareil ici avec Initerdé qui va être mon bootloader. Le bootloader c&#x27;est ce qui va être démarré à partir de mon bio 1001er. Pourquoi est-ce qu&#x27;on ne démarre pas directement mon kernel ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash / shell root)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27;, &#x27;cd /boot&#x27;, listage des fichiers du noyau Linux (vmlinuz-6.8.0-71-generic, vmlinuz-6.8.0-83-generic, initrd.img, initrd.img.old)</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration du répertoire /boot pour montrer la présence de plusieurs versions de noyaux Linux installées simultanément sur le système afin de permettre un retour en arrière (fallback) en cas de problème de mise à jour.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001256_seg37.jpg" alt="Terminal Linux affichant le contenu du dossier /boot avec les versions multiples du noyau (6.8.0-71 et 6.8.0-83), les fichiers initrd et vmlinuz correspondants." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001256_seg37.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:56</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du dossier /boot avec les versions multiples du noyau (6.8.0-71 et 6.8.0-83), les fichiers initrd et vmlinuz correspondants.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:00 - 00:13:34</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce qu&#x27;il y a pas mal de drivers, des choses comme ça, qui pourraient être utiles pour pouvoir démarrer. Si par exemple mon disque dur est un peu spécial, il y a besoin d&#x27;un driver un peu spécial, le driver pour pouvoir interagir, parler avec ce disque, il va être dans le bootloader. Pareil si par exemple je boot sur le réseau, il me faut un driver pour que ma carte réseau, puis ensuite ma carte réseau il faut qu&#x27;elle communique avec le network etc. Autre exemple, même si j&#x27;ai un disque simple en SATA qui n&#x27;a pas besoin de driver particulier, mais que ma partition est chiffrée ou alors que j&#x27;utilise LVM pour pouvoir faire du RAID logiciel, tout ça c&#x27;est des choses qui vont être gérées par mon bootloader qui va me permettre de pouvoir accéder à mes disques durs, à mes partitions et ensuite mon kernel va pouvoir booter et il aura</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou schéma technique.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur l&#x27;utilisation des drivers dans le processus de démarrage et le bootloader.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:34 - 00:14:06</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">accès à son réseau, à mes partitions, etc. Et on séparer les deux parce qu&#x27;on veut que le kernel il reste modulaire, comme ça le kernel il reste le plus léger possible, il n&#x27;a pas un milliard de drivers pour les 1 milliard de cartes réseaux et de disques durs et de façon de chiffrer ces disques différents. Il reste le plus petit possible et dans mon bootloader, c&#x27;est là où je vais pouvoir mettre ce que j&#x27;ai besoin pour ma machine en particulier. Il ne reste plus que quelques fichiers. Média et MNT, c&#x27;est des répertoires qui sont là juste si on a besoin de monter des disques ou des clés USB ou même à l&#x27;ancienne des CD-ROM, voire même des disquettes. Tous ces médias externes, par défaut, ils allaient être montés dans ces répertoires-là. Donc,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la modularité du noyau Linux et la gestion des pilotes.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:06 - 00:14:42</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est en allant dans slash média que je pouvais accéder à mon CD-ROM ou à ma clé USB. C&#x27;est un petit peu moins utilisé maintenant. Pareil pour MNT, si je mange par exemple un disque dur externe, des choses comme ça, souvent par défaut, il va aller se monter dans « slash mnt », même si au final, je pourrais les monter là où je veux, souvent par défaut, c&#x27;est là où ils atterrissent. Et donc, si je fais « slash mnt » et « slash media », évidemment, il n&#x27;y a rien dedans parce que j&#x27;ai rien de spécial de monter ici. Un plus intéressant, si je vais dans « slash var », « var » pour « variables », eh bien, on a pas mal de choses ici. En fait, dans « variables », c&#x27;est tout ce qui va être variable, tout ce qui va changer. Donc par exemple, si on installait un serveur web, www, c&#x27;est là où on va retrouver par défaut les fichiers de mon site web. Donc, c&#x27;est des fichiers</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande Linux (session shell en tant que root)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `ls` exécutée à la racine `/` affichant l&#x27;arborescence standard d&#x27;un système Linux (FHS) : `bin`, `boot`, `dev`, `etc`, `home`, `lib`, `lib64`, `media`, `mnt`, `opt`, `proc`, `root`, `run`, `sbin`, `srv`, `sys`, `tmp`, `usr`, `var`.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation théorique et visuelle de la structure des dossiers sous Linux, avec un focus sur les points de montage historiques `/media` (pour les clés USB, CD-ROM) et `/mnt` (pour le montage temporaire de périphériques de stockage comme les disques durs externes).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001415_seg40.jpg" alt="Terminal Linux affichant le contenu du répertoire racine (/) après l&#x27;exécution d&#x27;une commande ls, mettant en évidence les répertoires standards dont media et mnt." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001415_seg40.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:15</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire racine (/) après l&#x27;exécution d&#x27;une commande ls, mettant en évidence les répertoires standards dont media et mnt.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:42 - 00:15:17</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">de code, ces fichiers-là peuvent changer et donc ils se retrouvent dans slash var. Pareil pour var log. Les logs, c&#x27;est ce qu&#x27;utilise tout le système et les programmes pour pouvoir écrire qu&#x27;est-ce qui se passe. À chaque fois qu&#x27;il y a une action qui se passe, on rajoute une ligne de log pour pouvoir savoir ce qui s&#x27;est passé. Par exemple, si un utilisateur se connecte en SSH, on va rajouter une ligne de log pour dire « untel s&#x27;est connecté à telle heure depuis telle adresse IP », etc. Ou si j&#x27;ai un serveur web, à chaque fois que quelqu&#x27;un va aller sur mon site, on va rajouter une ligne de log pour dire « telle adresse IP est venue à telle heure à demander telle page et tel résultat est apparu. Donc pareil, c&#x27;est quelque chose qui change énormément. Spool, c&#x27;est tout ce qui est des files d&#x27;attente un petit peu. Donc ça peut être utilisé souvent par exemple si on a un serveur de</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts d&#x27;administration système concernant le dossier `/var` et les logs sous Linux sans démonstration visuelle directe sur écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:17 - 00:15:43</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">mail et bah la liste des mails qui sont en attente pour être envoyés par exemple, ils vont se retrouver là-bas. Aussi si on a un vieux serveur d&#x27;impression sur Linux et bah si on a pas mal de documents qui sont en attente d&#x27;impression, ils vont se retrouver dans une file d&#x27;attente aussi souvent dans VAR, Spool. C&#x27;est de moins en moins utilisé. Et aussi si on a lib. On peut se dire mais attends, c&#x27;est bizarre déjà t&#x27;as des slash lib, ensuite t&#x27;as des slash lib64, ensuite t&#x27;as des slash usr, slash lib, on a encore un slash lib ici. Et oui, on a encore un shp ici, mais le lib est dans var.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes `ls` et `ls spool/` exécutées dans le répertoire `/var`</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration du dossier `/var` pour montrer l&#x27;emplacement des files d&#x27;attente (spool, mail) sous Linux.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001530_seg42.jpg" alt="Terminal Linux affichant le contenu du dossier /var et /var/spool avec les sous-dossiers cron, mail et rsyslog." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001530_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:15:30</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du dossier /var et /var/spool avec les sous-dossiers cron, mail et rsyslog.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:43 - 00:16:16</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça veut dire que ça va être les fichiers qui vont être utilisés par les librairies et qui sont variables, donc qui vont changer. Si par exemple j&#x27;ai Docker d&#x27;installer sur la machine, et bien je vais avoir slash var slash lib slash docker. Et donc si je vais dans Docker, et bien je peux voir les informations que mon démon Docker est en train d&#x27;utiliser pour faire fonctionner mes conteneurs. Donc si je fais par exemple ici docker ps, ce qui va me lister mes conteneurs, j&#x27;ai pas de conteneurs qui tournent actuellement. Si je lance un conteneur, par exemple Docker run pour l&#x27;ancien conteneur, D pour qu&#x27;il parte en arrière-plan, Busybox parce que c&#x27;est une image petite qui sert à faire rien de spécial, et on va lui dire ne fait rien de spécial, dort pendant 1000 secondes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash/sh)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes `ls`, `cd lib/`, `ls` montrant les répertoires système dont `docker`, `containerd`, `apt`, `systemd`.</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration de l&#x27;arborescence du système de fichiers Linux pour illustrer l&#x27;emplacement des données variables des bibliothèques (`/var/lib`), en particulier le répertoire de travail du démon Docker.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001551_seg43.jpg" alt="Un terminal Linux affichant l&#x27;exploration du répertoire /var et de ses sous-dossiers, notamment /var/lib contenant le dossier docker." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001551_seg43.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:15:51</span>
+                        <span class="caption-text">Un terminal Linux affichant l&#x27;exploration du répertoire /var et de ses sous-dossiers, notamment /var/lib contenant le dossier docker.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:16 - 00:16:49</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça m&#x27;a démarré un conteneur en arrière-plan qui a cet ID là, 04C blablabla. Donc si je fais docker ps, là j&#x27;interagis avec mon démon Docker, mon serveur Docker si tu veux sur ma machine pour lui dire donne moi la liste des conteneurs qui tournent actuellement. Et il me dit t&#x27;as un conteneur qui s&#x27;appelle 04C blablabla qui tourne Busybox etc. Bon très bien, mais mon démon Docker lui-même, et bah il stocke ces informations dans slash var slash lib. Donc si je fais ls ici et que je fais par exemple dans containers et bah je retrouve ici 0 4c blablabla qui est le conteneur qui tourne actuellement. Je vois même un autre conteneur qui en fait si je fais docker ps a qui en fait</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:49 - 00:17:23</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">un autre conteneur qui tourne mais qui est exit donc qui est quitté depuis 23 heures. Mais là ici je l&#x27;ai vu ici parce que c&#x27;est là que mon démon docker, mon serveur docker stocke ces informations. Et je peux même avoir les informations sur le conteneur en lui-même si je fais dans le répertoire et bien là je vois j&#x27;ai sa configuration, j&#x27;ai son hostname, j&#x27;ai le fichier host qui est dans slash etc slash host qui permet d&#x27;avoir une résolution en DNS entre mes différents conteneurs, le resolve.conf etc etc. Si j&#x27;avais monté des volumes dans mon conteneur et bien j&#x27;aurais même accès directement dans mount ici. Donc c&#x27;est pas un répertoire dans lequel on va aller fréquemment mais si jamais on a besoin de débugger quelque chose, essayer de comprendre</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement interne du démon Docker et du stockage des métadonnées de conteneurs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:23 - 00:17:45</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">mieux comment fonctionne quelque chose, ça peut être intéressant à aller fouiller dans slash var Ensuite il nous reste slash dev qui est aussi un reporter très intéressant. C&#x27;est encore une fois un système de fichiers virtuels donc un faux système de fichiers. Ce n&#x27;est pas vraiment des vrais fichiers qui sont sur notre disque dur. Mais ça va nous permettre d&#x27;interagir avec des devices, donc des périphériques qui sont connectés à ma machine.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif (CLI)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;ls&#x27; et &#x27;cd /dev/&#x27;, affichage des répertoires systèmes racine et des fichiers de périphériques virtuels (tty, null, loop, sda, etc.)</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration de l&#x27;arborescence Linux et présentation du répertoire /dev (système de fichiers virtuel des périphériques).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001729_seg46.jpg" alt="Terminal Linux affichant le contenu du répertoire racine &#x27;/&#x27; avec la commande &#x27;ls&#x27;." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001729_seg46.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:29</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du répertoire racine &#x27;/&#x27; avec la commande &#x27;ls&#x27;.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001734_seg46.jpg" alt="Navigation dans le dossier /dev et affichage des fichiers de périphériques virtuels du système Linux avec &#x27;ls&#x27;." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001734_seg46.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:34</span>
+                        <span class="caption-text">Navigation dans le dossier /dev et affichage des fichiers de périphériques virtuels du système Linux avec &#x27;ls&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:45 - 00:18:09</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça peut être des périphériques physiques comme une carte son, un disque dur. Donc là par exemple quand je vois slash dev slash sda et bah c&#x27;est le fichier qui représente mon disque dur. Donc si je veux formater mon disque par exemple je vais utiliser ce chemin là pour pouvoir dire mon programme de formater ce disque là. Et ça peut même être des périphériques virtuelles. Donc c&#x27;est-à-dire des choses qui n&#x27;existent pas vraiment. Comme par exemple, random ici ou urandom, qui sont des périphériques, mais qui sont en fait une manière de demander au kernel de nous donner des données aléatoires.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:09 - 00:18:30</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">La différence entre les deux, c&#x27;est que slash dev slash random, c&#x27;est des données qui sont vraiment random, qui sont vraiment aléatoires. C&#x27;est souvent utilisé dans la cryptographie par exemple, où on a besoin de pouvoir générer quelque chose à partir d&#x27;un élément qui est très très imprévisible. Et donc pour ça, le kernel va utiliser des informations comme par exemple la température de ton disque dur, la vitesse à laquelle ton ventilateur est en train de tourner à ce moment précis, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le présentateur sur le fonctionnement du générateur de nombres aléatoires sous Linux (/dev/random).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-49">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:30 - 00:18:49</span>
+                <span class="segment-idx">Segment #49</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il va combiner comme ça plein de valeurs un petit peu physiques de la machine pour essayer d&#x27;avoir quelque chose de le plus aléatoire possible. Mais ça, ça peut être assez lent, parce que pour pouvoir récupérer assez d&#x27;informations assez aléatoires, ça prend du temps. Ça s&#x27;appelle l&#x27;entropie dans la machine. Quand on n&#x27;a plus d&#x27;entropie, on ne peut plus générer de nouveaux chiffres aléatoires. Et donc c&#x27;est pour ça qu&#x27;on a Urandome, qui est en fait un espèce de fake random.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun terminal, code ou interface logicielle visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, ligne de commande ou métrique affichée.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept d&#x27;entropie dans la machine et de la collecte de valeurs physiques pour la génération de nombres aléatoires.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-50">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:49 - 00:19:08</span>
+                <span class="segment-idx">Segment #50</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On va utiliser plus un algorithme qui va générer un chiffre qui va être aléatoire. On appelle ça pseudo-aléatoire, parce que ça va avoir l&#x27;air d&#x27;être aléatoire, Mais techniquement, si vraiment on connaît tous les aspects du kernel et l&#x27;heure exacte à laquelle on a commencé à générer, etc., on pourrait possiblement deviner les nombres aléatoires qui ont été générés avec uRandom. Mais l&#x27;avantage, c&#x27;est que ça va beaucoup plus vite.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts théoriques sur le pseudo-aléatoire et le noyau Linux.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-51">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:09 - 00:19:30</span>
+                <span class="segment-idx">Segment #51</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si par exemple, je fais catrandom et que je vais l&#x27;envoyer dans un fichier que je vais mettre dans cet htmp parce que je n&#x27;en ai pas besoin pour toujours. Donc si je fais ça, ça va écrire des choses aléatoires dans mon fichier jusqu&#x27;à l&#x27;infini, jusqu&#x27;à du moins qu&#x27;il n&#x27;y ait plus d&#x27;entropie, que mon système soit plus capable de générer de l&#x27;aléatoire, du vrai aléatoire. Et donc si je regarde ici dans mon fichier, random1, ça me dit qu&#x27;il est binaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux distant (SSH/shell web) avec incrustation vidéo du présentateur.</p>
+                        <p><strong>Contenu textuel & Code :</strong> `root@5yeutvkgr8:/dev# cat random &gt; /t`</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur tape une commande pour rediriger le contenu du générateur aléatoire vers un fichier, illustrant l&#x27;épuisement de l&#x27;entropie système.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001914_seg51.jpg" alt="Terminal Linux affichant la saisie de la commande de redirection du flux aléatoire." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001914_seg51.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:14</span>
+                        <span class="caption-text">Terminal Linux affichant la saisie de la commande de redirection du flux aléatoire.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-52">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:31 - 00:20:04</span>
+                <span class="segment-idx">Segment #52</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si je l&#x27;affiche, ça va afficher n&#x27;importe quoi. Je vais prendre le risque de l&#x27;afficher et ça m&#x27;affiche effectivement n&#x27;importe quoi. Donc si je quitte, si maintenant je fais la même chose ici, mais que j&#x27;utilise uRandom, et j&#x27;appelle ça random2, et bien là ça m&#x27;écrit des choses complètement random. Je vais annuler aussi parce que ça va aller à l&#x27;infini. et si je fais lsla tmp et ben je vais voir que mon fichier random 2 pour le coup random 1 il a quand même bien rempli donc j&#x27;ai laissé tourner random 1 un peu plus longtemps random 2 normalement va pas mal plus vite mais comme je dois avoir pas mal d&#x27;entropies disponibles parce que j&#x27;ai jamais lancé la commande</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash/sh)</p>
+                        <p><strong>Contenu textuel & Code :</strong> cat urandom &gt; /tmp/random2, ls -la /tmp, affichage des tailles des fichiers random1 (~2Go) et random2 (~628Mo)</p>
+                        <p><strong>Action / Démonstration :</strong> Génération de fichiers de données aléatoires à partir de /dev/urandom et vérification de leur taille avec la commande ls -la.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001956_seg52.jpg" alt="Terminal Linux affichant le contenu du dossier /tmp avec les fichiers random1 et random2 de grande taille générés à partir des périphériques aléatoires du noyau." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_001956_seg52.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:56</span>
+                        <span class="caption-text">Terminal Linux affichant le contenu du dossier /tmp avec les fichiers random1 et random2 de grande taille générés à partir des périphériques aléatoires du noyau.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-53">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:04 - 00:20:39</span>
+                <span class="segment-idx">Segment #53</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">avant et ben ça s&#x27;est quand même rempli un peu plus vite que random 2 mais si je le laisse tourner plus longtemps au bout d&#x27;un moment j&#x27;aurai plus d&#x27;entropies sur la machine avec ma machine n&#x27;a plus de source externe sur laquelle elle peut se baser pour pouvoir générer des choses qui sont vraiment aléatoires et ben Urandom va commencer à être beaucoup plus rapide. Parfois, c&#x27;est une machine qui est très puissante, qui a beaucoup de CPU, beaucoup de corps, très fort, etc. Ça peut être difficile de la stresser au maximum. Et 4 Urandom, ça y va. Donc là, ici, ce qu&#x27;on peut faire, c&#x27;est qu&#x27;on peut afficher le fichier Urandom et on va l&#x27;envoyer dans « slash dev slash null », qui est un autre fichier aussi,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif (shell root).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `root@5yeutvkgr8:/dev# cat urandom &gt; /` affichée dans le terminal.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et manipulation de la source d&#x27;entropie système (/dev/urandom) via le terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002030_seg53.jpg" alt="Terminal Linux affichant une ligne de commande en cours de saisie manipulant le fichier d&#x27;entropie urandom, avec la webcam du présentateur incrustée en bas à droite." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002030_seg53.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:20:30</span>
+                        <span class="caption-text">Terminal Linux affichant une ligne de commande en cours de saisie manipulant le fichier d&#x27;entropie urandom, avec la webcam du présentateur incrustée en bas à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-54">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:39 - 00:21:14</span>
+                <span class="segment-idx">Segment #54</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">qui n&#x27;est pas vraiment affiché. En fait, ça va aspirer tout ce qu&#x27;on va lui envoyer pour l&#x27;envoyer nulle part. Comme ça, ça va me permettre de pouvoir générer des nombres alliatoires le plus rapidement possible sans être limité par la vitesse d&#x27;écriture de mon disque dur. Et on va rajouter ici un N dans la fin, ce qui va mettre le processus 4 en arrière-plan. Donc là, c&#x27;est à dire que je récupère la main sur ma machine, mais c&#x27;est quand même en train de tabasser. Et donc, si je regarde mon utilisation de disque ici, je peux utiliser PS ou TOP pour voir l&#x27;utilisation de mon CPU, mais BITOP c&#x27;est un peu plus stylé. On voit ici que mon CPU est à 50-55% en utilisation parce que, en fait, j&#x27;ai mon C1 ici qui est à 7% et j&#x27;ai mon C2, mon deuxième core qui est lui à 100%. Donc,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, outil de monitoring système &#x27;btop&#x27;.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande &#x27;cat urandom &gt; /dev/null &amp;&#x27;, affichage du PID 2299931, graphiques de charge CPU et tableau des processus.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et exécution d&#x27;une commande pour générer des flux aléatoires en redirigeant /dev/urandom vers /dev/null en arrière-plan, puis observation de l&#x27;impact sur le processeur via btop.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002056_seg54.jpg" alt="Terminal Linux affichant l&#x27;exécution de la commande &#x27;cat urandom &gt; /dev/null &amp;&#x27; en arrière-plan." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002056_seg54.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:20:56</span>
+                        <span class="caption-text">Terminal Linux affichant l&#x27;exécution de la commande &#x27;cat urandom &gt; /dev/null &amp;&#x27; en arrière-plan.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002105_seg54.jpg" alt="Interface de l&#x27;outil de monitoring &#x27;btop&#x27; affichant l&#x27;utilisation CPU, mémoire, disques et la liste des processus en cours." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002105_seg54.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:21:05</span>
+                        <span class="caption-text">Interface de l&#x27;outil de monitoring &#x27;btop&#x27; affichant l&#x27;utilisation CPU, mémoire, disques et la liste des processus en cours.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-55">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:14 - 00:21:34</span>
+                <span class="segment-idx">Segment #55</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait, contrairement à ce que j&#x27;ai dit juste avant, ça va permettre de tabasser un des corps de notre machine, mais je pourrais en lancer autant que je veux si je veux tabasser 32 corps. Je le lance 32 fois et je vais avoir 100% d&#x27;utilisation. Si je veux l&#x27;arrêter, il y a deux manières. Soit je fais PS, AUX et que je filtre pour pouvoir récupérer juste les programmes qui s&#x27;appellent 4. Je peux ensuite kill le programme 2299931.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux interactif (shell bash).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes exécutées : `cat urandom &gt; /dev/null &amp;` (avec PID 2299931), affichage de l&#x27;autocomplétion pour les commandes commençant par `bt`, et lancement de `btop`.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration du lancement d&#x27;une tâche de charge CPU en arrière-plan pour saturer un cœur, suivie de la préparation du lancement de l&#x27;outil de surveillance `btop`.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002124_seg55.jpg" alt="Terminal Linux affichant l&#x27;exécution en arrière-plan d&#x27;une commande de stress CPU et la saisie de l&#x27;outil de monitoring btop." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002124_seg55.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:21:24</span>
+                        <span class="caption-text">Terminal Linux affichant l&#x27;exécution en arrière-plan d&#x27;une commande de stress CPU et la saisie de l&#x27;outil de monitoring btop.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-56">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:34 - 00:21:55</span>
+                <span class="segment-idx">Segment #56</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ou autre chose que je peux faire aussi, c&#x27;est utiliser la commande FG, qui va me permettre de remettre en premier plan la commande que j&#x27;ai mise en arrière-plan plus tôt. Et à partir d&#x27;ici, je peux faire CTRL-C. ça va plus simple, pas besoin de faire une commande bizarre avant. Au passage, la machine que je suis en train d&#x27;utiliser en ce moment dans mon navigateur, c&#x27;est une machine virtuelle qui est hébergée dans ma plateforme ici, que j&#x27;utilise et que je fournis à mes étudiants pour mes petites formations sur le DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web personnalisée (dashboard cocadmin.xyz)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tableau répertoriant 5 serveurs (ex: r39dwxbx6y &quot;Semaine 0 - exo Nginx&quot;, IP 10.141.17.247, 1Go RAM, 1 vCPU, 60 jours, démarrée) avec boutons &quot;Accéder&quot; et &quot;Supprimer&quot;, ainsi qu&#x27;un menu déroulant et un bouton &quot;Créer Serveur&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation ou consultation du tableau de bord de gestion des serveurs de la plateforme pédagogique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002149_seg56.jpg" alt="Tableau de bord d&#x27;administration listant des serveurs virtuels avec leurs caractéristiques (ID, description, IP, RAM, CPU, âge, état, actions) et une vue miniature du présentateur en bas à droite." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002149_seg56.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:21:49</span>
+                        <span class="caption-text">Tableau de bord d&#x27;administration listant des serveurs virtuels avec leurs caractéristiques (ID, description, IP, RAM, CPU, âge, état, actions) et une vue miniature du présentateur en bas à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-57">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:55 - 00:22:15</span>
+                <span class="segment-idx">Segment #57</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça sera beaucoup plus facile de pratiquer sans avoir à trouver une machine sur le cloud. Est-ce que je vais payer ? Est-ce que j&#x27;ai assez de RAM sans machine ? Et donc, si par exemple, tu es freelance et que tu veux ajouter la corde DevOps à ton art pour pouvoir avoir plus de missions ou pour avoir un meilleur TGM, quelques fois par an, je fais une formation de six semaines en petits groupes pour pouvoir apprendre les 6 aspects les plus importants du DevOps. Donc si c&#x27;est quelque chose qui t&#x27;intéresse, je te mets le lien en description.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation (slides), IDE ou éditeur de texte, et écran d&#x27;ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte de présentation : « Philosophie DevOps », « Pourquoi on apprend ça ? », « Quel est le problème que règle le DevOps ? ».</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la philosophie DevOps et des problématiques abordées.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002210_seg57.jpg" alt="Vue de profil du poste de travail avec affichage d&#x27;une présentation sur la « Philosophie DevOps » (Pourquoi on apprend ça ? Quel est le problème que règle le DevOps ?)." loading="lazy" onclick="openLightbox('../screenshots/3RUuv9Y4Uww/3RUuv9Y4Uww_002210_seg57.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:22:10</span>
+                        <span class="caption-text">Vue de profil du poste de travail avec affichage d&#x27;une présentation sur la « Philosophie DevOps » (Pourquoi on apprend ça ? Quel est le problème que règle le DevOps ?).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
