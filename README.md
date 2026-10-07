@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `24 / 142` (`16.9%`)
+- **Vidéos traitées** : `25 / 142` (`17.6%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -43,6 +43,7 @@
 | 2025-08-28 | [QR_zSiRbdtI](https://www.youtube.com/watch?v=QR_zSiRbdtI) | **7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements** | [2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `38` |
 | 2025-08-02 | [KTaLHOMydoM](https://www.youtube.com/watch?v=KTaLHOMydoM) | **Comment passer de 2 semaines à 2min pour déployer en prod** | [2025-08-02_YT-[KTaLHOMydoM]_Comment passer de 2 semaines à 2min pour déployer en prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-08-02_YT-[KTaLHOMydoM]_Comment passer de 2 semaines à 2min pour déployer en prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-08-02_YT-[KTaLHOMydoM]_Comment passer de 2 semaines à 2min pour déployer en prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `30` |
 | 2025-06-03 | [mdxKBz5QUTo](https://www.youtube.com/watch?v=mdxKBz5QUTo) | **Le minimum de réseau à savoir pour un Dev** | [2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `36` |
+| 2025-05-03 | [080p5Y2_wpg](https://www.youtube.com/watch?v=080p5Y2_wpg) | **Les 7 bases de données à connaître pour pas passer pour un con** | [2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
