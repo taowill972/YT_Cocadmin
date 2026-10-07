@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment passer de 2 semaines à 2min pour déployer en prod — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Comment passer de 2 semaines à 2min pour déployer en prod</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=KTaLHOMydoM" target="_blank">Lien YouTube (<code>KTaLHOMydoM</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-08-02</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:14:40</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **Comment passer de 2 semaines à 2min pour déployer en prod**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:29</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme maintenant je suis à plein temps sur YouTube, il y a plein de petites technos qui popent et que je connais pas. Et donc parfois je me sens un petit peu dépassé. Mais justement la semaine dernière je reçois un DM sur Discord d&#x27;un de mes amis qui a un SaaS. Et il avait un gros problème avec son SaaS. Comme il y a beaucoup de concurrence, il faut qu&#x27;il livre des nouvelles fonctionnalités tout le temps le plus rapidement possible. Mais malgré le fait qu&#x27;il a plusieurs développeurs qui travaillent d&#x27;arrache-pied pour améliorer son site, la moindre petite modification, même si c&#x27;est juste rajouter une virgule sur la page d&#x27;accueil du site web, ça prenait plusieurs semaines pour mettre en production.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Discord (Client de messagerie)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface utilisateur Discord en thème sombre, affichant le profil factice d&#x27;un contact (&quot;Un super pote&quot; / `unsuperpote`) et le texte de bienvenue de la messagerie privée.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du canal de communication par lequel le créateur a été contacté (DM Discord) pour résoudre une problématique technique liée à un produit SaaS.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000007_seg1.jpg" alt="Interface de l&#x27;application de messagerie collaborative Discord montrant l&#x27;ouverture d&#x27;un canal de discussion privé avec le contact &quot;Un super pote&quot; (@unsuperpote)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000007_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:07</span>
+                        <span class="caption-text">Interface de l&#x27;application de messagerie collaborative Discord montrant l&#x27;ouverture d&#x27;un canal de discussion privé avec le contact &quot;Un super pote&quot; (@unsuperpote).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:29 - 00:00:51</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et le problème venait du fait qu&#x27;ils avaient juste deux environnements, un de production et un autre environnement de dev pour les développeurs. Et comme ils avaient qu&#x27;un seul environnement de développement, ils pouvaient tester juste une fonctionnalité ou juste un seul fixe à la fois. Et tant qu&#x27;ils n&#x27;avaient pas fini cette fonctionnalité, ils ne pouvaient pas déployer une nouvelle fonctionnalité en production. Et moi quand je vois ça, je sais que c&#x27;est un problème classique qui peut être résolu avec des méthodes et des outils DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Discord (interface mobile)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Message textuel décrivant un problème opérationnel : obligation de réaliser un déploiement majeur global toutes les 2 à 4 semaines pour la moindre modification, mettant en évidence le besoin de découpler les déploiements de fonctionnalités individuelles.</p>
+                        <p><strong>Action / Démonstration :</strong> Audit et analyse d&#x27;un problème d&#x27;architecture de déploiement (absence d&#x27;environnements de staging dynamiques ou de fonctionnalités de &quot;Feature Branches/Preview Environments&quot;).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000034_seg2.jpg" alt="Capture d&#x27;écran d&#x27;une application mobile affichant une discussion Discord décrivant un problème de pipeline CI/CD et de fréquence de déploiement monolithique (bloqué à un cycle de 2 à 4 semaines)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000034_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:34</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;une application mobile affichant une discussion Discord décrivant un problème de pipeline CI/CD et de fréquence de déploiement monolithique (bloqué à un cycle de 2 à 4 semaines).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:51 - 00:01:13</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et c&#x27;est justement ma spécialité. Et moi même si d&#x27;habitude je ne fais pas vraiment de mission de freelance, je trouvais que c&#x27;était l&#x27;occasion de mettre en place et tester des nouvelles technos que j&#x27;avais encore jamais utilisées. Et donc pour pouvoir régler ce problème, ce qu&#x27;il faut c&#x27;est avoir des environnements de dev à la demande, des environnements de dev éphémères. C&#x27;est-à-dire qu&#x27;à chaque fois qu&#x27;un nouveau développeur va faire une nouvelle fonctionnalité dans une nouvelle branche sur Git, et bien on va automatiquement popper un nouvel environnement qui contient toutes les modifications que le développeur vient de faire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> GitHub Actions</p>
+                        <p><strong>Contenu textuel & Code :</strong> Workflows CI/CD listés à l&#x27;écran :
+- `Build Docker Images`
+- `Create dev environnement` (sélectionné par le curseur)
+- `Delete dev environnement`
+- `Deploy DEV Infrastructure`
+- `Provision and Deploy to EC2 DEV`
+- `Provision and Deploy to EC2 PROD`</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation de la solution technique pour automatiser la création et la destruction d&#x27;environnements de développement éphémères (&quot;à la demande&quot;) à l&#x27;aide de pipelines CI/CD et de scripts de provisionnement d&#x27;infrastructure (Iac/Docker/AWS EC2).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000102_seg3.jpg" alt="Interface GitHub Actions montrant une liste de workflows de CI/CD pour la création, la suppression et le déploiement d&#x27;environnements de dev et de prod sur AWS EC2." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000102_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:02</span>
+                        <span class="caption-text">Interface GitHub Actions montrant une liste de workflows de CI/CD pour la création, la suppression et le déploiement d&#x27;environnements de dev et de prod sur AWS EC2.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:13 - 00:01:35</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc comme ça, chaque développeur a son ou ses environnements en fonction des différentes fonctionnalités qu&#x27;il est en train de développer, et on n&#x27;a plus de goulot d&#x27;étranglement ou il y a un environnement qui bloque un autre ou quelque chose comme ça. Ça fait qu&#x27;on peut aller beaucoup beaucoup plus vite parce qu&#x27;on peut tester directement une modification et directement la mettre en preuve après, une fois qu&#x27;elle a été bien testée. Potentiellement, on pourrait passer de 2-3 semaines pour mettre un changement en production à peut-être 20-30 minutes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console web de gestion d&#x27;environnements (possiblement Argo CD ou une plateforme similaire de Preview Environments / Ephemeral Environments Kubernetes).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste de projets et d&#x27;applications configurés sous le projet &quot;default&quot; :
+- `lilienv2-faceswap-comfyui`
+- `onboarding`
+- `qdrant-scroll-without-count`
+- `split-thumbnail-creator`
+- `upgrade-user-without-customer-id`</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et illustration de la mise en place d&#x27;environnements de test dédiés (preview environments) par fonctionnalité/branche git, permettant aux développeurs de tester de manière isolée et parallèle sans bloquer les autres.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000118_seg4.jpg" alt="Interface d&#x27;un outil de déploiement continu ou de gestion d&#x27;environnements éphémères affichant plusieurs instances d&#x27;applications isolées par fonctionnalité (ex: split-thumbnail-creator, onboarding, qdrant-scroll-without-count)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000118_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:18</span>
+                        <span class="caption-text">Interface d&#x27;un outil de déploiement continu ou de gestion d&#x27;environnements éphémères affichant plusieurs instances d&#x27;applications isolées par fonctionnalité (ex: split-thumbnail-creator, onboarding, qdrant-scroll-without-count).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:35 - 00:01:56</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc du point de vue de son business, ce serait quelque chose qui aurait quand même énormément de valeur. Et les techniques que j&#x27;avais en tête pour pouvoir mettre en place ce projet, ça va être Kubernetes. Même si c&#x27;est une petite entreprise, un petit SaaS, ça parait un peu overkill. Comme on n&#x27;a pas besoin de haute disponibilité ou de choses comme ça, on peut simplement avoir Kubernetes sur un seul nœud. C&#x27;est des environnements de développement. Et comme il est sur AWS, l&#x27;avantage, c&#x27;est qu&#x27;on ne va pas avoir à payer une machine séparée pour chacun des environnements qu&#x27;on va avoir besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique pertinente affichée (uniquement un écran de contrôle de périphériques/éclairage flou en arrière-plan).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme d&#x27;architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale et conceptuelle sur le choix technologique de Kubernetes et la gestion de la haute disponibilité pour un petit SaaS.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:56 - 00:02:16</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">on pourra avoir plein d&#x27;environnement, mais dans une seule machine, et donc on ne paye qu&#x27;une seule fois. C&#x27;est probablement un petit peu overkill, on aurait pu aller simplement avec Docker Swarm ou même Docker Compose, mais comme son application est déjà conteneurisée, autant passer directement sur Kubernetes, comme ça, ça le future-proof un petit peu. Et la deuxième techno que je voulais mettre en place, c&#x27;est utiliser du GitOps avec Argo CD.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Docker Compose</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logo et identité visuelle de l&#x27;outil d&#x27;orchestration Docker Compose.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation théorique des alternatives de conteneurisation et d&#x27;orchestration (Docker Compose, Swarm, Kubernetes) adaptées à un déploiement mono-machine multi-environnement.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000206_seg6.jpg" alt="Affichage du logo officiel de Docker Compose avec sa mascotte (la pieuvre manipulant des conteneurs)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000206_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:06</span>
+                        <span class="caption-text">Affichage du logo officiel de Docker Compose avec sa mascotte (la pieuvre manipulant des conteneurs).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:16 - 00:02:38</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc on aurait d&#x27;un côté GitHub Action, que je n&#x27;avais pas trop trop utilisé, qui allait s&#x27;occuper du côté CI pour Continuous Integration, donc faire tous les tests sur le code et construire les images Docker qu&#x27;on va ensuite déployer. Et ensuite pour la partie CD ou Continuous Deployment, on va utiliser Argo. Et Argo va aller continuellement regarder sur le repo s&#x27;il y a des changements qui ont été faits et directement les déployer dans notre mini cluster Kubernetes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> GitHub Actions, ArgoCD (console web GitOps)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Pipeline YAML de CI (`matrix-build-deploy.yml` avec étapes Build, Test, Publish) et métadonnées de déploiement CD (statut Auto Sync activé, auteur du commit, détails du merge Git #563).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la répartition de l&#x27;architecture CI/CD avec l&#x27;utilisation combinée de GitHub Actions pour la construction/tests de code et d&#x27;ArgoCD pour le déploiement continu automatisé.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000221_seg7.jpg" alt="Visualisation d&#x27;un workflow GitHub Actions nommé `matrix-build-deploy.yml` exécutant des étapes de build et de test de matrice multiplateforme (Linux, macOS, Windows) déclenchées par un push." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000221_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:21</span>
+                        <span class="caption-text">Visualisation d&#x27;un workflow GitHub Actions nommé `matrix-build-deploy.yml` exécutant des étapes de build et de test de matrice multiplateforme (Linux, macOS, Windows) déclenchées par un push.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000232_seg7.jpg" alt="Console web ArgoCD affichant l&#x27;état de synchronisation (&quot;Synced&quot;) et de santé de l&#x27;application (&quot;Progressing&quot;) sur la branche &quot;develop&quot; suite à un merge de pull request." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000232_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:32</span>
+                        <span class="caption-text">Console web ArgoCD affichant l&#x27;état de synchronisation (&quot;Synced&quot;) et de santé de l&#x27;application (&quot;Progressing&quot;) sur la branche &quot;develop&quot; suite à un merge de pull request.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:38 - 00:02:59</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc on va avoir un pipeline dans GitHub Action qui va être un petit peu plus simple. Et pour le deployment, on va avoir Argo qui va avoir une petite interface qui va être simple à utiliser pour tous les développeurs. Et on n&#x27;a pas besoin de gérer tous nos différents environnements dans notre GitHub Action, ce qui peut être un petit peu compliqué quand on commence à avoir plusieurs environnements. Et du côté du CD, on va avoir Argo CD qui va nous donner une belle petite interface que les développeurs vont pouvoir utiliser.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune (uniquement des plans de présentation face-caméra).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun (les écrans en arrière-plan sont flous et non exploitables techniquement).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique de l&#x27;utilisation conjointe de GitHub Actions pour l&#x27;intégration continue (CI) et d&#x27;Argo CD pour simplifier le déploiement continu (CD) multi-environnement.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:59 - 00:03:18</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc comme ça, il n&#x27;a pas besoin forcément d&#x27;avoir à apprendre ou comprendre Kubernetes ou Argo ou quoi que ce soit. Ils ont juste à venir dans l&#x27;interface et à cliquer pour démarrer leurs environnements. Donc j&#x27;accepte et je me mets sur le projet. Et la première étape qu&#x27;on doit faire, c&#x27;est mettre en place la bulle des images dans GitHub Action. Donc ces applications, elles sont déjà containerisées. Ils utilisent des conteneurs en local.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> GitHub Actions (interface web de CI/CD).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Workflows de CI/CD (&quot;Build Docker Images&quot;, &quot;Create dev environnement&quot;, &quot;Delete dev environnement&quot;, &quot;Deploy DEV Infrastructure&quot;, &quot;Provision and Deploy to EC2 DEV&quot;) et statut d&#x27;exécution d&#x27;un job de compilation/construction (&quot;build&quot;).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et mise en place de la première étape d&#x27;automatisation consistant à builder les images de conteneurs de manière automatisée via les workflows GitHub Actions.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000304_seg9.jpg" alt="Interface GitHub Actions listant les différents workflows disponibles pour le projet, notamment la création d&#x27;environnements de développement, le déploiement d&#x27;infrastructure DEV et le build d&#x27;images Docker." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000304_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:04</span>
+                        <span class="caption-text">Interface GitHub Actions listant les différents workflows disponibles pour le projet, notamment la création d&#x27;environnements de développement, le déploiement d&#x27;infrastructure DEV et le build d&#x27;images Docker.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000314_seg9.jpg" alt="Visualisation d&#x27;une étape de build (&quot;build&quot;) en cours d&#x27;exécution au sein d&#x27;un pipeline de CI/CD (GitHub Actions), affichant un temps d&#x27;exécution de 3 minutes et 54 secondes." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000314_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:14</span>
+                        <span class="caption-text">Visualisation d&#x27;une étape de build (&quot;build&quot;) en cours d&#x27;exécution au sein d&#x27;un pipeline de CI/CD (GitHub Actions), affichant un temps d&#x27;exécution de 3 minutes et 54 secondes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:18 - 00:03:37</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et je voulais aussi utiliser une des nouvelles fonctionnalités qu&#x27;il y a dans GitHub maintenant qui est le fait d&#x27;avoir un registri privé. Donc c&#x27;est un endroit où on peut pousser nos images Docker et on peut les récupérer après sur nos serveurs quand on en a besoin. Et donc comme ça, on n&#x27;est pas obligé d&#x27;utiliser un service externe comme peut-être Docker Hub ou quelque chose comme ça. Donc pour ça, je commence à fouiller un petit peu dans GitHub Action.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la documentation GitHub Packages.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Documentation sur le &quot;Container registry&quot; de GitHub, mentionnant le stockage et la gestion d&#x27;images Docker et OCI.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation ou référence visuelle à la documentation officielle de GitHub expliquant l&#x27;utilisation de leur registre de conteneurs privé.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000328_seg10.jpg" alt="Gros plan sur un écran d&#x27;ordinateur affichant la documentation officielle de GitHub concernant son registre de packages. Le titre visible est &quot;Working with the Container registry&quot;, et le texte mentionne la possibilité de stocker et gérer des images Docker et OCI." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000328_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:28</span>
+                        <span class="caption-text">Gros plan sur un écran d&#x27;ordinateur affichant la documentation officielle de GitHub concernant son registre de packages. Le titre visible est &quot;Working with the Container registry&quot;, et le texte mentionne la possibilité de stocker et gérer des images Docker et OCI.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:37 - 00:03:56</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;ai presque aucune expérience. Donc je commence à regarder un petit peu dans les templates, les actions qu&#x27;ils ont par défaut parce que je me dis que builder des containers Docker, c&#x27;est quelque chose qui est assez commun. Et rapidement, je tombe sur des templates pour pouvoir faire ça. Donc c&#x27;est assez simple. Même si je suis toujours un peu plus fan de GitLab CI, le fait que je puisse copier-coller des templates déjà faits dans GitHub Action, c&#x27;est quand même un plus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> GitHub (visualiseur de code web)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier YAML de configuration CI/CD de GitHub Actions (`.github/workflows/create-dev-env.yml`) contenant :
+- Déclaration des variables de sortie (`branch_full`, `slug`)
+- Étape de récupération du code (`Checkout code` via `actions/checkout@v3`) avec paramètres d&#x27;entrée (`ref: ${{ github.event.inputs.branch_name }}`)
+- Étape d&#x27;initialisation des variables de branche (`Set branch and slug`)</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et compréhension de la syntaxe d&#x27;un template d&#x27;automatisation GitHub Actions existant pour la création d&#x27;un environnement de développement et le build d&#x27;images Docker.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000347_seg11.jpg" alt="Capture d&#x27;écran de l&#x27;interface GitHub affichant le code source d&#x27;un workflow YAML (`create-dev-env.yml`) pour GitHub Actions, montrant l&#x27;utilisation de `actions/checkout@v3` et la gestion des variables d&#x27;environnement." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000347_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:47</span>
+                        <span class="caption-text">Capture d&#x27;écran de l&#x27;interface GitHub affichant le code source d&#x27;un workflow YAML (`create-dev-env.yml`) pour GitHub Actions, montrant l&#x27;utilisation de `actions/checkout@v3` et la gestion des variables d&#x27;environnement.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:57 - 00:04:17</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, c&#x27;est assez rapide, ça fonctionne direct, donc je suis content. Et je continue avec l&#x27;étape suivante qui va être de mettre en place Kubernetes et Argo CD. Kubernetes, j&#x27;utilise K3S qui est ma distribution légère favorite, qui est très très simple à installer, c&#x27;est vraiment juste une seule ligne de commande. Et pour Argo CD, je ne l&#x27;avais jamais installé non plus, mais c&#x27;est aussi juste une ligne de commande. Parce que l&#x27;avantage, c&#x27;est que Argo CD se déploie dans Kubernetes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de code (potentiellement VS Code) ou terminal Linux affiché sur moniteurs multiples et un ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Code source ou fichiers de configuration (potentiellement YAML pour Kubernetes/K3S), et/ou commandes shell d&#x27;installation/gestion système. Le logo K3S est présent en surimpression dans l&#x27;image 2.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration et installation de K3S (distribution légère de Kubernetes), impliquant la manipulation de lignes de commande et de fichiers de configuration.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000402_seg12.jpg" alt="Vue aérienne d&#x27;un utilisateur travaillant sur deux moniteurs et un ordinateur portable affichant du code source ou des sorties de terminal, dans un environnement de développement ou de configuration système." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000402_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:02</span>
+                        <span class="caption-text">Vue aérienne d&#x27;un utilisateur travaillant sur deux moniteurs et un ordinateur portable affichant du code source ou des sorties de terminal, dans un environnement de développement ou de configuration système.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000407_seg12.jpg" alt="Vue aérienne similaire à l&#x27;image 1, montrant l&#x27;utilisateur devant ses écrans techniques, avec le logo K3S superposé en haut à gauche, contextualisant visuellement la distribution Kubernetes mentionnée." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000407_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:07</span>
+                        <span class="caption-text">Vue aérienne similaire à l&#x27;image 1, montrant l&#x27;utilisateur devant ses écrans techniques, avec le logo K3S superposé en haut à gauche, contextualisant visuellement la distribution Kubernetes mentionnée.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:17 - 00:04:38</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc pareil, c&#x27;est juste une seule ligne de commande et ça se lance directement. J&#x27;ai juste un petit problème avec Argo, c&#x27;est qu&#x27;il tout a l&#x27;air de s&#x27;être lancé, mais je n&#x27;arrive pas à accéder à l&#x27;UI. J&#x27;ai une espèce d&#x27;erreur SSL. Donc, premier réflexe, c&#x27;est que je commence à prendre les erreurs, les mettre dans ChatGPT ou dans Cloud pour pouvoir savoir d&#x27;où est-ce que ça vient, parce que ça n&#x27;a pas l&#x27;air d&#x27;être un truc trop trop compliqué.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface de chatbot IA (potentiellement ChatGPT ou Claude).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Question concernant un problème de boucle de redirection TLS infinie entre ArgoCD et un load balancer AWS, et des options pour la configuration TLS ou la désactivation de TLS dans ArgoCD.</p>
+                        <p><strong>Action / Démonstration :</strong> Recherche et débogage d&#x27;une erreur SSL/TLS liée à l&#x27;accès à l&#x27;interface utilisateur d&#x27;ArgoCD, en utilisant une intelligence artificielle pour obtenir des pistes de résolution.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000433_seg13.jpg" alt="Capture d&#x27;écran d&#x27;une interface de chatbot IA (type ChatGPT ou Claude), affichant une question technique sur une boucle de redirection TLS infinie avec ArgoCD et un load balancer AWS, ainsi que les options de résolution, notamment la désactivation du TLS dans ArgoCD." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000433_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:33</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;une interface de chatbot IA (type ChatGPT ou Claude), affichant une question technique sur une boucle de redirection TLS infinie avec ArgoCD et un load balancer AWS, ainsi que les options de résolution, notamment la désactivation du TLS dans ArgoCD.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:38 - 00:04:57</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, je commence à passer un petit peu de temps à essayer de débugger pourquoi est-ce que je n&#x27;arrive pas à accéder à l&#x27;UI. Et final, après avoir perdu un petit peu de temps, Je vais simplement lire la doc d&#x27;Argo CD, ce que j&#x27;aurais dû faire dès le départ. Et c&#x27;est expliqué dès le départ que Argo CD, il utilise son propre certificat SSL. Et donc, il faut rajouter un petit argument pour pouvoir le désactiver. Parce que moi, dans mon cas, c&#x27;est mon load balancer qui va gérer le HTTPS.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Documentation technique en ligne (probablement via un navigateur web).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Documentation expliquant que les endpoints d&#x27;Argo CD utilisent par défaut des certificats TLS auto-signés et la procédure pour configurer des certificats personnalisés ou via un gestionnaire comme cert-manager.</p>
+                        <p><strong>Action / Démonstration :</strong> Lecture de la documentation officielle d&#x27;Argo CD pour comprendre la gestion des certificats SSL/TLS et débloquer l&#x27;accès à l&#x27;interface utilisateur (UI) après un problème de connexion.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000452_seg14.jpg" alt="Gros plan sur un écran d&#x27;ordinateur affichant une section de la documentation technique d&#x27;Argo CD, mettant en évidence le texte sur l&#x27;utilisation par défaut de certificats SSL auto-signés (&quot;automatically generated, self-signed certificate&quot;) et les options de configuration TLS pour `argocd-server`." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000452_seg14.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:52</span>
+                        <span class="caption-text">Gros plan sur un écran d&#x27;ordinateur affichant une section de la documentation technique d&#x27;Argo CD, mettant en évidence le texte sur l&#x27;utilisation par défaut de certificats SSL auto-signés (&quot;automatically generated, self-signed certificate&quot;) et les options de configuration TLS pour `argocd-server`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:57 - 00:05:26</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, j&#x27;ai pas besoin de le gérer directement dans Argo CD. Vous allez voir que c&#x27;est un petit peu un thème dans cette histoire. Parce que c&#x27;est la première fois où je me dis, bon, d&#x27;un côté, les LLM, c&#x27;est bien. Ça fait aller plus vite, etc. D&#x27;un autre côté, parfois, ça peut juste faire perdre du temps. parce qu&#x27;on perd les vraies bonnes habitudes qui sont simplement commencer par lire la doc de ce qu&#x27;on veut utiliser. Le souci avec les IS, c&#x27;est que soit t&#x27;es dans un IDE genre curseur, donc c&#x27;est pas idéal si t&#x27;as besoin de faire des commandes dans ton terminal pour débuguer, soit c&#x27;est une application dans un terminal comme dans Cloud Code, mais tu peux pas trop modifier ce que ça te propose, c&#x27;est un peu juste t&#x27;acceptes ou pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran d&#x27;ordinateur (potentiellement un terminal Linux ou un éditeur de code).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de texte s&#x27;apparentant à du code ou des commandes dans un environnement de développement ou d&#x27;administration système (détails illisibles en raison du flou).</p>
+                        <p><strong>Action / Démonstration :</strong> Le créateur explique un concept DevOps lié à la gestion des applications (&quot;pas besoin de le gérer directement dans Argo CD&quot;) et l&#x27;impact des LLM sur les &quot;bonnes habitudes&quot;, l&#x27;arrière-plan technique servant d&#x27;environnement de travail contextuel.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000519_seg15.jpg" alt="Le créateur est en gros plan face-caméra, tandis qu&#x27;un écran en arrière-plan (flou) affiche ce qui ressemble à des lignes de code ou des commandes dans une interface de terminal ou d&#x27;éditeur de texte sur fond sombre." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000519_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:19</span>
+                        <span class="caption-text">Le créateur est en gros plan face-caméra, tandis qu&#x27;un écran en arrière-plan (flou) affiche ce qui ressemble à des lignes de code ou des commandes dans une interface de terminal ou d&#x27;éditeur de texte sur fond sombre.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:26 - 00:05:45</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Est-ce que l&#x27;idéal, ce serait pas un petit peu un mix entre les deux et c&#x27;est exactement ce qu&#x27;on propose, Warp ? Ils appellent ça un ADE pour Agent Tick Development Environment. Est-ce que tu peux utiliser plusieurs agents en même temps pour pouvoir coder ou débuguer ? Warp est top 5 sur SWBench et sur TerminalBench où l&#x27;agent doit interagir avec un terminal, il est numéro 1 devant Cloud Code, Gemini et codex de OpenArea. Et surtout, tu n&#x27;es pas bloqué avec un seul modèle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> SWE-bench web interface, Tableau de bord de performance d&#x27;agents (type TerminalBench).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Classement d&#x27;agents d&#x27;IA sur des benchmarks de résolution de problèmes de génie logiciel (SWE-bench) et de performance en environnement de terminal (TerminalBench-like). Métriques clés : &quot;% Resolved&quot;, pourcentages de réussite.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse visuelle des performances comparatives de l&#x27;agent Warp face à d&#x27;autres solutions d&#x27;IA sur des plateformes de benchmark techniques, illustrant sa position de leader ou de top performeur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000535_seg16.jpg" alt="Interface web du benchmark SWE-bench affichant un classement (&quot;Leaderboards&quot;) d&#x27;agents d&#x27;IA, avec des métriques de &quot;% Resolved&quot; pour diverses implémentations, dont &quot;Warp&quot;." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000535_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:35</span>
+                        <span class="caption-text">Interface web du benchmark SWE-bench affichant un classement (&quot;Leaderboards&quot;) d&#x27;agents d&#x27;IA, avec des métriques de &quot;% Resolved&quot; pour diverses implémentations, dont &quot;Warp&quot;.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000540_seg16.jpg" alt="Tableau de bord graphique illustrant les performances comparatives d&#x27;agents (&quot;agent performance&quot;), avec &quot;Warp (mixed)&quot; en tête, suivi d&#x27;autres agents basés sur des modèles Claude ou Gemini, affichant des pourcentages de réussite." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000540_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:40</span>
+                        <span class="caption-text">Tableau de bord graphique illustrant les performances comparatives d&#x27;agents (&quot;agent performance&quot;), avec &quot;Warp (mixed)&quot; en tête, suivi d&#x27;autres agents basés sur des modèles Claude ou Gemini, affichant des pourcentages de réussite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:45 - 00:06:07</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu peux utiliser le meilleur du moment. Par exemple, tu peux utiliser O3 pour la planification et puis Cloud pour un parti code. Dans mon cas, j&#x27;avais un bug casse-tête avec des migrations SQL et impossible de corriger même avec d&#x27;autres rires. Et avec Warp, il a lancé les migrations, il a lu les erreurs, enchaîné les commandes et requêtes SQL dans le terminal pour pouvoir débugger parce qu&#x27;il a tout le contexte de mon application et des outils en ligne de commande, et pas juste le code.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Image 1: Interface utilisateur graphique de configuration d&#x27;un agent IA. Image 3: Terminal intégré (probablement VS Code) exécutant des commandes shell et SQL.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Image 1: Options de modèles d&#x27;IA (o3 sélectionné pour la planification), gestion des permissions d&#x27;agent. Image 3: Commandes Flask-Migrate (`flask db upgrade`, `flask db stamp`, `flask db revision`), requêtes SQL Lite (`PRAGMA foreign_key_list`, `schema`), messages d&#x27;erreur de migration SQL relatifs aux contraintes de clés étrangères et tables manquantes.</p>
+                        <p><strong>Action / Démonstration :</strong> Image 1: Paramétrage d&#x27;un agent IA pour définir ses capacités et son comportement, notamment le choix du modèle de planification. Image 3: Débuggage interactif et correction d&#x27;un bug de migration SQL via une série de commandes d&#x27;inspection de base de données, d&#x27;analyse d&#x27;erreurs et d&#x27;application de correctifs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000551_seg17.jpg" alt="Interface de configuration sombre pour un agent IA, affichant les options de sélection de modèles (ex: Claude 4, GPT 4.1, o3) et de permissions pour l&#x27;agent (application de diffs de code, lecture de fichiers, création de plans, exécution de commandes)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000551_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:51</span>
+                        <span class="caption-text">Interface de configuration sombre pour un agent IA, affichant les options de sélection de modèles (ex: Claude 4, GPT 4.1, o3) et de permissions pour l&#x27;agent (application de diffs de code, lecture de fichiers, création de plans, exécution de commandes).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000601_seg17.jpg" alt="Capture d&#x27;écran d&#x27;un terminal (ressemblant à VS Code) affichant une séquence de commandes `flask db upgrade`, des requêtes `sqlite3` pour inspecter les schémas de base de données et les clés étrangères, des erreurs de migration SQL (problèmes de clés étrangères vers des tables inexistantes), et des commandes correctives comme `flask db stamp` et `flask db revision`." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000601_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:01</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un terminal (ressemblant à VS Code) affichant une séquence de commandes `flask db upgrade`, des requêtes `sqlite3` pour inspecter les schémas de base de données et les clés étrangères, des erreurs de migration SQL (problèmes de clés étrangères vers des tables inexistantes), et des commandes correctives comme `flask db stamp` et `flask db revision`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:07 - 00:06:40</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et bien, il a réglé le problème que j&#x27;avais depuis des mois en moins d&#x27;une minute. Perso, moi, j&#x27;avais commencé à l&#x27;utiliser avant même qu&#x27;ils sponsoraient cette vidéo. Donc, je te conseille de l&#x27;essayer. Ils ont une version gratuite. Et avec le code COCA, tu as le premier mois de la version pro à juste 1 euro. Je te mets le lien dans la description. Ensuite, j&#x27;ai mon Kubernetes qui marche. J&#x27;ai mon Argo CD qui marche. Donc, maintenant que ça, ça fonctionne, il faut que je convertisse le fichier Docker Compose qui est déjà dans le repo de l&#x27;application que les développeurs, ils utilisent pour pouvoir développer en local 50 lignes, je vais le mettre dans ChatGPT et boum je vais avoir ma conversion en manifeste qui marche</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface utilisateur graphique (GUI) d&#x27;un logiciel ou service web, probablement un tableau de bord de gestion ou de monitoring.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Disposition matricielle de tuiles ou de widgets colorés, suggérant des fonctionnalités modulaires ou des indicateurs divers. Le texte et les icônes spécifiques sont illisibles.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle implicite d&#x27;un outil ou service technique vanté par le créateur, dont l&#x27;interface est affichée en arrière-plan comme support visuel à son discours promotionnel et de recommandation.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000623_seg18.jpg" alt="Le créateur s&#x27;exprimant face-caméra. Derrière lui, un écran affiche une interface graphique de type tableau de bord ou console de gestion avec une multitude de tuiles ou modules colorés agencés en grille sur fond sombre." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000623_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:23</span>
+                        <span class="caption-text">Le créateur s&#x27;exprimant face-caméra. Derrière lui, un écran affiche une interface graphique de type tableau de bord ou console de gestion avec une multitude de tuiles ou modules colorés agencés en grille sur fond sombre.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000631_seg18.jpg" alt="Le créateur s&#x27;exprimant face-caméra. Derrière lui, un écran affiche une interface graphique de type tableau de bord ou console de gestion, identique ou très similaire à l&#x27;image précédente, avec des tuiles ou modules colorés en grille." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000631_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:31</span>
+                        <span class="caption-text">Le créateur s&#x27;exprimant face-caméra. Derrière lui, un écran affiche une interface graphique de type tableau de bord ou console de gestion, identique ou très similaire à l&#x27;image précédente, avec des tuiles ou modules colorés en grille.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:40 - 00:07:13</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">dans Kubernetes Direct. Et effectivement j&#x27;ai direct mon nouveau manifeste qui contient exactement tous les différentes services, applications, bases de données, tout ça dans un beau fichier. Et donc je me dis bah nickel je viens de gagner une heure ou deux. Je mets ça dans mon repo, j&#x27;ajoute mon repo dans ArcoCD pour lui dire de déployer ce manifeste et ça a l&#x27;air de marcher nickel. Ça me crée tout ce ce qu&#x27;il y a besoin, les bases de données, les volumes, les déploiements, les pods etc. Je me dis ça y est je suis un crack. Maintenant grâce à l&#x27;IA je peux être un DevOps dix fois plus efficace. Sauf qu&#x27;il y a deux pods dans l&#x27;infrastructure qui ne démarrent juste pas. Et c&#x27;est les</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> </p>
+                        <p><strong>Contenu textuel & Code :</strong> </p>
+                        <p><strong>Action / Démonstration :</strong> </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:13 - 00:07:48</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">deux images de cœur qui sont construites dans GitLab. Donc je fouille un petit peu, j&#x27;ai débug, j&#x27;essaie de demander un peu de l&#x27;aide à l&#x27;IA, essayer de voir qu&#x27;est ce qui se passe. Et de ce que je comprends, le cluster communities il n&#x27;arrive pas à récupérer les images depuis le registre github donc à la base j&#x27;avais créé un token d&#x27;autorisation dans github qui donne accès aux clusters et je l&#x27;avais mis en place dans le cluster mais je sais pas il y a quelque chose qui fonctionne pas il arrive quand même pas à récupérer les images donc c&#x27;est de fouiller fouiller débuguer débuguer et quand c&#x27;est comme ça je sais que ça sert à rien de s&#x27;acharner il faut juste partir et faire autre chose un petit peu ou revenir le lendemain et généralement la</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran d&#x27;ordinateur, potentiellement un IDE, une console GitLab, ou une interface cloud. Ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface graphique avec du texte, des menus et des panneaux, dont le détail exact est illisible mais dont la nature est technique (potentiellement code, logs, ou configuration de pipeline/Kubernetes).</p>
+                        <p><strong>Action / Démonstration :</strong> Débuggage ou configuration active sur un système informatique, en lien avec les problèmes de récupération d&#x27;images Docker depuis le registre GitLab vers le cluster Kubernetes mentionnés dans le contexte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000722_seg20.jpg" alt="Vue d&#x27;ensemble d&#x27;un expert DevOps travaillant sur son poste de travail, avec l&#x27;écran principal affichant une interface d&#x27;application web ou d&#x27;IDE, et un ordinateur portable ouvert sur le côté. L&#x27;écran principal contient des éléments de code, de configuration ou de logs, suggérant une session de débogage ou de développement." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000722_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:22</span>
+                        <span class="caption-text">Vue d&#x27;ensemble d&#x27;un expert DevOps travaillant sur son poste de travail, avec l&#x27;écran principal affichant une interface d&#x27;application web ou d&#x27;IDE, et un ordinateur portable ouvert sur le côté. L&#x27;écran principal contient des éléments de code, de configuration ou de logs, suggérant une session de débogage ou de développement.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:48 - 00:08:09</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">solution un petit peu plus évident et donc je veux me coucher effectivement le lendemain quand quand je commence à regarder ce problème avec un esprit un peu plus frais, je me rends compte que tout simplement, le manifeste que l&#x27;IA m&#x27;a pondu, il était presque parfait, mais il était configuré pour que les images ne soient jamais récupérées du repo. Je ne sais pas quelle raison, je ne sais pas qu&#x27;est-ce qui a poussé à écrire ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUN</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUN</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:09 - 00:08:29</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc moi, j&#x27;étais persuadé que c&#x27;était un problème d&#x27;autorisation, que mon cluster n&#x27;arrivait pas à récupérer les images, mais c&#x27;est juste que le manifeste lui disait de jamais récupérer les images de l&#x27;extérieur. Ce qui ne fait aucun sens, évidemment. Donc encore une fois, j&#x27;ai gagné une heure grâce à l&#x27;IA, mais j&#x27;ai perdu une heure à cause de l&#x27;IA. Donc, maintenant, je commence à me méfier un petit peu plus. Mais j&#x27;ai un petit problème avec les bases de données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique pertinente de type DevOps/SysAdmin n&#x27;est visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, commandes, architectures, métriques) n&#x27;est affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est visible à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:29 - 00:08:51</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est que les bases de données, je peux en démarrer une facilement en utilisant un conteneur MySQL. Mais ce que je voudrais, c&#x27;est lancer dessus toutes les migrations. Donc, c&#x27;est-à-dire qu&#x27;il y a une liste de fichiers SQL à exécuter sur les bases de données au lancement pour pouvoir créer toutes les tables. Je peux peut-être ajouter des données de démo, de tests, etc. Pour faire ça, j&#x27;utilise Customize, qui est un outil qui permet justement de customiser un petit peu nos manifestes Kubernetes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique (terminal Linux, console Docker/Kubernetes, interface cloud, etc.) n&#x27;est visible dans les captures d&#x27;écran fournies.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code source, commande, architecture ou métrique technique n&#x27;est affiché visuellement dans les images.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est démontrée à l&#x27;écran dans ces plans.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:52 - 00:09:11</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il y a une fonctionnalité qui est assez cool, qui permet de lui donner un dossier, et de prendre le contenu de tous ces fichiers qui sont dans le dossier, et de les convertir en ConfigMap, qui est un type de ressource dans Kubernetes. Ce qui fait qu&#x27;ensuite, je peux passer ces ConfigMap à mon conteneur, et donc remettre tous ces fichiers dans le conteneur de base de données, pour qu&#x27;ils puissent automatiquement exécuter tous ces fichiers au premier démarrage.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de texte ou IDE affichant un fichier de configuration YAML.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Code YAML d&#x27;une ConfigMap Kubernetes (`apiVersion: v1`, `kind: ConfigMap`, `metadata.name: geoip-config`) et utilisation d&#x27;une fonction de templating pour incorporer des données binaires de fichiers (`.Files.Get`).</p>
+                        <p><strong>Action / Démonstration :</strong> Visualisation d&#x27;un exemple de ConfigMap Kubernetes, illustrant comment des fichiers (comme &quot;GeoIP.dat&quot;) peuvent être encapsulés pour être ensuite mis à disposition de conteneurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000901_seg24.jpg" alt="Manifeste YAML définissant une ressource Kubernetes de type ConfigMap nommée &quot;geoip-config&quot;, incluant les champs `apiVersion: v1`, `kind: ConfigMap`, `metadata` et `binaryData`. Un overlay &quot;CONFIGMAP RESSOURCE KUBERNETES&quot; est présent." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000901_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:01</span>
+                        <span class="caption-text">Manifeste YAML définissant une ressource Kubernetes de type ConfigMap nommée &quot;geoip-config&quot;, incluant les champs `apiVersion: v1`, `kind: ConfigMap`, `metadata` et `binaryData`. Un overlay &quot;CONFIGMAP RESSOURCE KUBERNETES&quot; est présent.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000906_seg24.jpg" alt="Gros plan sur la définition YAML de la ConfigMap, se concentrant sur la section `binaryData` où le fichier &quot;GeoIP.dat&quot; est inclus dynamiquement via un template (`{{ .Files.Get &quot;GeoIP.dat&quot; }}`)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000906_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:06</span>
+                        <span class="caption-text">Gros plan sur la définition YAML de la ConfigMap, se concentrant sur la section `binaryData` où le fichier &quot;GeoIP.dat&quot; est inclus dynamiquement via un template (`{{ .Files.Get &quot;GeoIP.dat&quot; }}`).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:11 - 00:09:33</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, c&#x27;est nickel. Le deuxième petit problème, c&#x27;est que je veux que chaque environnement ait le même nom que sa branche dans GitHub. Je ne peux pas hardcoder un seul nom d&#x27;environnement, parce que sinon, j&#x27;aurais juste un environnement. Le but, c&#x27;est d&#x27;en avoir autant qu&#x27;on veut. Et en fait, avec Customize, tu peux pas vraiment faire ça. Ils sont vraiment contre le fait d&#x27;utiliser du templating, d&#x27;utiliser des variables. Donc dans mon manifeste, je peux jamais préciser quelle version de l&#x27;image je veux.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUN</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE manipulation, configuration, test ou explication technique n&#x27;est visible à l&#x27;écran, le créateur est en phase d&#x27;explication orale uniquement, sans support visuel technique pertinent.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:33 - 00:09:54</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je suis obligé de l&#x27;art-coder, que ça soit une seule image, pour toutes les branches différentes du repo. Donc ça me va pas. Et donc je vois qu&#x27;il y a un autre outil qui est similaire, qui s&#x27;appelle Helm, sur lequel j&#x27;avais pas trop d&#x27;expérience non plus, mais que justement, c&#x27;était l&#x27;occasion, qui lui permet de faire tout ce qu&#x27;on veut, de faire du templating, de mettre des variables, etc. Donc je repasse tout mon manifeste au format Customize vers le format Helm.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Incrustation textuelle (lower-third) de type infographique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Identification de l&#x27;outil Helm, sa catégorie (DevOps), et sa fonction principale (gestion et déploiement de manifestes).</p>
+                        <p><strong>Action / Démonstration :</strong> Introduction et clarification visuelle du concept de Helm, un outil majeur pour l&#x27;automatisation du déploiement d&#x27;applications dans des environnements conteneurisés comme Kubernetes, en contraste avec une approche d&#x27;hard-codage.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_000944_seg26.jpg" alt="Le créateur de contenu s&#x27;exprime face caméra, accompagné d&#x27;une incrustation graphique en bas de l&#x27;écran identifiant clairement &quot;HELM&quot; comme un &quot;OUTIL DEVOS&quot; (DevOps) pour la &quot;gestion et déploiement&quot; de &quot;manifestes&quot;." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_000944_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:44</span>
+                        <span class="caption-text">Le créateur de contenu s&#x27;exprime face caméra, accompagné d&#x27;une incrustation graphique en bas de l&#x27;écran identifiant clairement &quot;HELM&quot; comme un &quot;OUTIL DEVOS&quot; (DevOps) pour la &quot;gestion et déploiement&quot; de &quot;manifestes&quot;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:55 - 00:10:14</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là je peux ajouter mes variables. Et donc ça règle mon problème. Le nom d&#x27;image qui va être utilisé au démarrage de l&#x27;environnement, ça va être une variable qui correspond au nom de la branche. Et donc ça va être différent pour chacune des branches. C&#x27;est nickel sauf que dans Helm, on ne peut pas récupérer des fichiers qui sont en dehors du dossier où on a les manifestes pour Helm. Chose que je pouvais faire avec Customize.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique pertinente n&#x27;est visible dans les captures d&#x27;écran.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code, architectures, métriques) n&#x27;est affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est visuellement illustrée par un support graphique dans les captures.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:14 - 00:10:36</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là je suis dans une situation où j&#x27;ai besoin de Helm pour pouvoir utiliser des variables. mais j&#x27;ai besoin de Customize pour pouvoir aller récupérer des fichiers et pouvoir les injecter dans mes conteneurs. Donc là, je suis en train de me demander est-ce qu&#x27;il faut que je retourne dans Customize ? Je veux aussi qu&#x27;il y ait potentiellement une façon d&#x27;utiliser Customize mais avec des templates Helm. Mais ça a l&#x27;air d&#x27;un peu foireux. C&#x27;est l&#x27;autre, c&#x27;est important d&#x27;avoir des gens à qui se référer parce que ça, c&#x27;est pas quelque chose qui va être dans la doc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique pertinente (terminal, console cloud, IDE) n&#x27;est affichée en tant que support principal du discours. L&#x27;arrière-plan présente une interface graphique de système d&#x27;exploitation ancien.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, commandes, architectures, métriques) lié au sujet DevOps sur Helm/Kustomize n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration ou explication technique n&#x27;est réalisée visuellement sur des outils ou interfaces pertinentes pour le sujet abordé.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:36 - 00:10:58</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est juste une bonne pratique que je connais pas parce que j&#x27;ai pas assez d&#x27;expérience. Et après coup, je pense que probablement la bonne pratique, ça aurait été de séparer mon repo qui contient mes manifestes, etc. Et ensuite ça aurait pointé vers le repo où il y a mon application. Et là probablement que ça aurait pu fonctionner avec Helm directement. Et même avec Customize parce que j&#x27;aurais pu avoir un fichier qui décrit tous les environnements que j&#x27;ai besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal, logiciel ou console technique n&#x27;est affiché dans les captures fournies. Les arrière-plans des deux images montrent des éléments graphiques décoratifs ou de design (ex: &quot;hello&quot; stylisé, icônes) non pertinents pour une analyse DevOps/SysAdmin.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code source, commande, architecture réseau ou métrique technique n&#x27;est visible. Les images sont des plans fixes du créateur parlant face caméra.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est visuellement illustrée. Le contenu des images se limite à la présentation orale du créateur. Pour le discours sur la séparation des dépôts Git et l&#x27;utilisation de Helm, on aurait pu s&#x27;attendre à la visualisation d&#x27;une structure de dépôt, de fichiers Helm charts ou de commandes `git` et `helm`.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:58 - 00:11:24</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et probablement que ça aurait réglé mon problème. Mais sur le moment ce que je finis par faire c&#x27;est de rester sur Helm. Parce que j&#x27;aurais toujours besoin de mon histoire de variable. Et au lieu d&#x27;aller récupérer les fichiers, les mettre dans une config map et remettre la config map en fichier etc. Ce que je fais c&#x27;est que je crée deux nouveaux conteneurs pour les bases de données. Où les fichiers sont déjà hard codés dedans. C&#x27;est pas la solution ultime parce que ça rajoute une étape, mais c&#x27;est une étape qui prend juste 3 secondes dans le pipeline de CSID et ça règle mon problème, donc je pars avec cette solution.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface graphique de pipeline CI/CD (Intégration Continue / Déploiement Continu).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste d&#x27;étapes de pipeline : &quot;Build and push Docker image&quot;, &quot;Build and push Frontend container&quot;, &quot;Build and push app-db container&quot;, &quot;Build and push logs-db container&quot;, &quot;Post Build and push logs-db container&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Affichage des étapes automatisées de construction et de publication d&#x27;images Docker pour différents composants d&#x27;une application (frontend, bases de données d&#x27;application et de logs) dans un contexte de CI/CD.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_001111_seg30.jpg" alt="Gros plan sur une interface de pipeline CI/CD affichant les étapes de build et de push de diverses images Docker (frontend, app-db, logs-db)." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_001111_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:11</span>
+                        <span class="caption-text">Gros plan sur une interface de pipeline CI/CD affichant les étapes de build et de push de diverses images Docker (frontend, app-db, logs-db).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:24 - 00:11:45</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là maintenant, j&#x27;ai mes deux pods qui sont bien téléchargés, j&#x27;ai mon front-end qui se lance, je peux accéder à mon application, c&#x27;est nickel. Mais le back-end, bien qu&#x27;il se lance, bien qu&#x27;il arrive à accéder aux bases de données, bien qu&#x27;il arrive à récupérer l&#x27;image du registre de Docker, bien qu&#x27;il démarre et que dans ses logs il y a l&#x27;air d&#x27;avoir aucun problème, il n&#x27;a quand même pas l&#x27;air de fonctionner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> </p>
+                        <p><strong>Contenu textuel & Code :</strong> </p>
+                        <p><strong>Action / Démonstration :</strong> </p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:45 - 00:12:14</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">N&#x27;importe quelle requête que je fais au backend, ça me donne la même erreur not found. Je commence à fouiller un petit peu, essayer de débugger, mais comme je vous ai dit, tout a l&#x27;air correct. Dans les logs tout est clean, le pod il est démarré, les collections aux bases de données sont correctes, les bases de données sont bien, etc. Et donc j&#x27;arrive pas à trouver de ça. Je fouille pendant un petit bout de temps et là pareil, l&#x27;instinct me dit que ce genre de problème là, C&#x27;est le genre de problème que soit je continue à fouiller pendant trois jours et que peut-être que je finis par trouver la solution.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:14 - 00:12:33</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Soit je demande à un des développeurs et je suis quasi sûr qu&#x27;il va savoir instantanément quel est le problème. Et donc c&#x27;est ce que je fais. Je prends contact avec un des développeurs de l&#x27;application et on regarde ensemble d&#x27;où vient le problème. Et il m&#x27;explique directement que toutes les requêtes sont gérées par le front-end. Et c&#x27;est le front-end ensuite qui renvoie les requêtes vers le back-end. Et au moment où il fait ça, il change un petit peu l&#x27;URL.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Diagramme d&#x27;architecture d&#x27;application (schéma explicatif).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Composants d&#x27;architecture logicielle : utilisateur, FrontEnd, Backend, et deux bases de données. Flux de requêtes unidirectionnel (FrontEnd vers Backend vers Database), potentiellement pour expliquer un goulot d&#x27;étranglement ou une mauvaise gestion des requêtes.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication visuelle de l&#x27;architecture applicative et du parcours des requêtes, illustrant la manière dont les requêtes sont gérées et le rôle du Front-end, en lien avec le problème évoqué dans le discours.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_001228_seg33.jpg" alt="Diagramme schématique d&#x27;architecture d&#x27;application montrant un utilisateur interagissant avec un FrontEnd, qui à son tour communique avec un Backend et deux instances de base de données. Des flèches rouges mettent en évidence le chemin de la requête." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_001228_seg33.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:28</span>
+                        <span class="caption-text">Diagramme schématique d&#x27;architecture d&#x27;application montrant un utilisateur interagissant avec un FrontEnd, qui à son tour communique avec un Backend et deux instances de base de données. Des flèches rouges mettent en évidence le chemin de la requête.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:33 - 00:12:53</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il y a un morceau de l&#x27;URL qui est enlevé avant d&#x27;être envoyé à l&#x27;API. Donc moi, comme je contactais l&#x27;API directement via Ingress, l&#x27;URL était incorrect. Donc ce problème se règle très rapidement. J&#x27;ai enlevé le Ingress qui allait taper vers le backend. Et donc toutes les requêtes de la application passent par le frontend et le frontend les envoie au backend quand il y a besoin. Et direct, tout se met à marcher.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique pertinente (terminal, console cloud, éditeur de code, etc.) n&#x27;est affichée. L&#x27;écran en arrière-plan présente un contenu graphique ou textuel sans rapport avec des outils techniques.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code, architectures, métriques) n&#x27;est visible. Le texte &quot;Font the Crazy Ones&quot; et le numéro &quot;14&quot; sur l&#x27;écran en arrière-plan sont liés au design/typographie.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est démontrée visuellement. Le créateur est en train de s&#x27;exprimer oralement.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:53 - 00:13:25</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est pareil, c&#x27;est un truc avec lequel j&#x27;avais beaucoup de mal dans le passé. C&#x27;est que je voulais toujours trouver par moi-même les problèmes. Je sais que parfois ça m&#x27;est arrivé de passer des deux jours, trois jours sur un problème. que je savais définitivement que le mec à côté de moi il avait la réponse directe. Donc même si ça m&#x27;a aidé à être bon en troubleshooting, du point de vue business d&#x27;une entreprise c&#x27;est pas mieux de passer trois jours alors que tu pourrais passer 18. Et c&#x27;est encore plus le cas dans une mission freelance parce que là c&#x27;est toi directement qui perds les dents, qui perds l&#x27;argent entre les guillemets. Donc ça c&#x27;est un des points sur lesquels je me suis un petit peu amélioré depuis.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:25 - 00:13:57</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et maintenant tout fonctionne. On a d&#x27;un côté GitHub qui va prendre l&#x27;application, qui va faire tous les tests qu&#x27;il y a besoin qui va ensuite construire des conteneurs des conteneurs pour les applications des conteneurs pour les bases de données avec toutes les tables déjà créées des données pour pouvoir commencer à tester l&#x27;application un conteneur pour le front-end un conteneur pour le back-end et qui va ensuite mettre toutes ces images sur le registri GitHub et ensuite de l&#x27;autre côté on a Arpo qui va aller continuellement surveiller le repo GitHub pour voir quand il y a des nouvelles modifications et dès qu&#x27;il y a un changement et bien il va créer ou modifier les</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console de CI/CD (potentiellement GitHub Actions ou un terminal) affichant les logs d&#x27;une exécution Docker.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logs de build Dockerfile pour un conteneur &quot;Frontend&quot;, utilisation des images de base `node:18-alpine` et `nginx:alpine`, références SHA256 des couches Docker.</p>
+                        <p><strong>Action / Démonstration :</strong> Construction (build) et publication (push) automatisées d&#x27;une image Docker pour le frontend de l&#x27;application, intégrant les étapes de création de conteneurs mentionnées dans le discours.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_001333_seg36.jpg" alt="Journal de console affichant les étapes détaillées de la construction et du push d&#x27;un conteneur Docker pour une application frontend, incluant l&#x27;importation de bases Node.js et Nginx Alpine." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_001333_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:33</span>
+                        <span class="caption-text">Journal de console affichant les étapes détaillées de la construction et du push d&#x27;un conteneur Docker pour une application frontend, incluant l&#x27;importation de bases Node.js et Nginx Alpine.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:57 - 00:14:28</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">environnements sur notre petit cluster Kubernetes et en plus on va automatiquement donner un nom de domaine qui correspond au nom de la branche comme ça on peut très facilement accéder à tous les environnements qu&#x27;on a besoin indépendamment les uns des autres. Donc on peut déployer autant environnement que ce qu&#x27;on a besoin. Et donc je fais une petite documentation encore une fois je fais appel à l&#x27;IA et ça va gérer à 4 heures en faisant de ce que j&#x27;ai besoin donc pour cette fois ci ça m&#x27;a vraiment fait bien du temps et donc maintenant mon client est passé d&#x27;un cycle de développement qui pouvait durer plusieurs semaines à maintenant sur une petite politique va faire, on peut la déployer directement en juste quelques minutes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web, interface de gestion de code source (type GitHub ou GitLab), potentiellement un aperçu de workflow CI/CD.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Détails d&#x27;un workflow de déploiement GitOps avec ArgoCD pour une application spécifique, mentionnant l&#x27;intégration de builds (frontend, bases de données) et l&#x27;installation de Kubernetes/ArgoCD.</p>
+                        <p><strong>Action / Démonstration :</strong> Documentation et suivi d&#x27;un processus de déploiement et de configuration d&#x27;environnements d&#x27;application sur Kubernetes via ArgoCD, en ligne avec la création d&#x27;environnements dédiés par branche.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/KTaLHOMydoM/KTaLHOMydoM_001412_seg37.jpg" alt="Capture d&#x27;écran d&#x27;une interface web, probablement GitHub ou une plateforme similaire, affichant un &quot;Merge pull request&quot; et un workflow lié à un déploiement ArgoCD pour une application &quot;1of10&quot;. Un commentaire détaillé explique les étapes techniques : rédaction d&#x27;un README pour ArgoCD, ajout du build du frontend et de deux bases de données, installation d&#x27;un cluster Kubernetes mono-nœud et déploiement d&#x27;ArgoCD dessus." loading="lazy" onclick="openLightbox('../screenshots/KTaLHOMydoM/KTaLHOMydoM_001412_seg37.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:12</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;une interface web, probablement GitHub ou une plateforme similaire, affichant un &quot;Merge pull request&quot; et un workflow lié à un déploiement ArgoCD pour une application &quot;1of10&quot;. Un commentaire détaillé explique les étapes techniques : rédaction d&#x27;un README pour ArgoCD, ajout du build du frontend et de deux bases de données, installation d&#x27;un cluster Kubernetes mono-nœud et déploiement d&#x27;ArgoCD dessus.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:28 - 00:14:39</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc dans le DevOps, il y a énormément d&#x27;outils et des nouveaux qui pop tout le temps et parfois c&#x27;est difficile de se garder à jour et de savoir quel outil sert à quoi. Mais en fait, il y a seulement 6 catégories d&#x27;outils à connaître et j&#x27;explique tout en détail dans cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique identifiable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, commandes, architecture, métriques) visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation, configuration, test ou explication technique n&#x27;est montrée à l&#x27;écran par le biais d&#x27;outils ou d&#x27;interfaces.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
