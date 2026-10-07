@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 méthodes de crevard que j&#x27;utilise pour arrêter de payer des abonnements — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">7 méthodes de crevard que j&#x27;utilise pour arrêter de payer des abonnements</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=QR_zSiRbdtI" target="_blank">Lien YouTube (<code>QR_zSiRbdtI</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-08-28</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:14:26</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>La prolifération des abonnements SaaS (Software as a Service) engendre aujourd'hui une inflation invisible mais massive des coûts opérationnels pour les créateurs de contenu, formateurs et ingénieurs. Face à cette "fatigue de l'abonnement", l'approche présentée propose une stratégie de rationalisation financière agressive basée sur trois piliers : la négociation automatisée (exploitation des boucles de rétention lors des processus d'annulation), la consolidation applicative (suppression des doublons en exploitant pleinement les suites d'entreprise existantes comme Google Workspace), et la migration vers des modèles de tarification alternatifs (licences perpétuelles, alternatives *open source* ou clones à bas coût).<br><br>Sur le plan technique, l'optimisation va au-delà du simple choix de logiciels en introduisant des changements d'architectures profonds. Pour les besoins de conception 3D ou de montage vidéo, la transition s'effectue de solutions propriétaires sur abonnements (Adobe, Spline) vers des standards industriels haut de gamme gratuits ou à paiement unique (Unreal Engine, DaVinci Resolve), valorisant l'investissement en temps de montée en compétences face aux coûts récurrents. Côté intelligence artificielle, l'arbitrage financier s'organise autour d'un modèle hybride combinant un abonnement d'usage quotidien et l'exploitation des APIs de modèles concurrents payés au jeton (*pay-per-token*), éliminant ainsi les forfaits mensuels fixes redondants.<br><br>Enfin, pour les micro-services fonctionnels simples mais surévalués (comme le tracking d'URL), la démarche pousse à la réingénierie logicielle. En concevant son propre micro-service et en le déployant sur une architecture cloud serverless (telle qu'AWS Lambda), l'ingénieur DevOps bascule d'une tarification forfaitaire injustifiée vers un coût marginal à la requête, proche de zéro. Cette démarche globale redéfinit l'efficacité opérationnelle en alignant strictement la dépense financière sur la consommation réelle des ressources.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Zoom** : Solution de visioconférence professionnelle ($23 à $46/mois) optimisée temporairement par des techniques de rétention tarifaire, puis intégralement remplacée par des outils collaboratifs inclus dans l'infrastructure existante.<br>* **Google Workspace (Meet / Gemini Pro)** : Suite bureautique cloud globale dont les fonctionnalités natives (Google Meet pour la vidéo et Gemini Pro pour l'IA) sont exploitées pour éliminer les abonnements tiers redondants.<br>* **Loom** : Outil d'enregistrement vidéo de l'écran et de la webcam ($15/mois) remplacé par une alternative plus compétitive et performante.<br>* **Nito Record & Nito Cal** : Clones applicatifs agressifs ultra-économiques ($2.50/mois en facturation annuelle) conçus spécifiquement pour disrupter les monopoles de Loom et Calendly avec une parité de fonctionnalités.<br>* **Calendly** : Planificateur de rendez-vous historique dont le coût mensuel est éliminé au profit de la version gratuite hautement généreuse de Nito Cal.<br>* **Adobe Premiere Pro** : Logiciel de montage vidéo standard de l'industrie, jugé instable et onéreux, dont le coût est d'abord réduit via le tunnel d'annulation avant une migration définitive.<br>* **DaVinci Resolve** : Alternative d'édition vidéo et d'étalonnage haut de gamme, proposant une version gratuite extrêmement robuste et une version Studio sous forme de licence perpétuelle unique avec mises à jour à vie.<br>* **Spline** : Solution d'animation 3D web sur navigateur ($12/mois) abandonnée au profit d'un environnement de rendu local plus puissant et gratuit.<br>* **Unreal Engine** : Moteur 3D de premier plan pour le jeu vidéo et le cinéma, entièrement gratuit d'utilisation tant que le projet ne dépasse pas le million de dollars de chiffre d'affaires.<br>* **ChatGPT Plus** : Interface de modèle de langage d'OpenAI conservée comme outil principal d'interaction quotidienne en raison de la qualité de son UI.<br>* **Claude (Anthropic)** : Modèle d'IA de premier ordre pour le développement logiciel, rationalisé en fermant l'abonnement grand public au profit d'un accès direct via l'API.<br>* **Claude API** : Interface de programmation d'Anthropic permettant de consommer la puissance du modèle de code strictement à l'usage (facturation au token), réduisant les coûts pour les besoins sporadiques.<br>* **TinyURL** : Raccourcisseur de liens et traqueur de clics ($13/mois) à l'interface obsolète, ciblé pour être remplacé par un développement serverless sur mesure.<br>* **AWS Lambda** : Service de calcul serverless idéalement conçu pour héberger des micro-services personnalisés à la requête, permettant de tendre vers une facturation de quelques centimes par mois.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>1. **Exploitation systématique du "Churn Bluff"** : Les éditeurs SaaS intègrent des mécanismes automatisés de réduction (souvent de 15% à 25%) dans leur parcours de résiliation pour retenir l'utilisateur. Déclencher ce tunnel sans finaliser l'annulation est un moyen immédiat d'abaisser son coût d'acquisition.<br>2. **Gestion de l'intermittence via la mise en pause** : Pour les activités saisonnières ou par cycles (comme les sessions de formation DevOps), privilégier la mise en pause des abonnements plutôt que le maintien d'une facturation passive hors des périodes d'utilisation active.<br>3. **Audit rigoureux des chevauchements de fonctionnalités** : L'accumulation d'outils spécifiques crée souvent des doublons coûteux. Une suite déjà payée (comme Google Workspace) intègre des outils (Meet) capables de remplacer nativement des abonnements dédiés (Zoom) sans perte d'efficacité.<br>4. **Adoption stratégique des clones "Fast Follower"** : Des suites d'outils émergentes fondent leur modèle économique sur la réplication exacte des leaders du marché à des tarifs de 5 à 10 fois inférieurs (ex. Nito face à Loom ou Calendly). Cette parité fonctionnelle à bas coût doit être privilégiée.<br>5. **Valorisation de l'engagement annuel calculé** : Pour les outils validés à long terme, le passage d'une facturation mensuelle à un engagement annuel permet de réaliser d'importantes économies d'échelle, parfois cumulables avec des tarifs de lancement d'alternatives disruptives.<br>6. **Rupture avec le modèle de la rente par la licence perpétuelle** : Privilégier des outils comme DaVinci Resolve qui proposent un modèle d'achat unique (*one-time payment*) avec mises à jour gratuites à vie, brisant ainsi la dépendance financière des abonnements mensuels imposés par des acteurs comme Adobe.<br>7. **Arbitrage "Temps de montée en compétences" vs "Coût de licence"** : Le passage à des outils industriels de pointe gratuits mais complexes (ex. Unreal Engine à la place de Spline) demande un investissement initial en temps d'apprentissage. Cet investissement est hautement rentable car il élimine à vie les coûts de licence tout en augmentant la qualité finale des livrables.<br>8. **FinOps IA par l'hybridation "UI vs API"** : Cumuler plusieurs abonnements d'IA grand public à $20/mois est une inefficacité financière majeure. La bonne pratique consiste à conserver un seul outil avec interface graphique (ex. ChatGPT) et à consommer les modèles concurrents (ex. Claude) via leur API payée au token réel d'utilisation.<br>9. **Consolidation IA via les fonctionnalités incluses** : L'intégration progressive de modèles de pointe (Gemini Pro) directement dans les abonnements cloud professionnels existants (Google Workspace) offre une opportunité de centralisation pour supprimer totalement les abonnements IA tiers à terme.<br>10. **Développement de micro-services Serverless personnalisés** : Pour des fonctionnalités basiques mais facturées de manière disproportionnée par les SaaS (comme le tracking d'URL), le développement d'un outil interne léger hébergé en serverless (AWS Lambda) permet de passer d'un forfait fixe à une facturation à la micro-requête, réduisant le coût à néant.<br>11. **Maîtrise des contraintes architecturales cloud (Cold Start)** : Lors de la transition d'un SaaS vers une architecture serverless maison, l'ingénieur doit impérativement anticiper des problématiques de production telles que le *cold start* (latence au premier appel d'une fonction Lambda dormante), afin de garantir une expérience utilisateur fluide sur les redirections de requêtes.
+            <div class="tools-badges-cloud"><span class="tool-tag">Zoom</span><span class="tool-tag">Google Workspace (Meet / Gemini Pro)</span><span class="tool-tag">Loom</span><span class="tool-tag">Nito Record &amp; Nito Cal</span><span class="tool-tag">Calendly</span><span class="tool-tag">Adobe Premiere Pro</span><span class="tool-tag">DaVinci Resolve</span><span class="tool-tag">Spline</span><span class="tool-tag">Unreal Engine</span><span class="tool-tag">ChatGPT Plus</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>1. **Exploitation systématique du &quot;Churn Bluff&quot;** : Les éditeurs SaaS intègrent des mécanismes automatisés de réduction (souvent de 15% à 25%) dans leur parcours de résiliation pour retenir l&#x27;utilisateur. Déclencher ce tunnel sans finaliser l&#x27;annulation est un moyen immédiat d&#x27;abaisser son coût d&#x27;acquisition.</span></li><li><span class="point-bullet">✦</span><span>2. **Gestion de l&#x27;intermittence via la mise en pause** : Pour les activités saisonnières ou par cycles (comme les sessions de formation DevOps), privilégier la mise en pause des abonnements plutôt que le maintien d&#x27;une facturation passive hors des périodes d&#x27;utilisation active.</span></li><li><span class="point-bullet">✦</span><span>3. **Audit rigoureux des chevauchements de fonctionnalités** : L&#x27;accumulation d&#x27;outils spécifiques crée souvent des doublons coûteux. Une suite déjà payée (comme Google Workspace) intègre des outils (Meet) capables de remplacer nativement des abonnements dédiés (Zoom) sans perte d&#x27;efficacité.</span></li><li><span class="point-bullet">✦</span><span>4. **Adoption stratégique des clones &quot;Fast Follower&quot;** : Des suites d&#x27;outils émergentes fondent leur modèle économique sur la réplication exacte des leaders du marché à des tarifs de 5 à 10 fois inférieurs (ex. Nito face à Loom ou Calendly). Cette parité fonctionnelle à bas coût doit être privilégiée.</span></li><li><span class="point-bullet">✦</span><span>5. **Valorisation de l&#x27;engagement annuel calculé** : Pour les outils validés à long terme, le passage d&#x27;une facturation mensuelle à un engagement annuel permet de réaliser d&#x27;importantes économies d&#x27;échelle, parfois cumulables avec des tarifs de lancement d&#x27;alternatives disruptives.</span></li><li><span class="point-bullet">✦</span><span>6. **Rupture avec le modèle de la rente par la licence perpétuelle** : Privilégier des outils comme DaVinci Resolve qui proposent un modèle d&#x27;achat unique (*one-time payment*) avec mises à jour gratuites à vie, brisant ainsi la dépendance financière des abonnements mensuels imposés par des acteurs comme Adobe.</span></li><li><span class="point-bullet">✦</span><span>7. **Arbitrage &quot;Temps de montée en compétences&quot; vs &quot;Coût de licence&quot;** : Le passage à des outils industriels de pointe gratuits mais complexes (ex. Unreal Engine à la place de Spline) demande un investissement initial en temps d&#x27;apprentissage. Cet investissement est hautement rentable car il élimine à vie les coûts de licence tout en augmentant la qualité finale des livrables.</span></li><li><span class="point-bullet">✦</span><span>8. **FinOps IA par l&#x27;hybridation &quot;UI vs API&quot;** : Cumuler plusieurs abonnements d&#x27;IA grand public à $20/mois est une inefficacité financière majeure. La bonne pratique consiste à conserver un seul outil avec interface graphique (ex. ChatGPT) et à consommer les modèles concurrents (ex. Claude) via leur API payée au token réel d&#x27;utilisation.</span></li><li><span class="point-bullet">✦</span><span>9. **Consolidation IA via les fonctionnalités incluses** : L&#x27;intégration progressive de modèles de pointe (Gemini Pro) directement dans les abonnements cloud professionnels existants (Google Workspace) offre une opportunité de centralisation pour supprimer totalement les abonnements IA tiers à terme.</span></li><li><span class="point-bullet">✦</span><span>10. **Développement de micro-services Serverless personnalisés** : Pour des fonctionnalités basiques mais facturées de manière disproportionnée par les SaaS (comme le tracking d&#x27;URL), le développement d&#x27;un outil interne léger hébergé en serverless (AWS Lambda) permet de passer d&#x27;un forfait fixe à une facturation à la micro-requête, réduisant le coût à néant.</span></li><li><span class="point-bullet">✦</span><span>11. **Maîtrise des contraintes architecturales cloud (Cold Start)** : Lors de la transition d&#x27;un SaaS vers une architecture serverless maison, l&#x27;ingénieur doit impérativement anticiper des problématiques de production telles que le *cold start* (latence au premier appel d&#x27;une fonction Lambda dormante), afin de garantir une expérience utilisateur fluide sur les redirections de requêtes.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:20</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est le total de tout ce que j&#x27;ai dépensé en abonnement en 2024 pour ma chaîne. Et même si c&#x27;est des services que j&#x27;utilise et dont j&#x27;ai besoin, je trouve que c&#x27;est vraiment trop à dépenser tous les mois. Parce que maintenant tout est à un abonnement et même des outils très très simples peuvent te faire hacker tous les mois. Mais ça s&#x27;arrête maintenant parce que je vais utiliser toutes mes techniques de crevards pour pouvoir économiser un maximum de thunes. Et à commencer par Zoom qui est un outil que j&#x27;utilise pour donner ma formation en live sur le DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Page web d&#x27;abonnement / tarification du service SaaS Adobe Creative Cloud.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tarification de l&#x27;offre &quot;Creative Cloud Pro&quot; à 69,99 $/mois (avec engagement annuel) incluant Premiere Pro et les fonctionnalités d&#x27;IA générative Firefly.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration et dénonciation du coût élevé des abonnements mensuels imposés par les éditeurs de logiciels pour la production de contenu.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000010_seg1.jpg" alt="Capture d&#x27;écran de l&#x27;interface web d&#x27;une page de tarification SaaS (Adobe Creative Cloud Pro) affichant un tarif de 69,99 USD par mois." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000010_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:10</span>
+                        <span class="caption-text">Capture d&#x27;écran de l&#x27;interface web d&#x27;une page de tarification SaaS (Adobe Creative Cloud Pro) affichant un tarif de 69,99 USD par mois.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:21 - 00:00:44</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et Zoom c&#x27;est 23 dollars par mois. Sauf que moi j&#x27;ai besoin de deux utilisateurs parce que j&#x27;ai un assistant qui m&#x27;aide dans la formation. et donc ça me revient tous les mois à 46 dollars. Donc ça fait 550 balles par mois juste pour pouvoir faire des appels à vidéo. Et ça, cette astuce, elle marche dans plein plein plein d&#x27;outils, plein de services, plein de SaaS. On va tout simplement commencer à faire une annulation. Et comme par magie, la plupart du temps, on va se faire proposer une petite promotion pile à ce moment-là pour pas qu&#x27;on annule.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console de gestion de compte SaaS Zoom (Billing / Subscription Management).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Boîte de dialogue détaillant les restrictions suite à un déclassement de compte (limite de réunion de 40 minutes, perte d&#x27;accès à l&#x27;assistant IA, suppression de 10 Go d&#x27;espace de stockage cloud).</p>
+                        <p><strong>Action / Démonstration :</strong> Tentative de résiliation ou d&#x27;annulation d&#x27;un abonnement payant Zoom Workplace Pro pour réduire les coûts de fonctionnement.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000039_seg2.jpg" alt="Interface d&#x27;administration et de facturation Zoom affichant une fenêtre modale de confirmation de résiliation d&#x27;abonnement (&quot;Are you ready to say goodbye to your premium features?&quot;) avec l&#x27;option &quot;Cancel Subscription&quot;." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000039_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:39</span>
+                        <span class="caption-text">Interface d&#x27;administration et de facturation Zoom affichant une fenêtre modale de confirmation de résiliation d&#x27;abonnement (&quot;Are you ready to say goodbye to your premium features?&quot;) avec l&#x27;option &quot;Cancel Subscription&quot;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:45 - 00:01:05</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et dans le cas de Zoom, on peut facilement économiser 15-20% comme ça, juste en faisant semblant d&#x27;annuler. Donc c&#x27;est de l&#x27;argent gratuit. Donc déjà, ça montre un petit peu à quel point ces outils sont un petit peu vicieux parce qu&#x27;ils te chargent un petit peu plus et puis au pire, ils chargent un peu moins. Quelque part, ils nous prennent un petit peu pour des pigeons. Ensuite, une autre chose que je peux mettre en place, c&#x27;est que dans mon cas, je fais mes formations tous les quelques mois et donc je n&#x27;ai pas besoin de Zoom tout le temps, tout le temps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale face caméra concernant les stratégies de négociation et de résiliation d&#x27;abonnements pour économiser sur des outils comme Zoom.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:05 - 00:01:27</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ça m&#x27;embête un peu de payer tous les mois et ça, c&#x27;est quelque chose qu&#x27;on peut retrouver dans plein de SaaS aussi, c&#x27;est qu&#x27;on peut mettre ses abonnements en pause et donc économiser encore un petit peu d&#x27;argent. Et une troisième petite astuce, ça serait de regarder dans les autres services qu&#x27;on a parce que j&#x27;ai réalisé que je paye pour Google Workspace, que j&#x27;utilise pour mes emails. Et dedans, il y a Google Meet qui est inclus, qui contient exactement toutes les fonctionnalités que j&#x27;utilise déjà dans Zoom. Donc en fait, quelque part, à force de payer tellement d&#x27;abonnements, je me retrouve à payer des services en double.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Portails de gestion d&#x27;abonnements SaaS et page de tarification Google Workspace</p>
+                        <p><strong>Contenu textuel & Code :</strong> Formules tarifaires Google Workspace (Starter, Standard, Plus), capacités de stockage Cloud (30 Go, 2 To, 5 To), fonctionnalités collaboratives et options de gestion d&#x27;abonnement</p>
+                        <p><strong>Action / Démonstration :</strong> Optimisation financière des coûts SaaS (FinOps) via la mise en pause d&#x27;abonnements et l&#x27;analyse comparative des plans de services de productivité Cloud</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000110_seg4.jpg" alt="Fenêtre de dialogue d&#x27;un service SaaS proposant une mise en pause temporaire de l&#x27;abonnement (jusqu&#x27;à 3 mois) lors d&#x27;une tentative de résiliation." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000110_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:10</span>
+                        <span class="caption-text">Fenêtre de dialogue d&#x27;un service SaaS proposant une mise en pause temporaire de l&#x27;abonnement (jusqu&#x27;à 3 mois) lors d&#x27;une tentative de résiliation.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000116_seg4.jpg" alt="Page des tarifs de Google Workspace comparant les formules Starter (9,20 $), Standard (18,40 $) et Plus (28,70 $) par utilisateur et par mois." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000116_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:16</span>
+                        <span class="caption-text">Page des tarifs de Google Workspace comparant les formules Starter (9,20 $), Standard (18,40 $) et Plus (28,70 $) par utilisateur et par mois.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000122_seg4.jpg" alt="Zoom sur la liste des fonctionnalités du forfait Google Workspace Standard, incluant l&#x27;assistant Gemini AI, l&#x27;outil d&#x27;enregistrement Meet et les options de conformité." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000122_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:22</span>
+                        <span class="caption-text">Zoom sur la liste des fonctionnalités du forfait Google Workspace Standard, incluant l&#x27;assistant Gemini AI, l&#x27;outil d&#x27;enregistrement Meet et les options de conformité.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:28 - 00:01:47</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait, très probablement que je vais arrêter complètement de payer Zoom et puis juste utiliser Google Meet parce que ça fait tout ce que j&#x27;ai besoin. Un autre outil que j&#x27;utilise pour pouvoir répondre en vidéo à des questions qu&#x27;on me pose toujours dans ma formation, c&#x27;est Loom. C&#x27;est un outil que j&#x27;aime bien. Je peux enregistrer mon écran, ma tête en même temps et puis l&#x27;envoyer facilement à quelqu&#x27;un. Mais c&#x27;est déjà 15 balles par mois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Loom (lecteur vidéo web), outil de diagramme/tableau blanc virtuel (intégré dans la vidéo Loom)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Schéma d&#x27;architecture conceptuel : profils &quot;Dev&quot; (développeurs), profil &quot;DevOps/SRE&quot;, logo et fichier &quot;Terraform&quot;, et icônes de serveurs (&quot;Server&quot;) cibles</p>
+                        <p><strong>Action / Démonstration :</strong> Explication pédagogique et enregistrement d&#x27;écran (via Loom) pour vulgariser la différence entre le provisionnement d&#x27;infrastructure (Terraform) et l&#x27;orchestration de conteneurs (Kubernetes)</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000142_seg5.jpg" alt="Interface de l&#x27;outil de messagerie vidéo Loom montrant une présentation explicative intitulée &quot;Différences entre Kubernetes et Terraform&quot; avec un schéma illustrant le rôle d&#x27;un DevOps/SRE créant du code Terraform pour déployer des serveurs" loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000142_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:42</span>
+                        <span class="caption-text">Interface de l&#x27;outil de messagerie vidéo Loom montrant une présentation explicative intitulée &quot;Différences entre Kubernetes et Terraform&quot; avec un schéma illustrant le rôle d&#x27;un DevOps/SRE créant du code Terraform pour déployer des serveurs</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:47 - 00:02:19</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça, c&#x27;est en plus en annuel. Donc quelque part une astuce ça pourrait être pour les outils qu&#x27;on est certain d&#x27;utiliser sur le long De les payer directement annuellement comme ça on peut économiser un petit peu Mais ce qui est encore mieux ce serait de trouver des alternatives moins chères Et dans mon cas j&#x27;ai trouvé Nitto Record qui a exactement les mêmes fonctionnalités que dans Loom Y compris les fonctionnalités AI que j&#x27;avais essayé d&#x27;utiliser un petit peu mais qui honnêtement ne marchent pas super bien Alors que dans Nitto Record ça marche correctement et c&#x27;est beaucoup moins cher parce que là le pricing on est sur 5$ Et en plus de ça comme on a dit tout à l&#x27;heure si on paye annuellement le prix est de 30$ par an ce qui nous revient à 2,50 par mois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (site de tarification SaaS NeetoRecord)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Grille tarifaire et fonctionnalités de NeetoRecord : plan gratuit incluant jusqu&#x27;à 200 vidéos/mois (15 min max/vidéo, équipe illimitée) et plan payant à 5$/mois (ou 30$/an).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et évaluation d&#x27;une alternative économique aux outils d&#x27;enregistrement d&#x27;écran traditionnels dans le but de réduire l&#x27;OPEX (dépenses de fonctionnement) lié aux abonnements logiciels.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000203_seg6.jpg" alt="Capture d&#x27;écran du site web de l&#x27;outil NeetoRecord détaillant les fonctionnalités de son offre gratuite (&quot;Free Plan&quot;)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000203_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:03</span>
+                        <span class="caption-text">Capture d&#x27;écran du site web de l&#x27;outil NeetoRecord détaillant les fonctionnalités de son offre gratuite (&quot;Free Plan&quot;).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000211_seg6.jpg" alt="Vue de la grille tarifaire de NeetoRecord mettant en avant l&#x27;offre gratuite et l&#x27;offre payante abordable à 5$ par mois." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000211_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:11</span>
+                        <span class="caption-text">Vue de la grille tarifaire de NeetoRecord mettant en avant l&#x27;offre gratuite et l&#x27;offre payante abordable à 5$ par mois.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:19 - 00:02:39</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est presque une réduction de 8 à 10 fois en fonction de si on payait par mois ou pas, en passant sur Nito Record. Et ce que j&#x27;ai trouvé amusant, c&#x27;est qu&#x27;en fait, ils ont plein d&#x27;outils différents, et c&#x27;est toujours la même stratégie, où ils expliquent qu&#x27;en gros, nous, on n&#x27;est pas très très fort pour trouver des nouvelles fonctionnalités, etc. Donc ce qu&#x27;on va faire, c&#x27;est juste copier les autres, et puis on va juste faire un prix moins cher.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une documentation ou un article de blog technique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Titres et texte surligné : &quot;Competing on price&quot; et le début de &quot;Race to the bottom&quot;, expliquant la stratégie de développement de l&#x27;outil (optimisation des coûts plutôt que création de nouvelles fonctionnalités innovantes).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et analyse de la stratégie de l&#x27;éditeur (Nito Record) consistant à cloner des solutions existantes pour proposer des tarifs 8 à 10 fois inférieurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000234_seg7.jpg" alt="Capture d&#x27;écran d&#x27;un manifeste ou article de blog de l&#x27;éditeur détaillant sa philosophie de positionnement tarifaire (&quot;Competing on price&quot;) et son approche axée sur la réimplémentation économique de fonctionnalités existantes." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000234_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:34</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un manifeste ou article de blog de l&#x27;éditeur détaillant sa philosophie de positionnement tarifaire (&quot;Competing on price&quot;) et son approche axée sur la réimplémentation économique de fonctionnalités existantes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:39 - 00:03:00</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;utilisais aussi Calendly, qui me coûte à peu près 10-12 balles par mois, et donc je vais probablement switcher sur Nito Cal, qui est exactement la même chose que Calendly. et c&#x27;est encore pire parce qu&#x27;en fait il y a tellement de fonctionnalités dans leur version gratuite que tu n&#x27;as presque même pas de raison de prendre la version payante. Mais pour le coup si c&#x27;est juste 2,50 par mois ça me fait plaisir plutôt que de payer plus cher un autre outil qui n&#x27;a pas changé depuis les 10 dernières années.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant le site officiel de NeetoCal.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tarifs et fonctionnalités comparatives entre la version gratuite (&quot;Free Plan&quot; incluant la majorité des options) et payante (&quot;Pro Plan&quot; à 5$/utilisateur/mois).</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et comparaison des coûts d&#x27;outils SaaS de planification de rendez-vous en alternative à Calendly.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000250_seg8.jpg" alt="Interface web présentant la tarification de NeetoCal (plans Free et Pro à 5$/mois)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000250_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:50</span>
+                        <span class="caption-text">Interface web présentant la tarification de NeetoCal (plans Free et Pro à 5$/mois).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:00 - 00:03:21</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Un autre outil que j&#x27;adore détester c&#x27;est Première Pro parce que c&#x27;est un logiciel que j&#x27;ai beaucoup utilisé pour faire du montage que je fais un petit moment maintenant que j&#x27;ai quelqu&#x27;un qui m&#x27;aide là-dessus et donc du coup j&#x27;en ai moins besoin mais j&#x27;en ai quand même besoin un peu. C&#x27;est un problème aussi qui est récurrent avec les sas c&#x27;est que je me retrouve à payer tous les mois pour un outil que j&#x27;utilise pas souvent ou du moins pas tous les mois et qui en plus de ça est souvent frustrant à utiliser, plein de crash, plein de bugs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Portail web Adobe de gestion des abonnements SaaS (Software as a Service).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Formules de tarification de licence Cloud :
+- Option mensuelle : 44,99 CAD/mois sans engagement.
+- Option annuelle payée mensuellement : 29,99 CAD/mois avec engagement.
+- Option annuelle prépayée : 347,88 CAD/an.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration et critique du modèle de facturation récurrent imposé par les plateformes SaaS pour des logiciels de création (Premiere Pro / Creative Cloud), même pour un usage ponctuel ou occasionnel.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000305_seg9.jpg" alt="Interface de présentation et de téléchargement de l&#x27;application Adobe Premiere Pro avec options d&#x27;achat et d&#x27;essai gratuit." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000305_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:05</span>
+                        <span class="caption-text">Interface de présentation et de téléchargement de l&#x27;application Adobe Premiere Pro avec options d&#x27;achat et d&#x27;essai gratuit.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000316_seg9.jpg" alt="Interface de sélection des formules d&#x27;abonnement SaaS d&#x27;Adobe Creative Cloud présentant différentes options de tarification (mensuelle et annuelle en CAD)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000316_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:16</span>
+                        <span class="caption-text">Interface de sélection des formules d&#x27;abonnement SaaS d&#x27;Adobe Creative Cloud présentant différentes options de tarification (mensuelle et annuelle en CAD).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:22 - 00:03:43</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça fait vraiment chier de donner de l&#x27;argent à Adobe pour ça. Donc au passage, l&#x27;astuce d&#x27;annulation fonctionne aussi pour Adobe. Donc pareil, vous pouvez économiser facilement à 20 à 25% là-dessus. Mais encore mieux, c&#x27;est des alternatives qui ne sont pas moins chères, qui sont gratuits. Et donc dans ce cas-là, je suis passé sur DaVinci Resolve qui a une version qui est gratuite, qui est déjà très très bien. Ils ont une version qui est payante, mais qui est payante en une seule fois et qui prend toutes les mises à jour futures.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la page de présentation de DaVinci Resolve 20.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte descriptif de DaVinci Resolve 20 mettant en avant ses fonctionnalités d&#x27;édition professionnelle, d&#x27;étalonnage colorimétrique, d&#x27;effets visuels et de post-production audio.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;une alternative gratuite et performante à la suite Adobe Premiere Pro pour le montage et la post-production vidéo.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000337_seg10.jpg" alt="Capture d&#x27;écran du site web officiel de Blackmagic Design présentant le logiciel de montage vidéo et de post-production DaVinci Resolve 20." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000337_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:37</span>
+                        <span class="caption-text">Capture d&#x27;écran du site web officiel de Blackmagic Design présentant le logiciel de montage vidéo et de post-production DaVinci Resolve 20.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:43 - 00:04:06</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est quand même super. Ça fait des années et des années qu&#x27;ils font d&#x27;assez bonnes mises à jour, au point que maintenant, beaucoup considèrent que DaVinci est mieux que Premiere Pro en termes de stabilité, en termes de color, en termes de 3D, en termes... Il y a plein de fonctionnalités qu&#x27;on peut faire dans DaVinci, qu&#x27;on ne peut juste pas faire dans Premiere Pro dans un outil qui est gratuit ou alors qui est un paiement une fois. Dans le même esprit, il y a un outil que j&#x27;avais commencé à utiliser qui s&#x27;appelle Spline et qui, contrairement à Adobe, honnêtement, c&#x27;est un outil que j&#x27;aimais bien utiliser.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune action technique n&#x27;est réalisée. Le créateur s&#x27;exprime face caméra au sujet de la stabilité et des fonctionnalités de DaVinci Resolve comparé à Adobe Premiere Pro.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:06 - 00:04:27</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il permet de faire des animations en 3D comme j&#x27;ai fait sur certaines vidéos de ma chaîne et qui est assez facile à en prendre en main, qui est directement dans le navigateur, etc. où on peut aussi facilement l&#x27;exporter pour faire du web et tout. Donc c&#x27;est vraiment un outil qui est super cool. Là au contraire ça ne me dérangeait pas de payer. Surtout que ce n&#x27;était pas très très cher. C&#x27;était 12 balles par mois. Mais je sais que des animations je n&#x27;en fais pas forcément tous les mois non plus. Et encore une fois la même astuce c&#x27;est que parfois il y a des outils qui sont mieux et gratuits.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:27 - 00:04:46</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc l&#x27;exemple ici c&#x27;est que je suis passé sur Unreal Engine. Qui est utilisé dans les jeux vidéo qui ont les meilleurs graphiques. Et même utilisé dans le cinéma les effets spéciaux etc. Donc c&#x27;est vraiment le top du top en termes de logiciel 3D. Et c&#x27;est un logiciel qui est gratuit. Le seul moment où on doit payer, c&#x27;est quand on a un projet qui dépasse les 1 million de revenus. Donc, ce n&#x27;est pas encore mon cas. Sinon, je ne serais pas là à économiser des 20 balles à droite à gauche.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (site officiel d&#x27;Unreal Engine / Epic Games)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Conditions de licence d&#x27;Unreal Engine, mentionnant la gratuité pour les développeurs de jeux, indépendants et écoles en dessous d&#x27;un million de dollars USD de revenus.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du modèle de licence et d&#x27;accessibilité gratuite du moteur de jeu et de rendu 3D Unreal Engine.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000432_seg13.jpg" alt="Page d&#x27;accueil du site officiel d&#x27;Unreal Engine présentant le logiciel de création 3D temps réel." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000432_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:32</span>
+                        <span class="caption-text">Page d&#x27;accueil du site officiel d&#x27;Unreal Engine présentant le logiciel de création 3D temps réel.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000442_seg13.jpg" alt="Section &quot;Licensing&quot; du site d&#x27;Unreal Engine détaillant la gratuité du moteur en dessous d&#x27;un million de dollars de chiffre d&#x27;affaires." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000442_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:42</span>
+                        <span class="caption-text">Section &quot;Licensing&quot; du site d&#x27;Unreal Engine détaillant la gratuité du moteur en dessous d&#x27;un million de dollars de chiffre d&#x27;affaires.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:47 - 00:05:08</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, évidemment, c&#x27;est un outil qui est un peu plus complexe, qui m&#x27;a pris pas mal de temps pour pouvoir prendre mes repères, m&#x27;habituer et faire ce que je voulais dessus. Mais je trouve que c&#x27;est un investissement en temps qui vaut le coup. Parce qu&#x27;à partir du maintenant, à chaque fois que je vais avoir besoin d&#x27;animation 3D, je vais pouvoir réutiliser Unreal Engine et je vais avoir des meilleurs résultats. Et ça ne va rien me coûter. Les autres types d&#x27;outils qu&#x27;on commence à être de plus en plus à utiliser, c&#x27;est les IA, donc ChatGPT, CloudCode, Gemini, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:09 - 00:05:27</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et moi, j&#x27;utilise principalement ChatGPT. J&#x27;aime bien leur app, j&#x27;aime bien l&#x27;interface, les fonctionnalités qu&#x27;ils ont. Mais j&#x27;aime bien Cloud pour pouvoir coder. Je trouve que Cloud, pour le code ou pour tout ce qui a besoin d&#x27;un petit peu d&#x27;imagination est un petit peu mieux que les modèles de ChatGPT. Et donc, pendant un moment, je payais les deux. Ce qui est un peu embêtant de devoir payer plusieurs fois pour le même service.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (site officiel d&#x27;Anthropic / Claude).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande d&#x27;installation Node.js : `npm install -g @anthropic-ai/claude-code` (nécessite Node.js 18+).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des capacités de l&#x27;agent IA Claude (Anthropic) pour le développement et l&#x27;analyse de bases de code volumineuses directement depuis le terminal de commande.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000518_seg15.jpg" alt="Page web d&#x27;Anthropic introduisant l&#x27;outil CLI &quot;Claude Code&quot; avec les instructions d&#x27;installation pour le terminal via le gestionnaire de paquets npm." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000518_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:18</span>
+                        <span class="caption-text">Page web d&#x27;Anthropic introduisant l&#x27;outil CLI &quot;Claude Code&quot; avec les instructions d&#x27;installation pour le terminal via le gestionnaire de paquets npm.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:27 - 00:05:46</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, pour le coup, j&#x27;ai décidé d&#x27;accepter de payer ChatGPT parce que c&#x27;est celui que j&#x27;utilise le plus. et simplement pour Claude de passer sur l&#x27;API. Donc au lieu de payer 18 ou 20 balles, parce qu&#x27;évidemment c&#x27;est 17, mais en fait si tu payes tous les mois, c&#x27;est 20 balles. J&#x27;ai décidé de passer juste par l&#x27;API. Ce qui fait que quand j&#x27;en ai pas besoin, je paye pas. Et le jour où j&#x27;en ai besoin, je vais payer juste au token.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web, portails de tarification d&#x27;OpenAI et d&#x27;Anthropic (API).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tarifs d&#x27;abonnements ChatGPT (Plus à $20/mois) et métriques de facturation à l&#x27;usage pour les modèles d&#x27;Anthropic (Claude Sonnet 4 à $3/MTok d&#x27;input et $15/MTok d&#x27;output, avec prompt caching).</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative des coûts entre un abonnement grand public mensuel fixe (SaaS) et l&#x27;intégration directe de modèles de langage (LLM) via l&#x27;API développeur facturée à l&#x27;usage pour optimiser les dépenses d&#x27;infrastructure d&#x27;IA.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000531_seg16.jpg" alt="Interface web affichant la grille tarifaire des abonnements ChatGPT d&#x27;OpenAI (plans Free à $0, Plus à $20 et Pro à $200 par mois)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000531_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:31</span>
+                        <span class="caption-text">Interface web affichant la grille tarifaire des abonnements ChatGPT d&#x27;OpenAI (plans Free à $0, Plus à $20 et Pro à $200 par mois).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000536_seg16.jpg" alt="Interface web détaillant la tarification de l&#x27;API d&#x27;Anthropic pour les modèles d&#x27;IA (Claude Opus et Claude Sonnet) avec les coûts par million de tokens (MTok)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000536_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:36</span>
+                        <span class="caption-text">Interface web détaillant la tarification de l&#x27;API d&#x27;Anthropic pour les modèles d&#x27;IA (Claude Opus et Claude Sonnet) avec les coûts par million de tokens (MTok).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:46 - 00:06:06</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et au final, ça me revient beaucoup moins cher que de payer plusieurs fois 20 balles pour chacun des services. J&#x27;ai réalisé aussi que dans l&#x27;abonnement Google Workspace que j&#x27;utilise pour mes emails et pour mon stockage de fichiers, et bien en fait j&#x27;ai Gemini Pro qui est inclus dedans. Donc quelque part, si je switchais à Gemini, qui est honnêtement un très très bon modèle. En génération de vidéo aussi avec VO3, ils sont beaucoup meilleurs que ChatGPT.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Page web de tarification et fonctionnalités Google Workspace</p>
+                        <p><strong>Contenu textuel & Code :</strong> Offres d&#x27;abonnement cloud Google Workspace montrant l&#x27;espace de stockage (30 GB, 2 TB, 5 TB), l&#x27;intégration de Gemini AI Assistant (Gmail, Docs, Meet), NotebookLM et les fonctions de sécurité associées.</p>
+                        <p><strong>Action / Démonstration :</strong> Comparaison des abonnements de stockage et services cloud pour démontrer l&#x27;inclusion de Gemini Pro dans son offre Workspace existante.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000556_seg17.jpg" alt="Tableau comparatif des forfaits Google Workspace détaillant les espaces de stockage (30 Go, 2 To, 5 To) et l&#x27;intégration des fonctionnalités d&#x27;IA avec Gemini et NotebookLM." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000556_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:56</span>
+                        <span class="caption-text">Tableau comparatif des forfaits Google Workspace détaillant les espaces de stockage (30 Go, 2 To, 5 To) et l&#x27;intégration des fonctionnalités d&#x27;IA avec Gemini et NotebookLM.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:06 - 00:06:27</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En code, ils ne sont pas forcément autant au top que Cloud, mais ils ont une énorme contexte window, ce qui fait que dans certains cas, ils peuvent être un petit peu meilleurs. Et donc ce qui risque d&#x27;arriver, c&#x27;est que je vais petit à petit switcher vers Gemini. Et si ça me plaît, je vais juste annuler mon ChatGPT, annuler mon Cloud et puis rester dessus. Ce qui me fera encore une fois un outil de moins à devoir payer tous les mois. Et donc dans le cas de Cloud Code maintenant, j&#x27;utilise soit la version gratuite, soit l&#x27;API.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative orale des performances de codage et de la taille de la fenêtre de contexte (&quot;context window&quot;) entre les modèles d&#x27;IA Claude, ChatGPT et Gemini, expliquant la transition progressive de son flux de travail vers Gemini.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:27 - 00:06:49</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Dans ce cas-là, je pense que la leçon va revenir, c&#x27;est que parfois la version gratuite suffit. Et très souvent, il y a des outils où on peut payer vraiment à l&#x27;utilisation. Ce qui est le cas dans les services d&#x27;IA, mais aussi dans tous les services cloud. Et donc, ça permet d&#x27;économiser pas mal d&#x27;argent si on a une utilisation qui est assez faible. Autre astuce un petit peu plus hardcore cette fois, j&#x27;utilise un outil qui s&#x27;appelle TinyURL, qui est l&#x27;outil moins cher que j&#x27;ai trouvé pour pouvoir traquer les URL.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune (visage de l&#x27;intervenant uniquement)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun (discussion orale sans support technique visuel)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;avantage économique des modèles de tarification à l&#x27;usage (&quot;pay-as-you-go&quot;) dans le cloud et les services d&#x27;IA comparés aux abonnements fixes pour les faibles volumes d&#x27;utilisation.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:49 - 00:07:09</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Quand je mets un lien dans la description pour une sponsor, pour une formation, quelque chose comme ça, j&#x27;aime bien savoir combien de personnes ont cliqué pour savoir si c&#x27;était efficace ou pas. Et TinyURL, 13 balles par mois, juste pour compter le nombre de clics, c&#x27;est un petit peu chiant. C&#x27;est à la fois pas assez cher où je me dirais « Oh, bah, je vais prendre le temps de coder mon truc à moi-même. » D&#x27;un autre côté, c&#x27;est aussi un outil que je n&#x27;utilise pas forcément tout le temps, tous les mois, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console web SaaS TinyURL (dashboard d&#x27;analyse et page de souscription/pricing).</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Liens raccourcis configurés : `l.cocadmin.com/formation-devops`, `l.cocadmin.com/aws-free`, `l.cocadmin.com/e2600`, `l.cocadmin.com/peperelab`.
+- Graphique &quot;Traffic Over Time&quot; distinguant les clics uniques, non-uniques et bots.
+- Grille tarifaire TinyURL : Offre &quot;Free&quot; à 0,00 $/mois, offre &quot;Pro&quot; à 12,99 $/mois.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des statistiques de clics sur les liens de parrainage/formation et critique du rapport coût/bénéfice de l&#x27;abonnement &quot;Pro&quot; de TinyURL pour une simple fonctionnalité de redirection et de comptage de clics.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000654_seg20.jpg" alt="Interface d&#x27;administration de TinyURL présentant le tableau de bord analytique avec les métriques de clics (&quot;Likely Human Clicks: 32&quot;, &quot;Unique Clicks: 31&quot;), le graphique temporel du trafic et la liste des liens raccourcis personnalisés sous le sous-domaine l.cocadmin.com." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000654_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:54</span>
+                        <span class="caption-text">Interface d&#x27;administration de TinyURL présentant le tableau de bord analytique avec les métriques de clics (&quot;Likely Human Clicks: 32&quot;, &quot;Unique Clicks: 31&quot;), le graphique temporel du trafic et la liste des liens raccourcis personnalisés sous le sous-domaine l.cocadmin.com.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000659_seg20.jpg" alt="Page de tarification de TinyURL mettant en avant le forfait &quot;Pro&quot; actif (&quot;Current Subscription&quot;) à partir de 12,99 $ par mois pour le suivi et la gestion des liens raccourcis." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000659_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:59</span>
+                        <span class="caption-text">Page de tarification de TinyURL mettant en avant le forfait &quot;Pro&quot; actif (&quot;Current Subscription&quot;) à partir de 12,99 $ par mois pour le suivi et la gestion des liens raccourcis.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:10 - 00:07:35</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et parfois, on peut se dire « Bon, si je paye un SaaS, ça permet aux développeurs de continuer à rajouter des nouvelles fonctionnalités, etc. » Mais là, dans le cas de TinyURL, mon gars, le mec n&#x27;a jamais rien à rajouter depuis des années et des années. Même l&#x27;interface, tu vois qu&#x27;il l&#x27;a fait en 2004 et il n&#x27;a pas mis à jour depuis. sauf que maintenant avec les IA le coût du logiciel en termes de temps de développement etc a considérablement diminué et donc je me suis dit un soir pourquoi est-ce que je ne recoderais pas un outil qui va me permettre de faire ça comme ça je vais arrêter de payer pour celui-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la console d&#x27;administration et de suivi analytique de TinyURL.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liens raccourcis configurés (tels que l.cocadmin.com/formation-devops, l.cocadmin.com/aws-free) et statistiques de requêtes associées (clics uniques, répartition temporelle du trafic).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et critique de l&#x27;interface utilisateur de TinyURL pour illustrer le manque de nouveautés et de mises à jour ergonomiques de cette solution SaaS au fil des années.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000716_seg21.jpg" alt="Interface utilisateur du tableau de bord d&#x27;analyse de TinyURL, affichant des indicateurs de performance à vide pour des liens personnalisés associés au domaine l.cocadmin.com." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000716_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:16</span>
+                        <span class="caption-text">Interface utilisateur du tableau de bord d&#x27;analyse de TinyURL, affichant des indicateurs de performance à vide pour des liens personnalisés associés au domaine l.cocadmin.com.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000722_seg21.jpg" alt="Tableau de bord d&#x27;analyse de TinyURL montrant des graphiques de trafic (&quot;Traffic Over Time&quot;) et des métriques actives de clics (liens cliqués, clics humains probables, clics uniques)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000722_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:22</span>
+                        <span class="caption-text">Tableau de bord d&#x27;analyse de TinyURL montrant des graphiques de trafic (&quot;Traffic Over Time&quot;) et des métriques actives de clics (liens cliqués, clics humains probables, clics uniques).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:35 - 00:07:54</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;ai recodé mon propre raccourcisseur de lien. On peut se dire c&#x27;est quoi l&#x27;avantage parce que maintenant tu dois payer un serveur pour ça mais c&#x27;est une idée que j&#x27;avais en tête depuis un petit moment c&#x27;est d&#x27;utiliser du serverless. Donc à la base je pensais utiliser AWS Lambda qui est un service où on paye juste à la requête et comme je ne reçois pas tant de trafic sur mes requêtes peut-être quelques milliers par mois maximum et moi je paierais vraiment quelques centimes par mois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console Web / Page produit Amazon Web Services (AWS)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Titre principal &quot;AWS Lambda&quot; associé à une description du service FaaS (Function-as-a-Service) et un bouton d&#x27;appel à l&#x27;action pour démarrer (&quot;Get started...&quot;).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du concept d&#x27;architecture serverless et justification du choix initial d&#x27;AWS Lambda pour exécuter le code du raccourcisseur de lien à la demande sans gérer de serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000745_seg22.jpg" alt="Vue rapprochée de la page de présentation du service AWS Lambda sur la plateforme Amazon Web Services, mettant en avant le nom du service &quot;AWS Lambda&quot;." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000745_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:45</span>
+                        <span class="caption-text">Vue rapprochée de la page de présentation du service AWS Lambda sur la plateforme Amazon Web Services, mettant en avant le nom du service &quot;AWS Lambda&quot;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:54 - 00:08:14</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais un des soucis qu&#x27;il y a sur Lambda, c&#x27;est le problème de call start. C&#x27;est-à-dire que si personne clique sur un lien pendant assez longtemps, ce qui peut arriver, et bien la première personne qui va cliquer dessus, ça va mettre du temps avant que la fonction s&#x27;exécute et puis redirige la personne vers le bon site, ce qui est un petit peu chiant. Ça ne me donne pas une très très bonne expérience. Idéalement, on voudrait que ça redirige instantanément vers le lien.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant le blog officiel AWS (AWS Compute Blog)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Article explicatif sur le phénomène de &quot;cold start&quot; (démarrage à froid) lors de l&#x27;invocation d&#x27;une fonction AWS Lambda après une période d&#x27;inactivité.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle pour appuyer l&#x27;explication théorique du problème de latence réseau rencontré lors de la première requête sur une architecture serverless.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000759_seg23.jpg" alt="Article du blog AWS Compute intitulé &quot;Understanding and Remediating Cold Starts: An AWS Lambda Perspective&quot; traitant du fonctionnement et de l&#x27;optimisation des démarrages à froid des fonctions AWS Lambda." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000759_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:59</span>
+                        <span class="caption-text">Article du blog AWS Compute intitulé &quot;Understanding and Remediating Cold Starts: An AWS Lambda Perspective&quot; traitant du fonctionnement et de l&#x27;optimisation des démarrages à froid des fonctions AWS Lambda.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:14 - 00:08:33</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc à la place, j&#x27;ai utilisé les workers de Cloudflare qui sont exactement la même chose, sauf que dans les workers, il n&#x27;y a pas ce problème de call start. c&#x27;est toujours hot, c&#x27;est-à-dire qu&#x27;ils gardent toujours ta fonction au chaud dans la RAM. Et donc même si personne clique sur ton lien pendant trois semaines, quand quelqu&#x27;un arrive, boum, c&#x27;est très très rapide. Et donc j&#x27;ai vu dans mes stats mes temps d&#x27;exécution, c&#x27;est de l&#x27;ordre de 3 à 4 millisecondes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant le portail produit et le blog technique de Cloudflare.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diagramme de flux d&#x27;une requête HTTP/TLS entre le navigateur, l&#x27;edge Cloudflare, le runtime des Workers et le stockage (Edge Storage). Texte explicatif détaillant le chargement du Worker en 5 millisecondes déclenché dès la réception du paquet &quot;ClientHello&quot; lors de la négociation TLS.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique de l&#x27;élimination du &quot;cold start&quot; (démarrage à froid) chez Cloudflare, démontrant que l&#x27;initialisation de la fonction serverless est anticipée de manière transparente pendant l&#x27;établissement de la connexion sécurisée afin d&#x27;obtenir un temps d&#x27;accès instantané.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000819_seg24.jpg" alt="Page d&#x27;accueil de Cloudflare Workers présentant le concept de déploiement de code serverless mondial sans contrainte d&#x27;infrastructure." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000819_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:19</span>
+                        <span class="caption-text">Page d&#x27;accueil de Cloudflare Workers présentant le concept de déploiement de code serverless mondial sans contrainte d&#x27;infrastructure.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000824_seg24.jpg" alt="Article de blog officiel de Cloudflare intitulé &quot;Eliminating cold starts with Cloudflare Workers&quot;, introduisant la suppression des démarrages à froid." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000824_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:24</span>
+                        <span class="caption-text">Article de blog officiel de Cloudflare intitulé &quot;Eliminating cold starts with Cloudflare Workers&quot;, introduisant la suppression des démarrages à froid.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000829_seg24.jpg" alt="Diagramme de séquence et explication technique du mécanisme de pré-chargement (warmup) des Workers de Cloudflare initié dès la négociation TLS (ClientHello)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000829_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:29</span>
+                        <span class="caption-text">Diagramme de séquence et explication technique du mécanisme de pré-chargement (warmup) des Workers de Cloudflare initié dès la négociation TLS (ClientHello).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:34 - 00:09:03</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça n&#x27;ajoute aucun temps perceptible par l&#x27;utilisateur quand il clique dessus pour pouvoir comptabiliser son clic. Et en termes de coût, leur partie gratuite est tellement large que je risque de jamais payer. On a le droit à 100 000 requêtes par jour et on peut utiliser jusqu&#x27;à 10 000 secondes de CPU par invocation. Moi dans mon cas c&#x27;est entre 1 et 4 donc j&#x27;ai encore un peu de la marge. Et si jamais vraiment je deviens, je fais des milliards de vues et que ça clique à fond, dans la version payante, qui coûte 5 balles par mois, j&#x27;ai droit à 10 millions de requêtes incluses, et ensuite je paye 30 centimes par million de requêtes supplémentaires.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique de la tarification gratuite d&#x27;un service cloud (limite de 100 000 requêtes par jour et 10 000 secondes de CPU par invocation).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:03 - 00:09:21</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour stocker les données, parce qu&#x27;il faut que je stocke le nombre de clics, j&#x27;utilise D1, qui est une base de données serverless aussi, qu&#x27;on peut appeler via une API REST, donc c&#x27;est vraiment parfait pour du serverless comme des workers. Et bien c&#x27;est pareil, c&#x27;est gratuit pour 5 millions de lectures par jour, et 100 000 écritures par jour. Donc pareil, je ne vais très probablement jamais avoir à payer ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Documentation tarifaire de Cloudflare D1</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Métriques d&#x27;utilisation affichées pour l&#x27;offre &quot;Workers Free&quot; :
+  * Lectures de lignes (Rows read) : 5 millions par jour
+  * Écritures de lignes (Rows written) : 100 000 par jour
+  * Stockage (Storage) : 5 Go au total
+- Tarifs pour l&#x27;offre &quot;Workers Paid&quot; (ex: 25 milliards de lectures incluses, puis 0,001 $ par million).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique et comparaison des quotas gratuits de la base de données SQL serverless Cloudflare D1 pour justifier sa pertinence économique dans une architecture serverless (Workers).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000917_seg26.jpg" alt="Tableau des métriques de facturation (Billing metrics) comparant les offres gratuite (Workers Free) et payante (Workers Paid) pour la base de données Cloudflare D1." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_000917_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:17</span>
+                        <span class="caption-text">Tableau des métriques de facturation (Billing metrics) comparant les offres gratuite (Workers Free) et payante (Workers Paid) pour la base de données Cloudflare D1.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:21 - 00:09:44</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si jamais je dois payer, on est sur 1$ par million de requêtes après les 50 premières millions de requêtes gratuites. Donc ça, je trouve que c&#x27;est une bonne situation des services de cloud où souvent on se dit que le cloud, c&#x27;est pour que des grosses entreprises, des gros projets, etc. Mais parfois, au contraire, sur des petits projets, ça peut être très utile parce que là, j&#x27;ai de la haute disponibilité. J&#x27;ai un service qui est renondé dans le monde entier, qui est gratuit et qui est ultra performant et qui ne coûte rien du tout.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:44 - 00:10:08</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc les une ou deux soirées que j&#x27;ai dû investir à recoder ça, honnêtement, je trouve que ça vaut le coup parce que, premièrement, c&#x27;était amusant. Deuxièmement, ce n&#x27;est pas comme si c&#x27;était du temps que j&#x27;aurais pu rentabiliser parce que j&#x27;ai fait ça à la place de jouer à Starcraft le soir. Donc, ce n&#x27;est pas vraiment l&#x27;argent perdu pour moi. Dans le même style, il y a un outil que j&#x27;utilise pour mes formations aussi, pour pouvoir héberger tous les contenus, etc., qui s&#x27;appelle Podia, que j&#x27;aime bien, qui n&#x27;est pas trop trop cher, qui, contrairement à pas mal d&#x27;autres outils, rajoute continuellement des nouvelles fonctionnalités.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface d&#x27;administration système, de cloud ou de développement.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Menu de jeu vidéo (StarCraft II) et site vitrine de service SaaS tiers (Podia).</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation technique, configuration système ou développement n&#x27;est réalisé dans ces captures.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:09 - 00:10:31</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, je les aime bien. Donc, pour ça, je n&#x27;ai pas trop envie de changer parce que ça me convient à peu près. Et à part recoder tout de zéro, il n&#x27;y a pas vraiment d&#x27;alternative moins chère qui offre le même nombre de fonctionnalités. J&#x27;ai même passé la gestion de mes emails chez Podia. Avant, j&#x27;étais chez MailChimp qui est vraiment le pire exemple des SaaS qui font rien et qui charge un prix abusé. Je pense que chez MailChimp, je commençais à payer des 120, 130 dollars tous les mois alors que je n&#x27;envoyais jamais d&#x27;email.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web, interface de tarification SaaS de MailChimp.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Paliers de facturation basés sur le nombre de contacts (sélection de 2 500 contacts visible à l&#x27;écran) pour un volume de 6 000 emails mensuels, tarif de départ estimé à 27,73 CAD/mois après un essai gratuit de 14 jours.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative et critique du modèle de tarification de MailChimp, expliquant la migration de la gestion des emails vers une alternative plus avantageuse (Podia).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001025_seg29.jpg" alt="Interface d&#x27;estimation tarifaire de la plateforme d&#x27;emailing MailChimp, illustrant la sélection du nombre de contacts (menu déroulant de 500 à 20 000 contacts) pour le forfait &quot;Standard&quot;." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001025_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:25</span>
+                        <span class="caption-text">Interface d&#x27;estimation tarifaire de la plateforme d&#x27;emailing MailChimp, illustrant la sélection du nombre de contacts (menu déroulant de 500 à 20 000 contacts) pour le forfait &quot;Standard&quot;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:31 - 00:10:51</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, ça me coûtait vraiment trop cher. Donc là, chez Podia, donc là pour ma liste, c&#x27;est à peu près à 10 000. Je suis à 50 par mois, ce qui est raisonnable. mais dans mon cas où j&#x27;envoie vraiment pas beaucoup d&#x27;emails, comme je t&#x27;ai dit, ma formation, je l&#x27;ai fait quelques fois par an, donc j&#x27;envoie vraiment quelques emails par an. En plus de ça, ma liste est proche des 10 000, donc dès que je veux passer à 10 000 abonnés sur ma liste email, boum, ça va me booster à 86 par mois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de la plateforme SaaS Podia (section tarification Podia Email)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste des fonctionnalités incluses (&quot;Email automations&quot;, &quot;Analytics and sales metrics&quot;) et menu déroulant d&#x27;estimation tarifaire basé sur le nombre d&#x27;abonnés (&quot;Your subscribers&quot; avec des paliers allant de &quot;Less than 100&quot; à &quot;Up to 5,000&quot; et plus).</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative des coûts d&#x27;exploitation et d&#x27;hébergement d&#x27;une liste de diffusion de 10 000 abonnés pour optimiser les dépenses de sa plateforme de formation en ligne.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001036_seg30.jpg" alt="Page des tarifs de la plateforme SaaS Podia Email affichant les fonctionnalités (automatisations, statistiques d&#x27;envoi) et un sélecteur déroulant pour le nombre d&#x27;abonnés afin de configurer l&#x27;offre tarifaire." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001036_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:36</span>
+                        <span class="caption-text">Page des tarifs de la plateforme SaaS Podia Email affichant les fonctionnalités (automatisations, statistiques d&#x27;envoi) et un sélecteur déroulant pour le nombre d&#x27;abonnés afin de configurer l&#x27;offre tarifaire.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:52 - 00:11:11</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça commence à être un peu embêtant. Donc ce que je n&#x27;ai pas encore fait, mais ce que je regarde à faire, c&#x27;est de passer sur un outil qui est self-hosted. Donc il y en a plusieurs, comme par exemple Sandy, que j&#x27;ai commencé à regarder, mais qui utilise AWS SES, et qui est dans le même style que les workers Cloudflare. c&#x27;est un service où on paye à l&#x27;utilisation. Et pour le coup, ici, on paye 10 centimes par 1000 emails.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la page d&#x27;accueil de Mautic (mautic.org).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Slogan &quot;Grow your organization with Mautic, The World&#x27;s Largest Open Source Marketing Automation Product&quot; avec des boutons d&#x27;appel à l&#x27;action &quot;Get started today&quot; et &quot;Explore features&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et exploration visuelle d&#x27;alternatives d&#x27;outils d&#x27;emailing et de marketing automation self-hosted.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001102_seg31.jpg" alt="Capture d&#x27;écran de la page d&#x27;accueil du site officiel de Mautic, un outil open-source d&#x27;automatisation marketing." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001102_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:02</span>
+                        <span class="caption-text">Capture d&#x27;écran de la page d&#x27;accueil du site officiel de Mautic, un outil open-source d&#x27;automatisation marketing.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:12 - 00:11:32</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc dans mon cas, qui est une liste de 10 000 personnes, à chaque fois que je vais envoyer un email, ça me coûterait 1 dollar. Au lieu de 50 dollars par mois. Je n&#x27;envoie pas 50 emails par mois. Donc clairement, ça serait largement moins cher, même si ma liste grossirait. Comme c&#x27;est un petit peu sensible, j&#x27;ai quand même envie que mes emails arrivent à destination. Je vais faire ça progressivement. Ça, ça me permet juste d&#x27;avoir l&#x27;interface, de pouvoir écrire mes emails, de pouvoir voir combien de personnes nous les ont ouverts, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse comparative orale par le créateur entre le coût d&#x27;envoi d&#x27;emails basé sur la consommation réelle (via des services cloud comme AWS SES à 1$ pour 10 000 emails) et un abonnement classique de type SaaS à 50$ par mois.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:32 - 00:12:00</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ce qui m&#x27;assure que les emails que je vais envoyer ne vont pas arriver en spam, etc. Et un des derniers outils qui me coûte pas mal, c&#x27;est justement Google Workspace que j&#x27;utilise pour mes emails, mais que j&#x27;utilise aussi pour stocker mes vidéos quand je veux envoyer à mon monteur, etc. C&#x27;est surtout le stockage qui fait que ça me fait payer pas mal d&#x27;argent. Et donc la petite astuce que j&#x27;utilise jusqu&#x27;à présent, parce que j&#x27;utilise plus que 5 terabytes, j&#x27;ai pris cet abonnement-là qui me donne 5 teras, mais ce stockage, il est partagé à travers tous les utilisateurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la grille tarifaire officielle de Google Workspace.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Détail des abonnements Google Workspace :
+- Business Starter : 9,20 $ / utilisateur / mois (30 Go)
+- Business Standard : 18,40 $ / utilisateur / mois (2 To)
+- Business Plus : 28,70 $ / utilisateur / mois (5 To)</p>
+                        <p><strong>Action / Démonstration :</strong> Évaluation du coût de la solution Google Workspace pour la gestion des emails professionnels et l&#x27;hébergement de fichiers vidéos volumineux.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001139_seg33.jpg" alt="Interface des tarifs de Google Workspace détaillant les offres Starter, Standard (avec 2 To de stockage) et Plus (avec 5 To de stockage)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001139_seg33.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:39</span>
+                        <span class="caption-text">Interface des tarifs de Google Workspace détaillant les offres Starter, Standard (avec 2 To de stockage) et Plus (avec 5 To de stockage).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:00 - 00:12:19</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc si je voulais 10 teras, je pourrais payer un deuxième utilisateur, et le premier utilisateur, qui est moi-même, pourrait utiliser les 10 terres. Mais, payer 60 balles tous les mois pour pouvoir stocker des vidéos, c&#x27;est un peu trop. Donc, la petite filouterie, c&#x27;est qu&#x27;on peut créer un utilisateur et ensuite on peut l&#x27;archiver, qui est une fonction que les entreprises peuvent utiliser quand quelqu&#x27;un quitte l&#x27;entreprise.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console d&#x27;administration Google Workspace (gestion des utilisateurs)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste des utilisateurs (&quot;Richard Do&quot;, &quot;thomas bomboh&quot;), indicateur de sélection &quot;1 user selected&quot; et boutons d&#x27;action rapide.</p>
+                        <p><strong>Action / Démonstration :</strong> Sélection d&#x27;un utilisateur nouvellement créé en vue de l&#x27;archiver pour contourner les limitations de stockage et réduire les coûts d&#x27;abonnement mensuels.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001214_seg34.jpg" alt="Interface d&#x27;administration d&#x27;un service cloud (type Google Workspace) affichant la liste des utilisateurs avec un utilisateur nommé &quot;Richard Do&quot; sélectionné (case cochée)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001214_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:14</span>
+                        <span class="caption-text">Interface d&#x27;administration d&#x27;un service cloud (type Google Workspace) affichant la liste des utilisateurs avec un utilisateur nommé &quot;Richard Do&quot; sélectionné (case cochée).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:19 - 00:12:40</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On archive son compte, il ne peut plus rien faire, il ne peut plus envoyer d&#x27;email, il ne peut plus regarder ses emails, etc. Mais par contre, son espace de toquage est quand même gardé parce qu&#x27;on garde quand même les anciens fichiers que cette personne avait utilisés. Ce que quand on fait ça, un utilisateur archivé compte pour 5 terres. Ce qui fait que j&#x27;ai mon compte que je paye 30 balles et j&#x27;ai un autre utilisateur archivé qui coûte que 7 dollars qui me permet de doubler mon stockage.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique exploitable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la politique d&#x27;archivage d&#x27;un compte utilisateur, de la désactivation de ses accès (envoi et réception d&#x27;e-mails) et de la conservation de son espace de stockage historique de 5 To.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:41 - 00:13:05</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc je me retrouve avec 10 Tera de stockage que je peux utiliser dans mon utilisateur principal. Et si j&#x27;ai besoin de rajouter un autre 5 Tera, je pourrais juste repayer 7 balles, 7 balles. Donc ça, c&#x27;est ma petite technique de filouterie, mais c&#x27;est quand même un certain prix. Même si maintenant, en faisant la vidéo, je viens de réaliser que si j&#x27;utilise Google Meet à la place de Zoom et que j&#x27;utilise Gemini à la place de ChatGPT, et bah ça me fait économiser pas mal d&#x27;argent et ça rentabilise quand même pas mal ces 28 dollars là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée (plan face-caméra exclusif)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique visible</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;astuce pour obtenir 10 To de stockage et du coût associé (7 euros par tranche de 5 To additionnels)</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:05 - 00:13:38</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais quelque chose que j&#x27;ai envie de faire depuis pas mal de temps, c&#x27;est simplement d&#x27;héberger moi-même mes propres fichiers en faisant un NAS. Donc j&#x27;ai commencé à utiliser un Raspberry Pi, à brancher des disques durs externes, pour essayer de faire un NAS, etc. Mais c&#x27;était un petit peu foireux et le Raspberry Pi, il manque quand même un petit peu de patate, on va pas se mentir. Mais comme par hasard, c&#x27;est à ce moment-là que j&#x27;ai reçu cette Zima Blade qui est à peu près la même taille qu&#x27;un Raspberry Pi, sauf que c&#x27;est un processeur x86 donc intel qui a beaucoup plus de puissance que le raspberry pi et qui a même un port pc express pour pouvoir rajouter des choses par exemple une carte 10 gigas qui peut être intéressante pour un nas ou alors un adaptateur m2 pour pouvoir rajouter un ssd</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel homelab physique (ordinateur monocarte / SBC, stockage flash SanDisk, câblage SATA/Ethernet, châssis NAS multi-baies).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture matérielle d&#x27;un NAS DIY (Do It Yourself) compact à faible consommation électrique destiné à l&#x27;auto-hébergement de fichiers.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des composants et démonstration de l&#x27;intégration matérielle d&#x27;une solution de stockage réseau (NAS) personnelle à base de cartes SBC.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001322_seg37.jpg" alt="Vue d&#x27;ensemble des composants matériels déballés pour la création d&#x27;un NAS DIY (boîtier SBC Radxa, carte microSD SanDisk High Endurance, adaptateurs et câbles) sur un bureau." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001322_seg37.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:22</span>
+                        <span class="caption-text">Vue d&#x27;ensemble des composants matériels déballés pour la création d&#x27;un NAS DIY (boîtier SBC Radxa, carte microSD SanDisk High Endurance, adaptateurs et câbles) sur un bureau.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001330_seg37.jpg" alt="Gros plan sur le boîtier NAS compact assemblé, montrant les connexions réseau et le câblage d&#x27;un système de stockage multi-disques basé sur un ordinateur monocarte (SBC)." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001330_seg37.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:30</span>
+                        <span class="caption-text">Gros plan sur le boîtier NAS compact assemblé, montrant les connexions réseau et le câblage d&#x27;un système de stockage multi-disques basé sur un ordinateur monocarte (SBC).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:38 - 00:14:11</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">il m&#x27;envoie ici le nas kit qui est exactement ce que j&#x27;ai besoin pour faire un nas est ce qu&#x27;il rend vraiment pratique pour un nas c&#x27;est d&#x27;avoir cette petite baie ici on peut rentrer des disques en plus d&#x27;un câble spécial qui permet non seulement de communiquer avec les disques en sata mais de les alimenter directement. Donc c&#x27;est-à-dire que je n&#x27;ai pas besoin de câbles supplémentaires. Donc j&#x27;utilise ZimaOS, qui est un OS qui est parmi les meilleures OS pour les NAS maintenant. Et dans mon cas, ce qui est assez cool, c&#x27;est Nextcloud, qui est vraiment un remplacement à Google Drive, sauf que c&#x27;est Selfosted. C&#x27;est-à-dire que c&#x27;est chez moi, sur mes propres disques, sur mon propre matos. Comme j&#x27;ai une bonne connexion chez moi, ça permet très facilement de partager des vidéos avec des monteurs, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel Homelab (kit NAS physique), Interface Web Nextcloud.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Disques durs SATA 2.5&quot;, câblage d&#x27;alimentation et données, arborescence de fichiers Nextcloud (`All files &gt; youtube &gt; 45-ovh &gt; b-cam`).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation physique d&#x27;une baie d&#x27;extension de stockage avec son câblage d&#x27;alimentation directe, puis aperçu de l&#x27;interface d&#x27;administration de fichiers Nextcloud pour le stockage réseau.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001346_seg38.jpg" alt="Vue rapprochée d&#x27;un kit NAS DIY compact (homelab) assemblé, montrant une baie métallique accueillant des disques durs reliés par un câble combiné de données SATA et d&#x27;alimentation électrique." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001346_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:46</span>
+                        <span class="caption-text">Vue rapprochée d&#x27;un kit NAS DIY compact (homelab) assemblé, montrant une baie métallique accueillant des disques durs reliés par un câble combiné de données SATA et d&#x27;alimentation électrique.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001403_seg38.jpg" alt="Interface web de la solution de stockage cloud open-source Nextcloud, montrant l&#x27;arborescence de fichiers et de dossiers d&#x27;un serveur personnel." loading="lazy" onclick="openLightbox('../screenshots/QR_zSiRbdtI/QR_zSiRbdtI_001403_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:03</span>
+                        <span class="caption-text">Interface web de la solution de stockage cloud open-source Nextcloud, montrant l&#x27;arborescence de fichiers et de dossiers d&#x27;un serveur personnel.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:11 - 00:14:26</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Toutes ces petites astuces, ces petites crevardises bout à bout, ça nous mène quand même à une économie annuelle de 2774 dollars. Tout ça pour soit exactement le même service, soit un service équivalents, soit des services qui sont mieux. Donc même si ça m&#x27;a pris un petit peu de temps, je trouve que ça valait quand même le coup.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique n&#x27;est affichée dans cette séquence.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, terminal, métrique système ou architecture cloud n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Le créateur résume de manière globale et face-caméra les bénéfices financiers obtenus grâce aux optimisations d&#x27;infrastructure et d&#x27;hébergement présentées précédemment.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `21 / 142` (`14.8%`)
+- **Vidéos traitées** : `22 / 142` (`15.5%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -40,6 +40,7 @@
 | 2025-09-28 | [63D29lhtqoY](https://www.youtube.com/watch?v=63D29lhtqoY) | **Déployer une app en prod est enfin devenu facile avec cet outil** | [2025-09-28_YT-[63D29lhtqoY]_Déployer une app en prod est enfin devenu facile avec cet outil_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-09-28_YT-[63D29lhtqoY]_Déployer une app en prod est enfin devenu facile avec cet outil_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-09-28_YT-[63D29lhtqoY]_Déployer une app en prod est enfin devenu facile avec cet outil_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `36` |
 | 2025-09-20 | [g-xEUgG3yUo](https://www.youtube.com/watch?v=g-xEUgG3yUo) | **Je fais un selfie chez OVHcloud comme si c’était chez ma daronne** | [2025-09-20_YT-[g-xEUgG3yUo]_Je fais un selfie chez OVHcloud comme si c’était chez ma daronne_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-09-20_YT-[g-xEUgG3yUo]_Je fais un selfie chez OVHcloud comme si c’était chez ma daronne_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-09-20_YT-[g-xEUgG3yUo]_Je fais un selfie chez OVHcloud comme si c’était chez ma daronne_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `50` |
 | 2025-09-15 | [xRmxnWNR9Sk](https://www.youtube.com/watch?v=xRmxnWNR9Sk) | **Des millions d'apps javascript infectées mais bizarement presque aucune victimes 🤔** | [2025-09-15_YT-[xRmxnWNR9Sk]_Des millions d'apps javascript infectées mais bizarement presque aucune victimes_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-09-15_YT-[xRmxnWNR9Sk]_Des millions d'apps javascript infectées mais bizarement presque aucune victimes_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-09-15_YT-[xRmxnWNR9Sk]_Des millions d'apps javascript infectées mais bizarement presque aucune victimes_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `17` |
+| 2025-08-28 | [QR_zSiRbdtI](https://www.youtube.com/watch?v=QR_zSiRbdtI) | **7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements** | [2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-08-28_YT-[QR_zSiRbdtI]_7 méthodes de crevard que j'utilise pour arrêter de payer des abonnements_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `38` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
