@@ -17,7 +17,8 @@
     "_qInmqQIam8",
     "565fkoevF0Y",
     "lL3ElCmq6jc",
-    "3RUuv9Y4Uww"
+    "3RUuv9Y4Uww",
+    "63D29lhtqoY"
   ],
   "processed_videos": [
     {
@@ -235,6 +236,18 @@
       "screenshots_count": 41,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "63D29lhtqoY",
+      "title": "Déployer une app en prod est enfin devenu facile avec cet outil",
+      "upload_date": "20250928",
+      "duration": 1152,
+      "duration_str": "00:19:12",
+      "md_file": "YT_Cocadmin_Transcript/2025-09-28_YT-[63D29lhtqoY]_Déployer une app en prod est enfin devenu facile avec cet outil_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-09-28_YT-[63D29lhtqoY]_Déployer une app en prod est enfin devenu facile avec cet outil_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 36,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -382,7 +395,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-07T00:26:30Z",
-  "completed_count": 18,
+  "completed_count": 19,
   "total_catalog_count": 142,
   "status": "ready"
 }

@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Déployer une app en prod est enfin devenu facile avec cet outil — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Déployer une app en prod est enfin devenu facile avec cet outil</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=63D29lhtqoY" target="_blank">Lien YouTube (<code>63D29lhtqoY</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-09-28</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:19:12</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Déployer des applications en production de manière simple, robuste et économique reste un défi récurrent pour les développeurs et administrateurs systèmes. Contrairement aux plateformes PaaS managées (Heroku, Vercel) qui imposent des surcoûts et des limitations, l'utilisation de serveurs dédiés nus (« bare-metal » ou VPS) offre une liberté totale mais complexifie la mise en œuvre de la CI/CD, de la gestion des certificats SSL et du provisionnement de bases de données.<br><br>La solution présentée réside dans l'utilisation de **Docploy**, un outil open source auto-hébergé qui s'installe via une unique commande et configure automatiquement l'environnement conteneurisé (Docker et Docker Swarm). Il fait office de PaaS personnel en s'interfinçant directement avec les principaux gestionnaires de code source (GitHub, GitLab, Bitbucket) ou des registres de conteneurs. Il automatise le build via des Dockerfiles, gère le reverse proxy, automatise l'émission de certificats SSL via Let's Encrypt, et simplifie le déploiement de services complémentaires (bases de données SQL et NoSQL).<br><br>Pour les équipes DevOps et les administrateurs systèmes, cet outil change la donne en comblant le fossé entre la complexité des orchestrateurs lourds (Kubernetes pur) et le manque de flexibilité des hébergeurs cloud managés. Il permet de s'affranchir des pipelines CI/CD complexes pour de petites et moyennes architectures, tout en conservant une maîtrise totale de l'infrastructure sous-jacente et des coûts d'hébergement.<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Docploy** : Interface open source auto-hébergée de gestion et de déploiement d'applications conteneurisées, combinant la simplicité d'un PaaS et la liberté d'un serveur dédié.<br>* **Docker / Docker Swarm** : Moteur de conteneurisation et outil d'orchestration léger utilisé sous le capot pour isoler et exécuter les services et applications.<br>* **GitHub / GitLab / Bitbucket** : Plateformes de gestion de code source connectées à Docploy pour déclencher des déploiements automatisés sur événement (`push`).<br>* **Dockerfile** : Fichier de configuration décrivant les instructions de construction (build) de l'image de l'application à partir du code source.<br>* **Let's Encrypt** : Autorité de certification automatisée utilisée par Docploy pour générer et renouveler des certificats SSL/TLS valides et sécuriser le trafic HTTPS.<br>* **Bases de données (PostgreSQL, MongoDB, MariaDB, Redis, MySQL)** : Systèmes de gestion de bases de données déployables en un clic sous forme de services conteneurisés isolés.<br>* **Heroku / Vercel** : Solutions PaaS propriétaires et managées du marché, contrastant par leurs coûts et contraintes avec l'approche auto-hébergée de Docploy.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Installation universelle minimaliste** : Une seule ligne de commande suffit pour amorcer l'infrastructure complète sur un serveur vierge (installation de l'interface, de Docker et du moteur d'orchestration).<br>* **Affranchissement des contraintes PaaS** : L'utilisation de serveurs loués auprès d'hébergeurs économiques permet de réduire drastiquement les coûts par rapport aux offres cloud managées traditionnelles.<br>* **Isolation par projets et services** : La structure permet de cloisonner plusieurs applications et services hétérogènes (frontend, backend, bases de données) sur une seule et même machine hôte.<br>* **Sources de déploiement multiples** : Flexibilité totale dans l'importation du code source (dépôts Git distants, registres de conteneurs, archives ZIP ou images pré-buildées).<br>* **Automatisation native de la CI/CD** : Déclenchement automatique des builds et des mises en production sur simple `push` Git, éliminant la nécessité de configurer des pipelines complexes (Jenkins, GitHub Actions avancées).<br>* **Filtres de chemins de surveillance (*Watch Paths*)** : Possibilité de restreindre les déclenchements de déploiement aux modifications de répertoires spécifiques au sein du dépôt de code.<br>* **Standardisation via Dockerfile** : Adoption d'un standard universel de conteneurisation garantissant la reproductibilité des environnements de staging et de production.<br>* **Gestion automatique du reverse proxy et du routage** : Association transparente des noms de domaines personnalisés aux ports internes des conteneurs applicatifs (ex: redirection du trafic HTTP/HTTPS vers le port applicatif 5000).<br>* **Automatisation SSL/TLS intégrée** : Résolution des challenges Let's Encrypt nativement par l'outil pour garantir une sécurisation HTTPS immédiate et valide des services exposés.<br>* **Provisionnement instantané de bases de données** : Déploiement en un clic de services de bases de données relationnelles ou NoSQL pré-configurés (MongoDB, PostgreSQL, etc.) avec gestion des variables d'environnement.<br>* **Bonne pratique - Gestion des secrets** : Ne jamais coder en dur les identifiants de bases de données ou les chaînes de connexion dans le code source ; utiliser systématiquement les variables d'environnement injectées par l'interface de l'outil.<br>* **Erreur critique à éviter** : Négliger la persistance des données lors du déploiement de conteneurs de bases de données ; s'assurer que les volumes Docker sont correctement rattachés pour éviter toute perte de données en cas de redémarrage ou de mise à jour du conteneur.
+            <div class="tools-badges-cloud"><span class="tool-tag">Docploy</span><span class="tool-tag">Docker / Docker Swarm</span><span class="tool-tag">GitHub / GitLab / Bitbucket</span><span class="tool-tag">Dockerfile</span><span class="tool-tag">Let&#x27;s Encrypt</span><span class="tool-tag">Bases de données (PostgreSQL, MongoDB, MariaDB, Redis, MySQL)</span><span class="tool-tag">Heroku / Vercel</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Installation universelle minimaliste** : Une seule ligne de commande suffit pour amorcer l&#x27;infrastructure complète sur un serveur vierge (installation de l&#x27;interface, de Docker et du moteur d&#x27;orchestration).</span></li><li><span class="point-bullet">✦</span><span>Affranchissement des contraintes PaaS** : L&#x27;utilisation de serveurs loués auprès d&#x27;hébergeurs économiques permet de réduire drastiquement les coûts par rapport aux offres cloud managées traditionnelles.</span></li><li><span class="point-bullet">✦</span><span>Isolation par projets et services** : La structure permet de cloisonner plusieurs applications et services hétérogènes (frontend, backend, bases de données) sur une seule et même machine hôte.</span></li><li><span class="point-bullet">✦</span><span>Sources de déploiement multiples** : Flexibilité totale dans l&#x27;importation du code source (dépôts Git distants, registres de conteneurs, archives ZIP ou images pré-buildées).</span></li><li><span class="point-bullet">✦</span><span>Automatisation native de la CI/CD** : Déclenchement automatique des builds et des mises en production sur simple `push` Git, éliminant la nécessité de configurer des pipelines complexes (Jenkins, GitHub Actions avancées).</span></li><li><span class="point-bullet">✦</span><span>Filtres de chemins de surveillance (*Watch Paths*)** : Possibilité de restreindre les déclenchements de déploiement aux modifications de répertoires spécifiques au sein du dépôt de code.</span></li><li><span class="point-bullet">✦</span><span>Standardisation via Dockerfile** : Adoption d&#x27;un standard universel de conteneurisation garantissant la reproductibilité des environnements de staging et de production.</span></li><li><span class="point-bullet">✦</span><span>Gestion automatique du reverse proxy et du routage** : Association transparente des noms de domaines personnalisés aux ports internes des conteneurs applicatifs (ex: redirection du trafic HTTP/HTTPS vers le port applicatif 5000).</span></li><li><span class="point-bullet">✦</span><span>Automatisation SSL/TLS intégrée** : Résolution des challenges Let&#x27;s Encrypt nativement par l&#x27;outil pour garantir une sécurisation HTTPS immédiate et valide des services exposés.</span></li><li><span class="point-bullet">✦</span><span>Provisionnement instantané de bases de données** : Déploiement en un clic de services de bases de données relationnelles ou NoSQL pré-configurés (MongoDB, PostgreSQL, etc.) avec gestion des variables d&#x27;environnement.</span></li><li><span class="point-bullet">✦</span><span>Bonne pratique - Gestion des secrets** : Ne jamais coder en dur les identifiants de bases de données ou les chaînes de connexion dans le code source ; utiliser systématiquement les variables d&#x27;environnement injectées par l&#x27;interface de l&#x27;outil.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:27</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je suis tombé sur le meilleur moyen de déployer une application en production. À la base, je voulais tester tous les différents outils qui permettent de déployer des applications en prod, mais il y en a un qui est largement au-dessus de tous les autres, et cet outil, c&#x27;est DocPloy. Premièrement, une des choses que j&#x27;ai aimées, c&#x27;est simplement l&#x27;installation. C&#x27;est simplement une seule commande. Et ça, ça va non seulement t&#x27;installer DocPloy, qui est une interface qui va te permettre de déployer tes applications, et ça va aussi t&#x27;installer Docker, et même Docker soit, mais on verra pourquoi par la suite, pour pouvoir déployer un ou plusieurs services, une ou plusieurs applications sur ton serveur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant le site officiel de Dokploy et son interface d&#x27;administration (UI).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande shell d&#x27;installation (`curl -sSL https://dokploy.com/install.sh | sh`) et paramètres de configuration du fournisseur de code source (GitHub Account, Repository, Branch, Trigger Type).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du script d&#x27;installation automatisée de Dokploy et de l&#x27;interface de liaison avec les dépôts Git pour le déploiement d&#x27;applications.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000014_seg1.jpg" alt="Page d&#x27;accueil du site web Dokploy affichant la commande d&#x27;installation rapide avec curl." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000014_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:14</span>
+                        <span class="caption-text">Page d&#x27;accueil du site web Dokploy affichant la commande d&#x27;installation rapide avec curl.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000021_seg1.jpg" alt="Interface d&#x27;administration de Dokploy montrant la configuration des providers (GitHub, GitLab, Bitbucket, etc.) et des dépôts pour le déploiement." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000021_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:21</span>
+                        <span class="caption-text">Interface d&#x27;administration de Dokploy montrant la configuration des providers (GitHub, GitLab, Bitbucket, etc.) et des dépôts pour le déploiement.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:27 - 00:00:46</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc évidemment, contrairement à des SaaS comme Heroku ou Vercel, il va falloir avoir son propre serveur. Mais l&#x27;avantage, c&#x27;est que tu peux trouver n&#x27;importe où, prendre un hébergeur pas cher et avoir ton propre serveur. Une fois qu&#x27;on a installé Docploy, on se retrouve sur cette interface. On va venir pouvoir créer un projet. Parce que même si on n&#x27;a qu&#x27;un seul serveur, maintenant on peut déployer autant de projets et d&#x27;applications différentes sur notre serveur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface Web de l&#x27;outil de déploiement Docploy avec une modale de création de projet.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Formulaire &quot;Add a project&quot; avec les champs &quot;Name&quot; (saisi: Vandelay Industries) et &quot;Description&quot;, ainsi qu&#x27;un bouton &quot;Create&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration et création d&#x27;un nouveau projet dans l&#x27;interface de gestion Docploy.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000041_seg2.jpg" alt="Interface Web de gestion Docploy affichant une modale pour ajouter un nouveau projet (nom et description)." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000041_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:41</span>
+                        <span class="caption-text">Interface Web de gestion Docploy affichant une modale pour ajouter un nouveau projet (nom et description).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:46 - 00:01:09</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ici, mon projet, je vais l&#x27;appeler jeu2048. Vous allez savoir pourquoi juste après. Et donc, j&#x27;ai mon projet. Et dans un projet, je vais avoir différents services. Parce qu&#x27;une application, elle peut avoir différents morceaux. va y avoir l&#x27;application en elle-même, l&#x27;application Python, en Node.js ou en Java. Donc on va venir ici faire créer un service et ça va être une application. Mon application ici, c&#x27;est une application Node, donc je vais l&#x27;appeler Node, ce qui fait que mon app sera jeu 2048 Node.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de gestion d&#x27;infrastructure / PaaS self-hosted (Coolify v0.24.12)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Projet nommé &#x27;jeu-2048&#x27;, menu de création de services avec les types de ressources disponibles (Application, Database, Compose, Template, AI Assistant)</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans l&#x27;interface pour ajouter un nouveau service de type Application au projet jeu-2048</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000103_seg3.jpg" alt="Interface de gestion de projet (type Coolify) montrant la création d&#x27;un service au sein du projet &#x27;jeu-2048&#x27; avec un menu déroulant affichant les options &#x27;Application&#x27;, &#x27;Database&#x27;, &#x27;Compose&#x27;, &#x27;Template&#x27; et &#x27;AI Assistant&#x27;." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000103_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:03</span>
+                        <span class="caption-text">Interface de gestion de projet (type Coolify) montrant la création d&#x27;un service au sein du projet &#x27;jeu-2048&#x27; avec un menu déroulant affichant les options &#x27;Application&#x27;, &#x27;Database&#x27;, &#x27;Compose&#x27;, &#x27;Template&#x27; et &#x27;AI Assistant&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:11 - 00:01:34</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc j&#x27;ai créé mon application. Maintenant, comment est-ce que je fais pour pouvoir récupérer mon application en elle-même, le code de mon application pour que ça tourne sur mon serveur ? Eh bien, je vais venir ici dans mon appli. C&#x27;est un des premiers trucs que j&#x27;ai trouvé incroyable dans Doploy, qui est un outil open source d&#x27;ailleurs, je ne vais pas préciser. On va pouvoir récupérer son application depuis différentes sources. Ça peut être depuis GitHub. Donc moi, j&#x27;ai déjà ajouté mon compte GitHub, mais si ce n&#x27;est pas le cas, c&#x27;est juste deux, trois clics pour connecter Dockploy à GitHub.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de l&#x27;outil open-source Doploy avec menu latéral (Projects, Monitoring, Docker, Swarm, etc.) et section Provider.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Sélection des providers de code (GitHub, GitLab, Bitbucket, Gitea, Docker, Git, Drop), champs pour le compte GitHub, le dépôt, la branche, le chemin de build (Build Path), le type de déclenchement (Trigger Type : On Push), et les chemins surveillés (Watch Paths).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication de la configuration de la source du code pour l&#x27;application dans Doploy, permettant de lier un dépôt distant au serveur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000122_seg4.jpg" alt="Interface de configuration de Doploy montrant la sélection des fournisseurs de code source (GitHub, GitLab, Bitbucket, Gitea, Docker, Git, Drop) et les paramètres de dépôt." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000122_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:22</span>
+                        <span class="caption-text">Interface de configuration de Doploy montrant la sélection des fournisseurs de code source (GitHub, GitLab, Bitbucket, Gitea, Docker, Git, Drop) et les paramètres de dépôt.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:34 - 00:01:53</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et c&#x27;est la même chose si on utilise GitLab, si on utilise Bitbucket ou un autre type de repo. Ça peut aussi être un conteneur Docker. Donc je peux le pointer directement vers un registri Docker, comme par exemple Docker Hub ou quelque chose comme ça. Ça peut être un repo Git perso ou on peut même dropper directement un zip avec mon code dedans. Donc là, vraiment, il y a plein, plein, plein de façons différentes de dropper son code là-dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:53 - 00:02:11</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Dans mon cas, ça va être GitHub. Donc je vais prendre mon compte, je vais choisir mon repo. Donc mes repos, ça va être 2048. Je vais choisir ma branche. En général, ça va être main, mais peut-être que je vais avoir une autre branche que je vais déployer. Donc moi ici, je vais choisir une branche qui s&#x27;appelle Dockerfile. Là ici, le chemin de bulle, c&#x27;est à quel endroit on va se mettre pour pouvoir builder notre application.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:11 - 00:02:34</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que notre code, il faut le builder, il faut le construire, il faut peut-être le compiler, il faut peut-être installer des modules, juste comme ça. Ou il faut peut-être créer une image Docker, on va voir juste après. Ensuite, ce qui est vraiment cool, c&#x27;est qu&#x27;on peut choisir le type de déclenchement. déclenchement. Donc à quel moment est-ce que notre application va être déployée ? Parce que je peux le faire manuellement mais je peux aussi faire en sorte que automatiquement dès qu&#x27;il y a un commit sur telle ou telle branche, eh bien ça déploie la nouvelle version automatiquement sur mon serveur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Plateforme de PaaS/déploiement Dokploy (version v0.24.12) avec son menu latéral (Projects, Monitoring, Schedules, Docker, Swarm).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Paramètres de liaison GitHub : compte, dépôt (&quot;2048-mern&quot;), branche (&quot;dockerfile&quot;), chemin d&#x27;accès (&quot; / &quot;), type de déclencheur (&quot;On Push&quot;) et encadré d&#x27;avertissement sur les ressources système recommandées pour le build (4+ Go de RAM et 2+ CPU).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la configuration de l&#x27;intégration continue (CI/CD), spécifiquement le choix du déclencheur (&quot;Trigger Type&quot;) automatique lors d&#x27;un push de code sur le dépôt.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000222_seg7.jpg" alt="Interface d&#x27;administration de Dokploy affichant la configuration d&#x27;un déploiement (dépôt GitHub 2048-mern, branche dockerfile, et Trigger Type réglé sur On Push)." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000222_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:22</span>
+                        <span class="caption-text">Interface d&#x27;administration de Dokploy affichant la configuration d&#x27;un déploiement (dépôt GitHub 2048-mern, branche dockerfile, et Trigger Type réglé sur On Push).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:34 - 00:02:55</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui peut être un petit peu plus casse-tête à faire si je dois faire de la CI-CD. Là j&#x27;ai même pas besoin, je peux juste choisir ici on push. Donc quand je vais faire un push sur mon réponse git, ça va partir en prod sur mon serveur. Et je peux aussi mettre un watch path. Donc c&#x27;est à dire que je peux surveiller un chemin dans lequel je vais faire des modifications. C&#x27;est à dire que si je fais des modifications en dehors de ce chemin-là, ça ne va pas déclencher une mise en prod.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de Dokploy (dashboard de déploiement et d&#x27;hébergement open-source).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Configuration du dépôt Git (2048-mern), sélection de la branche (dockerfile), trigger type réglé sur &#x27;On Push&#x27; et champ Watch Paths.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration des options de déploiement automatique sur push Git sans passer par une configuration CI/CD complexe.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000244_seg8.jpg" alt="Interface de configuration de déploiement (Dokploy) montrant les paramètres du dépôt Git, la branche, le type de déclenchement (On Push) et les chemins surveillés (Watch Paths)." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000244_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:44</span>
+                        <span class="caption-text">Interface de configuration de déploiement (Dokploy) montrant les paramètres du dépôt Git, la branche, le type de déclenchement (On Push) et les chemins surveillés (Watch Paths).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:55 - 00:03:27</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est encore grave stylé aussi. Ensuite on peut se dire bon bah ok on va construire mon application, mais ça dépend de l&#x27;application. Si c&#x27;est une application en Java, ça ne se construit pas de la même manière qu&#x27;une application en Python. Et bah ici encore une fois on a différents types de builds. On a des Dockerfiles qui est une des façons les plus pratiques de construire une application. Si tu n&#x27;as jamais utilisé, je te recommande de t&#x27;y mettre, il serait temps. Mais si par exemple tu étais sur Heroku et bah voilà. Si par exemple c&#x27;est juste un site web statique, tu peux faire un un site web statique. Si tu es un appli en Rails, tu peux utiliser des Rails pack. Et donc ici, nous, on va utiliser un Dockerfile. Donc il y a vraiment plein de façons différentes de</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de gestion de déploiement (type Coolify ou plateforme PaaS similaire) avec un menu latéral (Projects, Monitoring, Docker, Swarm) et un panneau de configuration central.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste des options de type de build : &quot;Dockerfile&quot;, &quot;Railpack (New)&quot;, &quot;Nixpacks&quot;, &quot;Heroku Buildpacks&quot;, &quot;Paketo Buildpacks&quot;, et &quot;Static&quot;, ainsi qu&#x27;un champ &quot;Publish Directory&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et démonstration des différentes méthodes de construction et de packaging d&#x27;application (Buildpacks vs Dockerfile) selon le langage utilisé.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000311_seg9.jpg" alt="Interface graphique de configuration d&#x27;un projet montrant les différentes options de type de build (&quot;Build Type&quot;) disponibles pour packager une application." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000311_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:11</span>
+                        <span class="caption-text">Interface graphique de configuration d&#x27;un projet montrant les différentes options de type de build (&quot;Build Type&quot;) disponibles pour packager une application.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:27 - 00:03:52</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">construire ton application. Là, ici, le chemin de mon Dockerfile, ça va simplement être Dockerfile. Donc là, je vais vous montrer l&#x27;application pour le coup. C&#x27;est une petite application que j&#x27;aime bien utiliser en exemple et qui a un fichier ici Dockerfile. Et le fichier Dockerfile, il va utiliser l&#x27;appli Node. On va venir copier tous les fichiers de mon repo et les mettre dans usr.src.app qui va être l&#x27;endroit où on va exécuter notre application. Donc c&#x27;est ça ce fichier là qui va être utilisé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web GitHub (dépôt de code source).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier Dockerfile montrant les instructions : FROM node:23-slim, COPY, WORKDIR, RUN npm install, EXPOSE 5000 et CMD [&quot;npm&quot;, &quot;run&quot;, &quot;start&quot;].</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication du contenu du fichier Dockerfile utilisé pour packager l&#x27;application Node.js.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000339_seg10.jpg" alt="Interface GitHub affichant le contenu d&#x27;un fichier Dockerfile pour une application Node.js." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000339_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:39</span>
+                        <span class="caption-text">Interface GitHub affichant le contenu d&#x27;un fichier Dockerfile pour une application Node.js.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:52 - 00:04:25</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Quel est le contexte de mon Dockerfile ? Donc si par exemple je faisais dans ma ligne de commande docker-build. Et bien point c&#x27;est le contexte, c&#x27;est-à-dire le dossier actuel. Donc là pareil ça va être point, on peut le laisser par défaut. Et le build stage, si on a des multi-stage build, c&#x27;est pas mon cas donc j&#x27;ai pas besoin de le mettre. Si tu sais pas c&#x27;est quoi, c&#x27;est que tu l&#x27;utilises pas donc il n&#x27;y a pas vraiment besoin de savoir. Donc on a quand même quelque chose d&#x27;assez puissant qui permet de nous faire de la CSID, de construire des images Docker etc. sans être trop compliqué, sans avoir un milliard d&#x27;options qui ne sert à rien, etc. C&#x27;est-à-dire que même les options, si je ne sais pas exactement ce que c&#x27;est, à partir du moment où je laisse par défaut, ça me convient. Et donc là, ici, si je fais sauvegarder, hop, j&#x27;ai sauvegardé, je peux venir</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:25 - 00:04:59</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">ici faire déployer. Et donc là, est-ce que je n&#x27;ai sûr ? Ok. Et j&#x27;ai mon déploiement qui est en cours. Donc là, ce qui est en train de se passer, c&#x27;est que deploy va aller chercher sur mon repo GitHub, il est connecté à mon compte GitHub. Donc si on a un compte privé, évidemment, on peut quand même avoir accès. Il va récupérer mon repo, il va builder avec le Dockerfile et d&#x27;ailleurs on peut voir ce qu&#x27;il est en train de faire ici avec Vue. Il récupère mon repo, il se met dedans et il build le Dockerfile et le build ensuite cette image là qu&#x27;il a buildé, il va la lancer sur mon serveur. Une fois que ça c&#x27;est fait, il a créé l&#x27;image et il bouge. Donc là mon application</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web Dokploy, console de logs de déploiement.</p>
+                        <p><strong>Contenu textuel & Code :</strong> URL Webhook, logs de build Docker, étapes &#x27;Cloning Repo&#x27;, &#x27;Build dockerfile&#x27;, &#x27;Source Type: github&#x27;.</p>
+                        <p><strong>Action / Démonstration :</strong> Suivi et explication du processus de déploiement automatisé depuis GitHub vers le serveur Dokploy.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000434_seg12.jpg" alt="Interface de déploiement Dokploy montrant le statut &#x27;Running&#x27; d&#x27;un build Node.js et l&#x27;URL du webhook Git." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000434_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:34</span>
+                        <span class="caption-text">Interface de déploiement Dokploy montrant le statut &#x27;Running&#x27; d&#x27;un build Node.js et l&#x27;URL du webhook Git.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000451_seg12.jpg" alt="Logs en temps réel du déploiement Dokploy affichant le clonage du dépôt GitHub, le build Docker et les étapes de build d&#x27;une application Node.js." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000451_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:51</span>
+                        <span class="caption-text">Logs en temps réel du déploiement Dokploy affichant le clonage du dépôt GitHub, le build Docker et les étapes de build d&#x27;une application Node.js.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:59 - 00:05:35</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">elle est déployée, elle tourne déjà sur mon serveur. Si je vais dans Docker ici, je vois ici que j&#x27;ai un conteneur qui tourne depuis 50 secondes qui s&#x27;appelle jeu 2048 node blablabla. Donc là ça tourne. Maintenant comment est-ce que je fais pour y accéder ? Je reviens dans mon application ici et je vais dans Domaine. Première chose c&#x27;est que mon serveur il a une adresse IP qui est accessible depuis l&#x27;internet donc je pourrais accéder avec l&#x27;adresse IP mais bon c&#x27;est pas très pratique. Donc ce que je vais faire, ce que j&#x27;ai déjà fait, c&#x27;est que j&#x27;ai créé un nom de domaine qui s&#x27;appelle Coca0 et j&#x27;ai créé le sous-domaine 2048.coca0 et je l&#x27;ai pointé vers l&#x27;adresse IP de mon serveur, l&#x27;adresse IP publique de mon serveur. Ce qui fait qu&#x27;ici dans Domaine,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Console d&#x27;administration DNS Cloudflare</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Domaine configuré : coca0.xyz
+- Enregistrement A : Nom `2048` pointant vers `3.84.117.28` (statut &quot;Proxied&quot; activé)
+- Enregistrement CNAME : pointant vers une cible spécifique</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration des enregistrements DNS et du routage réseau pour permettre l&#x27;accès public au conteneur Docker &quot;jeu 2048&quot; déployé sur le serveur via un sous-domaine dédié.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000526_seg13.jpg" alt="Interface d&#x27;administration Cloudflare montrant la configuration des enregistrements DNS (DNS Records) pour le domaine coca0.xyz, avec un enregistrement de type A pour le sous-domaine 2048 pointant vers l&#x27;adresse IP 3.84.117.28." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000526_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:26</span>
+                        <span class="caption-text">Interface d&#x27;administration Cloudflare montrant la configuration des enregistrements DNS (DNS Records) pour le domaine coca0.xyz, avec un enregistrement de type A pour le sous-domaine 2048 pointant vers l&#x27;adresse IP 3.84.117.28.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:35 - 00:06:08</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je peux faire ajouter un domaine. Mon domaine ça va être 2048.cocas0.xyz. Ça va être quoi le chemin ? Parce que peut-être que j&#x27;ai une application qui s&#x27;attend à avoir un chemin slash api ou quelque chose comme ça. Bon là dans mon cas c&#x27;est pas le cas, mais si je voulais ce serait pratique que je puisse le faire. Et on a le port qu&#x27;on va vouloir taper dans le conteneur. Donc là si on regarde en fait dans mon application, pour le coup il se trouve que mon app elle est coûte sur le port 5000. Donc je peux venir ici et dire ok tu vas envoyer les requêtes qui rentre, tu vas les envoyer sur le port 5000. Mais Docploi, il va écouter sur les ports HTTP pour</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:08 - 00:06:43</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pouvoir avoir vraiment un vrai site web. Donc il va écouter sur le port 80 en HTTP, mais il va aussi écouter sur le port 443 en HTTPS si j&#x27;ai besoin d&#x27;avoir des HTTPS qui est quand même un minimum. Donc ce que je peux faire, je peux acheter un domaine, je peux acheter d&#x27;ailleurs autant de domaines que ce que je veux. Remettre encore 2048.coca0.xyz, encore le port 5000 parce qu&#x27;on va toujours dans le même conteneur, sauf que cette fois-ci, je peux dire ok, je vais écouter en HTTPS sur le port 443 et je vais choisir ici Let&#x27;s Encrypt ou même un provider custom si on veut, pour pouvoir aller générer un certificat. Donc Doploy va résoudre le challenge que Let&#x27;s Encrypt va lui envoyer pour pouvoir récupérer un certificat SSL qui est valide pour le domaine</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de gestion de déploiement (type PaaS ou reverse proxy dashboard)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Champs de configuration visibles : Host (2048.coca0.xyz), Path (/), Internal Path (/), Strip Path (désactivé), Container Port (5000), option HTTPS pour l&#x27;approvisionnement automatique de certificat SSL.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration d&#x27;un sous-domaine et association d&#x27;un conteneur applicatif sur le port interne avec option de génération de certificat HTTPS.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000626_seg15.jpg" alt="Interface de configuration d&#x27;un service (reverse proxy/PaaS) montrant le paramétrage du nom de domaine, des chemins et du port conteneur." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000626_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:26</span>
+                        <span class="caption-text">Interface de configuration d&#x27;un service (reverse proxy/PaaS) montrant le paramétrage du nom de domaine, des chemins et du port conteneur.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:43 - 00:07:16</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">2048.coca.min.xyz. Et ensuite quand je vais sur mon domaine en HTTPS, ça fonctionne avec le certificat que j&#x27;ai récupéré de Let&#x27;s Encrypt. Donc quand je viens ici en SSL, j&#x27;ai bien ma connexion qui est sécurisée et j&#x27;ai bien un certificat qui est valide. Donc ça déjà, c&#x27;est déjà pas mal. Maintenant notre application, ok elle fonctionne mais jusqu&#x27;à présent c&#x27;est juste un site statique. Donc là j&#x27;ai une partie ici qui récupère les highscores et qui ne fonctionne pas parce que j&#x27;ai pas de passe de données pour pouvoir sauvegarder mes scores. Donc la plupart des applications vont avoir besoin de plus que juste l&#x27;application en elle-même, elles vont avoir</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant l&#x27;application web 2048.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Jeu 2048 v1 avec score et message d&#x27;erreur : &quot;Failed to load high scores: HTTP error! Status: 500&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Test de l&#x27;application web et constat d&#x27;une erreur HTTP 500 liée au chargement des meilleurs scores.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000708_seg16.jpg" alt="Interface du jeu 2048 v1 affichant une grille avec des nombres et une erreur HTTP 500 au niveau des meilleurs scores." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000708_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:08</span>
+                        <span class="caption-text">Interface du jeu 2048 v1 affichant une grille avec des nombres et une erreur HTTP 500 au niveau des meilleurs scores.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:16 - 00:07:53</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">besoin de services comme par exemple des passes de données. Donc je vais revenir ici dans mon projet et je vais rajouter un service. Et là dans les services qu&#x27;est-ce qu&#x27;on a ? Soit Compose parce que d&#x27;ailleurs je ne vais pas montrer mais si j&#x27;avais un fichier Docker Compose avec toutes les listes des services que j&#x27;avais besoin et pas boum je le mettrais dedans, on en parlera même plus, ça serait réglé. On a une section template ici avec plein d&#x27;applications pré-configurées qu&#x27;on pourrait déployer donc si on veut avoir un homelab et puis déployer des petits services, des petites applications open source ça peut être cool. Mais dans le cas de mon application je voudrais déployer une base de données et donc là ça me propose directement d&#x27;utiliser soit Postgre, soit MongoDB, soit MariaDB, soit Redis, soit MySQL ce qui est dans 99% des gals les bases de données</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de gestion de type PaaS/Coolify (projets, services, déploiements).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Menus contextuels de création de services (Application, Database, Compose, Template, AI Assistant) et bibliothèque de templates open-source.</p>
+                        <p><strong>Action / Démonstration :</strong> Exploration des différentes options de services disponibles pour enrichir le projet en cours de configuration.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000725_seg17.jpg" alt="Interface de gestion de projet montrant le menu d&#x27;ajout de service avec les options Application, Database, Compose, Template et AI Assistant." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000725_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:25</span>
+                        <span class="caption-text">Interface de gestion de projet montrant le menu d&#x27;ajout de service avec les options Application, Database, Compose, Template et AI Assistant.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000735_seg17.jpg" alt="Catalogue de templates open-source permettant de déployer rapidement des applications préconfigurées comme Ackee, Activepieces, Actual Budget ou AdGuard Home." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000735_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:35</span>
+                        <span class="caption-text">Catalogue de templates open-source permettant de déployer rapidement des applications préconfigurées comme Ackee, Activepieces, Actual Budget ou AdGuard Home.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000744_seg17.jpg" alt="Vue de la console du projet avec le menu déroulant pointant sur l&#x27;option &#x27;Database&#x27; lors de la création d&#x27;un service." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000744_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:44</span>
+                        <span class="caption-text">Vue de la console du projet avec le menu déroulant pointant sur l&#x27;option &#x27;Database&#x27; lors de la création d&#x27;un service.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:53 - 00:08:27</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">que je vais utiliser. Moi pour le coup mon application a besoin d&#x27;une base de données MongoDB. Là je vais lui donner un nom, je vais l&#x27;appeler MyMongo et donc ici ça va être Gio 2048 MyMongo. Je peux lui spécifier un utilisateur donc on va mettre ici username, très sécurisé et password comme password. Voilà je ne le dis ta personne. Je peux choisir l&#x27;image parce que ça va être une image Docker donc si je veux une version spécifique je vais pouvoir lui dire mais par défaut elle va me prendre la version aussi ce qui me va très bien. Et je vais faire ici dans Mongo. Il faut que je clique sur Déploy pour le lancer. Est-ce que vous êtes sûr ? Confirmez.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de déploiement et de gestion (type PaaS/Coolify).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste des services du projet &#x27;jeu-2048&#x27; incluant &#x27;my-mongo&#x27; et &#x27;node&#x27;, menu latéral de navigation (Projects, Monitoring, Docker, Swarm, etc.).</p>
+                        <p><strong>Action / Démonstration :</strong> Validation de la création d&#x27;une base de données MongoDB pour l&#x27;application Node.js du jeu 2048.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000819_seg18.jpg" alt="Interface de gestion de projet montrant les services &#x27;my-mongo&#x27; et &#x27;node&#x27; dans l&#x27;environnement &#x27;jeu-2048&#x27; avec la notification &#x27;Database Created&#x27;." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000819_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:19</span>
+                        <span class="caption-text">Interface de gestion de projet montrant les services &#x27;my-mongo&#x27; et &#x27;node&#x27; dans l&#x27;environnement &#x27;jeu-2048&#x27; avec la notification &#x27;Database Created&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:27 - 00:08:48</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et c&#x27;est en train de démarrer mon conteneur qui contient ma base de données MongoDB. Maintenant, il reste une dernière petite chose à faire, c&#x27;est que mon application, il faut qu&#x27;elle communique avec ma base de données. Là, ici, mon déploiement a tout bien marché, etc. Donc, il faut que je revienne dans mon application ici. Et mon application, elle prend des variables d&#x27;environnement. Donc, si on vient dans mon application ici, si ton application est à peu près bien faite, elle va prendre des variables d&#x27;environnement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de Dokploy (dashboard de gestion de conteneurs).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Paramètres de déploiement du projet my-mongo, port interne MongoDB (27017), hôte interne et boutons d&#x27;action (Deploy, Reload, Stop, Open Terminal).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la configuration réseau et des identifiants du conteneur MongoDB pour permettre la communication avec l&#x27;application.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000838_seg19.jpg" alt="Interface de gestion Dokploy montrant les paramètres de déploiement d&#x27;un conteneur MongoDB (&quot;my-mongo&quot;) avec les boutons Deploy, Reload, Stop et les informations d&#x27;identification internes." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000838_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:38</span>
+                        <span class="caption-text">Interface de gestion Dokploy montrant les paramètres de déploiement d&#x27;un conteneur MongoDB (&quot;my-mongo&quot;) avec les boutons Deploy, Reload, Stop et les informations d&#x27;identification internes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:48 - 00:09:07</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là ici, la variable d&#x27;environnement me dit que c&#x27;est mongo-uri. Et donc mongo-uri égale blablabla. Donc je vais utiliser cette variable d&#x27;environnement pour pouvoir dire à mon application où se connecter, quelle base de données se connecter. Et donc si je vais dans mon mongo ici, je peux revenir vite fait ici, et ça me donne directement internal connection URL.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant de la documentation markdown et l&#x27;interface d&#x27;administration Dokploy.</p>
+                        <p><strong>Contenu textuel & Code :</strong> `MONGO_URI=mongodb://login:password@mongohostname:27017/databasename` et interface Dokploy avec les paramètres du conteneur my-mongo (port 27017, identifiants, URL de connexion).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la configuration de la chaîne de connexion MongoDB via la variable d&#x27;environnement MONGO_URI dans Dokploy.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000853_seg20.jpg" alt="Documentation ou fichier affichant l&#x27;utilisation de la variable d&#x27;environnement MONGO_URI pour connecter l&#x27;application à MongoDB." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000853_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:53</span>
+                        <span class="caption-text">Documentation ou fichier affichant l&#x27;utilisation de la variable d&#x27;environnement MONGO_URI pour connecter l&#x27;application à MongoDB.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_000902_seg20.jpg" alt="Interface de gestion Dokploy montrant les paramètres de déploiement et les identifiants internes d&#x27;un conteneur MongoDB (&quot;my-mongo&quot;)." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_000902_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:02</span>
+                        <span class="caption-text">Interface de gestion Dokploy montrant les paramètres de déploiement et les identifiants internes d&#x27;un conteneur MongoDB (&quot;my-mongo&quot;).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:07 - 00:09:28</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, si je l&#x27;affiche ici, pareil, de dite à personne, je peux directement copier ma connection string, c&#x27;est comme ça que ça s&#x27;appelle, qui me permet de me connecter à ma base de données. Et donc je peux revenir ici et juste simplement coller ma connection string. Mon nom de utilisateur, c&#x27;est username. Mon password, c&#x27;est password. Et ensuite, le nom d&#x27;hôte, c&#x27;est le nom du conteneur qui s&#x27;appelle jeu2048-mongo, blablabla, avec le port ici, 27017.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:29 - 00:10:05</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, boum, boum, boum, mon application va pouvoir se connecter. Je viens sauvegarder. Évidemment, il faut que je redéploie pour que mon conteneur redémarre avec les nouvelles variables d&#x27;environnement pour pouvoir se connecter à la base de données. Et donc si je fais un redéploiement ici, est-ce que vous êtes sûr ? Hop, hop, hop. J&#x27;ai un deuxième déploiement qui est en cours. je peux voir où est-ce que ça en est. Ça va me reconstruire mon conteneur, me le relancer, bien mettre la bonne variable environnement, etc. Et donc là ici, c&#x27;est déployé. Donc encore une fois, un truc que je trouve assez stylé, c&#x27;est qu&#x27;on peut voir les logs. Et bien je vois ici que j&#x27;ai mes logs. Mon application, elle a bien démarré. C&#x27;est bien connecté sur le port 5000 et j&#x27;ai</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:05 - 00:10:38</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">bien ici mon GoDB connecté. Donc c&#x27;est bien connecté à la base de données que j&#x27;ai donnée dans la connection string. Alors qu&#x27;avant ici, j&#x27;avais des erreurs qui me disaient je n&#x27;arrive pas à me connecter et il essaie de se reconnecter toutes les 10 secondes à une base de données qui n&#x27;existe pas. Et donc là en théorie si je reviens sur mon application et ben là à partir de maintenant je peux jouer un petit peu on voit que ça fait des highscores et donc si je rafraîcie je vois que j&#x27;ai mes highscores qui ont été enregistrés parce que mon application à chaque fois que je fais un score l&#x27;enregistre dans ma base de données et peut les récupérer une fois que mes scores sont enregistrés. Donc là déjà là on est bien. Là on est bien. J&#x27;ai mon application qui est déployée</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une application web interactive (jeu 2048 v1).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface utilisateur du jeu 2048 avec affichage du score (576), plateau de jeu avec tuiles (2, 4, 8, 16, 32, 64), bouton &quot;Nouvelle partie&quot; et section &quot;Meilleurs Scores&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;application web fonctionnelle après correction de la connexion à la base de données.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001022_seg23.jpg" alt="Interface web du jeu 2048 v1 montrant la grille de tuiles chiffrées et les scores, illustrant l&#x27;application fonctionnelle connectée à la base de données." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001022_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:22</span>
+                        <span class="caption-text">Interface web du jeu 2048 v1 montrant la grille de tuiles chiffrées et les scores, illustrant l&#x27;application fonctionnelle connectée à la base de données.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:38 - 00:11:12</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">sur mon serveur. Je n&#x27;ai pas eu à taper aucune ligne de commande, j&#x27;ai juste à cliquer un petit peu, configurer un petit peu et c&#x27;est déployé. Maintenant, on a quelques petites choses supplémentaires qu&#x27;on a besoin quand on déploie en production. Premièrement, le fait qu&#x27;on ait un redémarrage automatique en cas de crash, eh bien ça, c&#x27;est déjà pris en compte parce que ça utilise Docker Swarm sous le capot et donc si mon application crash, eh bien elle va automatiquement être redémarrée. Le conteneur va être redémarré. Donc ça déjà, c&#x27;est cool. Deuxièmement, on veut être capable de voir qu&#x27;est ce qui se passe. Donc on a vu ici qu&#x27;on avait accès à nos logs, ce qui est super important mais on a aussi accès à du monitoring donc savoir qu&#x27;est ce que consomme</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la configuration de déploiement en production sans manipulation visible à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:12 - 00:11:47</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">mon application mes différents services qui composent mon application et qu&#x27;est ce qu&#x27;ils consomment en termes de mémoire en termes de cpu en termes d&#x27;io etc et donc on a un petit graph qui s&#x27;affiche ici qui est assez cool pour savoir si jamais ça consomme plus ou bien un petit bug ou quoi et ben on peut on peut voir où est ce qu&#x27;on en est on a également des backups donc là dans le cas dans l&#x27;application ça n&#x27;avait pas de sens de faire des backups mais dans le cas de ma base de données par exemple ça fait du sens de pouvoir avoir des backups donc je pourrais connecter un bucket S3, pareil sur le fournisseur de bucket de type S3 que je veux et avoir automatiquement des sauvegardes sans encore une fois avoir la moindre ligne de code à faire. Ensuite on a comme je t&#x27;ai</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface graphique de gestion (Panneau de monitoring de type PaaS/PPL avec menu latéral incluant Projects, Monitoring, Schedules, Traefik, Docker, Swarm, Requests).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Graphiques et métriques de performance : CPU Usage (0.11%), Memory Usage (48.25 MiB / 7.75 GiB), Block I/O et Network I/O, avec infobulle temporelle sur le graphique mémoire.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication du module de supervision des ressources serveur et des services applicatifs pour détecter les pics de consommation ou les bugs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001121_seg25.jpg" alt="Tableau de bord de monitoring affichant l&#x27;utilisation des ressources (CPU, mémoire, I/O disque et réseau) d&#x27;une application." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001121_seg25.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:21</span>
+                        <span class="caption-text">Tableau de bord de monitoring affichant l&#x27;utilisation des ressources (CPU, mémoire, I/O disque et réseau) d&#x27;une application.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:47 - 00:12:06</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">montré le déploiement automatique donc c&#x27;est à dire que tout un pipeline de CACD en fait sans avoir à faire de pipeline de CACD, sans avoir à utiliser GitLab CI ou des GitHub Action ou quoi que ce soit. Si on se souvient dans mon application ici j&#x27;avais dit que je pouvais déployer les nouvelles versions directement quand je faisais un push. Donc je peux venir ici et faire auto-deploy.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de Dokploy (dashboard PaaS/DevOps)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Configuration du dépôt (2048-mern), branche &#x27;dockerfile&#x27;, et Trigger Type configuré sur &#x27;On Push&#x27;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du mécanisme de déploiement automatique intégré sans utiliser de pipeline CI/CD externe (comme GitLab CI ou GitHub Actions).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001201_seg26.jpg" alt="Interface web de Dokploy montrant la configuration du déploiement avec le dépôt GitHub, la branche, et le déclencheur défini sur &#x27;On Push&#x27;." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001201_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:01</span>
+                        <span class="caption-text">Interface web de Dokploy montrant la configuration du déploiement avec le dépôt GitHub, la branche, et le déclencheur défini sur &#x27;On Push&#x27;.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:06 - 00:12:39</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc à partir de maintenant, dès qu&#x27;il y a une modification qui va être faite et qui va être pushée sur GitHub, ça va partir en prod directement. Donc on peut venir dans mon application ici. Là, je vais dans mon fichier index par exemple. Je vais venir faire une petite modification et c&#x27;est plus la version 0, c&#x27;est boom version 2. Commit change, commit change. Et là, quand je veux venir dans mon application. Si je viens dans déploiement, j&#x27;ai un nouveau déploiement qui est en cours en ce moment. Il est en train de récupérer la dernière version de mon application, recréer une nouvelle</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web GitHub et tableau de bord de la plateforme de déploiement Dokploy.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Code source HTML (balises meta, liens CSS, titre &quot;2048 v0&quot;) et liste des déploiements avec statuts (Running, Done) et hash de commits.</p>
+                        <p><strong>Action / Démonstration :</strong> Modification du code source sur GitHub pour illustrer le déclenchement d&#x27;un déploiement automatique en production visible sur Dokploy.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001214_seg27.jpg" alt="Visualisation du fichier index.html du projet 2048-mern sur l&#x27;interface GitHub, montrant la structure du code HTML avec la version v0." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001214_seg27.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:14</span>
+                        <span class="caption-text">Visualisation du fichier index.html du projet 2048-mern sur l&#x27;interface GitHub, montrant la structure du code HTML avec la version v0.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001231_seg27.jpg" alt="Tableau de bord Dokploy affichant l&#x27;onglet Deployments avec un déploiement en cours (Running) suite à un webhook ou un push Git." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001231_seg27.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:31</span>
+                        <span class="caption-text">Tableau de bord Dokploy affichant l&#x27;onglet Deployments avec un déploiement en cours (Running) suite à un webhook ou un push Git.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:39 - 00:13:13</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">image Docker qui contient ma dernière version de mon application. Et boum, là ça a fonctionné. J&#x27;ai récupéré tout ça, etc. Et ça a redéployé la nouvelle image qui a été recréée avec la nouvelle version de mon appli. Et donc si je viens dans mon application ici et que je rafraîchis la page, et bah hop je récupère la nouvelle version la V2. Donc ça sans rien configurer, sans même se connecter une seule fois sur le serveur, si ce n&#x27;est juste la ligne de commande qui installe d&#x27;oploy, c&#x27;est déjà grave stylé. Mais c&#x27;est pas fini, ça va encore plus loin parce qu&#x27;imagine que mon application devient populaire, j&#x27;ai de plus en plus de trafic, de plus en plus d&#x27;utilisateurs,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant l&#x27;interface graphique de l&#x27;application déployée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface utilisateur du jeu 2048 avec mention explicite de la version &quot;v2&quot; et tableau des meilleurs scores.</p>
+                        <p><strong>Action / Démonstration :</strong> Test et validation du déploiement en rafraîchissant l&#x27;application dans le navigateur pour confirmer la prise en compte de la nouvelle version (V2).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001256_seg28.jpg" alt="Interface web du jeu 2048 affichant la version V2 après le redéploiement réussi de l&#x27;application via conteneur Docker." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001256_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:56</span>
+                        <span class="caption-text">Interface web du jeu 2048 affichant la version V2 après le redéploiement réussi de l&#x27;application via conteneur Docker.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:13 - 00:13:35</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">les gens ils kiffent le 2048, ça devient viral carrément, et bah je vais avoir beaucoup plus de charge sur mon serveur et jusqu&#x27;à ce que potentiellement mon serveur soit saturé. Et Et donc j&#x27;aimerais bien pouvoir répartir la charge sur différents serveurs pour pouvoir scaler, rajouter différents serveurs et que tous ces serveurs servent mon application. Accessoirement, ça me sert aussi en termes de haute disponibilité parce que si j&#x27;ai qu&#x27;un seul serveur et qu&#x27;il tombe en panne, bon bah j&#x27;ai plus de site.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du besoin de répartition de charge et de scalabilité horizontale.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:35 - 00:13:55</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et c&#x27;est ça qui pour moi a fait la grosse différence avec d&#x27;autres outils comme par exemple Coolify qui est assez cool aussi comme outil qui est assez similaire. Mais en plus d&#x27;avoir une interface qui est un petit peu moins logique, un petit peu moins facile à utiliser, quelques petits bugs, etc. ne règle pas du tout ce problème de scalabilité, c&#x27;est-à-dire déployer l&#x27;application sur plusieurs serveurs. Et Docploy, pour faire ça, il utilise Docker Swarm.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Site web Coolify (plateforme open-source de self-hosting / alternative à Heroku/Netlify).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page de présentation de Coolify mentionnant les fonctionnalités de déploiement et la liste des sponsors.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et comparaison critique de l&#x27;outil Coolify par rapport à d&#x27;autres solutions de gestion d&#x27;infrastructure.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001340_seg30.jpg" alt="Capture d&#x27;écran montrant le site web de Coolify avec le logo officiel et les informations de l&#x27;outil de déploiement self-hosted." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001340_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:40</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant le site web de Coolify avec le logo officiel et les informations de l&#x27;outil de déploiement self-hosted.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:56 - 00:14:15</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc Docker Swarm, c&#x27;est un orchestrateur qui permet d&#x27;héberger des conteneurs Docker sur plusieurs serveurs, les partager sur différents serveurs. Donc si je viens sur Docker ici, j&#x27;ai la liste de mes conteneurs. Et si je viens ici dans Swarm, je vois que j&#x27;ai deux nœuds parce que j&#x27;ai ajouté un nœud à mon cluster Swarm. Pareil, je n&#x27;ai pas eu de configuration de fou à faire ici.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableau de bord d&#x27;administration (UI web de gestion de conteneurs / orchestrateur) avec menu latéral de navigation.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Vue d&#x27;ensemble de Docker Swarm (Docker Swarm Overview) affichant 2 total nodes, 2/2 active nodes online, 1/2 manager nodes, et le détail des deux nœuds (ip-172-31-83-141 Leader et ip-172-31-87-173 Worker avec versions du moteur 28.3.3, 2 Cores et 7.75 Go de RAM).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication du statut des nœuds d&#x27;un cluster Docker Swarm dans une interface de supervision.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001405_seg31.jpg" alt="Interface graphique de gestion montrant le tableau de bord Docker Swarm avec deux nœuds actifs." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001405_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:05</span>
+                        <span class="caption-text">Interface graphique de gestion montrant le tableau de bord Docker Swarm avec deux nœuds actifs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:15 - 00:14:43</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je suis juste allé dans Manage Cluster, ajouter un node, et il me dit hop, tu as juste à ruiner cette commande-là et cette commande-là. Donc deux commandes, c&#x27;est plus compliqué une, mais c&#x27;est quand même assez simple. Et donc ça va installer Docker sur mon serveur. Et la deuxième va activer le mode Swarm et joindre le cluster de la première machine, la machine principale qui va être le manager. Et donc ce que ça me donne comme possibilité, c&#x27;est que maintenant, si je reviens dans mon petit projet 2048, imaginons que je veux scaler mon application Node, je ne veux plus que ça tourne une fois, mais que je veux que ça tourne cinq fois par exemple.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de gestion de cluster (type Dashboard PaaS / Docker Swarm UI).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Dashboard avec le menu latéral (Projects, Monitoring, Docker, Swarm) et la vue principale listant les services du projet &quot;jeu-2048&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans l&#x27;interface pour présenter l&#x27;ajout d&#x27;un nœud au cluster et la gestion des services.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001436_seg32.jpg" alt="Interface d&#x27;administration web montrant la gestion d&#x27;un cluster avec un projet nommé &quot;jeu-2048&quot; et des services déployés (&quot;my-mongo&quot;, &quot;node&quot;)." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001436_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:36</span>
+                        <span class="caption-text">Interface d&#x27;administration web montrant la gestion d&#x27;un cluster avec un projet nommé &quot;jeu-2048&quot; et des services déployés (&quot;my-mongo&quot;, &quot;node&quot;).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:43 - 00:15:03</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je peux venir ici dans Node, venir dans Avancer, Et ici, réplique. Je peux choisir de monter jusqu&#x27;à 5, 6, le nombre que je fais. Ici, ça me demande de choisir un registre. Donc un registre. Moi, j&#x27;ai déjà ajouté un ici. Je l&#x27;ai appelé My Registry. Comment est-ce que j&#x27;ai fait ? Je suis simplement allé dans Registry. Et j&#x27;ai fait Ajouter un nouveau registre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:03 - 00:15:23</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;ai mis un nom, un nom d&#x27;utilisateur. Et l&#x27;URL, je peux vous montrer ici. Et donc, ce que j&#x27;ai utilisé ici, c&#x27;est le Docker Hub, qui est un registre public. Je peux avoir deux ou trois images privées, si tu veux, en gratuit. Mais il y a plein de services différents qui permettent d&#x27;héberger des images Docker. Docker Hub, c&#x27;est un des plus basiques, mais ça pourrait même être sur GitHub directement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept de registre public (Docker Hub) et des images Docker.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:23 - 00:15:46</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">GitHub a son propre registre ou sur GitLab ou sur plein d&#x27;autres endroits où on peut avoir un registre. Et pourquoi est-ce qu&#x27;on a besoin de ça ? Parce que si j&#x27;ai plusieurs serveurs et que je construis mon image Docker sur un des serveurs, cette image-là, elle est juste sur le serveur qu&#x27;il a construit et pas sur les autres serveurs de mon cluster. Parce que ce n&#x27;est pas une image qui est publique. Donc ce qu&#x27;il faut, c&#x27;est pouvoir non seulement construire cette image, mais ensuite aller l&#x27;uploader sur un registre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Panneau de configuration web de gestion de cluster avec menu latéral (Projects, Monitoring, Docker, Swarm) et paramètres de service.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Champs de configuration &#x27;Cluster Settings&#x27; avec les options &#x27;Replicas&#x27; (réglé à 5), &#x27;Select a registry&#x27; (sélectionné sur &#x27;my-registry&#x27;), et la gestion des limites de ressources (Memory Limit, CPU Limit et réservations).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation de la configuration d&#x27;un service Docker Swarm, explication de la nécessité d&#x27;utiliser un registre centralisé partagé entre les différents nœuds d&#x27;un cluster pour synchroniser les images de conteneurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001534_seg35.jpg" alt="Interface de configuration d&#x27;un cluster montrant les paramètres de réplication et la sélection d&#x27;un registre de conteneurs." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001534_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:15:34</span>
+                        <span class="caption-text">Interface de configuration d&#x27;un cluster montrant les paramètres de réplication et la sélection d&#x27;un registre de conteneurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:46 - 00:16:06</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ensuite, mes autres serveurs de mon cluster pourront tous récupérer cette image de la même source. Et donc mon application pourra tourner sur tous les nœuds de mon cluster, même si ce n&#x27;est pas ce nœud-là en particulier qui a construit l&#x27;image à la base. Donc là, j&#x27;ai mis 5 répliques, mon registre, sauvegarder. D&#x27;ailleurs, ici, ça me dit, maintenant que tu as sauvegardé pour tes 5 répliques, il faut juste que tu redeployes, parce que c&#x27;est un nouveau déploiement dans Swarm.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de Coolify (Dashboard de gestion DevOps / Docker Swarm)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Paramètres de cluster Docker Swarm, champ &#x27;Replicas&#x27; défini à 5, sélection du registre &#x27;my-registry&#x27;, et message d&#x27;avertissement concernant le redéploiement.</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration du nombre de répliques et du registre d&#x27;images pour le service dans le cluster Docker Swarm.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001601_seg36.jpg" alt="Interface web de gestion de conteneurs (Coolify) affichant les paramètres du cluster Docker Swarm avec le réglage du nombre de répliques et du registre." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001601_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:01</span>
+                        <span class="caption-text">Interface web de gestion de conteneurs (Coolify) affichant les paramètres du cluster Docker Swarm avec le réglage du nombre de répliques et du registre.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:07 - 00:16:28</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc je viens ici faire dans Général et Deploy. Boum, boum. Donc là, ça va me refaire un nouveau déploiement, me reconstruire une nouvelle image. Mais cette fois-ci, l&#x27;uploader sur mon repo sur le Docker Hub. Donc là, je vois qu&#x27;il a créé l&#x27;image, mais il est maintenant en train de la pusher vers Docker Hub. Donc là, si je viens dans mon compte Docker Hub, je vois qu&#x27;il y a une nouvelle image qui a été créée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de déploiement / console de logs cloud (style Coolify ou similaire) avec affichage de la sortie standard d&#x27;un build et d&#x27;un push Docker.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logs détaillant les étapes de build : export to image, writing image, naming, authentification (Login Succeeded), puis le push des différentes couches (layers) vers le registre distant (docker.io/cocadmin/jeu2048-node-n3lcfs:latest), se terminant par le message &quot;Docker Deployed: Success&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Surveillance et explication en direct du processus de reconstruction de l&#x27;image conteneurisée et de son téléversement (upload/push) vers le dépôt Docker Hub.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001623_seg37.jpg" alt="Interface de déploiement affichant les logs de construction et de publication d&#x27;une image Docker sur Docker Hub, avec une pastille vidéo du présentateur en bas à gauche." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001623_seg37.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:23</span>
+                        <span class="caption-text">Interface de déploiement affichant les logs de construction et de publication d&#x27;une image Docker sur Docker Hub, avec une pastille vidéo du présentateur en bas à gauche.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:28 - 00:16:51</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Coqadmin, jeu 2048, node, blablabla. Il y a juste moins d&#x27;une minute. Donc cette image-là, si elle est en public, tout le monde peut accéder. Et si elle est en privé, il n&#x27;y a que moi ou les différents nodes de mon cluster qui vont pouvoir accéder en utilisant le mot de passe que j&#x27;ai renseigné ici quand j&#x27;ai créé mon registre. Donc là maintenant que j&#x27;ai mis 5 répliques, ça va me démarrer 5 fois le conteneur avec mon application Node dedans et ça va me balancer mon trafic entre mes 5 conteneurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur Web, interface Docker Hub et formulaire de configuration de registre.</p>
+                        <p><strong>Contenu textuel & Code :</strong> URL de registre docker.io, identifiant utilisateur &quot;cocadmin&quot;, et champs de configuration de mot de passe.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la visibilité publique ou privée d&#x27;une image Docker et configuration des accès pour un cluster de nœuds.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001634_seg38.jpg" alt="Interface Docker Hub affichant le dépôt public pour le jeu 2048 sous le compte cocadmin." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001634_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:34</span>
+                        <span class="caption-text">Interface Docker Hub affichant le dépôt public pour le jeu 2048 sous le compte cocadmin.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001640_seg38.jpg" alt="Formulaire de configuration d&#x27;un registre externe (External Registry) avec champs de nom, nom d&#x27;utilisateur, mot de passe et URL du registre." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001640_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:40</span>
+                        <span class="caption-text">Formulaire de configuration d&#x27;un registre externe (External Registry) avec champs de nom, nom d&#x27;utilisateur, mot de passe et URL du registre.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:51 - 00:17:18</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Chaque conteneur va recevoir un cinquième du trafic. J&#x27;ai que 2 serveurs, donc d&#x27;équivalent ça ne me sert pas à grand chose d&#x27;en avoir 5. Mais si je rajoutais des serveurs à mon cluster, je pourrais distribuer ces différents conteneurs sur mes différents serveurs et donc avoir plus de capacités et répondre à plus de requêtes à la fois. Un petit truc qui m&#x27;a un petit peu déçu, sur cette partie-là, c&#x27;est que techniquement, si je viens ici dans mes logs et que je regarde ici, je vois que j&#x27;ai que trois conteneurs qui sont en train de tourner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web de Dokploy (tableau de bord de gestion de conteneurs et de cluster).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Panneau d&#x27;administration de Dokploy affichant les onglets Environment, Domains, Preview Deployments, Schedules, Volume Backups, Deployments, Logs, ainsi qu&#x27;une section &quot;Cluster Settings&quot; avec un champ Replicas réglé sur 5.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la distribution du trafic et de la configuration des réplicas (mise à l&#x27;échelle) au sein d&#x27;un cluster de serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/63D29lhtqoY/63D29lhtqoY_001711_seg39.jpg" alt="Interface de l&#x27;outil Dokploy montrant la configuration d&#x27;un nœud, les onglets de gestion et les paramètres de cluster avec le réglage du nombre de réplicas à 5." loading="lazy" onclick="openLightbox('../screenshots/63D29lhtqoY/63D29lhtqoY_001711_seg39.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:11</span>
+                        <span class="caption-text">Interface de l&#x27;outil Dokploy montrant la configuration d&#x27;un nœud, les onglets de gestion et les paramètres de cluster avec le réglage du nombre de réplicas à 5.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:19 - 00:17:40</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, je me disais, c&#x27;est bizarre, j&#x27;en ai demandé cinq, mais j&#x27;en ai que trois. Ils sont où les deux autres ? Pareil ici, si je vais dans Docker, je vois que j&#x27;ai que trois conteneurs qui tournent ici. Donc pareil, c&#x27;est un peu bizarre. Mais en fait, ce qui se passe, c&#x27;est que ça a quand même bien fait ce que j&#x27;ai demandé. C&#x27;est juste que dans l&#x27;interface ici de DocPloy, je peux voir que les conteneurs qui tournent sur la machine qui fait tourner Docploy et pas les conteneurs qui tournent ailleurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:40 - 00:18:04</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais si je vais sur les serveurs en question, donc là à droite, j&#x27;ai mon serveur Docploy, je vois mon service ici, je node blablabla, qui a bien 5 répliques. Et si je fais Docker PS, je vois que j&#x27;ai 3 conteneurs les mêmes qu&#x27;on voit dans l&#x27;interface de Docploy ici. Donc là, hop 2 minutes, hop 2 minutes, hop 2 minutes, c&#x27;est mes 3. Mais si je vais sur mon autre serveur et que je fais Docker PS, j&#x27;ai les 2 autres qui font que j&#x27;ai bien 5 répliques.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:04 - 00:18:29</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc j&#x27;ai bien 2 conteneurs et c&#x27;est bien la même image qu&#x27;au admin slash jeu 2048, blablabla. Donc, ça fonctionne, mais dans l&#x27;interface, ça peut prêter un peu à confusion parce qu&#x27;on se dit, c&#x27;est bizarre, j&#x27;en ai que trois. Puis en plus de ça, on ne peut voir que les métriques et les logs de juste ceux qui tournent sur la machine de plug. Donc, c&#x27;est un petit bémol, mais cette fonctionnalité de fait de pouvoir scaler horizontalement, c&#x27;est quelque chose que j&#x27;ai retrouvé dans aucun autre outil que j&#x27;ai testé ou du moins aucun autre outil qui est simple.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la configuration des conteneurs par le créateur face caméra.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:30 - 00:18:49</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu as d&#x27;autres orchestrateurs qui peuvent faire ça, évidemment, mais ils sont beaucoup plus compliqués à utiliser. Alors que là, même si je ne sais même pas ce que c&#x27;est Docker Swarm, ça va quand même marcher. J&#x27;ai testé énormément de solutions alternatives. J&#x27;ai testé Doge, Portainer, Coolify, Nomad, Kamal, Swarm, et même les classiques Kubernetes ou Docker Compose.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console n&#x27;est affiché à l&#x27;écran.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible (plans purement face-caméra).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale par le créateur sur les différents orchestrateurs de conteneurs testés (Docker Swarm, Kubernetes, Nomad, etc.).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:49 - 00:19:11</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour moi, Doploie a de loin le meilleur rapport entre simplicité, avec l&#x27;interface où il y a vraiment tout, quelques clics, pas trop de trucs compliqués, et d&#x27;avoir quand même toutes les fonctionnalités nécessaires qu&#x27;on a besoin pour pouvoir aller avoir une application solide en production. Si tu veux apprendre les différentes outils et méthodes DevOps avec moi, je fais quelques fois par an des formations en petits groupes. Je te laisse ce lien en description si jamais ça t&#x27;intéresse. Et si tu veux toi même savoir comment faire une application qui scale, je te laisse aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web / outil de présentation sur écran externe.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Diapositive titrée &quot;Philosophie DevOps&quot; avec des questions textuelles.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la philosophie DevOps sans manipulation technique directe à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
