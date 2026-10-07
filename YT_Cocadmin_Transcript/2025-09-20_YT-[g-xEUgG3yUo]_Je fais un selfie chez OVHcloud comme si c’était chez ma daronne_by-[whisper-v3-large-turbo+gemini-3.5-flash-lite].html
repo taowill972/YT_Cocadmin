@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Je fais un selfie chez OVHcloud comme si c’était chez ma daronne — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Je fais un selfie chez OVHcloud comme si c’était chez ma daronne</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=g-xEUgG3yUo" target="_blank">Lien YouTube (<code>g-xEUgG3yUo</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-09-20</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:17:48</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Cette transcription de la chaîne Cocadmin plonge au cœur du méga-datacenter OVHcloud de Beauharnois (Canada) pour décortiquer l'infrastructure hardware et la stratégie d'ingénierie système derrière le déploiement massif de serveurs haute densité. Le problème critique auquel s'attaque OVHcloud est l'optimisation extrême des coûts au mètre carré, de l'efficacité énergétique et de la dissipation thermique face à l'explosion des besoins en calcul intensif (IA, GPU) et en stockage. Pour y répondre, l'entreprise s'affranchit du matériel standard en concevant sa propre métallurgie, ses racks sur-mesure et ses cartes mères ou *risers* propriétaires.<br><br>La solution technique repose sur une architecture matérielle hybride et modulaire : des châssis ultra-denses accueillant des serveurs semi-format (jusqu'à 96 unités par rack), un système de refroidissement liquide direct (*watercooling*) gérant 80 % de la charge thermique des processeurs (CPU/GPU), et un couplage malin avec un radiateur à air pour les 20 % restants. Cette conception thermique innovante élimine le besoin de climatiser les salles ou conteneurs. Côté réseau et alimentation, la redondance est poussée à son paroxysme avec trois switches aux rôles distincts (public, routage virtuel inter-datacenter et IPMI out-of-band), capables de basculer dynamiquement en cas de panne, ainsi que des blocs d'alimentation partagés et des cartes de sécurité anti-humidité.<br><br>Pour un ingénieur DevOps, Système ou SRE, cet aperçu opérationnel démontre l'importance d'une co-conception étroite entre le logiciel et le métal nu (*bare-metal*). La gestion de la topologie réseau, l'automatisation du provisionnement distant via l'IPMI et la maîtrise de la densité rackable redéfinissent les standards de la haute disponibilité et du dimensionnement d'infrastructure à grande échelle. L'impact est direct : des performances de calcul maximisées, une réduction drastique du PUE (Power Usage Effectiveness) et une résilience matérielle accrue grâce à des tests de pression rigoureux et une redondance multi-niveaux.<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **AMD EPYC (16 cœurs)** : Processeur haute performance embarqué dans les serveurs denses, offrant un équilibre optimal entre puissance de calcul, gestion de la mémoire (1 To de RAM) et efficacité énergétique.<br>* **NVIDIA RTX 2000 (Génération Ada / équivalent RTX 4060)** : GPU professionnels customisés et montés en grappe (jusqu'à 8 par serveur 2U) pour des charges de travail intensives en IA et calcul parallèle.<br>* **Switches Réseau (Public, Virtuel, IPMI)** : Équipements de commutation redondants gérant respectivement l'accès Internet, l'interconnexion globale de sous-réseaux virtuels et l'administration *out-of-band* (reboot, maintenance).<br>* **Cartes mères et *Risers* PCI Express sur-mesure** : Composants propriétaires conçus par OVHcloud pour déporter et connecter proprement de multiples cartes graphiques via des câbles mini-SAS.<br>* **Système de Watercooling & Échangeurs d'eau** : Circuit fermé de plomberie interne aux racks, couplé à un échangeur thermique externe exploitant l'air ambiant pour refroidir l'ensemble sans climatisation active.<br>* **Capteurs anti-humidité** : Cartes électroniques de sécurité embarquées dans les châssis pour couper instantanément l'alimentation en cas de fuite du liquide de refroidissement.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Densification verticale et horizontale** : Trouver l'équilibre entre la hauteur des racks et leur profondeur est crucial pour maximiser le ratio coût/mètre carré tout en maintenant une accessibilité viable pour la maintenance physique.<br>* **Dissipation thermique hybride (Liquide / Air)** : Cibler 80 % de la chaleur des processeurs directement par *watercooling* permet de rejeter un air à température ambiante, supprimant le goulet d'étranglement énergétique des clims de datacenter traditionnelles.<br>* **Redondance réseau multi-rôles** : Dissocier le trafic public, le routage virtuel inter-datacenters et l'IPMI garantit qu'une défaillance sur une interface n'isole jamais complètement l'infrastructure de son plan de contrôle.<br>* **Haute disponibilité des plans de données** : Le mécanisme de bascule automatique entre le switch public et le switch virtuel assure un *failover* réseau instantané en cas de coupure de la liaison Internet principale.<br>* **Administration *Out-of-Band* (IPMI)** : L'utilisation d'un réseau de management dédié est impérative pour diagnostiquer, débloquer (*freezes*) et rebooter à distance des serveurs inaccessibles via le réseau de production.<br>* **Isolation et sécurité des alimentations** : Centraliser et partager des blocs d'alimentation de 1200W à 2500W directement au niveau du rack simplifie le câblage et tolère la charge de calcul massive des GPU.<br>* **Mitigation des risques liés aux fluides** : L'intégration de capteurs d'humidité avec coupure automatique du courant est une mesure de sécurité indispensable lors de l'industrialisation du refroidissement liquide en milieu informatique.<br>* **Erreur critique à éviter** : Négliger les tests de pression hydraulique et de contrainte thermique en phase d'assemblage initial expose l'infrastructure à des pannes en cascade catastrophiques une fois les serveurs en production.<br>* **Routage virtuel inter-sites** : Configurer des sous-réseaux étirés (*stretched networks*) permet d'abstraire la distance géographique (ex: Montréal - Paris), facilitant la migration et la haute disponibilité applicative multi-régions.<br>* **Gestion des composants non standard** : Le recours à des *risers* PCI Express déportés et des modifications de waterblocks (impliquant la perte de garantie constructeur grand public) nécessite un partenariat métallurgique et une supply chain étroitement intégrés.<br>* **Contrôle qualité rigoureux post-assemblage** : Soumettre l'intégralité des racks à une double batterie de tests (en usine puis dans l'allée du datacenter) valide l'intégrité de la plomberie et du réseau avant l'injection de charge.<br>* **Maintenance prédictive et préventive** : Assurer des tournées de maintenance régulières pour le déploiement et le remplacement des ventilateurs de brassage d'air garantit la pérennité du taux de disponibilité global du parc *bare-metal*.
+            <div class="tools-badges-cloud"><span class="tool-tag">AMD EPYC (16 cœurs)</span><span class="tool-tag">NVIDIA RTX 2000 (Génération Ada / équivalent RTX 4060)</span><span class="tool-tag">Switches Réseau (Public, Virtuel, IPMI)</span><span class="tool-tag">Cartes mères et *Risers* PCI Express sur-mesure</span><span class="tool-tag">Système de Watercooling &amp; Échangeurs d&#x27;eau</span><span class="tool-tag">Capteurs anti-humidité</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Densification verticale et horizontale** : Trouver l&#x27;équilibre entre la hauteur des racks et leur profondeur est crucial pour maximiser le ratio coût/mètre carré tout en maintenant une accessibilité viable pour la maintenance physique.</span></li><li><span class="point-bullet">✦</span><span>Dissipation thermique hybride (Liquide / Air)** : Cibler 80 % de la chaleur des processeurs directement par *watercooling* permet de rejeter un air à température ambiante, supprimant le goulet d&#x27;étranglement énergétique des clims de datacenter traditionnelles.</span></li><li><span class="point-bullet">✦</span><span>Redondance réseau multi-rôles** : Dissocier le trafic public, le routage virtuel inter-datacenters et l&#x27;IPMI garantit qu&#x27;une défaillance sur une interface n&#x27;isole jamais complètement l&#x27;infrastructure de son plan de contrôle.</span></li><li><span class="point-bullet">✦</span><span>Haute disponibilité des plans de données** : Le mécanisme de bascule automatique entre le switch public et le switch virtuel assure un *failover* réseau instantané en cas de coupure de la liaison Internet principale.</span></li><li><span class="point-bullet">✦</span><span>Administration *Out-of-Band* (IPMI)** : L&#x27;utilisation d&#x27;un réseau de management dédié est impérative pour diagnostiquer, débloquer (*freezes*) et rebooter à distance des serveurs inaccessibles via le réseau de production.</span></li><li><span class="point-bullet">✦</span><span>Isolation et sécurité des alimentations** : Centraliser et partager des blocs d&#x27;alimentation de 1200W à 2500W directement au niveau du rack simplifie le câblage et tolère la charge de calcul massive des GPU.</span></li><li><span class="point-bullet">✦</span><span>Mitigation des risques liés aux fluides** : L&#x27;intégration de capteurs d&#x27;humidité avec coupure automatique du courant est une mesure de sécurité indispensable lors de l&#x27;industrialisation du refroidissement liquide en milieu informatique.</span></li><li><span class="point-bullet">✦</span><span>Erreur critique à éviter** : Négliger les tests de pression hydraulique et de contrainte thermique en phase d&#x27;assemblage initial expose l&#x27;infrastructure à des pannes en cascade catastrophiques une fois les serveurs en production.</span></li><li><span class="point-bullet">✦</span><span>Routage virtuel inter-sites** : Configurer des sous-réseaux étirés (*stretched networks*) permet d&#x27;abstraire la distance géographique (ex: Montréal - Paris), facilitant la migration et la haute disponibilité applicative multi-régions.</span></li><li><span class="point-bullet">✦</span><span>Gestion des composants non standard** : Le recours à des *risers* PCI Express déportés et des modifications de waterblocks (impliquant la perte de garantie constructeur grand public) nécessite un partenariat métallurgique et une supply chain étroitement intégrés.</span></li><li><span class="point-bullet">✦</span><span>Contrôle qualité rigoureux post-assemblage** : Soumettre l&#x27;intégralité des racks à une double batterie de tests (en usine puis dans l&#x27;allée du datacenter) valide l&#x27;intégrité de la plomberie et du réseau avant l&#x27;injection de charge.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:19</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Aujourd&#x27;hui on est à OVH Cloud dans le data center de Beauharnau au Canada, un des plus gros data center d&#x27;Amérique du Nord. Et on va tout voir de leur nouvelle génération de serveurs, de l&#x27;installation au watercooling, à l&#x27;alimentation électrique, au réseau, à la destruction des serveurs, ici dans leur super gros mega data center à Montréal. Toutes les pièces, donc tout ce qui va être assemblé dans les serveurs, elles vont rentrer par cette boîte ici.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;introduction du datacenter OVH Cloud de Beauharnois par le créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:19 - 00:00:53</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite elles vont être rangées dans toutes les différentes étagères pour être stockées, ou alors dans cette étagère un petit peu robotique pour pouvoir optimiser au maximum l&#x27;espace. Donc du coup OVH ils ont un partenaire qui leur fait toute la métallurgie, donc qui fait tous les racks dans lesquels on va pouvoir mettre les serveurs. Et donc, ils arrivent tout nus comme ça. Et ensuite, en fonction des besoins qu&#x27;il va y avoir en ce moment, s&#x27;il y a besoin de gros serveurs, de petits serveurs, eh bien on va venir mettre les petites ailettes ici qui vont permettre d&#x27;héberger soit des serveurs de une unité, soit de deux unités ou plus en fonction si on a besoin d&#x27;un gros serveur ou d&#x27;un tout petit mini serveur. Une fois qu&#x27;on a fini l&#x27;assemblage physique du rack, il va ressembler à ça où on a</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Équipement matériel et racks de datacenter physiques.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Manipulation de matériel serveur et racks métalliques industriels.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du processus de stockage et de la structure physique des racks de serveurs chez le partenaire d&#x27;OVH.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000045_seg2.jpg" alt="Vue rapprochée d&#x27;un technicien manipulant un composant de serveur ou une carte mère devant un rack de stockage de datacenter." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000045_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:45</span>
+                        <span class="caption-text">Vue rapprochée d&#x27;un technicien manipulant un composant de serveur ou une carte mère devant un rack de stockage de datacenter.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:53 - 00:01:27</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">le réseau, l&#x27;électricité et toute la plomberie pour le refroidissement à l&#x27;eau. Ça, c&#x27;est la configuration la plus dense possible, on peut mettre 96 serveurs parce que c&#x27;est des serveurs qui font la moitié d&#x27;une unité. Donc ça c&#x27;est une unité, une unité, une unité, une unité. C&#x27;est l&#x27;espace normal pour mettre un serveur sauf que comme on voit ici, il y a une petite séparation, ce qui fait qu&#x27;en fait dans une seule unité normale, on peut mettre jusqu&#x27;à deux serveurs. Du coup, c&#x27;est des petits serveurs qui ressemblent à ça, qui prennent la moitié de la place, qui sont beaucoup plus petits, ce qui fait qu&#x27;on peut avoir un rack beaucoup plus dense, beaucoup plus de serveurs au même endroit en utilisant moins de place. Une fois que l&#x27;assemblage ici est fait, il y a toute une partie de tests évidemment pour vérifier que la plomberie résiste</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique (serveurs rackables, carte mère propriétaire demi-U).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture matérielle serveur : socket CPU AMD EPYC, emplacements mémoire DDR5, connecteurs d&#x27;alimentation et câblage interne.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation physique et détaillée d&#x27;un serveur haute densité au format demi-unité (0.5U) et de ses composants internes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000119_seg3.jpg" alt="Gros plan sur une carte mère de serveur au format compact (half-U) équipée d&#x27;un processeur AMD EPYC, de mémoire RAM et de connectique réseau." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000119_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:19</span>
+                        <span class="caption-text">Gros plan sur une carte mère de serveur au format compact (half-U) équipée d&#x27;un processeur AMD EPYC, de mémoire RAM et de connectique réseau.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:27 - 00:01:58</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">bien la pression, que tout est bien branché, etc. On va passer à une partie où on va hacker tous les serveurs, mettre les 96 serveurs dedans. Pour la partie réseau, on a trois switches en haut et les trois switches ont une fonction un petit peu différente. On va avoir un switch qui va permettre la connectivité à Internet pour pouvoir accéder à mon serveur. On va avoir un deuxième switch qui va être un petit peu virtuel et qui va permettre de configurer le réseau un peu comme on veut, ce qui fait que si on a un serveur à Montréal et un autre serveur à Paris, on peut configurer le réseau pour faire comme si les deux étaient exactement dans le même sous-réseau alors qu&#x27;ils sont à l&#x27;autre bout du monde.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel réseau physique (panneau de brassage, câblage structuré, switchs).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Connectique réseau dense avec câbles à paires torsadées et étiquettes de repérage.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;architecture réseau et du rôle des différents switchs pour la connectivité des 96 serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000150_seg4.jpg" alt="Gros plan technique sur le panneau de brassage et les câbles réseaux connectés aux switchs supérieurs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000150_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:50</span>
+                        <span class="caption-text">Gros plan technique sur le panneau de brassage et les câbles réseaux connectés aux switchs supérieurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:58 - 00:02:18</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, c&#x27;est quand même assez pratique. Et le troisième switch, c&#x27;est l&#x27;IPMI. Donc, c&#x27;est pour pouvoir se connecter au serveur en cas de problème, si jamais il répond plus, s&#x27;il est freeze, s&#x27;il faut rebooter le serveur. Et bien, ce switch-là permet de faire toutes ces opérations de maintenance sur le serveur. Et ce qui est intéressant aussi, c&#x27;est que le switch pour l&#x27;accès au public et le switch virtuel, et bien, ils peuvent échanger.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel réseau physique (panneau de brassage, câbles RJ45/fibre, switch).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Connectique réseau et câblage structuré dans un rack de serveurs.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation matérielle du switch réseau et de la connectivité IPMI pour la maintenance à distance.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000203_seg5.jpg" alt="Gros plan sur le panneau de brassage et le câblage réseau d&#x27;un rack de serveurs, illustrant l&#x27;infrastructure de connectivité." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000203_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:03</span>
+                        <span class="caption-text">Gros plan sur le panneau de brassage et le câblage réseau d&#x27;un rack de serveurs, illustrant l&#x27;infrastructure de connectivité.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:18 - 00:02:54</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça veut dire que si jamais le switch qui donne accès à Internet tombe en panne, et bien, le switch virtuel peut prendre le relais et donner une connectivité Internet à tous les autres switches. Ensuite en parlant de redondance, chaque switch va avoir 2 x 25 gigues en connectivité en SFP. Le switch ici va donner en général 10 gigas de connectivité vers internet, mais si jamais on a des demandes spéciales, on peut potentiellement avoir jusqu&#x27;à 2 x 25 gigues en connectivité locale. Et le troisième câble ici, ça va être notre IPMI pour pouvoir accéder à notre machine à distance en cas de problème. Ensuite pour la partie alimentation, les serveurs, on voit qu&#x27;ils n&#x27;ont pas l&#x27;alimentation directement ici. Ils ont juste la connexion ici,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la redondance réseau et de la connectivité SFP entre switches.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:54 - 00:03:15</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">je m&#x27;imagine que c&#x27;est une connexion ATX. Et ils vont se connecter directement au fond du rack et c&#x27;est dans le rack qu&#x27;il y a déjà les alimentations qui sont déjà préinstallées. Donc là pour la partie alimentation électrique, on voit on a toutes les alimes qui sont derrière pour pouvoir alimenter tous les serveurs. Là comme ça va être que des machines qui sont un peu plus entrée de gamme, on va avoir une alimentation qui peut alimenter jusqu&#x27;à quatre machines différentes. Donc c&#x27;est des alimentations de 1200 watts donc elles ont largement la puissance pour pouvoir faire ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique, infrastructure de datacenter / rack serveur modulaire.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Connectique d&#x27;alimentation interne et structure modulaire des serveurs en rack.
+[DESC_IMAGE_1] Explication de l&#x27;architecture d&#x27;alimentation électrique centralisée et de la connexion ATX au fond du rack.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000259_seg7.jpg" alt="Gros plan horizontal montrant l&#x27;intérieur d&#x27;un rack de serveurs et les connecteurs d&#x27;alimentation préinstallés au fond." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000259_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:59</span>
+                        <span class="caption-text">Gros plan horizontal montrant l&#x27;intérieur d&#x27;un rack de serveurs et les connecteurs d&#x27;alimentation préinstallés au fond.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000310_seg7.jpg" alt="Gros plan sur le technicien en gilet de sécurité et casque pointant les baies et tiroirs serveurs du rack." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000310_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:10</span>
+                        <span class="caption-text">Gros plan sur le technicien en gilet de sécurité et casque pointant les baies et tiroirs serveurs du rack.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:15 - 00:03:40</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ensuite on va avoir la partie refroidissement. Donc c&#x27;est ça toute la plomberie qu&#x27;on voit ici. On va avoir de l&#x27;eau fraîche qui va rentrer dans le rack et qui va aller, par tous ces petits tuyaux, aller refroidir individuellement tous les 96 serveurs qui sont dans le rack. Et l&#x27;eau, elle refroidit à peu près 80% de la chaleur que fournit le CPU. Et un 20% qui reste, qui est produit par le CPU, mais aussi les autres composants, la carte réseau, la RAM, les disques durs, etc., qui va être refroidi par air.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique de datacenter (rack de serveurs haute densité, système de refroidissement liquide par tuyauterie).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture matérielle d&#x27;un rack contenant 96 serveurs équipés de watercooling.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et démonstration du système de refroidissement liquide (plomberie et tuyaux d&#x27;eau fraîche) pour dissiper la chaleur des serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000334_seg8.jpg" alt="Vue d&#x27;ensemble d&#x27;un rack ouvert montrant la disposition empilée de 96 serveurs haute densité." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000334_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:34</span>
+                        <span class="caption-text">Vue d&#x27;ensemble d&#x27;un rack ouvert montrant la disposition empilée de 96 serveurs haute densité.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:40 - 00:04:02</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est pour ça qu&#x27;on va aussi avoir de l&#x27;eau qui va circuler dans ce gros, gros radiateur ici. Et on va avoir tous ces ventilateurs qui vont prendre l&#x27;air chaud qui est généré par le reste des composants. et le faire passer à travers cette eau froide ici. Et ça, c&#x27;est une des grosses innovations d&#x27;OVH qui font qu&#x27;ils n&#x27;ont pas forcément besoin de climatiser les bâtiments, de climatiser les conteneurs qu&#x27;on va voir juste après dans lesquels ils mettent les serveurs, parce que l&#x27;air qui ressort des racks est à température normale.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel hardware datacenter / système de refroidissement liquide OVH</p>
+                        <p><strong>Contenu textuel & Code :</strong> Racks de serveurs, échangeur thermique, tuyauterie de refroidissement liquide, ventilateurs</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique du système de refroidissement par eau (watercooling) et ventilation des serveurs OVH</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000345_seg9.jpg" alt="Vue rapprochée de techniciens inspectant un système de refroidissement liquide (watercooling) pour serveurs OVH." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000345_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:45</span>
+                        <span class="caption-text">Vue rapprochée de techniciens inspectant un système de refroidissement liquide (watercooling) pour serveurs OVH.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000351_seg9.jpg" alt="Vue d&#x27;un rack de serveurs haute densité avec un technicien en équipement de sécurité." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000351_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:51</span>
+                        <span class="caption-text">Vue d&#x27;un rack de serveurs haute densité avec un technicien en équipement de sécurité.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:02 - 00:04:24</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc il n&#x27;y a pas besoin de refroidissement supplémentaire, il n&#x27;y a pas besoin de rajouter de climatisation, etc. Donc là, on va préparer un GPU, un RTX 2000, qui correspond à peu près à une 40-60 en GPU classique, sauf que là, ce n&#x27;est pas pour faire du gaming, c&#x27;est plus pour des utilisations plus professionnelles, comme de l&#x27;IA ou des autres utilisations qui ont besoin de GPU. Sauf que comme on va faire du refroidissement en liquide, à OVH, ils vont les customiser pour pouvoir les faire entrer dans leur serveur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Atelier technique avec plan de travail, boîtes de rangement de composants et écran de contrôle en arrière-plan.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Manipulation physique d&#x27;une carte graphique professionnelle (GPU RTX 2000).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation matérielle et explication des usages professionnels (IA) d&#x27;un GPU RTX 2000.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:24 - 00:04:44</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Premièrement, on va le démonter. On va enlever les petites vis de derrière. On va perdre la garantie, évidemment. On va venir ensuite enlever le radiateur pour pouvoir après faire l&#x27;installation d&#x27;un waterblock. OK, une moyenne goutte. Comme ça ? Parfait. Ça a l&#x27;air bien appliqué.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Atelier technique avec établi, bacs de rangement de composants et écran de contrôle.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Manipulation physique de matériel informatique, application de pâte thermique sur un circuit imprimé (PCB).</p>
+                        <p><strong>Action / Démonstration :</strong> Application précise de pâte thermique sur un processeur ou une puce électronique avant l&#x27;installation d&#x27;un waterblock.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000439_seg11.jpg" alt="Gros plan sur l&#x27;application minutieuse de pâte thermique sur un composant électronique (PCB) avec une spatule." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000439_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:39</span>
+                        <span class="caption-text">Gros plan sur l&#x27;application minutieuse de pâte thermique sur un composant électronique (PCB) avec une spatule.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:45 - 00:05:05</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est bon, je suis embauché ? Oui ! C&#x27;est un petit oui. Si on regarde comme il faut, c&#x27;est vraiment ici pour mettre sur les chipsets. On va remettre encore de la pâte thermique. OK. Cette fois-ci, une grosse goutte, j&#x27;imagine? Oui. Après, il y a une bonne... T&#x27;en as beaucoup, là. Ouais. Mais moi, je suis comme ça, je suis généreux.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran de contrôle/suivi d&#x27;atelier et poste de travail physique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Composants matériels, cartes électroniques (PCB), pots de pâte thermique, outillage de précision et bacs de quincaillerie.</p>
+                        <p><strong>Action / Démonstration :</strong> Application manuelle de pâte thermique sur des composants matériels et contrôle visuel de l&#x27;assemblage.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000450_seg12.jpg" alt="Plan de travail d&#x27;atelier montrant du matériel informatique en cours d&#x27;assemblage (PCB, composants, outils)." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000450_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:50</span>
+                        <span class="caption-text">Plan de travail d&#x27;atelier montrant du matériel informatique en cours d&#x27;assemblage (PCB, composants, outils).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000500_seg12.jpg" alt="Gros plan sur la manipulation de pâte thermique sur un poste de travail d&#x27;assemblage matériel." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000500_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:00</span>
+                        <span class="caption-text">Gros plan sur la manipulation de pâte thermique sur un poste de travail d&#x27;assemblage matériel.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:05 - 00:05:25</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il n&#x27;y a pas de problème. Ça déborde, on va nettoyer. Yep. On vient remettre le backplane. Donc là, ici, on a une grosse, grosse machine. Les GPU qu&#x27;on a vus tout à l&#x27;heure.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel informatique, outillage de précision et composants électroniques (GPU / cartes d&#x27;accélération).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Manipulation physique de matériel, application de pâte thermique et assemblage de backplane/dissipateur thermique.</p>
+                        <p><strong>Action / Démonstration :</strong> Maintenance matérielle, nettoyage et réassemblage d&#x27;un composant de serveur haute performance.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000510_seg13.jpg" alt="Application de pâte thermique sur un composant ou un radiateur de carte d&#x27;accélération matérielle." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000510_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:10</span>
+                        <span class="caption-text">Application de pâte thermique sur un composant ou un radiateur de carte d&#x27;accélération matérielle.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000515_seg13.jpg" alt="Assemblage et vissage du système de refroidissement (backplane/dissipateur) sur une carte d&#x27;extension matérielle ou un composant GPU." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000515_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:15</span>
+                        <span class="caption-text">Assemblage et vissage du système de refroidissement (backplane/dissipateur) sur une carte d&#x27;extension matérielle ou un composant GPU.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:25 - 00:05:43</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ici, on va retrouver 1, 2, 3, 4, 5, 6, 7, 8 fois des RTX 2000 qui vont être tout ça dans un serveur seulement 2U. Et à l&#x27;intérieur, dans la machine ici, on va avoir un Epic 16 coeurs avec 1TB de RAM, donc quand même assez costaud aussi, et 2TB de disque dur, prodondé, c&#x27;est juste pour avoir l&#x27;OS.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel serveur rackable 2U, composants internes (CPU EPYC, RAM, cartes graphiques RTX 2000, watercooling).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Architecture matérielle haute densité : serveur 2U, processeur EPYC 16 cœurs, 1 To de RAM, stockage NVMe M.2 et 8 GPU RTX 2000 intégrés.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation physique et démontage du châssis serveur 2U pour exposer la disposition interne des composants haute performance.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000534_seg14.jpg" alt="Gros plan technique sur l&#x27;intérieur d&#x27;un serveur 2U haute densité montrant le watercooling, les barrettes de RAM et la carte mezzanine contenant les cartes graphiques RTX 2000." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000534_seg14.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:34</span>
+                        <span class="caption-text">Gros plan technique sur l&#x27;intérieur d&#x27;un serveur 2U haute densité montrant le watercooling, les barrettes de RAM et la carte mezzanine contenant les cartes graphiques RTX 2000.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:43 - 00:06:03</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;imagine que si on utilise autant de GPU, on va utiliser comme un NAS ou un SAS ou un stockage qui est déporté, qui ne va pas être directement dans le serveur. Et donc, on va faire notre petite installation ici. Évidemment, il a déjà été un petit peu fait pour moi. On va faire notre petit ajout de GPU ici. On va venir faire ça ici. Tac.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface logicielle ou console visible (plans vidéo face-caméra/atelier).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique affiché à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;infrastructure de stockage déportée (NAS/SAS) et manipulation physique générique de matériel informatique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:04 - 00:06:31</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là, on a toutes les ports PCI Express qui sont tous déportés, qui viennent ici se reconnecter derrière dans la carte mère. Et donc, un GPU, ça consomme déjà beaucoup d&#x27;énergie. Mais là, quand on en a huit dans le même serveur, ça consomme encore plus. Donc, on a notre alimentation ici, 2500 watts d&#x27;alimentation qui va alimenter premièrement notre serveur, mais qui va aussi alimenter directement les risers PCI Express qui vont te permettre d&#x27;alimenter après derrière les GPU.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique (serveur haute densité, blocs d&#x27;alimentation, câblage interne).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Composants matériels de serveurs IA (ports PCIe déportés, alimentation haute capacité, watercooling).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur l&#x27;alimentation électrique et le routage des ports PCIe pour les GPU dans un serveur haute densité.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000611_seg16.jpg" alt="Gros plan sur le câblage interne d&#x27;un serveur haute performance, montrant les connexions PCIe déportées et l&#x27;alimentation haute puissance." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000611_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:11</span>
+                        <span class="caption-text">Gros plan sur le câblage interne d&#x27;un serveur haute performance, montrant les connexions PCIe déportées et l&#x27;alimentation haute puissance.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:31 - 00:06:56</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ces risers PCI Express qu&#x27;on voit ici, c&#x27;est aussi des cartes custom faites directement par OVH. Et ensuite, les risers vont être branchés en mini-sass vers la carte mère. Pour la carte mère, elle va voir ça comme un périphérique PCI Express et donc elle va voir la carte graphique comme si elle était branchée en PCI Express alors qu&#x27;on l&#x27;a déportée via un câble. On a aussi une carte ici qui permet de vérifier qu&#x27;on n&#x27;a pas d&#x27;humidité dans le châssis et pour pouvoir venir couper l&#x27;alimentation en cas de problème.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel informatique serveur, carte mère, connectique interne.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Composants matériels de serveur OVH (carte mère, SSD NVMe, connecteurs internes).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation matérielle des composants internes d&#x27;un serveur personnalisé OVH.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000643_seg17.jpg" alt="Gros plan sur la carte mère d&#x27;un serveur montrant les composants, connecteurs et SSD M.2." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000643_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:43</span>
+                        <span class="caption-text">Gros plan sur la carte mère d&#x27;un serveur montrant les composants, connecteurs et SSD M.2.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:56 - 00:07:17</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une fois qu&#x27;on a fini d&#x27;installer tous les serveurs dans le rack qui ont été montés, qui ont été testés, on va prendre le rack et on va venir les installer ici. C&#x27;est quand même assez grand et c&#x27;est quand même assez dense. Il y a quatre allées dans ce data center. Ici, c&#x27;est l&#x27;allée dernière génération et on va installer jusqu&#x27;à 30 000 serveurs dans cette année-là. Et donc, pour l&#x27;instant, ils utilisent à peu près la moitié de l&#x27;espace, donc ils ont encore de l&#x27;espace pour l&#x27;expansion.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel physique de centre de données (racks de serveurs, câblage réseau, équipements d&#x27;alimentation).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Infrastructure physique de serveurs haute densité installés dans des baies de datacenter.</p>
+                        <p><strong>Action / Démonstration :</strong> Visite guidée et présentation de l&#x27;agencement matériel d&#x27;un centre de données moderne.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000701_seg18.jpg" alt="Vue d&#x27;un technicien dans un data center dense montrant les baies de serveurs haute densité." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000701_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:01</span>
+                        <span class="caption-text">Vue d&#x27;un technicien dans un data center dense montrant les baies de serveurs haute densité.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000706_seg18.jpg" alt="Gros plan sur l&#x27;infrastructure matérielle : rangées de serveurs montés en rack avec câblage structuré." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000706_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:06</span>
+                        <span class="caption-text">Gros plan sur l&#x27;infrastructure matérielle : rangées de serveurs montés en rack avec câblage structuré.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000712_seg18.jpg" alt="Vue panoramique des allées du data center mettant en avant l&#x27;installation des serveurs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000712_seg18.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:12</span>
+                        <span class="caption-text">Vue panoramique des allées du data center mettant en avant l&#x27;installation des serveurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:17 - 00:07:43</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais ils essayent aussi de s&#x27;étendre en hauteur. On voit que les serveurs vont beaucoup plus haut que dans un data center normal. Dans un data center classique, le rack irait peut-être jusqu&#x27;ici, quelque chose comme ça, alors que là, on a quand même beaucoup de serveurs en plus. Et il prévoit d&#x27;aller encore plus haut. Et en fait, il y a toute une balance entre rajouter des serveurs en hauteur ou rajouter des serveurs dans la salle, parce que le plus on va avoir de serveurs au même endroit, le plus on va avoir une bonne densité, on va avoir un meilleur prix du serveur au mètre carré, entre guillemets.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Datacenter physique, racks de serveurs haute densité, chemins de câbles aériens, câblage réseau et alimentation.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Infrastructure matérielle de serveurs empilés verticalement, câbles optiques et cuivres, gestion thermique et électrique.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation physique et explication technique de l&#x27;architecture verticale des serveurs du datacenter.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000724_seg19.jpg" alt="Un technicien en équipement de protection (casque et gilet haute visibilité) présente la hauteur importante des racks de serveurs dans un datacenter haute densité." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000724_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:24</span>
+                        <span class="caption-text">Un technicien en équipement de protection (casque et gilet haute visibilité) présente la hauteur importante des racks de serveurs dans un datacenter haute densité.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000730_seg19.jpg" alt="Vue rapprochée du cheminement des câbles de brassage et de la connectique aérienne au sommet des baies de serveurs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000730_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:30</span>
+                        <span class="caption-text">Vue rapprochée du cheminement des câbles de brassage et de la connectique aérienne au sommet des baies de serveurs.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000736_seg19.jpg" alt="Le technicien poursuit son explication en montrant la structure verticale étendue des racks de serveurs haute performance." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000736_seg19.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:36</span>
+                        <span class="caption-text">Le technicien poursuit son explication en montrant la structure verticale étendue des racks de serveurs haute performance.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:43 - 00:08:04</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On va aussi avoir besoin de moins d&#x27;infrastructures, d&#x27;équipements réseau, d&#x27;équipements de refroidissement, etc., parce que tout est au même endroit. Maintenant, le fait de rajouter des serveurs en hauteur, c&#x27;est plus difficile à installer, c&#x27;est plus difficile à maintenir. Au bout d&#x27;un moment, on a besoin de quipements qui sont peut-être plus chers. Donc ça fait qu&#x27;il y a cette difficile balance à trouver entre densifier en hauteur et densifier en profondeur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Datacenter physique, racks de serveurs haute densité, chemins de câbles optiques et cuivre.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Racks de serveurs empilés verticalement, câblage structuré, blocs d&#x27;alimentation et ventilateurs de serveurs visibles.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur l&#x27;optimisation de l&#x27;infrastructure et la complexité de maintenance des serveurs installés en hauteur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000748_seg20.jpg" alt="Un technicien en EPI (casque et gilet haute visibilité) présente une haute allée de serveurs rackables à haute densité de câblage." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000748_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:48</span>
+                        <span class="caption-text">Un technicien en EPI (casque et gilet haute visibilité) présente une haute allée de serveurs rackables à haute densité de câblage.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000753_seg20.jpg" alt="Le technicien pointe du doigt les hauteurs des racks de serveurs pour illustrer la difficulté de maintenance des équipements en hauteur." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000753_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:53</span>
+                        <span class="caption-text">Le technicien pointe du doigt les hauteurs des racks de serveurs pour illustrer la difficulté de maintenance des équipements en hauteur.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000759_seg20.jpg" alt="Vue plus large de l&#x27;allée du datacenter montrant l&#x27;infrastructure des racks serveurs et les chemins de câbles aériens." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000759_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:59</span>
+                        <span class="caption-text">Vue plus large de l&#x27;allée du datacenter montrant l&#x27;infrastructure des racks serveurs et les chemins de câbles aériens.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:04 - 00:08:27</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une fois qu&#x27;on arrive et qu&#x27;on a installé nos serveurs ici, on a une double redondance en termes d&#x27;électricité et en termes de réseau. Donc du coup, on a deux câbles réseaux qui verissent deux réseaux différents pour être sûr que ça marche plus grand. Pareil pour l&#x27;électricité. Comme ici, on est dans l&#x27;année de dernière génération, c&#x27;est quand même assez rare qu&#x27;il y ait des problèmes parce que les serveurs comme on a vu avant sont déjà testés au niveau de la pression de l&#x27;eau, de la température, des composants, etc. dans la partie fabrication.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Datacenter physique, baies de serveurs rackables, gestion de câblage cuivre et fibre optique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Racks de serveurs haute densité avec voyants d&#x27;état et câblage structuré double réseau.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;architecture de redondance électrique et réseau (double câblage) dans une infrastructure moderne de datacenter.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000810_seg21.jpg" alt="Vue rapprochée d&#x27;un technicien dans un datacenter expliquant l&#x27;architecture des racks de serveurs et le câblage réseau redondant." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000810_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:10</span>
+                        <span class="caption-text">Vue rapprochée d&#x27;un technicien dans un datacenter expliquant l&#x27;architecture des racks de serveurs et le câblage réseau redondant.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000815_seg21.jpg" alt="Gros plan sur le technicien désignant les baies de serveurs haute densité et les connexions réseau dans le datacenter." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000815_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:15</span>
+                        <span class="caption-text">Gros plan sur le technicien désignant les baies de serveurs haute densité et les connexions réseau dans le datacenter.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000821_seg21.jpg" alt="Vue large de l&#x27;allée du datacenter montrant de multiples baies de serveurs, les chemins de câbles aériens et la gestion des fibres optiques (jaunes) et câbles réseaux." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000821_seg21.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:21</span>
+                        <span class="caption-text">Vue large de l&#x27;allée du datacenter montrant de multiples baies de serveurs, les chemins de câbles aériens et la gestion des fibres optiques (jaunes) et câbles réseaux.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:27 - 00:08:49</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais ils sont retestés ici une deuxième fois, une fois que l&#x27;installation est finie. Et avec le fait qu&#x27;ils font une maintenance régulière pour s&#x27;assurer que les ventilateurs sont réployés, ça fait qu&#x27;il y a assez peu de problèmes sur les serveurs qui ont utilisé. Et donc ici on est de l&#x27;autre côté des serveurs. Il y a beaucoup de vent qui passe par ici parce que c&#x27;est là où on a les ventilateurs qui vont aspirer l&#x27;air ambiant, le faire passer à travers ces radiateurs ici qui sont pleins d&#x27;eau fraîche.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Matériel de centre de données, racks de serveurs, échangeurs thermiques industriels et tuyauterie de refroidissement.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Infrastructure de serveurs haute densité et systèmes de ventilation/refroidissement de datacenter.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique des procédures de test des serveurs et de la maintenance du système de refroidissement et des ventilateurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000832_seg22.jpg" alt="Présentateur dans un centre de données montrant des racks de serveurs densément peuplés avec un câblage réseau structuré." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000832_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:32</span>
+                        <span class="caption-text">Présentateur dans un centre de données montrant des racks de serveurs densément peuplés avec un câblage réseau structuré.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000838_seg22.jpg" alt="Vue de l&#x27;arrière des racks de serveurs avec des échangeurs de chaleur et des canalisations de refroidissement industriel." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000838_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:38</span>
+                        <span class="caption-text">Vue de l&#x27;arrière des racks de serveurs avec des échangeurs de chaleur et des canalisations de refroidissement industriel.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000843_seg22.jpg" alt="Gros plan sur le système de ventilation et de refroidissement à l&#x27;arrière des serveurs, illustrant l&#x27;infrastructure thermique." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000843_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:43</span>
+                        <span class="caption-text">Gros plan sur le système de ventilation et de refroidissement à l&#x27;arrière des serveurs, illustrant l&#x27;infrastructure thermique.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:49 - 00:09:22</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et qui vont ensuite passer dans le serveur pour refroidir passivement tous les composants qui sont autres que le CPU et le GPU, qui eux sont refroidis avec du watercooling. Et donc on a tout le circuit d&#x27;eau qui vient rafraîchir les serveurs ici, et on a aussi le circuit d&#x27;eau qui vient rafraîchir le circuit de watercooling pour les processeurs et le GPU directement à l&#x27;intérieur du serveur, comme on a vu tout à l&#x27;heure. Et donc tous les serveurs qu&#x27;on voit ici, ils sont alimentés en eau fraîche par un seul échangeur d&#x27;eau, qui va prendre l&#x27;eau et la refroidir avec un autre circuit d&#x27;eau, Et cet autre circuit d&#x27;eau, lui, est refroidi, mais cette fois à l&#x27;extérieur du bâtiment avec l&#x27;air ambiant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Équipements industriels de refroidissement (tuyauteries, vannes, échangeurs thermiques).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Infrastructure physique de refroidissement par eau (watercooling et circuits passifs) d&#x27;un datacenter.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique de l&#x27;architecture du système de refroidissement liquide des serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000857_seg23.jpg" alt="Gros plan sur les tuyauteries métalliques et vannes du système de refroidissement liquide du datacenter." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000857_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:57</span>
+                        <span class="caption-text">Gros plan sur les tuyauteries métalliques et vannes du système de refroidissement liquide du datacenter.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:22 - 00:09:41</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc l&#x27;unité de refroidissement, elle peut refroidir jusqu&#x27;à 4 allées à la fois. Et donc on va retrouver ces systèmes de refroidissement-là à chaque fois toutes les 3 ou 4 allées. Et là où il y a un gros gain en termes d&#x27;efficacité énergétique, c&#x27;est que dans un data-sauter traditionnel, on va utiliser de la climatisation pour refroidir l&#x27;air de toute la pièce. Et ensuite, l&#x27;air de toute la pièce vient refroidir les serveurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Équipements physiques de refroidissement de datacenter (échangeurs de chaleur, radiateurs industriels, tuyauteries en cuivre et flexibles de distribution de fluide caloporteur).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Systèmes de climatisation et de refroidissement liquide industriels conçus pour optimiser l&#x27;efficacité énergétique globale (PUE) des salles de serveurs.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur site du fonctionnement des unités de refroidissement de datacenter et de leur disposition toutes les 3 ou 4 allées de serveurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000927_seg24.jpg" alt="Vue rapprochée sur les échangeurs thermiques (radiateurs industriels et serpentins de cuivre) installés dans l&#x27;allée technique d&#x27;un datacenter." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000927_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:27</span>
+                        <span class="caption-text">Vue rapprochée sur les échangeurs thermiques (radiateurs industriels et serpentins de cuivre) installés dans l&#x27;allée technique d&#x27;un datacenter.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000932_seg24.jpg" alt="Vue d&#x27;ensemble de l&#x27;allée technique montrant la double rangée de modules de refroidissement industriels (In-Row Cooling) avec leurs flexibles d&#x27;alimentation en eau." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000932_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:32</span>
+                        <span class="caption-text">Vue d&#x27;ensemble de l&#x27;allée technique montrant la double rangée de modules de refroidissement industriels (In-Row Cooling) avec leurs flexibles d&#x27;alimentation en eau.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000936_seg24.jpg" alt="Gros plan sur la structure d&#x27;un bloc de refroidissement à ailettes en aluminium destiné à dissiper la chaleur générée par les serveurs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000936_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:36</span>
+                        <span class="caption-text">Gros plan sur la structure d&#x27;un bloc de refroidissement à ailettes en aluminium destiné à dissiper la chaleur générée par les serveurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:41 - 00:10:06</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Alors que là, ce qui se passe, c&#x27;est qu&#x27;on fait tourner les machines un petit peu plus chaud que d&#x27;habitude, mais toujours largement dans les températures acceptables. on injecte l&#x27;eau fraîche pour pouvoir refroidir notre composant. Donc l&#x27;eau qui ressort est un petit peu plus chaude, donc elle a peu près à 35 degrés. Et cette eau-là, elle peut ensuite être refroidie avec l&#x27;air ambiant de l&#x27;extérieur. Et comme à l&#x27;extérieur, il fait plus frais que cette température-là, on peut refroidir les serveurs seulement en déplaçant de l&#x27;eau et sans avoir un compresseur, une climatisation ou des choses qui sont beaucoup plus énergivores.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Caméra thermique avec échelle de température (-15,0°C à 150,0°C).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Thermographie infrarouge illustrant la dissipation thermique des composants serveurs et des canalisations.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur l&#x27;injection d&#x27;eau fraîche, le refroidissement des composants et la gestion thermique à environ 35°C.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000947_seg25.jpg" alt="Vue en caméra thermique montrant les gradients de température sur les équipements de refroidissement des serveurs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_000947_seg25.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:47</span>
+                        <span class="caption-text">Vue en caméra thermique montrant les gradients de température sur les équipements de refroidissement des serveurs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:06 - 00:10:29</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ici, on est dans la salle des batteries. Et donc on va avoir toute l&#x27;énergie électrique qui va d&#x27;abord arriver dans une salle avec des UPS, qui va nettoyer le courant, faire en sorte qu&#x27;il soit bien stable, qu&#x27;il n&#x27;y a pas de trop d&#x27;interférences, juste comme ça. Et ensuite, ça va passer ici dans des batteries qui vont servir en cas de problème électrique pour pouvoir alimenter tous les serveurs le temps qu&#x27;il y a un générateur thermique qui se met en route pour pouvoir alimenter tous les serveurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;infrastructure électrique et des batteries de secours du datacenter.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:29 - 00:10:50</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, elles ne sont pas vraiment utilisées en temps normal. Mais par contre, comme le CEM est doublé pour avoir de la haute disponibilité, ça a deux avantages. Le premier, c&#x27;est que si on a un problème sur une des alimentations électriques, il y a l&#x27;autre qui peut prendre le relais et continuer d&#x27;alimenter le data center. Et le deuxième avantage aussi, c&#x27;est pour la maintenance. parce que parfois on a besoin de mettre à jour des équipements, de faire de la maintenance sur des équipements, et donc on a besoin de les éteindre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la haute disponibilité et de la redondance des alimentations électriques (onduleurs/batteries) dans un datacenter.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:50 - 00:11:12</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Sauf que les serveurs, on ne veut jamais que les éteindre, on veut que les serveurs continuent à tourner H24. Et donc le fait d&#x27;avoir ces deux alimentations électriques-là redondées, on peut en éteindre une quand on a besoin de faire de la maintenance dessus, et c&#x27;est l&#x27;autre qui va prendre le relais. Et ensuite, une fois qu&#x27;on a fini la maintenance, on vient réouvrir le courant dessus et faire la maintenance sur l&#x27;autre partie. Comme ça, on peut mettre à jour et maintenir notre installation électrique sans interrompre les serveurs qui tournent dans tout le reste du data center.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la redondance électrique et de la continuité de service des serveurs en datacenter.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:12 - 00:11:36</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ici ce qui est intéressant c&#x27;est qu&#x27;on est à Beauharnais près de Montréal au Québec et c&#x27;est un endroit très très intéressant pour avoir un datacenter pour plusieurs raisons. Premièrement le climat est assez favorable la plupart du temps de l&#x27;année pour des serveurs parce qu&#x27;il se fait assez froid et comme l&#x27;eau du watercolim est refroidie avec l&#x27;air ambiant, ça nous arrange. Deuxièmement c&#x27;est très bien connecté avec toute l&#x27;Amérique du Nord et avec l&#x27;Europe parce qu&#x27;il y a des câbles qui passent directement avec l&#x27;Europe et on est aussi proche de l&#x27;exchange de New York où il y a encore plus de connexions qui vont un peu partout dans le monde.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant des cartes géographiques et des cartes de câbles sous-marins (Submarine Cable Map).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Cartographie de la région de Beauharnois et routes de câbles de fibre optique transatlantiques et terrestres.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication géographique et infrastructurelle des avantages de l&#x27;emplacement du datacenter (proximité de l&#x27;eau pour le refroidissement et connectivité réseau).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001118_seg29.jpg" alt="Carte géographique centrée sur Beauharnois au Québec, montrant l&#x27;emplacement du datacenter près du fleuve et des voies navigables." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001118_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:18</span>
+                        <span class="caption-text">Carte géographique centrée sur Beauharnois au Québec, montrant l&#x27;emplacement du datacenter près du fleuve et des voies navigables.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001130_seg29.jpg" alt="Carte mondiale des câbles sous-marins et des réseaux de télécommunications interconnectant l&#x27;Amérique du Nord." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001130_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:30</span>
+                        <span class="caption-text">Carte mondiale des câbles sous-marins et des réseaux de télécommunications interconnectant l&#x27;Amérique du Nord.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:36 - 00:12:01</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en termes de latence, de débit de réseau pour un datacenter c&#x27;est très bien positionné. Et troisièmement, le data center est vraiment juste à côté d&#x27;un barrage hydroélectrique, ce qui donne plusieurs avantages. Donc premièrement, c&#x27;est de l&#x27;énergie renouvelable, ça veut dire que tous les serveurs qu&#x27;on voit dans ce data center-là sont tous alimentés par de l&#x27;énergie verte, l&#x27;énergie hydroélectrique. Deuxièmement, cette proximité, elle permet d&#x27;avoir une puissance beaucoup plus élevée que ce qu&#x27;on pourrait avoir ailleurs où on n&#x27;a pas forcément accès à de l&#x27;énergie proche.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface logicielle ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Infrastructure physique de production énergétique (barrage hydroélectrique) alimentant le datacenter.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;alimentation en énergie renouvelable des serveurs grâce à la proximité immédiate d&#x27;un barrage hydroélectrique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001149_seg30.jpg" alt="Vue aérienne par drone d&#x27;une centrale hydroélectrique adjacente au datacenter, illustrant la source d&#x27;énergie renouvelable." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001149_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:49</span>
+                        <span class="caption-text">Vue aérienne par drone d&#x27;une centrale hydroélectrique adjacente au datacenter, illustrant la source d&#x27;énergie renouvelable.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:01 - 00:12:20</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et troisièmement, ça permet aussi d&#x27;avoir une meilleure disponibilité parce que comme on est vraiment juste à côté du barrage, il y a très peu de chances d&#x27;avoir des problèmes parce que, si tu veux, le câble est très très court. Donc il ne va pas y avoir plein d&#x27;endroits intermédiaires où un problème peut arriver. Donc une fois que notre serveur a été racké, il a été branché, etc., les clients l&#x27;utilisent, ils les commandent, tout ça pendant à peu près 9 ans, 10 ans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la fiabilité et la haute disponibilité liée à la proximité de l&#x27;infrastructure avec la source d&#x27;énergie (le barrage).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:20 - 00:12:42</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et après cette période-là, tous les serveurs d&#x27;Amérique du Nord, qui sont aux Etats-Unis ou qui sont au Canada, ils vont venir ici à Boarnois pour être recyclés. Donc il y a plusieurs chemins possibles qu&#x27;un vieux serveur peut avoir. Premièrement, ils vont arriver, et ensuite il y a un technicien qui va nettoyer tous les composants et les vérifier un par un pour voir lesquels fonctionnent, lesquels fonctionnent plus et lesquels fonctionnent mais ne sont pas forcément aux normes que OVH a besoin pour ces nouveaux serveurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Établi de technicien, écran de contrôle, bacs de tri de composants et outils de diagnostic</p>
+                        <p><strong>Contenu textuel & Code :</strong> Composants matériels informatiques en cours de tri (cartes mères, barrettes de RAM, câblerie)</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du processus de nettoyage, de vérification et de tri des composants matériels des serveurs reçus</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001226_seg32.jpg" alt="Atelier de maintenance et de recyclage de serveurs avec un technicien en ÉPI et un poste de travail équipé" loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001226_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:26</span>
+                        <span class="caption-text">Atelier de maintenance et de recyclage de serveurs avec un technicien en ÉPI et un poste de travail équipé</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:42 - 00:13:03</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ensuite, chacun de ces composants, donc ça peut être des cartes mères, ça peut être des CPU, ça peut être des barrettes de RAM, ça peut être des câbles, et des composants qui sont juste trop vieux, qu&#x27;on ne peut pas réutiliser, donc on va juste les recycler. Mais si c&#x27;est des composants qu&#x27;on peut réutiliser sur des serveurs d&#x27;entrée de gamme, ça permet de prolonger la durée de vie du matériel, de proposer des solutions qui sont un petit peu moins chères, plus abordables pour un autre type de clientèle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du processus de tri, de recyclage et de réutilisation des composants matériels informatiques (cartes mères, RAM, CPU).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:04 - 00:13:22</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est gagnant pour tout le monde. Pour ce qui est des composants qui sont réutilisables, on va les tester avant de les réutiliser pour être sûr qu&#x27;ils fonctionnent bien. Et donc, on a tous des systèmes vraiment maison de chez OVH pour pouvoir s&#x27;assurer que tout fonctionne bien. Donc premièrement, pour les disques durs, là ici on voit qu&#x27;on a des SSD en SATA. Ici on a des disques durs 2 Tera, comme vous voulez savoir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Infrastructures de datacenters physiques, baies de serveurs racks, matériel de test d&#x27;OVH.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Racks de serveurs, câblage réseau, étiquettes de zone (ZONE PCC).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du processus de test et de réutilisation des composants matériels (disques durs, serveurs) dans les installations d&#x27;OVH.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001313_seg34.jpg" alt="Le présentateur présente une baie de serveurs rackables dans un datacenter OVH, montrant le matériel de test et les racks." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001313_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:13</span>
+                        <span class="caption-text">Le présentateur présente une baie de serveurs rackables dans un datacenter OVH, montrant le matériel de test et les racks.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001318_seg34.jpg" alt="Le présentateur désigne une baie de serveurs informatique avec un étiquetage &#x27;ZONE PCC&#x27; visible sur le rack." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001318_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:18</span>
+                        <span class="caption-text">Le présentateur désigne une baie de serveurs informatique avec un étiquetage &#x27;ZONE PCC&#x27; visible sur le rack.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:23 - 00:13:44</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, ils sont mis dans des systèmes ici qui vont avoir des scripts qui vont tourner, qui vont automatiquement effacer les disques durs pour pouvoir être ensuite réutilisés. Et s&#x27;ils sont réutilisés à l&#x27;interne chez OVH dans des serveurs, parce qu&#x27;ils fonctionnent assez bien et qu&#x27;ils ont assez de performance pour pouvoir être réutilisés dans des nouveaux serveurs, ils vont être effacés trois fois d&#x27;affilée pour être sûrs qu&#x27;il n&#x27;y a aucune chance qu&#x27;ils puissent récupérer des données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écrans de contrôle et terminaux embarqués sur racks de serveurs.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de codes et interfaces de monitoring système affichées sur les écrans en hauteur.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation physique de l&#x27;infrastructure de recyclage et de test des disques durs en datacenter.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001328_seg35.jpg" alt="Baies de serveurs et racks matériels dans un datacenter, affichant des écrans de monitoring et du matériel de stockage." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001328_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:28</span>
+                        <span class="caption-text">Baies de serveurs et racks matériels dans un datacenter, affichant des écrans de monitoring et du matériel de stockage.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:44 - 00:14:10</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si par contre, ils fonctionnent, mais par exemple, ils sont un peu trop vieux, si c&#x27;est des disques de juste 1 Tera ou 500 Giga, qu&#x27;on ne peut pas réutiliser dans des nouveaux serveurs parce que ce n&#x27;est juste pas assez performant, mais qu&#x27;ils fonctionnent quand même bien et qu&#x27;il y avait d&#x27;autres gens qui pourraient en bénéficier, ces disques-là sont revendus à des brokers qui vont ensuite les revendre ou les réutiliser. Et dans ce cas-là, quand ça sort d&#x27;OVH, là elles sont effacées 7 fois pour être sûr que vraiment là, c&#x27;est garanti que jamais de la vie il y a un seul octet qui va sortir de ces disques durs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur le réemploi de disques durs de plus faible capacité dans un contexte de gestion de datacenter.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:10 - 00:14:31</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc tout ça c&#x27;est automatisé dans cette Béla, comme ça on peut mettre tous les disques durs et les effacer tous en même temps. Et ici on a la même chose mais pour les barrettes de RAM. Donc les barrettes de RAM on n&#x27;a pas besoin de les effacer évidemment, mais on a besoin de s&#x27;assurer qu&#x27;elles fonctionnent. Et pour ça pareil on a besoin d&#x27;une machine qui va écrire dessus un certain nombre de fois, lire dessus un certain nombre de fois pour s&#x27;assurer que tout l&#x27;espace mémoire de la barrette fonctionne correctement, fonctionne à la bonne vitesse.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur le matériel de test de disques durs et de barrettes de RAM.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:31 - 00:15:04</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et la même manière si la barrette est réutilisable on va la retrouver dans des serveurs qui vont être remis ensuite dans le data center si jamais c&#x27;est peut-être un peu trop vieux par exemple c&#x27;est de la DDR3 qui est plus vraiment utilisé dans les gammes OVH et bien là pareil ça va être revendu à des brokers qui eux pourront potentiellement les réutiliser et pareil tous ces châssis ici sont tout fait custom par OVH et on voit même ici qu&#x27;on a le water cooling parce que c&#x27;est les cartes meilleures d&#x27;OVH avec le water block custom d&#x27;OVH donc tout est fait custom donc si les disques qui remarchent s&#x27;ils ne sont pas super performants ils sont revendus Si par contre ils marchent bien et qu&#x27;ils sont assez performants, on les réutilise. Si par contre</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Baies de serveurs de datacenter, racks d&#x27;infrastructure matérielle.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Racks de serveurs montés en rack avec câblage réseau et matériel informatique visible en arrière-plan.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur la réutilisation des composants matériels (serveurs et barrettes mémoire) dans le data center ou leur revente à des brokers.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001448_seg38.jpg" alt="Présentateur dans un datacenter devant des baies de serveurs et des racks informatiques, illustrant le cycle de vie du matériel." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001448_seg38.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:48</span>
+                        <span class="caption-text">Présentateur dans un datacenter devant des baies de serveurs et des racks informatiques, illustrant le cycle de vie du matériel.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:04 - 00:15:38</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">ils marchent plus du tout ou que le client a décidé qu&#x27;on ne veut pas réutiliser ces disques dans aucun cas possible, ils vont être détruits, détruits physiquement. Non seulement ils vont être effacés cette fois dans les machines qu&#x27;on a vu là-bas, mais ensuite ils vont être broyés dans cette machine ici. Et donc le disque qui rentre ici, il est déchiqueté, broyé, explosé et il finit par ressembler à ça, de la poudre de SSD et de disque dur. Donc là on est dans la salle</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Machine physique de broyage / destruction de disques durs (hard drive shredder).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Dispositif industriel de destruction de supports de stockage (disques durs HDD/SSD).</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration du processus de broyage physique des disques durs pour garantir une destruction définitive et sécurisée des données.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001521_seg39.jpg" alt="Gros plan sur le mécanisme ou la zone de réception d&#x27;une machine de broyage physique de disques durs." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001521_seg39.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:15:21</span>
+                        <span class="caption-text">Gros plan sur le mécanisme ou la zone de réception d&#x27;une machine de broyage physique de disques durs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:38 - 00:15:59</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">de contrôle où on va gérer tous les incidents qu&#x27;il peut y avoir. Donc il y a deux types d&#x27;intervention qu&#x27;il peut faire. Le premier type d&#x27;intervention ça va être des choses qui sont préventives comme par exemple répondre à des demandes clients, faire des nettoyages préventifs des machines, des choses comme ça. Et le deuxième type d&#x27;intervention ça va être plus en réaction à des problèmes qui peuvent arriver. Ça peut être des problèmes matériels ou ça peut aussi être des demandes des clients qui ont un problème avec leur machine qui n&#x27;est pas forcément matérielle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écrans muraux de type salle de contrôle (Monitoring / NOC).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tableaux de bord et métriques de supervision affichés sur les écrans muraux d&#x27;une salle de contrôle (NOC).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale des processus d&#x27;intervention préventive et corrective dans une salle de contrôle.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:59 - 00:16:19</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si par exemple quelqu&#x27;un configure mal sa machine et perd l&#x27;accès parce qu&#x27;il a mal configuré un firewall ou parce qu&#x27;il a cassé son système d&#x27;exploitation, ce n&#x27;est pas un problème qui qui est physique, mais il peut quand même contacter le support pour pouvoir aller manuellement redémarrer la machine s&#x27;il y a besoin ou la démarrer en mode secours pour pouvoir essayer de récupérer ses données, remettre le système d&#x27;exploitation en état de fonctionner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écrans de contrôle muraux et affichages de supervision (inutilisables ou trop lointains pour être analysés techniquement).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code ou métriques) n&#x27;est lisible sur ces plans.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts d&#x27;administration système (erreurs de configuration réseau, pare-feu, mode secours).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:19 - 00:16:43</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ici, on a pas mal de dashboards pour pouvoir surveiller tout ce qui se passe dans le data center, dans tous les différents endroits dans le data center. On surveille les températures, on surveille la météo, on surveille le nombre de machines qui sont en cours d&#x27;installation ou qu&#x27;on a besoin d&#x27;installer, et on surveille évidemment les machines qui ont un problème en ce moment. Là, on voit par exemple qu&#x27;en ce moment, Dans le data center, on a une machine qui a un problème et apparemment, c&#x27;est un problème de carte mère qui bug.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableaux de bord de supervision (NOC), écrans muraux multiples, interface de monitoring des déploiements matériels.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Métriques de suivi des installations de serveurs, compteurs chiffrés d&#x27;état du parc de machines du data center.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et présentation des outils de supervision et des tableaux de bord de surveillance du data center.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (3) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-3">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001625_seg42.jpg" alt="Vue d&#x27;ensemble du mur de moniteurs (NOC) dans le data center avec un technicien en équipement de sécurité expliquant les tableaux de bord de supervision." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001625_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:25</span>
+                        <span class="caption-text">Vue d&#x27;ensemble du mur de moniteurs (NOC) dans le data center avec un technicien en équipement de sécurité expliquant les tableaux de bord de supervision.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001631_seg42.jpg" alt="Gros plan sur la salle de contrôle montrant plusieurs écrans affichant des métriques d&#x27;infrastructure et d&#x27;état des machines." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001631_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:31</span>
+                        <span class="caption-text">Gros plan sur la salle de contrôle montrant plusieurs écrans affichant des métriques d&#x27;infrastructure et d&#x27;état des machines.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001637_seg42.jpg" alt="Zoom sur l&#x27;écran central de monitoring affichant des tableaux de bord chiffrés avec des compteurs de machines et d&#x27;alertes en temps réel." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001637_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:37</span>
+                        <span class="caption-text">Zoom sur l&#x27;écran central de monitoring affichant des tableaux de bord chiffrés avec des compteurs de machines et d&#x27;alertes en temps réel.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:43 - 00:17:18</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, quand on détecte ce problème, les techniciens ici, ils vont pouvoir diagnostiquer, essayer de voir à distance qu&#x27;est-ce qui se passe. S&#x27;ils peuvent régler le problème à distance, ils vont le faire. Sinon, on va devoir aller physiquement sur la machine pour pouvoir changer le matériel si jamais il y a besoin. Et le chiffre au milieu, en rouge, qu&#x27;on voit, c&#x27;est le nombre d&#x27;interventions planifiées qui restent à faire. Donc, comme je l&#x27;ai dit, ça peut être des clients qui demandent à changer le disque dur ou qui demandent à ce qu&#x27;on a manuellement rebooter leurs machines ou des choses comme ça. On a aussi la météo qu&#x27;on surveille parce que avec le refroidissement liquide cette eau elle est refroidie avec l&#x27;air ambiant et donc du coup la météo affecte la température de l&#x27;eau qu&#x27;on va utiliser pour refroidir les serveurs. Donc c&#x27;est</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Tableaux de bord de supervision / monitoring affichés sur des écrans muraux de type NOC (Network Operations Center).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de métriques et de statuts comportant des compteurs chiffrés avec des indicateurs colorés (vert, rouge, bleu).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du processus de détection et de diagnostic à distance des anomalies par les équipes techniques.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001709_seg43.jpg" alt="Le présentateur explique le fonctionnement des tableaux de bord de supervision affichés sur les écrans muraux, détaillant les codes couleur des métriques d&#x27;incidents (vert, rouge)." loading="lazy" onclick="openLightbox('../screenshots/g-xEUgG3yUo/g-xEUgG3yUo_001709_seg43.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:09</span>
+                        <span class="caption-text">Le présentateur explique le fonctionnement des tableaux de bord de supervision affichés sur les écrans muraux, détaillant les codes couleur des métriques d&#x27;incidents (vert, rouge).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:18 - 00:17:47</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pour ça qu&#x27;on essaie de surveiller la température. Tant que la température est assez stable ça va, mais c&#x27;est plus quand il y a des grosses variations dans la journée ou si par exemple il y a des prévisions d&#x27;orage qui pourraient potentiellement affecter l&#x27;alimentation électrique du coup on garde un oeil là dessus pour pouvoir s&#x27;assurer que tout va bien. Merci OVH pour m&#x27;avoir laissé balader dans leur data center. Et au passage ils viennent de lancer une toute nouvelle gamme de VPS avec un super bon rapport performance prix. Je pense ça va t&#x27;intéresser donc je te mets le lien en bas. Donc maintenant que tu connais mieux le côté matériel, pour savoir comment mettre en place une infrastructure solide avec ses serveurs, il faut que tu ailles voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
