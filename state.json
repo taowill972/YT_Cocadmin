@@ -14,7 +14,8 @@
     "aN4PCILrbBg",
     "1jW-Kh75oN0",
     "s1YBeSDnGnY",
-    "_qInmqQIam8"
+    "_qInmqQIam8",
+    "565fkoevF0Y"
   ],
   "processed_videos": [
     {
@@ -196,6 +197,18 @@
       "screenshots_count": 0,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "565fkoevF0Y",
+      "title": "La VRAIE raison du crash d'AWS",
+      "upload_date": "20251029",
+      "duration": 1041,
+      "duration_str": "00:17:21",
+      "md_file": "YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 0,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -343,7 +356,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-06T11:59:30Z",
-  "completed_count": 15,
+  "completed_count": 16,
   "total_catalog_count": 142,
   "status": "ready"
 }

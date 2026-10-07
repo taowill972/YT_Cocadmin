@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La VRAIE raison du crash d&#x27;AWS — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">La VRAIE raison du crash d&#x27;AWS</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=565fkoevF0Y" target="_blank">Lien YouTube (<code>565fkoevF0Y</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-10-29</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:17:21</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>Dans cette vidéo intitulée **La VRAIE raison du crash d'AWS**, cocadmin propose une immersion approfondie dans les problématiques concrètes d'infrastructure, de systèmes et d'ingénierie logicielle.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>- **Linux & Outils Systèmes** : Administration système, automatisation et surveillance.<br>- **Conteneurisation & Cloud** : Déploiement et gestion d'environnements résilients.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>- Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.<br>- Privilégier les architectures simples et observables en environnement de production.
+            <div class="tools-badges-cloud"><span class="tool-tag">Linux &amp; Outils Systèmes</span><span class="tool-tag">Conteneurisation &amp; Cloud</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Maîtriser les fondamentaux réseau et système pour diagnostiquer efficacement les pannes.</span></li><li><span class="point-bullet">✦</span><span>Privilégier les architectures simples et observables en environnement de production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:19</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On a entendu parler partout, Amazon était d&#x27;Inde, donc tout le monde était d&#x27;Inde, donc c&#x27;était le bordel. Et puis, en tant que sysadmin, on était tranquille parce qu&#x27;on n&#x27;avait plus besoin de travailler. On pouvait juste dire, ah bah c&#x27;est pas ma faute, Amazon est d&#x27;Inde, vous voyez, tout ne marche pas, donc c&#x27;est normal. Mais ce que moi je trouve vraiment intéressant, c&#x27;est de savoir qu&#x27;est-ce qui s&#x27;est passé exactement. À la base, le problème venait de DynamoDB, on va voir un petit peu plus en détail juste après.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:19 - 00:00:38</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais ça a eu des effets de bord sur plein plein plein d&#x27;autres services, ce qui fait que t&#x27;as plein de sites qui fonctionnaient plus. Et c&#x27;était limité à la région US East 1, qui est la toute première région qu&#x27;AWS a mis en service. Et donc en fait Amazon est divisé en régions et chaque région est divisée en zones de disponibilité. Par exemple la région Paris ici qui n&#x27;est pas exactement à Paris.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:38 - 00:00:57</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Elle est divisée en plusieurs data centers qui sont indépendants les uns des autres. Pour éviter les effets de bord. Pour que s&#x27;il y a un problème dans un data center ça n&#x27;affecte pas en théorie les autres data centers. Et si jamais il y a une météorite qui tombe et que ça explose les trois data centers qui sont dans cette région là. En théorie tu peux avoir ton infrastructure qui est rondondée dans des régions qui sont à côté. Et ce qui fait que ton service va rester disponible.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:57 - 00:01:16</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais en pratique, ce n&#x27;est pas toujours le cas parce que c&#x27;est quand même assez chiant et il y a quand même quelques inconvénients à mettre son service dans différentes régions. Parce que ça veut dire que toutes tes bases données, par exemple, elles doivent se répliquer à travers le monde. Tu dois faire transférer pour synchroniser des données à travers le monde aussi, donc ça coûte beaucoup plus cher. Tu dois aussi avoir une infrastructure un peu partout, donc ça coûte plus cher aussi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:16 - 00:01:37</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, il faut vraiment en avoir besoin. Ce qui fait que tu as beaucoup d&#x27;entreprises qui, même si c&#x27;était une seule région, ils étaient impactés. En plus de ça, c&#x27;est la plus ancienne et donc la plus grosse. et donc celle qui a le plus gros impact quand il y a un souci dedans. Donc là, ils disent que ça a affecté DynamoDB, mais ils se disent aussi que ça a affecté aussi les NLB, les Network Cloud Balancer, les répertiteurs de charges, mais aussi les instances de C2.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:37 - 00:02:10</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc on va essayer de comprendre pourquoi, parce que tout ça est un peu connecté, même si à la base, ce n&#x27;est pas censé avoir de rapport. Le souci a commencé à minuit au Pacifique, et pour commencer, pour comprendre le problème, ils expliquent comment fonctionne le système derrière, sous le capot. Le service DynamoDB, c&#x27;est un service de base de données non relationnelle qui est beaucoup utilisé parce qu&#x27;il est facile à utiliser, il est géré et donc il est utilisé par beaucoup d&#x27;entreprises même par Amazon eux-mêmes en interne pour pouvoir faire fonctionner toute la plateforme et donc les applications pour se connecter à cette base de données elles ont besoin d&#x27;utiliser un nom de domaine qui va résoudre en adresse IP donc tu vas avoir ton DNS ici, service de DNS, celui qui résout entre</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:10 - 00:02:32</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">l&#x27;adresse IP blablabla.dynamoDB.aws.com en adresse IP donc comme c&#x27;est beaucoup utilisé beaucoup de personnes qui créent des bases de données qui suppriment des bases de données des bases de données qui scalent et donc pour pouvoir faire ça le système est découplé ça Ça veut dire qu&#x27;on a un système ici qui sert à planifier. Il appelle ça le planificateur. C&#x27;est celui qui va recevoir toutes les requêtes du système pour pouvoir faire des changements dans le nom de domaine des bases de données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:32 - 00:02:53</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en fait, quand tu cliques pour faire un changement, le changement n&#x27;est pas fait instantanément. Il arrive dans ce système de planification. Ce système de planification, il peut répondre à l&#x27;utilisateur en disant « Ok, j&#x27;ai pris en compte ta requête, mais je ne l&#x27;ai pas encore fait. » Donc en gros, c&#x27;est en statut pending, c&#x27;est en cours. Ce système, il va générer une configuration. Tac, voilà, c&#x27;est censé représenter une configuration. Et ensuite, ces configurations vont être appliquées par des DNS enactors.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:53 - 00:03:16</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">L&#x27;actors, ça veut dire que c&#x27;est lui qui va vraiment faire le travail, qui va modifier la configuration DNS. Donc, tu vas avoir tes enactors ici. Et en fait, eux, tu en as plein. Tu en as plusieurs parce que, pareil, il y a beaucoup de travail à faire, beaucoup de modifications à faire. Et donc, on peut potentiellement en ajouter ou en enlever en fonction de la charge qu&#x27;il y a, etc. Et donc, la manière normale dont fonctionne le système, c&#x27;est que quand il y a une nouvelle configuration qui arrive, le système génère une nouvelle configuration.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:16 - 00:03:35</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le connecteur, par exemple celui-là, il récupère la configuration. Il vérifie que cette configuration est bien plus récente que la configuration qui existe déjà dans mon système DNS. Si c&#x27;est le cas, il applique la nouvelle configuration sur le DNS. Et ensuite, il va enlever les vieilles configurations du DNS. Et ce qui fait qu&#x27;on se retrouve dans le dernier état.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:35 - 00:03:55</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça, c&#x27;est dans le meilleur des cas, dans le cas qui fonctionne et qui a fonctionné tout le temps, tous les jours, 7 jours sur 7 jusqu&#x27;à 7 semaines. Là, le problème a eu lieu, c&#x27;est qu&#x27;on avait une nouvelle configuration qui est arrivée. les annecteurs ont commencé à distribuer la nouvelle configuration un petit peu partout. Sauf un, il y en a un qui était un petit peu en galère. Lui par exemple ici, il a récupéré la nouvelle configuration.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:55 - 00:04:14</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il a bien vérifié que cette configuration était bien plus récente que la configuration qui est actuellement sur les DNS. Mais en essayant de l&#x27;appliquer, il n&#x27;y arrivait pas. Parce que ça se peut qu&#x27;il y avait un autre annecteur en ce moment-là qui était en train de faire une modification. Et donc il réessayait un petit peu en boucle. Et donc ça tout seul, ce n&#x27;est pas trop un problème. Parce que bon, il va réessayer. Au bout d&#x27;un moment, ça ne va finir pas fonctionner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:14 - 00:04:32</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le problème c&#x27;est que ça a augmenté énormément les chances d&#x27;avoir une waste condition. Donc ça c&#x27;est un type de bug qui arrive quand tu as un système qui est distribué. Donc tu as plusieurs machines qui font des choses en même temps. Ou dans la plupart des cas les systèmes font ce qu&#x27;on veut. Mais il peut y avoir dans certains cas si les choses arrivent vraiment dans un ordre précis. Là ça ne fait pas ce qu&#x27;on veut et ça génère un bug. Et c&#x27;est ce qui est arrivé là. Pendant que lui il essaie de mettre sa configuration.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:32 - 00:04:59</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu as une nouvelle configuration ici qui est arrivée. Parce qu&#x27;il y a des modifications qui sont faites tout le temps. Les gens ils créent, ils modifient, ils enlèvent des bases de données tout le temps. Et donc tu as un autre acteur qui l&#x27;a récupéré. lui regarde la configuration ici, il se dit ok, elle est bien plus ancienne que celle que j&#x27;ai en ce moment, donc il n&#x27;y a pas de soucis. Il vient rajouter sa configuration dans le DNS ici. Juste exactement après ce moment-là, pas de chance, un acteur qui essayait de rajouter sa configuration, finalement il arrive à appliquer sa configuration, et donc elle vient écraser la configuration qui vient d&#x27;être mise juste avant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:00 - 00:05:18</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il a effectivement fait sa vérification que sa configuration était plus récente, mais il l&#x27;a fait avant de recommencer 10 fois. Et le temps qu&#x27;il recommence 10 fois, ce n&#x27;est plus le cas, sa configuration est devenue trop ancienne. Et lui, une fois qu&#x27;il a appliqué sa configuration, et bien ce qu&#x27;il fait, c&#x27;est qu&#x27;il efface les anciennes configurations. Et quand il regarde les configurations qui sont appliquées, il voit que celles-là et celles-là sont anciennes, et donc il les efface.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:18 - 00:05:37</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc on est entré dans une race condition. Si les choses se font exactement au mauvais endroit, au mauvais moment, à la milliseconde près, et bien on arrive à ce bug-là, où on se retrouve avec rien du tout. Aucune configuration DNS. Ce qui fait que quand j&#x27;ai une application qui essaye d&#x27;accéder à ma base de données MongoDB, il essaye de résoudre le nom de domaine, et le nom de domaine, il ne correspond à rien.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:37 - 00:05:55</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le DNS, il dit non, ça n&#x27;existe pas. Même si la base de données elle elle est bien toujours là, elle répond, elle a toujours ses données etc. Et bien notre application ici elle peut pas y accéder. Et ça, ça va déclencher pas mal de problèmes en cascade. Parce que maintenant le DNS il est dans un état qui est vraiment bizarre, inconnu avec aucune entrée DNS. Donc c&#x27;est pour ça qu&#x27;il y a eu besoin d&#x27;une intervention manuelle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:55 - 00:06:15</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour pouvoir corriger ce problème c&#x27;est pas si compliqué. Il faut juste récupérer ok c&#x27;est quoi la dernière version, l&#x27;appliquer sur les serveurs DNS. Et puis boum ça revient. Et donc effectivement ils ont corrigé ça assez rapidement. Et au bout de pas si longtemps que ça, ça a pris deux heures et demie. ils ont restauré le DNS et tout fonctionnait correctement pour DynamoDB. Le souci, c&#x27;est que pendant ce temps-là, on a Amazon EC2.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:15 - 00:06:36</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc EC2, c&#x27;est le service de machines virtuelles. Ce système, il utilise lui aussi DynamoDB en tant que base de données pour pouvoir faire les modifications, créer des nouvelles machines, supprimer les anciennes. À partir du moment où DynamoDB a commencé à ne plus être disponible, ça a commencé à bugger. Les gens n&#x27;étaient plus capables de pouvoir démarrer des nouvelles machines. En soi, ce n&#x27;était pas trop grave parce que toutes les machines qui étaient là déjà existantes, elles continuent à fonctionner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:36 - 00:06:58</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est juste que dans le cas où on voulait ajouter une nouvelle machine ou faire une modification d&#x27;une machine existante ou les supprimer, là, ça fonctionnait. Et ça, ça peut causer des problèmes quand on utilise un service d&#x27;AWS qui s&#x27;appelle l&#x27;autoscaling qui permet d&#x27;automatiquement ajouter des machines quand la charge devient plus importante sur nos serveurs. Ce qui fait que si on a plus d&#x27;utilisateurs sur notre application, ça va rajouter des machines pour pouvoir absorber la charge supplémentaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:59 - 00:07:20</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais là, dans ce cas-là, on ne pouvait pas démarrer des nouvelles machines. Donc, ça peut causer des interruptions ou du moins des ralentissements dans certaines applications qui essayaient de scaler à ce moment-là. Donc on peut se dire, bon, arrivé 2h30, là, ça a dû se remettre à marche parce que DynamoDB était réparé. Mais ils disent, après avoir résolu les problèmes de DynamoDB à 2h30, les utilisateurs ont continué de voir des erreurs dans le lancement de nouvelles instants.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:20 - 00:07:53</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Au fait, là aussi, le système est découplé. En fait, c&#x27;est le cas partout. Parce qu&#x27;en un système qui a beaucoup de charges et que la charge peut varier beaucoup, tu ne veux pas directement qu&#x27;un utilisateur fasse une demande et que directement ça fasse la modification sur ton système. Tu veux en fait que l&#x27;utilisateur fasse une demande sa demande aille dans une file d&#x27;attente ça s&#x27;ajoute ici et ensuite tu vas avoir un programme qui va récupérer les demandes et qui va les effectuer sur notre système et de cette manière là l&#x27;utilisateur lui il a une réponse tout de suite quand il fait la demande de modification on peut tout de suite lui dire ok on a bien pris en compte ta demande de modification et de temps en temps on peut récupérer le statut</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:53 - 00:08:13</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">de cette modification pour savoir quand est-ce que ça a été fait et c&#x27;est le cas quand on va sur la double S et qu&#x27;on crée une machine on voit que la machine elle apparaît dans notre dashboard mais elle est en état pending ou en creating et en train de se configurer, etc. Donc ça, c&#x27;est évidemment indispensable quand c&#x27;est des actions qui prennent beaucoup de temps à faire parce que sinon, l&#x27;utilisateur, il va cliquer et si ça prend 45 secondes avant de lui répondre que la machine est là, c&#x27;est une expérience utilisateur qui est pourrie.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:13 - 00:08:42</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Même si c&#x27;est quelque chose qui est rapide, qui prend juste 100 millisecondes, c&#x27;est quand même utile d&#x27;utiliser ce système de fil d&#x27;attente parce que quand soudainement, tu as plein d&#x27;utilisateurs qui commencent à arriver et à faire des demandes de modification, même si ça prenait que 100 millisecondes avant, et bien là, ça peut prendre beaucoup plus de temps et donc on peut quand même répondre vite aux utilisateurs. Et en plus de ça, on peut scaler, Donc, si on voit que dans la liste d&#x27;attente, il y a beaucoup de demandes, on peut rajouter ici des workers, des programmes qui vont aller plus vite pour aller vider la file d&#x27;attente plus rapidement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:43 - 00:09:07</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, ça pour dire que dans EC2, c&#x27;est comme ça que ça fonctionne. On a notre utilisateur ici qui demande la création d&#x27;une instance. Il veut une EC2 ? Point d&#x27;interrogation. Et notre système ici, notre demande, elle est dans une liste d&#x27;attente ici. On a notre petit programme qui va prendre la requête quand il a le temps de le faire et qui va ensuite aller voir dans les machines disponibles pour pouvoir créer la machine et ensuite redire à l&#x27;utilisateur que sa machine est bien créée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:07 - 00:09:36</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, ça fonctionne bien, il n&#x27;y a pas de souci. Même s&#x27;il y a un peu plus de requêtes d&#x27;utilisateurs, les requêtes vont s&#x27;additionner un petit peu ici. Mais finalement, quand la demande va redescendre ou quand on va ajouter des programmes ici, ça va finir par redescendre. Mais là, le problème, c&#x27;est que pendant deux heures, trois heures, toutes les requêtes ici, elles ne pouvaient pas être exécutées. Ce qui fait que ça s&#x27;est tellement accumulé que même quand c&#x27;est revenu, il y avait tellement tellement de requêtes dans le backlog que même en rajoutant des programmes ici, il y en avait tellement que c&#x27;était impossible à rattraper.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:36 - 00:09:57</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ou du moins peut-être que ça aurait pris trois jours pour rattraper toutes les requêtes. Parce qu&#x27;en plus du nombre de requêtes qu&#x27;on va avoir normalement dans l&#x27;espace de 2-3 heures, en fait on a beaucoup plus que ça parce que les gens voient que ça ne marche pas, donc ils réessayent. Parfois tu as des bots qui réessayent aussi parce qu&#x27;ils sont codés comme ça. Et donc tu te retrouves à devoir régler les requêtes non seulement des 2-3 dernières heures, mais peut-être x10 parce que les gens ont réessayé, réessayé, réessayé, réessayé pendant tout ce temps-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:57 - 00:10:20</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc c&#x27;est pour ça que les gens voyaient des erreurs insufficient capacity. Le système leur disait non, je ne peux pas rajouter de nouvelles machines parce que je n&#x27;ai pas de capacité. En vrai, il y avait de la capacité, mais le système qui créait de nouvelles machines était tellement saturé qu&#x27;il disait qu&#x27;il n&#x27;avait plus de capacités. Et donc ce qu&#x27;ils ont fait pour fixer ça, c&#x27;est que premièrement, ils ont trottled, donc ils ont limité le nombre de requêtes que les gens pouvaient faire pour éviter que la liste d&#x27;attente continue de grossir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:20 - 00:10:45</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que même s&#x27;il y a quelques machines qui démarrent, il y a trop de demandes de modifications qui sont rajoutées par rapport à ce qu&#x27;on peut traiter en temps réel. Donc ce qu&#x27;ils ont fait, c&#x27;est qu&#x27;ils ont tout simplement, comme on dit d&#x27;habitude dans l&#x27;outre-boot, c&#x27;est qu&#x27;ils ont redémarré certains de ces systèmes pour pouvoir vider les listes d&#x27;attente. Parce que la plupart de ces demandes-là de modifications, de création et d&#x27;effacement de machines virtuelles, la plupart c&#x27;était par exemple des demandes de suppression de machines qui n&#x27;existaient déjà plus, parce que c&#x27;est un script qui voulait créer une machine, mais comme il a réessayé, il a demandé 100 fois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:45 - 00:11:05</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc au lieu d&#x27;attendre que la liste d&#x27;attente se vide par elle-même, ce qui peut ne jamais arriver parce qu&#x27;il y a tellement de requêtes dessus, et bien ils ont juste vidé la liste d&#x27;attente en gros. Et donc cette combinaison de vider la liste d&#x27;attente et de limiter le nombre de requêtes maximum que chaque utilisateur peut faire a fait qu&#x27;au final on a pu retrouver un état stable. Mais en fait non. Ça c&#x27;est le système qui permet de créer des machines virtuelles.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:05 - 00:11:27</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en fait, tu as un autre système qui s&#x27;appelle le Network Manager qui permet lui, une fois que la machine est créée, de lui affecter sa configuration réseau. De lui dire ok, tu vas être dans tel VPC, c&#x27;est-à-dire tu vas être connecté à tel autre groupe d&#x27;instance, tu vas avoir tel règle de firewall, tu peux accéder à telle route, telle route, etc. Et ce système avait exactement le même souci. Il avait un backlog énorme de rétats réseaux à affecter à toutes les machines.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:27 - 00:11:46</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et il n&#x27;arrivait pas à rattraper toute la liste d&#x27;attente qu&#x27;il avait. Donc, ils ont appliqué les mêmes techniques pour pouvoir résoudre ce problème-là. Et à 10h du matin, donc on est déjà à 10-11h plus tard, et seulement à ce moment-là, ça a commencé à redevenir correct. En fait, c&#x27;est redevenu utilisable probablement un petit peu avant. Mais on était un peu dans un état où les gens avaient quand même un petit peu d&#x27;erreurs, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:46 - 00:12:05</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais de moins en moins. Une heure après, ils ont enlevé les limites. Et donc comme ça, on pouvait à nouveau recréer autant d&#x27;instances qu&#x27;on voulait. Mais ce n&#x27;est pas fini. Parce qu&#x27;il y a aussi les NLB qui ont été affectés. En gros, tu as deux types de load balancer chez AWS. C&#x27;est les NLB et les ALB. Les ALB, c&#x27;est plus pour les applications. Par exemple, une API, une application web, un site web, des choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:05 - 00:12:29</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et on a le NLB qui vont être plus pour si on a une application qui est accessible via TCP, via UDP, quelque chose comme ça, qui n&#x27;est pas un protocole HTTP en gros. Et bien, on peut utiliser un NLB pour pouvoir balancer la charge entre différents serveurs. Une de ces fonctionnalités, c&#x27;est de vérifier que chacune des machines est dans un état qui permet de répondre. Et donc, on a notre load balancer ici, qui balance le trafic entre plusieurs machines, comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:29 - 00:13:02</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et bien, si mon utilisateur, lui, il envoie des requêtes qu&#x27;à un seul endroit, au load balancer, le load balancer, il distribue sur des serveurs au hasard, mais en plus des requêtes des utilisateurs, il envoie aussi des requêtes de health check, une requête pour savoir si la machine en question, elle répond. Si une machine en question qui pour une raison ou pour une autre, elle arrête de répondre ou elle répond pas assez vite Et bah le load balancer, il va la considérer qu&#x27;elle est unhealthy, qu&#x27;elle est pas en bonne santé Et donc il va arrêter de lui envoyer du trafic Et donc comme ça pour l&#x27;utilisateur, c&#x27;est transparent parce que son trafic va être envoyé toujours sur une machine qui fonctionne correctement</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:02 - 00:13:35</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et après on peut avoir d&#x27;autres systèmes qui vont automatiquement effacer cette machine Et recréer une nouvelle qui fonctionne à nouveau Et à ce moment là le load balancer va continuer à lui renvoyer du trafic Donc tout ça c&#x27;est bien, sauf que dans notre cas ici le système de health check il a commencé à bugger un petit peu parce que parfois il arrivait à accéder à l&#x27;instance et parfois il n&#x27;arrivait pas et donc il s&#x27;est retrouvé dans un état où il y avait beaucoup d&#x27;instances qui étaient considérées comme unhealthy c&#x27;est-à-dire qui ne rentrent pas en bonne santé qu&#x27;elles ne répondent pas correctement même si au final peut-être que l&#x27;instance en elle-même elle est correcte mais le fait que sa configuration réseau soit pas bonne ou que cette instance elle n&#x27;arrive pas à accéder</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:35 - 00:13:54</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">à une base de données derrière ça a déclenché un failover quand un NLB détecte qu&#x27;il y a trop d&#x27;erreurs dans une des zones de disponibilité et bien il va complètement enlever toutes les machines de cette zone de disponibilité. Le problème c&#x27;est que ça aggravait encore plus le problème qu&#x27;il y avait sur EC2. Toutes les machines qui étaient dans cette zone de disponibilité ont été considérées comme indisponibles même si ce n&#x27;était pas forcément tous le cas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:54 - 00:14:27</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ça a augmenté énormément la charge sur les autres machines qui sont dans les autres zones de disponibilité. Donc là imaginons que j&#x27;ai deux zones de disponibilité, une à gauche et une à droite. Si celle à droite ici j&#x27;ai trop de machines qui bug, qui répondent, qui répondent pas, et bien le load balancer il va dire ok dans cette zone de disponibilité là c&#x27;est le bordel. et bah on va tout enlever et il va complètement arrêter d&#x27;envoyer du trafic ici. Ce qui fait que quelque part c&#x27;est bon pour l&#x27;utilisateur parce qu&#x27;il va pas avoir des requêtes qui vont finir par arriver sur des serveurs qui bug mais ce qui se fait qu&#x27;on se retrouve là dans notre exemple on avait cinq serveurs on se retrouve avec plus que deux donc en temps normal ça peut ne pas être un</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:27 - 00:14:45</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">trop gros problème parce qu&#x27;on peut juste ici rajouter des nouveaux serveurs dans les autres zones de disponibilité sauf que souvenez-vous on peut plus redémarrer des nouvelles machines parce que EC2 est en train de bugger aussi. Ce qui fait que bah ici notre application elle commence à ralentir et à faire plein d&#x27;erreurs parce qu&#x27;elle n&#x27;a qu&#x27;une fraction des serveurs qu&#x27;elle devrait avoir pour pouvoir servir toutes les requêtes des utilisateurs.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:45 - 00:15:04</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc pour pouvoir régler ce souci là, ce qu&#x27;ils ont fait c&#x27;est qu&#x27;ils ont désactivé les Health Check Failover des NLB pour éviter que ça arrive, pour éviter d&#x27;aggraver le problème. Et ça c&#x27;est quelque chose qu&#x27;on retrouve pas mal dans tout ce qu&#x27;ils ont fait. Ils n&#x27;ont pas essayé tout de suite de régler le problème parce qu&#x27;ils savent que parfois le problème peut prendre du temps à régler.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:04 - 00:15:25</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils essayent de savoir qu&#x27;est-ce qu&#x27;on peut faire pour mitiger, qu&#x27;est-ce qu&#x27;on fait pour pouvoir le plus rapidement possible se retrouver dans un état qui est proche de fonctionnel. Quitte à faire des choses qui sont temporaires, désactiver certaines fonctionnalités pour au plus vite retrouver de l&#x27;uptime. Et comme ça, ça nous laisse du temps pour pouvoir fixer le vrai problème. Ensuite, ils donnent la liste de tous les autres services qui ont été impactés parce qu&#x27;évidemment, et la plupart des services vont utiliser aussi EC2.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:26 - 00:15:45</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, par exemple, SQS qui est un service de liste d&#x27;attente justement de QE. Les lambdas utilisent EC2, donc ça a été affecté. On a EKS, le service de Kubernetes, un service qui a été affecté parce que ça utilise aussi des machines EC2. Et donc, même si le problème venait à la base de DynamoDB, même si toi, ton application utilisait juste des lambdas, par exemple, eh bien, tu as quand même été affecté.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:45 - 00:16:04</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc maintenant que c&#x27;est réglé, OK, tout est rentré dans l&#x27;ordre, c&#x27;est fini. Non, pas tout à fait, parce qu&#x27;il faut faire en sorte maintenant que ça ne réarrive plus dans le futur. Parce que même si c&#x27;est rare et que c&#x27;est une reste condition qui arrive vraiment une fois sur un milliard, bon, là, pour le coup, c&#x27;est arrivé. Premièrement, c&#x27;est qu&#x27;ils ont désactivé le planeur et l&#x27;anacteur, l&#x27;automation, juste temporairement. Ils vont le réactiver, mais avant de le réactiver, ils vont fixer la reste condition.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:04 - 00:16:24</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils vont faire en sorte que si l&#x27;anacteur doit réessayer, au moment où il réessaye, il faut qu&#x27;il revérifie si le plan est bien plus récent que celui qui va écraser. Pour NLB, ils vont ajuster un petit peu le mécanisme de failover de manière à ce que ça n&#x27;enlève pas trop trop de machine d&#x27;un coup et donc limiter l&#x27;effet qu&#x27;un seul NLB peut avoir dans le failover.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:24 - 00:16:48</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour EC2, il faut faire des modifications dans la manière dont ce système qui affecte les machines sur le hardware. Comme ça, si jamais il y a un souci, le système peut retomber dans un état normal un peu plus rapidement et surtout automatiquement. Sans qu&#x27;il y ait besoin d&#x27;avoir une intervention manuelle, on va améliorer notre mécanisme de ralentissement et le rendre en fonction de la liste d&#x27;attente. Plus la liste d&#x27;attente va grossir, plus le ralentissement des requêtes utilisateurs va être agressif pour pouvoir essayer de revenir le plus rapidement possible en temps réel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:48 - 00:17:06</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Au-delà du buzz de AWS et d&#x27;Inde, je trouve que c&#x27;est super intéressant de voir ces post-mortem parce qu&#x27;on peut à la fois voir d&#x27;où le problème vient et peut-être l&#x27;éviter sur notre propre système, voir comment est-ce qu&#x27;ils ont été fixés et aussi voir sous le capot comment fonctionne la grosse machine AWS. Quelques fois par an, je fais une formation avec un petit groupe de personnes pour pouvoir apprendre les différents outils pilés du DevOps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:06 - 00:17:20</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, si ça t&#x27;intéresse, je te mets un petit lien dans la description. Et en attendant, la prochaine formation, qui est je ne sais pas encore quand, vu que je suis en train d&#x27;en faire une en ce moment, je te conseille de regarder cette vidéo qui explique comment faire une infrastructure tellement solide qu&#x27;elle peut résister même à ce type de problème où toute une région AWS ne fonctionne plus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

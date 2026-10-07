@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `15 / 142` (`10.6%`)
+- **Vidéos traitées** : `16 / 142` (`11.3%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -34,6 +34,7 @@
 | 2025-12-26 | [1jW-Kh75oN0](https://www.youtube.com/watch?v=1jW-Kh75oN0) | **Deviens celui qu’on appelle quand la BDD part en vrille** | [2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-12-26_YT-[1jW-Kh75oN0]_Deviens celui qu’on appelle quand la BDD part en vrille_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2025-12-09 | [s1YBeSDnGnY](https://www.youtube.com/watch?v=s1YBeSDnGnY) | **Cette techno sur ton cv vaut +600€/mois** | [2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-12-09_YT-[s1YBeSDnGnY]_Cette techno sur ton cv vaut +600€mois_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2025-11-19 | [_qInmqQIam8](https://www.youtube.com/watch?v=_qInmqQIam8) | **Pourquoi le serverless de Cloudflare est de loin le meilleur** | [2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-11-19_YT-[_qInmqQIam8]_Pourquoi le serverless de Cloudflare est de loin le meilleur_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
+| 2025-10-29 | [565fkoevF0Y](https://www.youtube.com/watch?v=565fkoevF0Y) | **La VRAIE raison du crash d'AWS** | [2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-10-29_YT-[565fkoevF0Y]_La VRAIE raison du crash d'AWS_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
