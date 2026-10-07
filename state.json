@@ -22,7 +22,8 @@
     "g-xEUgG3yUo",
     "xRmxnWNR9Sk",
     "QR_zSiRbdtI",
-    "KTaLHOMydoM"
+    "KTaLHOMydoM",
+    "mdxKBz5QUTo"
   ],
   "processed_videos": [
     {
@@ -300,6 +301,18 @@
       "screenshots_count": 30,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "mdxKBz5QUTo",
+      "title": "Le minimum de réseau à savoir pour un Dev",
+      "upload_date": "20250603",
+      "duration": 2295,
+      "duration_str": "00:38:15",
+      "md_file": "YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 36,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -447,7 +460,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-07T12:55:13Z",
-  "completed_count": 23,
+  "completed_count": 24,
   "total_catalog_count": 142,
   "status": "ready"
 }
