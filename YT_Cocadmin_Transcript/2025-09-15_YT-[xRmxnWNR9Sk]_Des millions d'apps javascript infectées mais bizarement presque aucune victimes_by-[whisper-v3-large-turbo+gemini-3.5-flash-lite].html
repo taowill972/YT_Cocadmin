@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Des millions d&#x27;apps javascript infectées mais bizarement presque aucune victimes 🤔 — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Des millions d&#x27;apps javascript infectées mais bizarement presque aucune victimes 🤔</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=xRmxnWNR9Sk" target="_blank">Lien YouTube (<code>xRmxnWNR9Sk</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2025-09-15</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:13:10</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Une des plus importantes attaques par chaîne d'approvisionnement (*supply chain attack*) de l'écosystème JavaScript a frappé le gestionnaire de paquets NPM, compromettant des packages ultra-populaires cumulant plus de 2 milliards de téléchargements hebdomadaires. Maintenus par le développeur connu sous le pseudonyme de Kix (Josh), des modules fondamentaux tels que `chalk`, `debug`, ou encore `strip-ansi` ont vu leur code source détourné à la suite d'une campagne de phishing ciblée. En usurpant l'identité visuelle et textuelle de NPM via un domaine frauduleux subtil (`npmjs.help`), les attaquants ont piégé le mainteneur pour récolter ses identifiants et son authentification multifacteur (MFA).<br><br>Une fois les accès compromis, les scripts de build et de publication ont été corrompus par l'injection d'un code malveillant lourdement obfusqué. Ce malware ciblait spécifiquement les environnements d'exécution front-end interactifs pour intercepter et modifier à la volée les requêtes réseaux (`fetch`, `XMLHttpRequest`) ou les API du plugin Metamask (`window.ethereum`). Son objectif chirurgical : détourner les transactions en cryptomonnaies (Bitcoin, Ethereum, etc.) en remplaçant dynamiquement les adresses des portefeuilles cibles par celles de l'attaquant, tout en générant de fausses adresses visuellement similaires pour tromper la vigilance des utilisateurs finaux.<br><br>Malgré l'ampleur industrielle de la diffusion — des dizaines de millions d'applications et de sites web potentiellement infectés en l'espace de quelques heures —, le bilan financier est resté infime (environ 900 dollars dérobés). Cette asymétrie s'explique par un concours de circonstances strict requis pour activer la charge utile : l'application infectée devait être compilée et déployée durant la courte fenêtre de vulnérabilité, exécutée dans un navigateur client, et intégrer des fonctionnalités de transfert de crypto-actifs au moment précis de la visite d'un utilisateur malchanceux. Cet incident rappelle de manière critique aux ingénieurs DevOps et SysAdmins la fragilité systémique des dépendances NPM et la nécessité absolue de verrouiller la chaîne logistique logicielle par l'automatisation et l'audit continu.<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **NPM (Node Package Manager)** : Le registre officiel et gestionnaire de paquets de référence pour l'écosystème JavaScript et Node.js, au cœur de la vulnérabilité de la chaîne d'approvisionnement exploitée.<br>* **Chalk** : Package utilitaire NPM extrêmement populaire (>300 millions de téléchargements hebdomadaires) servant à coloriser les sorties textuelles dans la console.<br>* **Debug** : Bibliothèque standard de journalisation JavaScript (>300 millions de téléchargements hebdomadaires) massivement réutilisée à travers plus de 55 000 packages dépendants.<br>* **Metamask** : Extension de navigateur populaire agissant comme un portefeuille Ethereum et injectant l'objet global `window.ethereum` dans les pages web.<br>* **SBOM (Software Bill of Materials / via `npm sbom`)** : Standard et commande d'inventaire logiciel permettant de cartographier de manière exhaustive l'ensemble des composants, dépendances et versions imbriquées composant une application.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>1. **La menace de la supply chain logicielle** : Nos applications modernes reposent sur un arbre de dépendances profond et modulaire où un seul package de bas niveau compromis (comme `debug`) contamine par ricochet des dizaines de milliers de projets en aval.<br>2. **L'efficacité redoutable du phishing d'identité** : Les attaquants n'exploitent plus uniquement des failles logicielles zero-day, mais ciblent directement l'humain (les mainteneurs de paquets) à l'aide d'eaux-de-vie techniques sophistiquées imitant à la perfection les communications de services tiers.<br>3. **Le piège des domaines homoglyphes** : L'utilisation d'un domaine frauduleux enregistré légitimement (`npmjs.help` vs `npmjs.com`) permet de contourner les filtres anti-spam traditionnels et de berner des développeurs pourtant avertis.<br>4. **La fragilité du MFA mal implémenté** : Recevoir une notification demandant de « mettre à jour son multifacteur » est une incohérence de sécurité critique, le MFA n'ayant pas de date d'expiration périodique nécessitant une ré-authentification sur un lien externe.<br>5. **Techniques d'obfuscation de code** : L'injection de charges malveillantes passe systématiquement par du code JavaScript obfusqué et étalé pour échapper à une revue de code visuelle superficielle lors d'un déploiement rapide.<br>6. **Malware contextuel et furtif** : Le script malveillant analysé vérifie la présence d'environnements spécifiques (comme l'objet `window.ethereum`) pour s'activer uniquement dans le navigateur de l'utilisateur final et rester invisible dans les backends Node.js.<br>7. **Détournement dynamique des flux financiers** : Plutôt que de détruire les données ou de miner de la crypto de manière inefficace, le malware réécrit les fonctions natives (`fetch`, `XHR`) pour falsifier les adresses de destination des portefeuilles cryptographiques au niveau réseau.<br>8. **Algorithme de similarité d'adresses** : Le malware utilise une logique avancée pour sélectionner, parmi une liste de portefeuilles attaquants, celui dont les premiers et derniers caractères ressemblent le plus à l'adresse originale afin d'éviter les doutes de la victime.<br>9. **Le facteur temps comme bouclier partiel** : La correction ultra-rapide par le mainteneur et le support NPM a réduit la fenêtre d'exposition à quelques heures, limitant drastiquement le nombre de victimes malgré des milliards de téléchargements théoriques.<br>10. **L'écart entre exposition et impact réel** : Une attaque d'envergure globale ne se traduit pas nécessairement par des dégâts massifs si les conditions d'exécution de la charge utile (interaction client + features crypto + timing de déploiement) ne sont pas simultanément réunies.<br>11. **Nécessité absolue d'outils de traçabilité** : L'intégration d'un inventaire rigoureux des composants via des SBOM (Software Bill of Materials) devient une obligation pour les équipes DevOps afin de auditer instantanément le code tiers exécuté en production.<br>12. **Surveillance automatisée des registres** : Mettre en place des pipelines CI/CD capables de détecter des divergences suspectes entre le code source versionné sur GitHub et le code réellement publié sur le registre NPM permet de stopper net les attaques automatisées.
+            <div class="tools-badges-cloud"><span class="tool-tag">NPM (Node Package Manager)</span><span class="tool-tag">Chalk</span><span class="tool-tag">Debug</span><span class="tool-tag">Metamask</span><span class="tool-tag">SBOM (Software Bill of Materials / via `npm sbom`)</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>1. **La menace de la supply chain logicielle** : Nos applications modernes reposent sur un arbre de dépendances profond et modulaire où un seul package de bas niveau compromis (comme `debug`) contamine par ricochet des dizaines de milliers de projets en aval.</span></li><li><span class="point-bullet">✦</span><span>2. **L&#x27;efficacité redoutable du phishing d&#x27;identité** : Les attaquants n&#x27;exploitent plus uniquement des failles logicielles zero-day, mais ciblent directement l&#x27;humain (les mainteneurs de paquets) à l&#x27;aide d&#x27;eaux-de-vie techniques sophistiquées imitant à la perfection les communications de services tiers.</span></li><li><span class="point-bullet">✦</span><span>3. **Le piège des domaines homoglyphes** : L&#x27;utilisation d&#x27;un domaine frauduleux enregistré légitimement (`npmjs.help` vs `npmjs.com`) permet de contourner les filtres anti-spam traditionnels et de berner des développeurs pourtant avertis.</span></li><li><span class="point-bullet">✦</span><span>4. **La fragilité du MFA mal implémenté** : Recevoir une notification demandant de « mettre à jour son multifacteur » est une incohérence de sécurité critique, le MFA n&#x27;ayant pas de date d&#x27;expiration périodique nécessitant une ré-authentification sur un lien externe.</span></li><li><span class="point-bullet">✦</span><span>5. **Techniques d&#x27;obfuscation de code** : L&#x27;injection de charges malveillantes passe systématiquement par du code JavaScript obfusqué et étalé pour échapper à une revue de code visuelle superficielle lors d&#x27;un déploiement rapide.</span></li><li><span class="point-bullet">✦</span><span>6. **Malware contextuel et furtif** : Le script malveillant analysé vérifie la présence d&#x27;environnements spécifiques (comme l&#x27;objet `window.ethereum`) pour s&#x27;activer uniquement dans le navigateur de l&#x27;utilisateur final et rester invisible dans les backends Node.js.</span></li><li><span class="point-bullet">✦</span><span>7. **Détournement dynamique des flux financiers** : Plutôt que de détruire les données ou de miner de la crypto de manière inefficace, le malware réécrit les fonctions natives (`fetch`, `XHR`) pour falsifier les adresses de destination des portefeuilles cryptographiques au niveau réseau.</span></li><li><span class="point-bullet">✦</span><span>8. **Algorithme de similarité d&#x27;adresses** : Le malware utilise une logique avancée pour sélectionner, parmi une liste de portefeuilles attaquants, celui dont les premiers et derniers caractères ressemblent le plus à l&#x27;adresse originale afin d&#x27;éviter les doutes de la victime.</span></li><li><span class="point-bullet">✦</span><span>9. **Le facteur temps comme bouclier partiel** : La correction ultra-rapide par le mainteneur et le support NPM a réduit la fenêtre d&#x27;exposition à quelques heures, limitant drastiquement le nombre de victimes malgré des milliards de téléchargements théoriques.</span></li><li><span class="point-bullet">✦</span><span>10. **L&#x27;écart entre exposition et impact réel** : Une attaque d&#x27;envergure globale ne se traduit pas nécessairement par des dégâts massifs si les conditions d&#x27;exécution de la charge utile (interaction client + features crypto + timing de déploiement) ne sont pas simultanément réunies.</span></li><li><span class="point-bullet">✦</span><span>11. **Nécessité absolue d&#x27;outils de traçabilité** : L&#x27;intégration d&#x27;un inventaire rigoureux des composants via des SBOM (Software Bill of Materials) devient une obligation pour les équipes DevOps afin de auditer instantanément le code tiers exécuté en production.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:25</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Hier, il y a eu une des plus grosses attaques sur le repository NPM qui a touché des packages qui ont des milliards de téléchargements chaque semaine qui hébergent les dépendances que toutes les applications de JavaScript utilisent. Donc il y a potentiellement des millions de sites web qui ont été infectés par ce malware et pourtant il y a eu très très peu de victimes et donc on va voir pourquoi. Donc tout commence avec Josh qui est connu sur le nom de Kix et c&#x27;est le maintainer, c&#x27;est lui qui s&#x27;occupe de tous ces packages là qu&#x27;on a sur Node.js et ces packages, ils sont quand même beaucoup utilisés.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant un article d&#x27;analyse de sécurité (Observations / Supply-Chain Attack).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte technique décrivant l&#x27;attaque de la chaîne d&#x27;approvisionnement NPM, mentionnant le compromis du compte du développeur qix et les packages touchés (chalk, strip-ansi, color-convert).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et analyse d&#x27;un rapport de cyber-sécurité concernant une attaque majeure sur le repository NPM.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000006_seg1.jpg" alt="Article de blog technique intitulé &quot;Anatomy of a Billion-Download NPM Supply-Chain Attack&quot; détaillant la compromission du compte du développeur qix." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000006_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:06</span>
+                        <span class="caption-text">Article de blog technique intitulé &quot;Anatomy of a Billion-Download NPM Supply-Chain Attack&quot; détaillant la compromission du compte du développeur qix.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:25 - 00:00:44</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que si on regarde juste certains de ces packages, Il y a par exemple Chalk qui est à 300 millions de téléchargements par semaine, Strip on Sea, 260 millions, 193 millions, on a Debug aussi qui est à plus de 300 millions. Et donc si on fait le total juste pour cet utilisateur-là, c&#x27;est déjà plus de 2 milliards de téléchargements par semaine. Si on fait un petit calcul rapide, ça fait quand même 12 millions de téléchargements par heure.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web / page de documentation ou article technique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste de packages JavaScript avec le nombre de téléchargements hebdomadaires (ex: chalk à ~300 millions).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des statistiques d&#x27;utilisation des packages pour illustrer leur criticité et l&#x27;impact d&#x27;une faille potentielle.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000030_seg2.jpg" alt="Capture d&#x27;écran montrant une page web listant des packages npm avec leurs statistiques de téléchargement hebdomadaires (chalk, strip-ansi, color-convert, etc.)." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000030_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:30</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant une page web listant des packages npm avec leurs statistiques de téléchargement hebdomadaires (chalk, strip-ansi, color-convert, etc.).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:44 - 00:01:05</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc même si le malware a été supprimé très très rapidement, c&#x27;est quand même potentiellement des dizaines de millions d&#x27;applications qui vont être infectées. Mais il n&#x27;y a pas que Kix qui a été attaqué. Il y a pas mal d&#x27;autres utilisateurs qui ont reçu la même attaque, dont DuckDB, qui sont des packages pour utiliser une bâche de données, où il y a tous leurs packages aussi qui ont été infectés par ce mail malware. Donc à prendre Debug comme exemple pour regarder ce malware, c&#x27;est un des plus gros packages.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une interface GitHub (onglet Security / Advisory GHSA-w62p-hx95-gf2c).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tableau listant les packages NPM compromis (@duckdb/duckdb-wasm, @duckdb/node-api, @duckdb/node-bindings, duckdb) avec leurs versions affectées, versions corrigées et niveau de sévérité (High).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication d&#x27;un bulletin d&#x27;alerte de sécurité détaillant les versions de packages NPM compromises par du code malveillant.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000054_seg3.jpg" alt="Alerte de sécurité GitHub sur le dépôt duckdb/duckdb-node concernant la compromission de packages NPM par un malware." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000054_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:54</span>
+                        <span class="caption-text">Alerte de sécurité GitHub sur le dépôt duckdb/duckdb-node concernant la compromission de packages NPM par un malware.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:05 - 00:01:25</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une partie du problème qui cause ce type d&#x27;attaque, qu&#x27;on appelle des attaques de supply chain, en français ce serait des attaques de chaînes d&#x27;approvisionnement, en fait nos logiciels ont besoin d&#x27;autres petits morceaux de logiciels pour fonctionner, en particulier dans JavaScript, parce que c&#x27;est un langage qui est très très modulaire. Donc au lieu de tout recoder, l&#x27;avantage c&#x27;est qu&#x27;on peut prendre plein de petits morceaux de code à droite à gauche qui vont tous fonctionner dans mon application.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface visible</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, terminal ou architecture visible</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la modularité de JavaScript et les risques de la supply chain logicielle</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:26 - 00:01:45</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le gros inconvénient, c&#x27;est que ça fait que ce type d&#x27;attaque-là est possible parce que, par exemple, on voit ce package-là debug qui sert simplement à ce que notre application puisse écrire des lignes de log de debug avec un petit peu de couleur pour pouvoir les filtrer, etc. Non seulement toutes les applications qui utilisent directement ce package, elles ont été infectées, mais on voit aussi qu&#x27;il y a 55 000 dépendants.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (Registre npm) et émulateur de terminal Bash macOS.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande d&#x27;installation `npm i debug`, statistiques de téléchargements (378M+ par semaine), et sortie de terminal avec des logs colorés (`worker:a doing lots of uninteresting work`).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du package npm &#x27;debug&#x27; et démonstration de son utilisation pour afficher des logs colorés dans un terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000130_seg5.jpg" alt="Page du registre npm pour le package &#x27;debug&#x27; avec un terminal superposé affichant des logs colorés de Node.js." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000130_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:30</span>
+                        <span class="caption-text">Page du registre npm pour le package &#x27;debug&#x27; avec un terminal superposé affichant des logs colorés de Node.js.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:45 - 00:02:07</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, c&#x27;est-à-dire qu&#x27;il y a 55 000 autres packages sur NPM qui dépendent de debug. Parmi ces 55 000 packages qui dépendent de debug, il y a encore probablement des millions de packages qui dépendent des packages qui eux-mêmes dépendent de debug. Et ça qui aggrave le problème, c&#x27;est qu&#x27;on peut utiliser un package qui lui a besoin même d&#x27;un package, qui lui va utiliser un autre package, qui ce package là va utiliser debug.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console active affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept de dépendances en cascade dans l&#x27;écosystème NPM.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:07 - 00:02:30</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça devient très difficile de savoir qu&#x27;est-ce qui tourne vraiment dans l&#x27;application. Et quand il y a des packages qui sont infectés, très rapidement ça peut infecter comme on voit là des milliards d&#x27;applications d&#x27;un coup. Donc évidemment, dès que Josh a été mis au courant, il a très rapidement réglé le problème, il a contacté NPM, ils ont enlevé les versions infectées. Mais comme on a vu, juste une heure ou deux avec des versions infectées, ça fait déjà des dizaines de millions de téléchargements potentiels.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web GitHub (système de gestion des issues et de suivi des bugs).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Issue GitHub intitulée &quot;(RESOLVED) Version 4.4.2 published to npm is compromised #1005&quot; avec des commentaires de la communauté et des liens vers d&#x27;autres packages compromis (chalk, etc.).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et analyse d&#x27;une alerte de sécurité concernant un package open-source npm compromis et potentiellement malveillant (crypto-stealer).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000218_seg7.jpg" alt="Capture d&#x27;écran d&#x27;une issue GitHub (projet debug-js/debug) signalant qu&#x27;une version compromise (4.4.2) a été publiée sur npm." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000218_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:18</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;une issue GitHub (projet debug-js/debug) signalant qu&#x27;une version compromise (4.4.2) a été publiée sur npm.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:30 - 00:02:48</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc Josh, il nous explique qu&#x27;il a été victime d&#x27;une attaque de phishing. Donc tout simplement, il a reçu un email qui ressemble à ça, qui ressemble en tout point à ce qu&#x27;il pourrait recevoir d&#x27;un email de NPM. Donc là, il a un email support.npm, le petit logo qui lui dit « Ah, il faut que tu mettes à jour ton authentification de facteur. » avec un lien qui mène vers le site.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Client de messagerie électronique affichant un e-mail avec un logo NPM stylisé et un lien de mise à jour 2FA.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte d&#x27;un e-mail de phishing alertant sur l&#x27;expiration des identifiants 2FA et incitant à cliquer sur un lien de mise à jour (« Update 2FA Now »).</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et présentation d&#x27;un exemple concret d&#x27;e-mail de phishing ciblant les développeurs et usurpant la plateforme NPM.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000234_seg8.jpg" alt="Capture d&#x27;écran montrant un faux e-mail de phishing usurpant l&#x27;identité de NPM, demandant une mise à jour de l&#x27;authentification à deux facteurs (2FA)." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000234_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:34</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant un faux e-mail de phishing usurpant l&#x27;identité de NPM, demandant une mise à jour de l&#x27;authentification à deux facteurs (2FA).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:48 - 00:03:07</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le problème, c&#x27;est que l&#x27;adresse email ici, c&#x27;est npmjs.help, alors que le vrai domaine, c&#x27;est npmjs.com. Sauf que ça passe crème quand même. C&#x27;est npmjs.help, ça paraît legit. Et comme c&#x27;est un vrai domaine que l&#x27;attaqueur a vraiment acheté, a vraiment confirmé, ce n&#x27;est pas un email qui est passé en spam. Donc, c&#x27;est vraiment passé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Client de messagerie affichant le contenu d&#x27;un e-mail de phishing 2FA.</p>
+                        <p><strong>Contenu textuel & Code :</strong> E-mail intitulé &quot;Two-Factor Authentication Update Required&quot; provenant de &quot;support@npmjs.help&quot; destiné à un utilisateur, avec un lien &quot;Update 2FA Now&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse d&#x27;un e-mail de phishing ciblant les développeurs npm, mettant en évidence l&#x27;utilisation d&#x27;un domaine frauduleux mais authentifié (npmjs.help) pour contourner les filtres anti-spam.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000253_seg9.jpg" alt="Capture d&#x27;écran montrant un faux e-mail de phishing usurpant npmjs, avec l&#x27;adresse d&#x27;expéditeur frauduleuse support@npmjs.help." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000253_seg9.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:53</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant un faux e-mail de phishing usurpant npmjs, avec l&#x27;adresse d&#x27;expéditeur frauduleuse support@npmjs.help.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:07 - 00:03:27</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">La première chose qu&#x27;aurait pu potentiellement tilter un petit peu, c&#x27;est que mettre à jour son multifacteur, ça n&#x27;existe pas vraiment. Une fois qu&#x27;on a son multifacteur, il n&#x27;y a pas de « tous les ans, il faut le mettre à jour ». Mais ça paraît quand même legit parce qu&#x27;on reçoit tellement d&#x27;emails comme ça, un petit peu automatisés, qu&#x27;il faut mettre à jour ci, il y a des attaques qui arrivent tout le temps, parfois il faut changer ses mots de passe, etc. Donc ça paraît comme quelque chose qu&#x27;il faudrait faire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et sensibilisation orale sur les mécanismes d&#x27;ingénierie sociale, plus précisément sur l&#x27;illégitimité des demandes de mise à jour de l&#x27;authentification multifacteur (MFA) souvent utilisées dans les campagnes de phishing.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:28 - 00:04:04</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Sachant que là aussi, on parle d&#x27;un développeur qui n&#x27;est pas forcément quelqu&#x27;un qui est un expert extrême en sécurité. Et donc, quand il clique sur ce lien, il arrive sur un site qui ressemble exactement comme le site de NPMGS où il doit mettre son login, son mot de passe et son code d&#x27;authentification. Ce qui fait que l&#x27;attaqueur récupère toutes ces informations. instantanément il va se connecter sur le vrai site npmjs et il va aller modifier tous les packages qui appartiennent à Josh et il va aller chercher directement le fichier index.js et il va rajouter une petite ligne et déployer une nouvelle version du package et donc cette petite ligne elle ressemble à ça là on voit const o x 1 1 1 c&#x27;est bizarre sauf qu&#x27;en fait cette ligne là quand</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune (les écrans d&#x27;ordinateur présents en arrière-plan font partie du décor et sont totalement flous).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun (pas de code, pas de terminal de commande ni d&#x27;interface technique visible).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et face-caméra par le créateur de la vidéo concernant une attaque d&#x27;ingénierie sociale (hameçonnage/phishing) visant à usurper les identifiants de connexion et jetons MFA d&#x27;un développeur via un faux site miroir de registre de paquets (type npm).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:04 - 00:04:43</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">on scroll on voit que la ligne elle scroll pendant un petit moment et donc si on met cette ligne là qu&#x27;on la déplie, on se retrouve avec ça. Qui ressemble à rien évidemment, c&#x27;est illisible, parce que c&#x27;est du code qui est obfusqué, qui est fait exprès pour qu&#x27;on puisse pas vraiment du premier coup d&#x27;oeil voir qu&#x27;est ce qui se passe. Sauf que ce code là contient le code qui permet de l&#x27;exécuter donc quelque part il faut que ça le désobfusque. Donc on peut quand même, si on inspecte un petit peu, on peut savoir qu&#x27;est ce qui s&#x27;est passé. Si on le désobfusque, ce qui n&#x27;est pas très difficile à faire, on se retrouve avec ce code là. Mais on commence à voir qu&#x27;on a des check Ethereum, on a des windows.Ethereum etc. On commence à voir que c&#x27;est bizarre. Déjà du</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de code ou IDE affichant du code obfusqué.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Code JavaScript hautement obfusqué avec un tableau de chaînes de caractères chiffrées/encodées et des fonctions de désobfuscation complexes.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et explication de code source obfusqué pour en démontrer l&#x27;illisibilité et la complexité au premier coup d&#x27;œil.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000414_seg12.jpg" alt="Affichage d&#x27;un extrait de code source extrêmement long et obfusqué en JavaScript, avec le créateur en incrustation vidéo en bas à droite." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000414_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:14</span>
+                        <span class="caption-text">Affichage d&#x27;un extrait de code source extrêmement long et obfusqué en JavaScript, avec le créateur en incrustation vidéo en bas à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:43 - 00:05:18</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">code opusqué c&#x27;était déjà ultra bizarre mais là maintenant on commence à comprendre qu&#x27;est ce qui se passe. Ça a un rapport avec les cryptos, peut-être que ça va miner de la crypto ou peut-être que ça va essayer de nous voler nos Ethereum ou nos bitcoins. Donc il y a des chercheurs en cybersécurité qui ont inspecté un petit peu ce malware pour savoir comment est ce qu&#x27;il fonctionne. La première chose qu&#x27;il fait c&#x27;est qu&#x27;il regarde si windows.Ethereum existe. Donc là le package il a été mis dans notre application et notre application peut être que c&#x27;est une application backend donc si notre application elle est dans le backend, Windows ça n&#x27;existe pas. Donc déjà ça permet de vérifier si on tourne dans un navigateur ou pas et Windows.Ethereum c&#x27;est ce qui est utilisé par Metamask.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Schéma technique / diagramme logique au format ASCII Art.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Étape initiale : &quot;Code Execution Starts&quot;
+- Condition de détection : &quot;Checks if window.ethereum (e.g., MetaMask) exists&quot;
+- Branche d&#x27;exécution positive : appel de la fonction `checkethereumw()` pour interroger les comptes disponibles (&quot;Requests wallet accounts&quot;).
+- Branche d&#x27;exécution alternative : appel direct de la fonction `newdlocal()`.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse du mécanisme d&#x27;attaque d&#x27;un malware Web3 qui tente de détecter la présence d&#x27;extensions de portefeuilles crypto afin de compromettre les clés d&#x27;accès ou de siphonner les actifs numériques (Ethereum/Bitcoin).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000500_seg13.jpg" alt="Diagramme de flux logique en art ASCII détaillant les étapes d&#x27;exécution d&#x27;un malware ciblant l&#x27;API Web3 &#x27;window.ethereum&#x27; pour détecter et intercepter les portefeuilles de cryptomonnaies (MetaMask)." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000500_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:00</span>
+                        <span class="caption-text">Diagramme de flux logique en art ASCII détaillant les étapes d&#x27;exécution d&#x27;un malware ciblant l&#x27;API Web3 &#x27;window.ethereum&#x27; pour détecter et intercepter les portefeuilles de cryptomonnaies (MetaMask).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:18 - 00:05:36</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est un plugin Chrome qui permet de faire des transactions Ethereum etc. Si ça trouve que Metamask est installé dans le navigateur et bien ça va regarder s&#x27;il y a des comptes, s&#x27;il y a des wallets qui sont dans Metamask. Si c&#x27;est le cas, ça va renair ici le runmask, la fonction run mask, et ce qu&#x27;elle va faire ici c&#x27;est qu&#x27;elle va écraser les fonctions request et send de Metamask.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation graphique textuelle (diagramme d&#x27;architecture et documentation de code).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logique conditionnelle vérifiant la présence de window.ethereum, checkethereumw(), runmask() pour le détournement de transaction (Transaction Hijacking), et le vecteur d&#x27;attaque par &quot;Passive Address Swapping&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;analyse comportementale d&#x27;un plugin malveillant ciblant les portefeuilles cryptographiques et modifiant les transactions d&#x27;une manière transparente pour l&#x27;utilisateur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000522_seg14.jpg" alt="Diagramme ASCII représentant l&#x27;organigramme de vérification et d&#x27;interception du portefeuille MetaMask (window.ethereum)." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000522_seg14.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:22</span>
+                        <span class="caption-text">Diagramme ASCII représentant l&#x27;organigramme de vérification et d&#x27;interception du portefeuille MetaMask (window.ethereum).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000532_seg14.jpg" alt="Documentation textuelle décrivant le fonctionnement détaillé de la fonction runmask() et l&#x27;attaque par substitution d&#x27;adresse." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000532_seg14.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:32</span>
+                        <span class="caption-text">Documentation textuelle décrivant le fonctionnement détaillé de la fonction runmask() et l&#x27;attaque par substitution d&#x27;adresse.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:36 - 00:06:00</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est à dire que si en nous en tant qu&#x27;utilisateur on va sur un site qui est infecté par ce malware, ça va écraser les fonctions envoyer et recevoir de notre Metamask pour pouvoir modifier l&#x27;adresse du destinataire. Ce qui fait que si on envoie des cryptos avec Metamask, et bien ça va changer l&#x27;adresse de destination pour l&#x27;envoyer à l&#x27;attaqueur. Donc c&#x27;est lui qui va recevoir les cryptos à la place. Si jamais il n&#x27;y a pas Metamask, et que pas malchance le site qui a été infecté permet à l&#x27;utilisateur de gérer des cryptos d&#x27;une manière ou d&#x27;une autre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement d&#x27;un malware ciblant les extensions de portefeuille de crypto-monnaie (MetaMask).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:00 - 00:06:19</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça va écraser les fonctions fetch et xmlhtp request. Ces deux fonctions, elles permettent au navigateur de faire des requêtes vers l&#x27;internet. En écrasant ces deux fonctions, ça va faire que le navigateur, à chaque fois qu&#x27;il va envoyer une requête vers internet, il va regarder s&#x27;il y a des champs qui correspondent à un wallet bitcoin, ou un wallet Ethereum, ou un wallet de crypto.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:20 - 00:06:42</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et si c&#x27;est le cas, ça va modifier le champ destinataire, encore une fois, pour que l&#x27;attaqueur reçoive l&#x27;argent au lieu du destinataire. Ce qui est très très vicieux parce que dans l&#x27;interface du site web, on va même pas voir que ça a envoyé quelqu&#x27;un d&#x27;autre parce que c&#x27;est juste au niveau de l&#x27;appel réseau que la modification va être faite. Ce qui fait que c&#x27;est encore plus vicieux c&#x27;est que si on regarde dans le code ici il n&#x27;y a pas un seul wallet de destination il y en a plein et il y en a plein pour différentes cryptos.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de code (type IDE/éditeur de texte sur fond sombre).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de code contenant des listes de chaînes de caractères entre guillemets simples (potentiellement des adresses de portefeuilles ou des hachages cryptographiques).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;un script ou de données textuelles lors de l&#x27;explication d&#x27;une vulnérabilité liée à la manipulation de données.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000636_seg17.jpg" alt="Affichage d&#x27;un éditeur de code avec une liste de chaînes de caractères alphanumériques et de clés ou adresses potentielles." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000636_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:36</span>
+                        <span class="caption-text">Affichage d&#x27;un éditeur de code avec une liste de chaînes de caractères alphanumériques et de clés ou adresses potentielles.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:42 - 00:07:02</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là ici c&#x27;est du bitcoin, là je sais pas BC ça doit être du bitcoin cash ou quelque chose comme ça OX la cellule du Ethereum etc etc. Et ce que ça fait c&#x27;est que ça va utiliser un algorithme pour pouvoir comparer l&#x27;adresse de destination originale et pouvoir choisir un des wallets ici qui correspond à la crypto qu&#x27;on va utiliser et qui match le plus avec l&#x27;adresse originale pour que ça ressemble le plus.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et gestuelle du fonctionnement d&#x27;un algorithme de sélection de wallets de cryptomonnaies.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:02 - 00:07:21</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, si on vérifie que j&#x27;ai de fait, on regarde juste les 2-3 derniers caractères, il y a une chance que ça match avec certains des wallets qui sont là-dedans. Donc, c&#x27;est vraiment le top du vice. Donc, qui s&#x27;est fait carotte ? Qui a été affecté dans l&#x27;histoire ? Eh bien, en fait, pas tant de monde. Parce que comme les transactions en crypto sont publiques, on peut voir les transactions qui ont été faites.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:21 - 00:07:45</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il se trouve qu&#x27;il a récupéré 441 dollars en Ethereum et un petit peu plus de 480 dollars en chiccoin à la con, on sait pas trop ce que c&#x27;est. Potentiellement qu&#x27;en Ethereum pur, il y aurait juste une personne ici qui serait fait carotte, qui serait fait carotte 400 balles. Donc c&#x27;est dommage pour cette personne, mais pour une attaque de cette ampleur qui a affecté des dizaines de millions de sites, ça paraît vraiment un miracle que ça soit pas plus que ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Explorateur de blockchain (type Etherscan)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Solde ETH de 0,100011001 ETH (valeur de 441,91$), avoirs en tokens de 486,47$ (8 token contracts), et liste des transactions récentes avec hash, méthode et horodatage.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et affichage des fonds subtilisés sur l&#x27;adresse d&#x27;un acteur malveillant lié à une attaque sur le gestionnaire de paquets NPM.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000727_seg20.jpg" alt="Interface d&#x27;un explorateur de blockchain affichant le solde d&#x27;une adresse identifiée comme &#x27;NPM Exploiter 1&#x27;, avec le détail des avoirs en Ethereum et en tokens ainsi que l&#x27;historique des transactions récentes." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000727_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:27</span>
+                        <span class="caption-text">Interface d&#x27;un explorateur de blockchain affichant le solde d&#x27;une adresse identifiée comme &#x27;NPM Exploiter 1&#x27;, avec le détail des avoirs en Ethereum et en tokens ainsi que l&#x27;historique des transactions récentes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:45 - 00:08:16</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ce qui fait à mon avis que ça a pas affecté tant de personnes que ça, c&#x27;est que ça a affecté plein plein plein de sites, mais il faut que ce soit un site qui ait des services de crypto, on peut envoyer et recevoir des cryptos, et il faut que ce site-là ait eu pile poil un déploiement dans cette tranche-là pendant les 2-3 heures où la version infectée des dépendances était disponible. Ou alors qu&#x27;il y a un site qui ait eu cette version infectée et qui ait été déployé pareil dans ces 2-3 heures-là et que quelqu&#x27;un qui n&#x27;a vraiment pas de chance ait été sur un site infecté et ait utilisé Metamask à ce moment-là précis.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface active ou exploitable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale du contexte d&#x27;un incident de déploiement par le créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:16 - 00:08:37</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça ne veut pas forcément dire qu&#x27;il y a des millions de sites qui sont allés en prod avec cette version infectée. Il faut qu&#x27;il y ait quand même un bon concours de circonstances pour que quelqu&#x27;un se fasse carotte ses cryptos. Donc on se dit vraiment, l&#x27;attaqueur quelque part il est un peu con parce qu&#x27;il aurait fait n&#x27;importe quoi d&#x27;autre comme type d&#x27;attaque. Il aurait gagné largement plus que 500$. Il aurait juste miné des cryptos dans le navigateur ou il aurait essayé de récupérer des informations de je sais pas trop quoi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface pertinente affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;intervenant concernant un scénario d&#x27;attaque informatique et la probabilité d&#x27;exploitation.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:38 - 00:08:56</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça aurait été mille fois plus rentable que ça. Donc en fait quelque part c&#x27;est vraiment malo pour lui. Donc au final tout a été résolu très très rapidement en quelques heures. Le package qui a été uploadé sur NPM n&#x27;est pas le même que le code qu&#x27;on trouve sur GitHub. Donc c&#x27;est quelque chose qui est quand même cramé assez rapidement. Et c&#x27;est même quelque chose qu&#x27;on peut facilement automatiser pour voir quand ça arrive.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur concernant un incident de sécurité sur des packages NPM.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:56 - 00:09:15</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est pour ça que ça a été vu et corrigé assez rapidement. Et donc comment est-ce qu&#x27;on peut faire pour éviter que ça arrive ? Donc ça dépend pour qui. Pour les développeurs qui utilisent JavaScript, ils peuvent déjà utiliser une commande qui s&#x27;appelle NPM SBOM. SBOM pour Software Bills of Materials. La Bills of Materials, c&#x27;est quand on a un produit, tous les composants du produit, combien est-ce qu&#x27;ils coûtent ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:15 - 00:09:38</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, dans le Software Bills of Materials, c&#x27;est pour pouvoir nous dire, dans notre logiciel, qu&#x27;est-ce qu&#x27;il y a dedans ? Quelles sont les dépendances de dépendance, de sous-dépendance qu&#x27;il y a, quelle est la totalité du code qui tourne dans mon application ? Parce que ce n&#x27;est pas évident à voir, vu qu&#x27;on a des sous-dépendances de sous-dépendance de sous-dépendance. Et avec cette liste-là, on peut déjà commencer à optimiser un petit peu, se dire, ok, bon, il y a peut-être des choses que je n&#x27;ai pas forcément besoin, peut-être d&#x27;essayer de limiter un petit peu ces dépendances.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et pédagogique sur l&#x27;importance du SBOM et de la gestion des sous-dépendances en développement logiciel.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:38 - 00:10:06</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et deuxièmement, ensuite, on peut faire un audit sur toutes nos dépendances pour pouvoir s&#x27;assurer que, ok, toutes ces versions-là, on les a auditées, on sait qu&#x27;il n&#x27;y a pas trop de trucs bizarres dedans, donc on peut l&#x27;utiliser. Une fois qu&#x27;on sait ça, on peut utiliser les overrides dans notre package.json pour pouvoir figer les versions des dépendances qu&#x27;on a auditées, qu&#x27;on sait qu&#x27;elles sont bien. On peut aussi décider de tout le temps figer les dépendances dans nos repos, mais souvent dans les versions mineures, on a des corrections de sécurité, des choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Documentation technique web (navigateur) / Documentation officielle npm.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Blocs de code JSON illustrant l&#x27;utilisation de la propriété &quot;overrides&quot; dans le package.json pour forcer des versions spécifiques de paquets (ex: &quot;foo&quot;: &quot;1.0.0&quot;).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;utilisation des overrides dans npm pour figer et contrôler les versions des dépendances imbriquées.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000952_seg26.jpg" alt="Documentation officielle affichant la section &quot;overrides&quot; de npm avec des exemples de configuration JSON pour fixer les versions de dépendances." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_000952_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:52</span>
+                        <span class="caption-text">Documentation officielle affichant la section &quot;overrides&quot; de npm avec des exemples de configuration JSON pour fixer les versions de dépendances.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:06 - 00:10:28</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc oui, figer ça peut aider, mais d&#x27;un autre côté, ça peut nous desservir parce qu&#x27;on peut potentiellement louper des patches de sécurité sur nos milliards de dépendances. Donc on voit que c&#x27;est un problème qui n&#x27;est pas facile à régler, en particulier dans NPM. Donc c&#x27;est un type d&#x27;attaque qui peut évidemment exister dans d&#x27;autres langages, mais dans Node.js en particulier, c&#x27;est tellement modulaire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:29 - 00:10:48</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est un langage qui inclut très très peu de choses par défaut, ce qui fait que pour faire la moindre chose, on est tout le temps tenté ou obligé de récupérer des dépendances. Et donc ça aggrave le problème parce que ces dépendances-là aussi ont le même problème et donc récupère plein d&#x27;autres dépendances. Et donc, ça devient très difficile de savoir qu&#x27;est-ce qui tourne vraiment dans notre application. Donc, c&#x27;est moins un problème dans les autres langages parce qu&#x27;il y a plus de choses qui sont intégrées par défaut.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:48 - 00:11:09</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, on a moins besoin d&#x27;apporter de choses. Et dans ce qu&#x27;on apporte, il y a moins de choses aussi qui sont importées. Et donc, ça contient un petit peu le blast radius, comme on dit. Le rayon d&#x27;explosion. Donc, potentiellement, le vrai fixe, ça serait de ne pas utiliser le package registre, ce qui n&#x27;est pas vraiment faisable en ODS. Ou potentiellement, de changer de langage si vraiment c&#x27;est quelque chose qui est critique pour nous.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:09 - 00:11:33</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ensuite, pour les utilisateurs de crypto, parce que c&#x27;est eux qui prennent cher à chaque fois, utiliser un hardware wallet, donc ça va être un appareil physique sur lequel on va voir la transaction. Donc en gros, la clé de chiffrement, elle va être dans l&#x27;appareil, donc elle ne va jamais être sur ton ordinateur. Donc même si ton ordinateur se fait hacker, ton navigateur se fait hacker, etc., la clé n&#x27;est pas dedans. Et en plus de ça, dans le hardware wallet, tu vois, quand tu fais une transaction, c&#x27;est le wallet qui va signer la transaction.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (Google Images)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Résultats de recherche d&#x27;images montrant différents types de portefeuilles matériels (Ledger, Trezor, etc.)</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle du concept de &quot;hardware wallet&quot; via une recherche d&#x27;exemples de portefeuilles physiques pour appuyer l&#x27;explication sur la sécurité des clés de chiffrement.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001115_seg30.jpg" alt="Navigateurs web affichant une recherche d&#x27;images Google sur le terme &quot;hardware wallet&quot; avec incrustation du présentateur." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001115_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:15</span>
+                        <span class="caption-text">Navigateurs web affichant une recherche d&#x27;images Google sur le terme &quot;hardware wallet&quot; avec incrustation du présentateur.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:33 - 00:12:00</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc si elle a été altérée, ton ordinateur est complètement vérolé, etc., et l&#x27;adresse de destination a été changée, tu la verras sur l&#x27;écran de ton appareil. Et donc si tu vérifies bien, tu pourras voir quelque chose qui ne va pas et donc annuler la transaction. Maintenant pour les maintainers, une chose qui aurait pu éviter ça, ça serait d&#x27;utiliser un PASKey. Donc un PASKey, c&#x27;est une clé que tu vas installer sur un appareil, soit sur un téléphone ou si tu as un laptop, souvent il y a une puce qui est dédiée à ça, qui peut stocker une clé qui va te permettre de te connecter sur tous ces sites-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la page de documentation de npm.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte explicatif sur le 2FA (Something you know, have, are), les clés de sécurité (YubiKey, Touch ID) et les applications TOTP.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication des bonnes pratiques de sécurité pour les mainteneurs de packages afin d&#x27;éviter les compromissions de comptes.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001153_seg31.jpg" alt="Documentation officielle de npm concernant l&#x27;authentification à deux facteurs (2FA) pour sécuriser les comptes et les packages." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001153_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:53</span>
+                        <span class="caption-text">Documentation officielle de npm concernant l&#x27;authentification à deux facteurs (2FA) pour sécuriser les comptes et les packages.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:00 - 00:12:19</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ou alors tu peux utiliser une YubiKey ou des choses comme ça. Et ça, ça permet d&#x27;éviter le phishing. C&#x27;est-à-dire que même si tu cliques sur un lien bizarre, même si tu donnes ton login, tu donnes ton mot de passe, tu donnes ton multifakeur d&#x27;authentification, comme l&#x27;attaqueur n&#x27;a pas l&#x27;objet physique qui peut être sous forme de clé, sous forme d&#x27;un laptop, sous forme de ce que tu veux, il ne peut quand même pas se connecter à ton compte. Donc ça évite toutes ces attaques de phishing-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code, architectures).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;utilisation des clés de sécurité matérielles (YubiKey) pour contrer le phishing.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:19 - 00:12:44</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre chose qui peut être utile aussi, c&#x27;est d&#x27;utiliser des provenance statements. C&#x27;est quelque chose qu&#x27;on peut rajouter dans le CI-CD de notre code, donc dans notre intégration continue, déploiement continu. Ou là, par exemple, on peut avec GitHub Action signer le processus de build de notre package avant l&#x27;upload sur NPM. Ce qui fait que sur NPM, on va pouvoir vérifier par une signature que ce qu&#x27;il y a dans NPM, c&#x27;est exactement ce qui vient du code qui était dans GitHub.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la documentation npmjs.com sur la sécurité et la provenance des packages.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Extraits de configuration YAML et commandes CLI : `permissions: id-token: write`, `runs-on: ubuntu-latest`, et `npm publish --provenance`.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication de la configuration requise dans GitHub Actions pour ajouter des déclarations de provenance lors de la publication de packages NPM.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001225_seg33.jpg" alt="Documentation officielle NPM affichant le guide pour publier des packages avec des déclarations de provenance via GitHub Actions." loading="lazy" onclick="openLightbox('../screenshots/xRmxnWNR9Sk/xRmxnWNR9Sk_001225_seg33.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:25</span>
+                        <span class="caption-text">Documentation officielle NPM affichant le guide pour publier des packages avec des déclarations de provenance via GitHub Actions.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:44 - 00:13:05</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, ça évite ces attaques de supply chain comme on a vu aujourd&#x27;hui. Ou du moins, ça évite une partie parce que comme on a vu, il y a aussi des attaques de supply chain qui permettent d&#x27;attaquer directement le repo, donc le repo GitHub. Et donc, à partir de ce moment-là, bon, ça aide un petit peu moins. Cette histoire me fait penser à une autre attaque de supply chain et qui était cette fois carrément sur le kernel Linux et qui était 10 fois plus élaborée qui aurait pu être encore 10 fois plus pire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les attaques de supply chain et les compromissions de dépôts GitHub.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:05 - 00:13:07</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour comprendre comment cette faille a eu lieu, tu peux aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la faille de sécurité sans support technique visuel.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
