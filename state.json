@@ -29,7 +29,8 @@
     "SXv9JCCUqXQ",
     "QU6yGZ17Zak",
     "Q5a92asc7hM",
-    "PUpgGtq0xSw"
+    "PUpgGtq0xSw",
+    "9qaRqO3GPTs"
   ],
   "processed_videos": [
     {
@@ -391,6 +392,18 @@
       "screenshots_count": 40,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "9qaRqO3GPTs",
+      "title": "La source du bug Crowdstrike enfin révélée",
+      "upload_date": "20240817",
+      "duration": 923,
+      "duration_str": "00:15:23",
+      "md_file": "YT_Cocadmin_Transcript/2024-08-17_YT-[9qaRqO3GPTs]_La source du bug Crowdstrike enfin révélée_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2024-08-17_YT-[9qaRqO3GPTs]_La source du bug Crowdstrike enfin révélée_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 7,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -538,7 +551,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-08T00:17:10Z",
-  "completed_count": 30,
+  "completed_count": 31,
   "total_catalog_count": 142,
   "status": "ready"
 }

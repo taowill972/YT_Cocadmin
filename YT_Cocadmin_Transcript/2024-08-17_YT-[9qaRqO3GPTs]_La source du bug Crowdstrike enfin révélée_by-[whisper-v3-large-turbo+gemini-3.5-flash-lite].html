@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La source du bug Crowdstrike enfin révélée — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">La source du bug Crowdstrike enfin révélée</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=9qaRqO3GPTs" target="_blank">Lien YouTube (<code>9qaRqO3GPTs</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2024-08-17</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:15:23</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br>L'incident planétaire CrowdStrike, survenu en juillet 2024, a paralysé des millions de machines critiques (hôpitaux, banques, aéroports) à travers le monde en déclenchant une vague massive de *Blue Screen of Death* (BSOD). La cause racine (*Root Cause Analysis* ou RCA), formalisée dans un rapport technique officiel de 10 pages, lève le voile sur une défaillance systémique liée à la mise à jour asynchrone de fichiers de configuration dynamiques par un pilote de noyau (*kernel driver*). Contrairement aux idées reçues, le binaire principal n'a pas changé, mais un fichier de définitions de menaces a introduit un décalage critique entre les structures de données attendues et les données fournies, provoquant une erreur de type *Out-of-Bounds* en espace noyau.<br><br>Pour contourner la lourdeur des processus de certification logicielle (tels que le WHQL de Microsoft) et réagir instantanément aux nouvelles menaces, CrowdStrike dissocie la logique de détection (le pilote validé) de sa base de règles (les fichiers de configuration dits « Channel Files »). L'incident s'est produit lorsque le pilote a tenté de lire un 21e champ dans un fichier de configuration n'en fournissant que 20, accédant ainsi à un emplacement mémoire non alloué. Ce dysfonctionnement a été aggravé par la nature *boot-start* du pilote : s'exécutant au démarrage avant même l'initialisation de l'OS pour intercepter toute activité malveillante, son crash en boucle a rendu les systèmes inbootables, nécessitant une intervention manuelle en mode sans échec pour supprimer le fichier corrompu.<br><br>Pour les administrateurs systèmes et les ingénieurs DevOps, cet événement constitue une étude de cas magistrale sur les risques inhérents au code bas niveau en C/C++, à la gestion des dépendances implicites entre configuration et binaire, et aux failles dans les pipelines de validation de bout en bout. Les leçons tirées de cette crise imposent une refonte des processus de CI/CD pour les logiciels s'exécutant au niveau du noyau, en particulier l'implémentation rigoureuse du *fuzzing*, la validation stricte des schémas à la compilation et la généralisation de tests d'intégration globaux (*end-to-end*) avant tout déploiement automatisé en production.<br><br>---<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br>* **CrowdStrike Falcon** : Solution EDR (*Endpoint Detection and Response*) avancée fonctionnant comme un pilote de noyau pour surveiller en temps réel le comportement du système et bloquer les menaces.<br>* **Pilote de noyau (*Kernel Driver*)** : Programme doté des privilèges ultimes du système d'exploitation, s'exécutant au même niveau que le noyau Windows pour observer l'intégralité des processus.<br>* **Pilote de démarrage (*Boot-Start Driver*)** : Type de pilote spécifique qui s'initialise obligatoirement avant tous les autres processus au démarrage de la machine, bloquant le boot de l'OS en cas de défaillance.<br>* **WHQL (*Windows Hardware Quality Labs*)** : Laboratoire et processus de certification de Microsoft validant la robustesse et la stabilité des pilotes logiciels avant leur déploiement.<br>* **Fichiers de configuration Channel (*Channel Files*)** : Fichiers de définitions dynamiques (notamment le fichier incriminé de la série 291) mis à jour régulièrement pour alimenter les moteurs de détection sans nécessiter la recompilation du pilote.<br>* **Outils de Fuzzing** : Outils de test automatisés consistant à injecter des données aléatoires ou corrompues dans un programme pour éprouver sa robustesse face aux entrées inattendues.<br><br>---<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br>* **Dangers du mode noyau (*Ring 0*)** : Tout code exécuté au niveau du noyau partage les privilèges de l'OS ; un crash applicatif à ce niveau entraîne instantanément un *kernel panic* ou un BSOD de la machine entière.<br>* **Criticité des pilotes *Boot-Start*** : Un pilote requis dès le démarrage du système ne tolère aucune défaillance, sous peine de rendre la machine totalement inbootable et de bloquer les mécanismes de récupération automatique.<br>* **Dichotomie code/configuration** : Séparer la logique applicative des fichiers de configuration accélère le déploiement des correctifs de sécurité, mais introduit un risque critique de désynchronisation des structures de données.<br>* **Erreur *Out-of-Bounds* en C++** : L'accès à un index mémoire inexistant (ex: tenter de lire un 21e élément dans un tableau de 20) est une faille classique de programmation bas niveau imputable à l'absence de vérification de limites.<br>* **Limites du masquage par joker (*Wildcard*)** : Un bug de logique peut rester latent durant des mois en production si les jeux de données de test utilisent systématiquement des caractères génériques masquant l'absence d'un champ.<br>* **Nécessité de la validation à la compilation** : Les processus de build doivent intégrer des assertions strictes pour s'assurer que le nombre de colonnes ou de champs d'un fichier de configuration correspond toujours exactement aux structures attendues par le code.<br>* **Impératif du *Fuzzing* applicatif** : L'injection systématique de charges utiles corrompues, aléatoires ou mal formées dans les parseurs de configuration est indispensable pour garantir la résilience logicielle.<br>* **Insuffisance des tests isolés** : Valider des composants de manière unitaire ne suffit pas ; il est impératif de mettre en place des tests d'intégration de bout en bout (*End-to-End*) simulant l'environnement réel d'exécution.<br>* **Gouvernance des processus de test internes** : S'appuyer uniquement sur des collaborateurs ou des bêta-testeurs internes présente des angles morts méthodologiques nécessitant des pipelines de test automatisés et diversifiés.<br>* **Contournement des goulots d'étranglement de certification** : Bien que les processus rigoureux comme le WHQL protègent la stabilité, l'agilité face aux cybermenaces exige des mécanismes de mise à jour rapide qui doivent être encadrés par des garde-fous internes infaillibles.<br>* **Résilience opérationnelle et plan de reprise** : L'incident rappelle l'importance vitale de disposer de procédures de secours documentées (comme le démarrage en mode sans échec pour supprimer un fichier corrompu) pour le personnel d'exploitation.<br>* **Responsabilité de la chaîne d'approvisionnement logicielle (*Software Supply Chain*)** : Une mise à jour de sécurité automatisée ne doit jamais être poussée en production sans une validation automatisée de non-régression à grande échelle.
+            <div class="tools-badges-cloud"><span class="tool-tag">CrowdStrike Falcon</span><span class="tool-tag">Pilote de noyau (*Kernel Driver*)</span><span class="tool-tag">Pilote de démarrage (*Boot-Start Driver*)</span><span class="tool-tag">WHQL (*Windows Hardware Quality Labs*)</span><span class="tool-tag">Fichiers de configuration Channel (*Channel Files*)</span><span class="tool-tag">Outils de Fuzzing</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Dangers du mode noyau (*Ring 0*)** : Tout code exécuté au niveau du noyau partage les privilèges de l&#x27;OS ; un crash applicatif à ce niveau entraîne instantanément un *kernel panic* ou un BSOD de la machine entière.</span></li><li><span class="point-bullet">✦</span><span>Criticité des pilotes *Boot-Start*** : Un pilote requis dès le démarrage du système ne tolère aucune défaillance, sous peine de rendre la machine totalement inbootable et de bloquer les mécanismes de récupération automatique.</span></li><li><span class="point-bullet">✦</span><span>Dichotomie code/configuration** : Séparer la logique applicative des fichiers de configuration accélère le déploiement des correctifs de sécurité, mais introduit un risque critique de désynchronisation des structures de données.</span></li><li><span class="point-bullet">✦</span><span>Erreur *Out-of-Bounds* en C++** : L&#x27;accès à un index mémoire inexistant (ex: tenter de lire un 21e élément dans un tableau de 20) est une faille classique de programmation bas niveau imputable à l&#x27;absence de vérification de limites.</span></li><li><span class="point-bullet">✦</span><span>Limites du masquage par joker (*Wildcard*)** : Un bug de logique peut rester latent durant des mois en production si les jeux de données de test utilisent systématiquement des caractères génériques masquant l&#x27;absence d&#x27;un champ.</span></li><li><span class="point-bullet">✦</span><span>Nécessité de la validation à la compilation** : Les processus de build doivent intégrer des assertions strictes pour s&#x27;assurer que le nombre de colonnes ou de champs d&#x27;un fichier de configuration correspond toujours exactement aux structures attendues par le code.</span></li><li><span class="point-bullet">✦</span><span>Impératif du *Fuzzing* applicatif** : L&#x27;injection systématique de charges utiles corrompues, aléatoires ou mal formées dans les parseurs de configuration est indispensable pour garantir la résilience logicielle.</span></li><li><span class="point-bullet">✦</span><span>Insuffisance des tests isolés** : Valider des composants de manière unitaire ne suffit pas ; il est impératif de mettre en place des tests d&#x27;intégration de bout en bout (*End-to-End*) simulant l&#x27;environnement réel d&#x27;exécution.</span></li><li><span class="point-bullet">✦</span><span>Gouvernance des processus de test internes** : S&#x27;appuyer uniquement sur des collaborateurs ou des bêta-testeurs internes présente des angles morts méthodologiques nécessitant des pipelines de test automatisés et diversifiés.</span></li><li><span class="point-bullet">✦</span><span>Contournement des goulots d&#x27;étranglement de certification** : Bien que les processus rigoureux comme le WHQL protègent la stabilité, l&#x27;agilité face aux cybermenaces exige des mécanismes de mise à jour rapide qui doivent être encadrés par des garde-fous internes infaillibles.</span></li><li><span class="point-bullet">✦</span><span>Résilience opérationnelle et plan de reprise** : L&#x27;incident rappelle l&#x27;importance vitale de disposer de procédures de secours documentées (comme le démarrage en mode sans échec pour supprimer un fichier corrompu) pour le personnel d&#x27;exploitation.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:26</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On va enfin savoir qu&#x27;est-ce qui s&#x27;est vraiment passé dans l&#x27;épisode CrowdStrike qui a fait bugger le monde entier, les aéroports, les hôpitaux, les banques, les appels d&#x27;urgence, tout ! Presque toutes les industries ont été touchées par ça. Il vient enfin de sortir une route cause analysiste d&#x27;où vient précisément l&#x27;origine du bug. Pour comprendre ce bug, il faut déjà comprendre le fonctionnement de CrowdStrike Falcon, qui est le programme qui tournait sur toutes ces machines qui ont tous blue screen en boucle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant un tableau de bord d&#x27;impact des pannes (dashboard de suivi d&#x27;incidents).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Statistiques d&#x27;impact par site critique : customer facing, affected people, estimated damages, status (fixed: no).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation visuelle et introduction de l&#x27;analyse d&#x27;impact de l&#x27;incident mondial CrowdStrike sur les différentes industries touchées.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000006_seg1.jpg" alt="Capture d&#x27;écran montrant un tableau de bord illustrant l&#x27;impact de la panne mondiale CrowdStrike sur différentes infrastructures critiques (aéroports de Dubaï, LAX, Espagne, Amsterdam, Microsoft Office et la banque centrale d&#x27;Israël) avec des métriques d&#x27;impact." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000006_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:06</span>
+                        <span class="caption-text">Capture d&#x27;écran montrant un tableau de bord illustrant l&#x27;impact de la panne mondiale CrowdStrike sur différentes infrastructures critiques (aéroports de Dubaï, LAX, Espagne, Amsterdam, Microsoft Office et la banque centrale d&#x27;Israël) avec des métriques d&#x27;impact.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:26 - 00:00:44</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui fait ce programme, c&#x27;est qu&#x27;il surveille tous les événements qui se passent sur la machine. Donc ça peut être la création d&#x27;un fichier, la création d&#x27;un processus, d&#x27;un nouveau trait, la modification d&#x27;un fichier, tout ce que les programmes font sur la machine. Et ils regardent qu&#x27;est-ce qui a l&#x27;air bizarre ou pas. Et quand ça a l&#x27;air bizarre, ils prennent des actions ou pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique du fonctionnement d&#x27;un programme de surveillance système (EDR/monitoring).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:44 - 00:01:04</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Plus précisément, ça s&#x27;appelle un EDR. C&#x27;est un espèce de type d&#x27;antivirus pour simplifier, un petit peu plus avancé. Il n&#x27;y a pas simplement regarder une base de données et de fichiers pour savoir si c&#x27;est un virus ou pas. Il va analyser le comportement du système et de tous les processus sur le système pour savoir s&#x27;ils font des trucs suspects ou pas. Et donc pour pouvoir faire ça, ce programme CrowdStrike Falcon, il est installé en tant que kernel driver.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface logicielle ou console active visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept d&#x27;EDR et d&#x27;analyse comportementale des processus par le créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:04 - 00:01:25</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça veut dire qu&#x27;il a un niveau de privilège encore plus élevé que ton mode administrateur, si tu veux. Il a un peu les droits ultimes sur ta machine. Il a les mêmes droits que le kernel Windows même sur ta machine. Donc il peut vraiment faire tout ce qu&#x27;il veut. L&#x27;avantage de faire ça, c&#x27;est qu&#x27;il peut vraiment observer tout ce qui se passe sur ta machine. Parce que la plupart des programmes malissieux, ils vont tout faire pour être le plus discret possible, faire des trucs un petit peu en cachet pour pas que ça se voit.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique n&#x27;est visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur concernant les privilèges système avancés et le niveau d&#x27;accès au noyau Windows.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:25 - 00:01:48</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Malgré ça, si CrowdStrike, il tourne en tant que kernel driver, ils peuvent pas se cacher en gros. L&#x27;inconvénient de ça, c&#x27;est que quand tu es un kernel driver, tu es au même niveau que Windows. C&#x27;est comme si tu étais intégré directement à Windows. Donc d&#x27;habitude, un programme, quand il crache sur ta machine, c&#x27;est juste le programme qui se ferme, ce n&#x27;est pas si grave. Mais là, comme il est carrément intégré à Windows, s&#x27;il crache, tu as tout Windows qui crache. Et deuxièmement, c&#x27;est un type de kernel driver particulier parce que c&#x27;est un boot start driver.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique et pédagogique sur le fonctionnement de CrowdStrike au niveau du noyau (kernel) Windows.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:48 - 00:02:07</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça veut dire qu&#x27;une fois que ce programme-là est installé, Windows ne peut pas démarrer si ce programme-là ne démarre pas. L&#x27;avantage de ça, c&#x27;est que Crashtra va démarrer avant tous les autres processus sur la machine. et donc il va pouvoir voir tout ce qui s&#x27;est passé à partir du moment où la machine a démarré. Donc il n&#x27;y a pas un malware qui pourrait commencer à faire des trucs bizarres avant que ton antivirus démarre. L&#x27;inconvénient, c&#x27;est que si ce programme-là crache, eh bien la machine ne peut plus booter.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune, l&#x27;intervenant explique de manière théorique le chargement d&#x27;un agent de sécurité de type ELAM (Early Launch Anti-Malware) sous Windows, conçu pour s&#x27;exécuter avant les autres pilotes et processus afin de neutraliser les menaces dès la phase de boot.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:07 - 00:02:41</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est ça qui a causé l&#x27;étendue de ce bug, parce qu&#x27;une machine qui bug à droite ou à gauche, ce n&#x27;est pas si grave, mais là c&#x27;était des millions de machines à droite ou à gauche qui buggaient parce qu&#x27;elles ne pouvaient juste plus redémarrer. Et donc on peut se dire, comment c&#x27;est possible que Microsoft laisse faire ça, des programmes qui s&#x27;installent et qui foutent le bordel sur mon ordi ? Et justement, Microsoft, ils ont une certification pour ça. Pas une certification que les gens peuvent passer, mais une certification logicielle qui s&#x27;appelle le WHQL pour Windows High Quality Labs, qui est en gros un laboratoire chez Microsoft qui va prendre ton programme, ton kernel driver, et il va l&#x27;inspecter, ils vont le tester, ils vont faire toute une tas de panoplies de tests</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console active.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale du contexte du bug sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:41 - 00:03:10</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">pour s&#x27;assurer que ton programme est solide, il marche bien, il bugge pas, il crache pas, dans toutes les conditions. Une fois que ça s&#x27;est validé, ils vont le certifier, ils vont donner un certificat, qui fait que les gens vont avoir le droit de l&#x27;installer sur sa machine parce que c&#x27;est un programme qui est validé par Microsoft. Le problème c&#x27;est que les malwares, les virus, etc. il y en a des nouveaux tous les jours. Et donc si à chaque fois qu&#x27;il y a des nouveaux malwares, il faut repasser à travers tout le processus de certification Microsoft qui prend je sais pas combien de temps, mais bon même s&#x27;il prend une semaine ou deux, ça veut dire que c&#x27;est à chaque fois une semaine ou deux avec des menaces qui sont existantes et auxquelles on peut pas répondre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console technique affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible (présence uniquement d&#x27;un texte explicatif sur la sécurité).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur le processus de validation de programmes et de certification par Microsoft.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:10 - 00:03:28</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc pour pouvoir répondre plus rapidement aux menaces aux nouveaux virus qui arrivent, ce que CrowdStrike a fait, c&#x27;est qu&#x27;ils ont leur kernel driver d&#x27;un côté qui a été validé par Microsoft au moment où il l&#x27;a envoyé. Mais ce kernel driver là, il va utiliser des fichiers de configuration. Et c&#x27;est ces fichiers de configuration là, qui vont contenir les nouvelles techniques de détection des nouveaux malwares, qui vont être mis à jour.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:29 - 00:03:48</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme ça, on n&#x27;a pas besoin de mettre à jour le driver si souvent que ça. On va juste mettre à jour les fichiers de configuration entre guillemets. Et le fameux fichier channel 291, blablabla, c&#x27;était justement un de ces fameux fichiers de configuration. Et c&#x27;est pour ça que quand on rebootait en mode sans échec et qu&#x27;on efface ce fichier, et bien là, comme par magie, tout se remettait à fonctionner.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console active n&#x27;est visible (simple incrustation textuelle sur l&#x27;image 1).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Mention textuelle du fichier système &#x27;CHANNEL00000291.sys&#x27;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;architecture des fichiers de configuration et des pilotes système (pas de manipulation technique filmée).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:48 - 00:04:08</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc maintenant qu&#x27;on comprend comment ça fonctionne, qu&#x27;est-ce qui a mal allé ? C&#x27;était quoi le problème ? Donc ils ont fait un rapport de 10 pages qui explique un petit peu en détail ce qui s&#x27;est passé. Et je passe à travers comme ça, t&#x27;as pas besoin. Et ce que ça dit, c&#x27;est que l&#x27;erreur de base, c&#x27;est que ces fameux fichiers de configuration, il y a un endroit où il donnait 21 champs différents à vérifier, sauf que le kernel driver en lui-même, il donnait juste 20 éléments.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Document PDF (Rapport d&#x27;incident CrowdStrike avec pages 6 et 9 visibles).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte technique décrivant le fonctionnement des pilotes en mode noyau Windows (kernel mode), la certification WHQL et l&#x27;analyse de crash dump (`PAGE_FAULT_IN_NONPAGED_AREA`).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et analyse détaillée du rapport d&#x27;incident post-mortem publié par CrowdStrike suite à la panne mondiale.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000353_seg11.jpg" alt="Extrait du rapport d&#x27;incident de CrowdStrike détaillant l&#x27;analyse du crash dump et les spécifications techniques des pilotes noyau." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000353_seg11.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:53</span>
+                        <span class="caption-text">Extrait du rapport d&#x27;incident de CrowdStrike détaillant l&#x27;analyse du crash dump et les spécifications techniques des pilotes noyau.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:08 - 00:04:28</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ce qui se passait, c&#x27;est que le programme, il allait vérifier chacun des éléments, 1, 2, 3, 4, 5, 6, jusqu&#x27;à 20. Et quand il arrivait pour vérifier l&#x27;événement numéro 21, et comme il n&#x27;existait pas, ça déclenche une out of bound error, C&#x27;est-à-dire que ton programme, il essaie d&#x27;aller lire un espace en mémoire qui n&#x27;existe pas, qui fait pas de sens. Et quand ça, ça arrive, le programme crache. Comme le programme est un kernel driver intégré à Windows, Windows crache.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts techniques (erreur de dépassement de mémoire / out of bounds error).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:28 - 00:04:49</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et comme c&#x27;est un bootstart driver, Windows peut jamais redémarrer. Ce qui est intéressant, les détails qu&#x27;il donne, c&#x27;est que ce bug, en fait, il est dans CrowdStrike depuis février-mars. Mais il n&#x27;avait encore jamais été déclenché. Il a passé inaperçu pendant tout ce temps-là. Parce qu&#x27;avant ça, dans ce fichier, le champ numéro 21, c&#x27;était tout le temps un wildcard. Donc c&#x27;est un caractère spécial qui est un petit peu comme un joker qui veut dire « pour ce champ-là, n&#x27;importe quoi, ça ira ».</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du bug CrowdStrike par le présentateur (face-caméra).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:49 - 00:05:10</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce qui fait que probablement ce qui s&#x27;est passé, le programme, il vérifiait les champs de 1 à 20 et pour le champ numéro 21, comme il y avait un wildcard dedans, il vérifiait pas. Il essayait pas d&#x27;aller vérifier parce que de toute manière, c&#x27;est censé matcher avec n&#x27;importe quoi. Comme le champ 21, c&#x27;était tout le temps un wildcard dans leur test, et bah ils ont jamais vu le bug. Et c&#x27;est seulement le 19 juin, dans une nouvelle nouvelle nouvelle mise à jour, que là cette fois-ci, le champ, c&#x27;était pas un wildcard, c&#x27;était une valeur n&#x27;importe laquelle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:10 - 00:05:28</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et donc là comme on essaie de chercher cette valeur là, boum ça fait tout cracher. Donc là ça veut dire que ça soulève pas mal de problèmes parce qu&#x27;il y a pas mal de choses qui auraient pu être faites pour pouvoir empêcher ça. La première chose c&#x27;est de ne jamais générer un fichier de config qui va comporter plus de champs que ce que le programme peut vérifier. Donc ça c&#x27;est une des premières choses qu&#x27;ils ont fixées et qu&#x27;ils expliquent dans leur rapport.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le présentateur sur les erreurs de configuration et la gestion des fichiers de configuration.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:28 - 00:05:48</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est qu&#x27;à la compilation du programme, ils vont vraiment vérifier que pour tous les fichiers de configuration, les nombres de colonnes, le nombre d&#x27;événements à regarder correspond au nombre d&#x27;événements qui existent vraiment sur la machine dans le kernel driver. La deuxième chose qui est problématique, c&#x27;est que même si le fichier de config donne plus de champs à vérifier, le programme n&#x27;aurait jamais dû aller essayer d&#x27;aller accéder à une valeur qui n&#x27;existe pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:49 - 00:06:13</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça, c&#x27;est la deuxième chose aussi qu&#x27;ils ont corrigé, c&#x27;est de faire en sorte que leur programme, à cet endroit-là en particulier, mais aussi ailleurs dans le programme, c&#x27;est de faire en sorte que quand on a par exemple un tableau de 20 éléments, qu&#x27;on n&#x27;essaie pas d&#x27;accéder au 21e élément, parce que ça ne fait pas de sens, c&#x27;est ça qui cause ce type d&#x27;erreur-là. Et ça, c&#x27;est un type d&#x27;erreur qui est quand même assez fréquent quand on fait de la programmation en bas niveau, en C++. Comme c&#x27;est un langage bas niveau, c&#x27;est vraiment nous qui avons la responsabilité de devoir fermer ce qu&#x27;on a ouvert, vérifier que ce qu&#x27;on ouvre existe bien, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:13 - 00:06:33</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça c&#x27;est probablement quelque chose qui est vérifié la plupart du temps, mais comme un programme c&#x27;est quelque chose qui est dynamique ou quelque chose où on va tout le temps faire des modifications, corriger des bugs, rajouter des fonctionnalités, et donc du coup comme l&#x27;erreur est humaine, toujours un moment ou un endroit où on peut oublier de faire cette vérification, et du coup ça cause des crashs. Donc ils ont fixé ça particulièrement à ce endroit là. Ils ont aussi fait ce qu&#x27;on appelle du fuzzing.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:33 - 00:06:57</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et le fusing, c&#x27;est prendre un programme ou une fonction et lui envoyer un petit peu n&#x27;importe quoi. Soit des entrées qu&#x27;on va faire exprès d&#x27;être mauvaises, soit lui donner des valeurs aléatoires. Mais en gros, on va faire en sorte d&#x27;essayer de tout péter. Et c&#x27;est ce qu&#x27;ils ont fait avec ce fichier Channel 291. Ils ont essayé de mettre plein de trucs, n&#x27;importe quoi dedans, et essayer de voir comment se comporte le programme, pour faire en sorte que, quelles que soient les conneries que peut y avoir dans ce fichier de config-là, que ça ne fasse pas cracher le programme principal.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:57 - 00:07:21</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, ils l&#x27;ont fait pour ce fichier-là en particulier. Ils expliquent qu&#x27;ils sont en cours de le faire pour tous les autres Channel 5, parce qu&#x27;on imagine bien que si c&#x27;est Channel 5 numéro 291, il y en a quelques centaines d&#x27;autres à checker. Troisième gros problème dans cette histoire, c&#x27;est peut-être même un des premiers trucs auxquels on pense, on se dit mais comment c&#x27;est possible, ils n&#x27;ont pas testé ? Et en fait, si, il y a plein de tests qui sont faits à plein de niveaux, même des tests performants, des choses comme ça, mais il se trouve que ce problème-là en particulier n&#x27;a jamais été testé.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Document PDF / Rapport d&#x27;analyse technique CrowdStrike.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte technique listant les points &quot;3. Template Type testing should cover a wider variety of matching criteria&quot;, &quot;4. The Content Validator contained a logic error&quot;, et &quot;5. Template Instance validation should expand to include testing within the Content Interpreter&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et explication du rapport de root cause de CrowdStrike concernant la validation des fichiers de template et les correctifs apportés.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000715_seg20.jpg" alt="Extrait du rapport technique CrowdStrike (pages 4 et 5) détaillant les conclusions (Findings) et mesures d&#x27;atténuation (Mitigation) concernant les erreurs de validation de contenu et de test des Template Types." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_000715_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:15</span>
+                        <span class="caption-text">Extrait du rapport technique CrowdStrike (pages 4 et 5) détaillant les conclusions (Findings) et mesures d&#x27;atténuation (Mitigation) concernant les erreurs de validation de contenu et de test des Template Types.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:21 - 00:07:44</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est quand même balou parce que ça veut dire qu&#x27;ils n&#x27;ont pas ce qu&#x27;on appelle de end-to-end testing, c&#x27;est-à-dire un test qui va simplement prendre une machine, installer, cross-throw dessus, jouer un peu avec, faire quelques petites modifications, des trucs comme ça, et puis vérifier que juste ça fonctionne. C&#x27;est-à-dire que probablement qu&#x27;ils testent certaines fonctionnalités de manière isolée, mais ils ne testent pas globalement le programme. C&#x27;est peut-être quelque chose qui est aussi très compliqué à faire parce que c&#x27;est un carline driver, ce n&#x27;est pas non plus une calculatrice.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console technique affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur l&#x27;absence de tests end-to-end (E2E).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:44 - 00:08:04</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Apparemment, dans leur batterie de test, ils testent en interne, c&#x27;est-à-dire que toutes les personnes qui travaillent dans cette entreprise-là, ils testent les nouvelles versions, et ensuite ils ont un autre petit groupe de bêta-testeurs pour pouvoir vérifier que les nouvelles versions fonctionnent correctement. Ça c&#x27;est quelque chose que je trouve quand même un petit peu bizarre, ou du moins je trouve que c&#x27;est dommage que ça n&#x27;a pas été expliqué dans le document.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:04 - 00:08:25</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est pourquoi est-ce qu&#x27;un problème aussi facile à détecter, entre guillemets, qui est passé à travers toute leur couche de différents tests. Ça, ça aurait été intéressant à savoir, parce que clairement il y a un problème dans tout le processus de test. Probablement que ce qui s&#x27;est passé, c&#x27;est qu&#x27;ils considéraient peut-être pas vraiment ça comme du code, parce que c&#x27;était entre guillemets juste un fichier de configuration.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale sur les processus de test et la détection de bogues informatiques.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:25 - 00:08:46</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">donc ils l&#x27;ont testé au départ quand ils ont ajouté cette nouvelle fonctionnalité en février mars. Pour le coup tout fonctionnait bien parce que la valeur numéro 21 avait un wildcard dedans et ils n&#x27;ont jamais vraiment retesté avec les nouvelles versions des fichiers de configuration. Donc clairement ça veut dire qu&#x27;il y a un problème au niveau de la chaîne de test, la chaîne de qualité du programme. Donc évidemment ils expliquent qu&#x27;ils ont rajouté plein de batteries test pour plus que ça arrive.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:46 - 00:09:15</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils ont également embauché deux entreprises de sécurité externes pour pouvoir à la fois vérifier le code qu&#x27;il n&#x27;y ait pas de ce type d&#x27;erreur là ailleurs dans le code parce que c&#x27;est quand même une erreur fréquente qui peut arriver ailleurs, et aussi pour pouvoir regarder tout leur processus de test pour pouvoir voir où est arrivé le problème et le fixer. Le problème un petit peu avec ce genre d&#x27;audit, c&#x27;est que oui, ils vont peut-être trouver le problème à ce moment-là, mais comme dans le développement logiciel, on est toujours en train d&#x27;ajouter des nouvelles fonctionnalités, corriger des bugs, faire plein de modifications tout le temps, tout le temps, ça, c&#x27;est des problèmes qui vont revenir de manière constante.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:15 - 00:09:38</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le faire un audit à un instant T, ça peut trouver des problèmes, d&#x27;autres problèmes qui n&#x27;ont pas encore forcément été trouvés, mais c&#x27;est pas forcément une solution long terme. Donc c&#x27;est pour ça qu&#x27;il faut corriger et améliorer le processus de test au maximum pour pouvoir attraper ces erreurs parce que c&#x27;est sûr et certain qu&#x27;elles vont revenir. Un autre problème, ou plutôt quelque chose qui aurait pu être mis en place pour pouvoir éviter ce type de problème, c&#x27;est ce qu&#x27;on appelle un déploiement en canaries, ou du stage déploiement.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:38 - 00:09:58</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ce nom, déploiement en canaries, ça vient vraiment du petit canary, le petit canard jaune. En gros, à l&#x27;époque, dans les mines, on savait pas trop comment mesurer le niveau d&#x27;oxygène et quand l&#x27;oxygène devenait trop bas, les mineurs s&#x27;en rendaient pas compte avant que ça soit trop tard et personne n&#x27;avait le temps de ressortir et c&#x27;était une catastrophe. Donc ce qu&#x27;ils ont commencé à faire, c&#x27;est d&#x27;emmener avec eux dans les mines des petits canaris, des tout petits canards jeunes. Et ces canaris, ils font tout le temps du bruit.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou console visible (illustrations historiques uniquement).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucune commande, code, architecture ou métrique technique affichée.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration historique du concept de déploiement en canari (origine du terme avec les mineurs et les canaris dans les mines).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:58 - 00:10:19</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils sont là, tip, tip, tip, tip, tip. Et la particularité de ces canaris, en plus de jamais se taire, c&#x27;est qu&#x27;ils sont plus sensibles que les humains aux baisses de niveaux d&#x27;oxygène. Et donc quand l&#x27;oxygène va descendre en dessous d&#x27;un certain niveau, le canari va commencer à fermer sa bouche un petit peu parce qu&#x27;il est mort. Et donc les mineurs, quand ils n&#x27;entendent plus le canari en train de brailler, ça veut dire qu&#x27;il n&#x27;y a plus d&#x27;oxygène et qu&#x27;il faut se barrer.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication du concept de déploiement &quot;canary&quot; par analogie historique avec les mineurs et les canaris dans les mines.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:19 - 00:10:38</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc, c&#x27;est ballot pour le canari, mais au moins, tout le monde a pu ressortir sain et sauf. Donc là, c&#x27;est le même principe, sauf qu&#x27;on n&#x27;a pas besoin de tuer des petits canaris. C&#x27;est qu&#x27;on va faire notre déploiement en petits morceaux. Donc, quand on a une nouvelle version de notre logiciel, au lieu de le déployer à tout le monde d&#x27;un coup, on va le déployer une petite partie. Par exemple, juste 1% des utilisateurs. Et ces 1%, ça va être notre fameux canari.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:38 - 00:11:01</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On va mesurer comment se passe ces 1%. Est-ce qu&#x27;il y a plus de crash que d&#x27;habitude ? Est-ce qu&#x27;ils sont plus lents ? Et si toutes ces valeurs-là sont normales, c&#x27;est-à-dire comme d&#x27;habitude, on va continuer le développement, on va déployer à 10%. Et à 10%, pareil, on va mesurer, voir si tout se passe bien, et on va attendre encore un petit peu plus de temps pour pouvoir le déployer peut-être à 50% et ensuite à 100%.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:01 - 00:11:21</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">De cette manière, si jamais il y a un problème, on va le voir assez rapidement. Si jamais c&#x27;est un problème qui affecte par exemple une machine sur 1000, là c&#x27;est quelque chose qu&#x27;on n&#x27;aurait peut-être pas vu en déployant juste à 1% des machines, parce que ça ne fait juste pas assez de machines. Donc quand on fait la deuxième partie du développement à 10% par exemple, là il y a beaucoup plus de machines. Donc on a beaucoup plus d&#x27;échantillons pour pouvoir voir si jamais ça cause des problèmes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou outil DevOps visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration, commande ou métrique affiché à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur concernant les stratégies de déploiement et la gestion des pannes sur un grand nombre de machines.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:22 - 00:11:44</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">À chaque étape, on attend un petit peu plus longtemps. Comme ça, s&#x27;il y a des problèmes qui prennent un peu plus de temps à arriver, on peut les attraper aussi. Et donc avec cette technique, ça permet d&#x27;empêcher l&#x27;étendue du problème comme on a vu avec CrowdStrike. C&#x27;est quelque chose qu&#x27;ils ont aussi mis en place pour pouvoir éviter dans l&#x27;avenir ces problèmes-là. Ils ont aussi fait en sorte que les clients de CrowdStrike, donc les administrateurs système en gros, puissent pouvoir mieux paramétrer à quel moment sont faits les mises à jour.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Document texte / rapport technique officiel au format PDF ou web.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte technique décrivant la mise en place de procédures de test et d&#x27;un déploiement progressif (staged rollout) pour les Template Instances afin d&#x27;éviter les pannes système.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la mise en place de politiques de déploiement par anneaux progressifs pour contrer les régressions similaires à l&#x27;incident CrowdStrike.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001133_seg32.jpg" alt="Extrait de document officiel de CrowdStrike détaillant les mesures d&#x27;atténuation et la nécessité d&#x27;un déploiement par étapes (staged deployment / anneaux de déploiement)." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001133_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:33</span>
+                        <span class="caption-text">Extrait de document officiel de CrowdStrike détaillant les mesures d&#x27;atténuation et la nécessité d&#x27;un déploiement par étapes (staged deployment / anneaux de déploiement).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:44 - 00:12:08</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que là, en gros, toutes les mises à jour ont été faites instantanément à tout le monde et les administrateurs de système n&#x27;avaient pas forcément assez de contrôle pour pouvoir choisir quand est-ce qu&#x27;ils font des mises à jour. Donc là, maintenant, tu peux choisir si tu préfères attendre un peu avant d&#x27;avoir les toutes dernières mises à jour. Comme ça, tu es peut-être un petit peu moins protégé, mais au moins, tu as le temps de voir venir si jamais il y a un gros problème. Et le dernier problème que ça soulève, qui est un petit peu plus global, qui dépasse peut-être un petit peu CrowdStrike, c&#x27;est est-ce qu&#x27;on a vraiment besoin de kernel driver ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts d&#x27;administration système et de gestion des mises à jour.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:08 - 00:12:28</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que si on voit ce que ça peut causer, le fait que ça peut cracher des machines, les empêcher de rebooter, et qu&#x27;encore pire que ça, un kernel driver, CrowdStrike Falcon, c&#x27;est un programme qui est close source. Donc c&#x27;est-à-dire qu&#x27;on ne sait pas ce qu&#x27;il fait. Il peut y avoir n&#x27;importe quoi dedans, même si CrowdStrike est de bonne volonté. Peut-être qu&#x27;il y a un employé qui est malveillant, peut-être qu&#x27;ils se sont fait hacker et qu&#x27;ils ne le savent pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les risques liés aux pilotes de noyau (kernel drivers) propriétaires et les pannes système.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:28 - 00:12:46</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tu vois, il peut se passer un mille heures de trucs qui font que sur mon ordi, j&#x27;ai un truc qui tourne avec plus de privilèges que moi-même, qui est administrateur de ma machine, et qui peut faire n&#x27;importe quoi sur ma machine. Donc d&#x27;un point de vue sécurité, c&#x27;est un petit peu un truc qui est abusé. Parce qu&#x27;on peut se dire que, par exemple, pour un logiciel antivirus, peut-être ça peut faire du sens, qu&#x27;il ait des accès un peu privilégiés, ces choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console technique visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les risques de sécurité liés aux privilèges administrateur des processus en arrière-plan.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:47 - 00:13:11</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais un autre type d&#x27;application qu&#x27;utilisent beaucoup les kernel drivers, c&#x27;est les anti-cheats. Par exemple, quand tu installes Valorant sur ton ordi, qui est un jeu en ligne, ça installe aussi un programme qui s&#x27;appelle Vanguard et qui est un kernel driver. C&#x27;est pour ça que tu as besoin de rebooter ton ordi quand tu installes Valorant. Et pour ça, on se dit, est-ce que vraiment pour pouvoir jouer à un jeu en ligne, j&#x27;ai besoin d&#x27;avoir un bout de programme qui tourne dont j&#x27;ai aucune idée de ce qu&#x27;il fait, qui tourne avec des privilèges maximum sur mon ordi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console active visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur le fonctionnement des anti-cheats fonctionnant en mode kernel, comme Vanguard pour Valorant.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:11 - 00:13:31</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, ça vaut peut-être beaucoup moins le coup. Donc ça soulève vraiment cette question de est-ce que c&#x27;est vraiment nécessaire qu&#x27;on ait ce type de programme sur nos ordi ? Et dans le rapport, ils en parlent un petit peu. Ils expliquent que justement, Windows a commencé petit à petit à mettre certaines des fonctionnalités qui sont disponibles juste pour les drivers à les rendre disponibles dans le userland.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique ou graphique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le présentateur sur la nécessité des programmes et l&#x27;évolution de Windows.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:31 - 00:13:52</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Le userland, c&#x27;est l&#x27;endroit où roulent les programmes normaux comme Word, la calculatrice, Google Chrome, des choses comme ça. Et donc quand un programme roule dans le userland, il n&#x27;y a pas tous ces problèmes-là. S&#x27;il crache, c&#x27;est juste le programme qui crache, tu le redémarres et ça ne fout pas le bordel sur tout ton ordi. Ça n&#x27;empêche pas ton ordi de rebooter, etc. Donc CrowdStrike, ils ont commencé justement à utiliser ces fonctionnalités qui sont dans le user LAN pour les enlever de la partie kernel driver.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:52 - 00:14:16</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais il y a encore plein de fonctionnalités qui sont réservées juste au kernel driver. Donc ça, c&#x27;est quelque chose qui vraiment doit venir de Microsoft. Si jamais ils décident que, ok, bon, maintenant on a compris, les kernel drivers, c&#x27;est un petit peu abusé, il faut que toutes les fonctionnalités qui sont en ce moment disponibles pour les kernel drivers soit disponible dans le user-lane. Et c&#x27;est d&#x27;ailleurs ce qu&#x27;a fait Apple avec macOS. Depuis 2019, ils ont apprécié et même enlevé la plupart des fonctionnalités qui étaient dans les kernels drivers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:16 - 00:14:35</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça s&#x27;appelle les kernels extensions sur macOS. Et ils les ont remplacés par ce qu&#x27;ils appellent des systèmes extensions. Et les systèmes extensions, elles tournent dans le user-lane. Donc, c&#x27;est quelque chose qui est possible. C&#x27;est juste qu&#x27;il faut que Microsoft s&#x27;y mette un petit peu. Ce qui est intéressant avec ce type de problème, c&#x27;est que ça permet d&#x27;apprendre comment les choses fonctionnent. Et c&#x27;est pour ça que j&#x27;aime bien le sponsor d&#x27;aujourd&#x27;hui Brilliant. Je kiffe parce que c&#x27;est visuel et interactif.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou console visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur le fonctionnement des extensions de noyau (kernel extensions) et system extensions sur macOS sans support visuel technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:35 - 00:14:54</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et pour moi c&#x27;est ça la meilleure façon d&#x27;apprendre. Il y a plein de sujets à découvrir comme par exemple les bases de la programmation en Python, les réseaux de neurones ou les modèles de langage ou plein d&#x27;autres. Et moi j&#x27;ai particulièrement aimé la leçon sur les réseaux de neurones parce que c&#x27;est un sujet qui est assez vague et qui n&#x27;est jamais vraiment expliqué en détail sur comment est-ce qu&#x27;une machine fait pour apprendre ou pour détecter des images par exemple.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface graphique mobile / application ludo-éducative de programmation et d&#x27;apprentissage des concepts d&#x27;intelligence artificielle.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Blocs logiques séquentiels (&#x27;move forward&#x27;, &#x27;turn right&#x27;) et schéma visuel d&#x27;un réseau de neurones multicouche traitant une grille de pixels.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication pédagogique des concepts fondamentaux de la programmation et des réseaux de neurones à l&#x27;aide d&#x27;exemples visuels interactifs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001440_seg41.jpg" alt="Illustration conceptuelle &#x27;Thinking in Code&#x27; montrant un smartphone avec des blocs d&#x27;instructions séquentiels pour guider un véhicule sur une carte." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001440_seg41.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:40</span>
+                        <span class="caption-text">Illustration conceptuelle &#x27;Thinking in Code&#x27; montrant un smartphone avec des blocs d&#x27;instructions séquentiels pour guider un véhicule sur une carte.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001449_seg41.jpg" alt="Présentation d&#x27;une interface mobile sur fond bleu illustrant le fonctionnement des réseaux de neurones (Neural Networks) pour la reconnaissance de formes." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001449_seg41.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:49</span>
+                        <span class="caption-text">Présentation d&#x27;une interface mobile sur fond bleu illustrant le fonctionnement des réseaux de neurones (Neural Networks) pour la reconnaissance de formes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:54 - 00:15:13</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et même si ce n&#x27;est pas quelque chose qui va forcément me servir dans la vie de tous les jours, à mon avis le plus de sujets tu explores, le plus ça habitue ton cerveau à résoudre des problèmes de plus en plus difficiles. Si comme moi tu aimes bien comprendre comment le monde fonctionne, tu peux essayer gratuitement en allant sur brilliant.org.coqadmin, dans le lien dans la description, ou même en scannant ce QR code avec ton téléphone. Et si ça te plaît, ça te donnera droit à 20% de réduction sur ton abonnement annuel.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web ludo-éducative (Brilliant.org) avec éléments graphiques interactifs (curseurs, masses, diagrammes de physique).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Problème de physique interactif titré &quot;Center of Mass&quot; avec des masses m1 (6) et m2 (2).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;un exercice de résolution de problème logique/scientifique pour stimuler la réflexion algorithmique et analytique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001459_seg42.jpg" alt="Schéma interactif de physique illustrant le calcul du centre de masse avec un système de poids suspendus (plateforme Brilliant.org)." loading="lazy" onclick="openLightbox('../screenshots/9qaRqO3GPTs/9qaRqO3GPTs_001459_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:59</span>
+                        <span class="caption-text">Schéma interactif de physique illustrant le calcul du centre de masse avec un système de poids suspendus (plateforme Brilliant.org).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:13 - 00:15:22</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc voilà, maintenant tu sais tout ce qui s&#x27;est passé, comment, pourquoi, et qu&#x27;est-ce qu&#x27;il reste à faire. Et c&#x27;est la fin du rapport, donc si tu aimes ce style de vidéo, je te recommande d&#x27;aller voir celle-là, et on se voit dans la prochaine.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur conclut la vidéo en s&#x27;adressant directement à l&#x27;audience (face-caméra).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
