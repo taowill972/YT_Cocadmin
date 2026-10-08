@@ -25,7 +25,8 @@
     "KTaLHOMydoM",
     "mdxKBz5QUTo",
     "080p5Y2_wpg",
-    "nmUBSX6BEak"
+    "nmUBSX6BEak",
+    "SXv9JCCUqXQ"
   ],
   "processed_videos": [
     {
@@ -339,6 +340,18 @@
       "screenshots_count": 0,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "SXv9JCCUqXQ",
+      "title": "Comment faire une infra prête pour la prod",
+      "upload_date": "20250126",
+      "duration": 714,
+      "duration_str": "00:11:54",
+      "md_file": "YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 14,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -485,8 +498,8 @@
     "MAPbo8cNkJ8",
     "4jlPZtc17l8"
   ],
-  "last_run_timestamp": "2026-10-07T12:55:13Z",
-  "completed_count": 26,
+  "last_run_timestamp": "2026-10-08T00:17:10Z",
+  "completed_count": 27,
   "total_catalog_count": 142,
   "status": "ready"
 }

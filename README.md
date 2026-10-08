@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `26 / 142` (`18.3%`)
+- **Vidéos traitées** : `27 / 142` (`19.0%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -45,6 +45,7 @@
 | 2025-06-03 | [mdxKBz5QUTo](https://www.youtube.com/watch?v=mdxKBz5QUTo) | **Le minimum de réseau à savoir pour un Dev** | [2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-06-03_YT-[mdxKBz5QUTo]_Le minimum de réseau à savoir pour un Dev_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `36` |
 | 2025-05-03 | [080p5Y2_wpg](https://www.youtube.com/watch?v=080p5Y2_wpg) | **Les 7 bases de données à connaître pour pas passer pour un con** | [2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-05-03_YT-[080p5Y2_wpg]_Les 7 bases de données à connaître pour pas passer pour un con_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
 | 2025-04-20 | [nmUBSX6BEak](https://www.youtube.com/watch?v=nmUBSX6BEak) | **Ya juste 6 concepts pour tout comprendre au DevOps.** | [2025-04-20_YT-[nmUBSX6BEak]_Ya juste 6 concepts pour tout comprendre au DevOps._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-04-20_YT-[nmUBSX6BEak]_Ya juste 6 concepts pour tout comprendre au DevOps._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-04-20_YT-[nmUBSX6BEak]_Ya juste 6 concepts pour tout comprendre au DevOps._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `0` |
+| 2025-01-26 | [SXv9JCCUqXQ](https://www.youtube.com/watch?v=SXv9JCCUqXQ) | **Comment faire une infra prête pour la prod** | [2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `14` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
