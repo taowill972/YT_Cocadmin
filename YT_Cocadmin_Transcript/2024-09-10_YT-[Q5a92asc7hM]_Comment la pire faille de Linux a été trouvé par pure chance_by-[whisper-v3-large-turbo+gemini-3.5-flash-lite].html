@@ -1,0 +1,2625 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment la pire faille de Linux a été trouvé par pure chance ? — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">Comment la pire faille de Linux a été trouvé par pure chance ?</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=Q5a92asc7hM" target="_blank">Lien YouTube (<code>Q5a92asc7hM</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2024-09-10</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:23:38</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Cette affaire met en lumière l'une des attaques de supply chain (chaîne d'approvisionnement logicielle) les plus sophistiquées et redoutables de l'histoire de l'écosystème Open Source Linux. Par un concours de circonstances purement fortuit, un développeur enquêtant sur une surconsommation CPU minime de son serveur SSH a mis au jour une porte dérobée (backdoor) critique infiltrée au cœur de la bibliothèque de compression `XZ` (anciennement `LibLZMA`). Cette faille n'était pas un simple bug de code, mais le fruit d'une opération d'ingénierie sociale menée sur plusieurs années par un acteur malveillant (se faisant passer pour plusieurs intervenants sous les pseudonymes de Denis, Kumar et Jia). Ce groupe de pression a méthodiquement harcelé et discrédité le mainteneur historique du projet, Las Collins, jusqu'à l'épuisement, pour obtenir des privilèges de co-maintenance et injecter du code malveillant de manière insidieuse.<br><br>L'impact opérationnel pour les administrateurs systèmes, les ingénieurs DevOps et les équipes de sécurité est monumental. La bibliothèque compromise n'était pas directement ciblée dans les applications finales grand public, mais insérée de manière transitive via des dépendances critiques telles que `systemd`, qui l'utilise pour la gestion et la compression des journaux (logs). Par effet domino, les démons SSH de nombreuses distributions Linux majeures se sont retrouvés compromis au moment de la compilation de leurs paquets, ouvrant potentiellement un accès distant non authentique à l'échelle mondiale. Le vecteur d'attaque contournait totalement les revues de code traditionnelles de GitHub en masquant la charge utile (payload) malveillante non pas dans le dépôt source public, mais uniquement dans les archives de publication (*tarballs* de *release*) générées pour la compilation, combinée à des scripts de test obfusqués.<br><br>Cette cyberattaque démontre la fragilité structurelle de l'écosystème open source, souvent reposant sur le bénévolat exténué d'un unique mainteneur non rémunéré. Pour les professionnels du cloud et des infrastructures, elle redéfinit radicalement la posture de sécurité : la confiance aveugle envers les dépendances logicielles en amont n'est plus permise. Elle impose une refonte des processus de validation des paquets, l'intégration d'analyses comportementales au runtime (comme l'audit de l'utilisation CPU et mémoire des daemons système), et une vigilance accrue lors de l'intégration de bibliothèques tierces dans les chaînes d'intégration et de livraison continues (CI/CD).<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **XZ / LibLZMA** : Bibliothèque logicielle open source de compression et de décompression de données hautement performante, largement adoptée par l'ensemble des distributions Linux.<br>* **SSH (Secure Shell)** : Protocole et service réseau standard de l'industrie permettant l'administration et la connexion à distance sécurisée aux serveurs.<br>* **Systemd** : Suite logicielle de gestion du système et des services pour Linux, intégrant de manière transitive des dépendances de compression comme `XZ` pour la gestion des logs.<br>* **7-Zip** : Logiciel d'archivage populaire (originellement sous interface graphique Windows) ayant popularisé l'adoption du format de compression LZMA.<br>* **GitHub** : Plateforme de collaboration et d'hébergement de code source utilisée pour le versioning et le suivi des tickets (*issues*) du projet compromis.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Vigilance face aux anomalies de performance** : Une surconsommation CPU infime (quelques millisecondes sur un démon critique comme SSH) doit être traitée comme un signal faible potentiel d'intrusion ou de compromis bas niveau.<br>* **Vulnérabilité humaine de l'Open Source** : L'é puisement et l'isolement des mainteneurs bénévoles constituent des vecteurs d'attaque privilégiés pour l'ingénierie sociale et la prise hostile de projets (*takeover*).<br>* **Attaques par usurpation d'identité multiple** : Le recours à de faux profils coordonnés pour harceler, culpabiliser et forcer la main d'un mainteneur légitime est une technique avancée de manipulation de communauté.<br>* **Divergence entre Code Source et Archives de Release** : Un attaquant redoutable n'injecte pas son code dans les branches publiques visibles, mais directement dans les paquets de distribution (*tarballs*) compilés pour le grand public.<br>* **Dépendances transitives invisibles** : Une bibliothèque de compression apparemment anodine peut se retrouver embarquée au cœur de composants critiques du système d'exploitation (`systemd`, SSH), démultipliant la surface d'attaque.<br>* **Patience stratégique des attaquants (Long Game)** : Accepter de contribuer de manière légitime pendant des années pour accumuler du capital de confiance avant d'introduire le moindre code malveillant démontre un niveau de menace étatique ou APT.<br>* **Obfuscation par expressions régulières (Regex)** : L'utilisation de scripts de modification de fichiers de test complexes et obscurs permet de masquer l'injection initiale de charges malveillantes sous couvert d'opérations de maintenance routinières.<br>* **Nécessité du SBOM (Software Bill of Materials)** : Pour tout ingénieur DevOps, cartographier précisément l'ensemble des dépendances directes et indirectes (transitives) d'une image ou d'un serveur est désormais une obligation de conformité et de sécurité.<br>* **Remise en question de la confiance aveugle aux paquets amont** : Ne jamais supposer qu'un paquet officiel issu d'une distribution ou d'un dépôt tiers est intègre sans validation cryptographique stricte et audits indépendants.<br>* **Urgence de la durabilité financière de l'Open Source** : Les entreprises tirant profit de milliards de dollars d'infrastructure basée sur des briques logicielles bénévoles doivent financer et auditer activement ces fondations critiques.
+            <div class="tools-badges-cloud"><span class="tool-tag">XZ / LibLZMA</span><span class="tool-tag">SSH (Secure Shell)</span><span class="tool-tag">Systemd</span><span class="tool-tag">7-Zip</span><span class="tool-tag">GitHub</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Vigilance face aux anomalies de performance** : Une surconsommation CPU infime (quelques millisecondes sur un démon critique comme SSH) doit être traitée comme un signal faible potentiel d&#x27;intrusion ou de compromis bas niveau.</span></li><li><span class="point-bullet">✦</span><span>Vulnérabilité humaine de l&#x27;Open Source** : L&#x27;é puisement et l&#x27;isolement des mainteneurs bénévoles constituent des vecteurs d&#x27;attaque privilégiés pour l&#x27;ingénierie sociale et la prise hostile de projets (*takeover*).</span></li><li><span class="point-bullet">✦</span><span>Attaques par usurpation d&#x27;identité multiple** : Le recours à de faux profils coordonnés pour harceler, culpabiliser et forcer la main d&#x27;un mainteneur légitime est une technique avancée de manipulation de communauté.</span></li><li><span class="point-bullet">✦</span><span>Divergence entre Code Source et Archives de Release** : Un attaquant redoutable n&#x27;injecte pas son code dans les branches publiques visibles, mais directement dans les paquets de distribution (*tarballs*) compilés pour le grand public.</span></li><li><span class="point-bullet">✦</span><span>Dépendances transitives invisibles** : Une bibliothèque de compression apparemment anodine peut se retrouver embarquée au cœur de composants critiques du système d&#x27;exploitation (`systemd`, SSH), démultipliant la surface d&#x27;attaque.</span></li><li><span class="point-bullet">✦</span><span>Patience stratégique des attaquants (Long Game)** : Accepter de contribuer de manière légitime pendant des années pour accumuler du capital de confiance avant d&#x27;introduire le moindre code malveillant démontre un niveau de menace étatique ou APT.</span></li><li><span class="point-bullet">✦</span><span>Obfuscation par expressions régulières (Regex)** : L&#x27;utilisation de scripts de modification de fichiers de test complexes et obscurs permet de masquer l&#x27;injection initiale de charges malveillantes sous couvert d&#x27;opérations de maintenance routinières.</span></li><li><span class="point-bullet">✦</span><span>Nécessité du SBOM (Software Bill of Materials)** : Pour tout ingénieur DevOps, cartographier précisément l&#x27;ensemble des dépendances directes et indirectes (transitives) d&#x27;une image ou d&#x27;un serveur est désormais une obligation de conformité et de sécurité.</span></li><li><span class="point-bullet">✦</span><span>Remise en question de la confiance aveugle aux paquets amont** : Ne jamais supposer qu&#x27;un paquet officiel issu d&#x27;une distribution ou d&#x27;un dépôt tiers est intègre sans validation cryptographique stricte et audits indépendants.</span></li><li><span class="point-bullet">✦</span><span>Urgence de la durabilité financière de l&#x27;Open Source** : Les entreprises tirant profit de milliards de dollars d&#x27;infrastructure basée sur des briques logicielles bénévoles doivent financer et auditer activement ces fondations critiques.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:26</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça c&#x27;est une des pires attaques de sécurité que j&#x27;ai jamais vu de toute ma vie. Et on l&#x27;a évité de juste test juste par hasard. Et donc j&#x27;ai passé ces derniers jours à éplucher un petit peu cette affaire pour comprendre comment il a fait et comment ça a pu arriver. En mars dernier, il y avait un développeur qui faisait des tests sur une base de données pour pouvoir savoir quelle version a été les plus performantes. Et pour faire ça, il voulait que tout le reste de sa machine consomme le moins de ressources possibles pour pouvoir voir vraiment les micro différences de performance sur sa base de données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Moniteur d&#x27;activité (Activity Monitor) de macOS.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Liste des processus système et utilisateurs (Virtual Machine Service, WindowServer, kernel_task, Activity Monitor, Terminal, etc.) avec l&#x27;utilisation CPU et mémoire associée.
+[DESC_IMAGE_1] Plan face-caméra sans support technique pertinent.
+[DESC_IMAGE_2] Vue de saisie au clavier sans affichage d&#x27;interface technique.
+[DESC_IMAGE_3] Visualisation des processus et de la charge système sur macOS.</p>
+                        <p><strong>Action / Démonstration :</strong> Surveillance et analyse des processus actifs sur le poste de travail pour identifier une activité suspecte ou mesurer la charge de la machine.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000019_seg1.jpg" alt="Capture d&#x27;écran d&#x27;un moniteur affichant le moniteur d&#x27;activité (Activity Monitor) sous macOS avec la liste des processus en cours d&#x27;exécution." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000019_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:19</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un moniteur affichant le moniteur d&#x27;activité (Activity Monitor) sous macOS avec la liste des processus en cours d&#x27;exécution.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:26 - 00:00:59</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là il remarque que son serveur SSH, qui est le protocole qui permet de se connecter à distance à sa machine, il consomme un petit peu de CPU. Pas beaucoup mais un petit peu plus que ce que ça devrait être. Et donc comme il est curieux il investigue et il fouille il fouille il passe toute la nuit à essayer de comprendre pourquoi est-ce que son serveur SSH il consomme 500 millisecondes de CPU en trop par rapport à d&#x27;habitude. Et donc il passe toute la nuit à essayer d&#x27;investiguer, débuguer, comprendre qu&#x27;est-ce qui se passe, si ça vraiment ça le rend malade. Jusqu&#x27;à ce qu&#x27;il découvre qu&#x27;il y a une backdoor donc un accès secret à sa machine mais pas seulement dans sa machine potentiellement dans toutes les machines et les serveurs qui utilisent Linux. Dans la fin des années 2000 il y a un</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web d&#x27;un client Mastodon affichant un tweet ou message textuel.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Publication d&#x27;AndresFreundTec détaillant le micro-benchmarking, l&#x27;utilisation anormale du CPU par sshd, le profilage montrant du temps CPU dans liblzma, et l&#x27;alerte Valgrind sur Postgres.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle de la source officielle de la découverte de la faille de sécurité (backdoor XZ Utils) par le développeur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000034_seg2.jpg" alt="Capture d&#x27;écran d&#x27;un message publié sur Mastodon par Andres Freund expliquant sa découverte d&#x27;une anomalie CPU dans sshd liée à liblzma." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000034_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:34</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un message publié sur Mastodon par Andres Freund expliquant sa découverte d&#x27;une anomalie CPU dans sshd liée à liblzma.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:59 - 00:01:31</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">nouveau format de compression qui vient d&#x27;arriver qui s&#x27;appelle le LZMA et qui est de plus en plus populaire parce qu&#x27;il est beaucoup plus performant que les anciens formats de compression, le zip, etc. Et ce format c&#x27;est le format XZ qui a été popularisé par le logiciel 7zip si vous avez utilisé à l&#x27;époque. Et donc 7zip c&#x27;était un logiciel en interface graphique principalement pour Windows. Et donc sur Linux il y a un développeur qui s&#x27;appelle Las Collins qui a développé une librairie pour que n&#x27;importe quel programme puisse compresser et décompresser des fichiers avec le format XZ et cette librairie va s&#x27;appeler LibLZMA puis ensuite LibXZ. Donc là,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts théoriques sur la compression LZMA et le format XZ par le présentateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:31 - 00:02:04</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">c&#x27;est un des fondateurs de ce projet, c&#x27;est celui qui va continuer pendant toutes ces années jusqu&#x27;à aujourd&#x27;hui même à contribuer à ce projet. C&#x27;est un projet open source, donc c&#x27;est à dire qu&#x27;il y a plein de gens qui peuvent contribuer, fixer des bugs, rajouter des fonctionnalités, etc. Mais c&#x27;est lui qui est le maintainer du projet, c&#x27;est à dire que c&#x27;est lui qui décide quels changements on va mettre ou pas dans LibLZMA. Et donc ça fait 15 ans qu&#x27;il travaille dessus donc c&#x27;est un petit peu son bébé. C&#x27;est quand même un projet open source qui est utilisé par beaucoup de gens et beaucoup d&#x27;autres projets sauf que évidemment au bout de 10 15 ans et bat un petit peu moins la pêche qu&#x27;au début parce que c&#x27;est un peu un travail à ingrat il est pas payé pour faire ça c&#x27;est vraiment</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication en face-caméra concernant le rôle du mainteneur et le fonctionnement collaboratif d&#x27;un projet open source.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:04 - 00:02:28</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">totalement bénévole en plus de ça dans sa vie perso parfois les trucs qui vont pas trop de parfois le projet xz il passe un petit peu à la trappe et donc le projet ralenti et à des demandes des bugs qui commencent à s&#x27;accumuler un petit peu mois après mois année après année et ça commence à se sentir un petit peu sur le projet et en 2022 ça commence un petit peu à râler dans la communauté On a Denis qui demande un petit peu innocentement, est-ce que ce projet est encore maintenu ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:28 - 00:02:48</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça fait un an que j&#x27;ai pas vu de mise à jour. Il y a un autre mec qui s&#x27;appelle Kumar qui répond ou qui dit « La dernière grosse mise à jour, elle date d&#x27;il y a 7 ans, donc t&#x27;attends pas à grand jour ». Lui aussi, il est un petit peu frustré par le manque de dynamisme du projet. Un peu plus tard, il y a un autre message qui dit « Il n&#x27;y aura jamais de progrès tant qu&#x27;on ne change pas de maintainer ». Le maintainer, il s&#x27;en fout, c&#x27;est vraiment triste de voir un repo comme ça. Kumar, lui, c&#x27;est vraiment un fils de pute.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:49 - 00:03:10</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Encore d&#x27;autres messages sur des fonctionnalités qui traînent un petit peu. ça fait plus d&#x27;un mois et toujours pas merger. Je suis vraiment pas surpris. Unkumar, vraiment, lui, il l&#x27;enfonce, il tourne le couteau trois fois dans la plaie, quoi. C&#x27;est vraiment... Il est vraiment vicieux. Donc Lass, le maintainer du projet, il s&#x27;excuse. Il explique justement que ça fait longtemps qu&#x27;il fait ça gratuit, c&#x27;est un projet bénévole et qu&#x27;en plus, en ce moment, dans sa vie, ça va pas trop.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:11 - 00:03:50</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc forcément, parfois, le projet prend un peu de retard. Mais qu&#x27;il a commencé à accepter un petit peu de l&#x27;aide, en particulier d&#x27;un autre mec qui s&#x27;appelle JIA et qui a fait pas mal de bonnes contributions dernièrement. Et donc potentiellement dans le futur, JIA pourra prendre un plus grand rôle, peut-être il sera co-maintainer pour pouvoir redonner un peu vie au projet. Kumar est toujours fidèle à lui-même et il répond « il n&#x27;y a eu aucun progrès depuis avril, en ce moment tu étouffes ton repos, pourquoi attendre plus tard ? Pourquoi retarder ce dont le projet a besoin ? » Donc vraiment il pousse pour dégager la sang-cou, il dit « ouais c&#x27;était une merde, ça va rien, ton projet il ralentit, c&#x27;est mieux de ramener quelqu&#x27;un tout de suite qui va pouvoir faire avancer les choses. »</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:50 - 00:04:11</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">« Bon, ne t&#x27;inquiète pas, ça ira quand même un petit peu plus vite que ce que tu penses. J&#x27;ai commencé à travailler sur quelques trucs un petit peu. La situation va s&#x27;améliorer. » Donc vraiment, tu vois, il est sympa ce JIA. Il aide, il fait des bonnes contributions, il corrige des bugs, il rajoute des fonctionnalités, il calme un petit peu les tensions. Il est vraiment cool, tu vois. C&#x27;est vraiment le nouveau maintainer parfait pour ce projet.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de code et terminal (visibles de loin sur l&#x27;écran de l&#x27;Image #1).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de code source et interface de terminal non détaillées.</p>
+                        <p><strong>Action / Démonstration :</strong> Session de développement et explications sur l&#x27;utilisation d&#x27;outils d&#x27;IA pour coder.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:11 - 00:04:34</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là, avec toute cette pression, au bout de 15 ans, il finit un petit peu par craquer. Et en septembre, il passe JIA, co-maintener du projet. C&#x27;est-à-dire que maintenant, ils sont deux à pouvoir revoir les corrections, revoir les mises à jour, les nouvelles fonctionnalités, et décider ensemble de quel changement va ou non dans le projet. Et donc, évidemment, Denis, Kumar et même Jiya, ce sont la même personne.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique chronologique animé (timeline) illustrant les jalons du projet.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Mention textuelle &quot;2022 Septembre&quot; sur fond texturé avec repère temporel et icône de co-maintenance.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle de la chronologie du projet et de l&#x27;arrivée du co-mainteneur en septembre 2022.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000417_seg10.jpg" alt="Timeline graphique animée affichant l&#x27;année 2022 et le mois de septembre avec une icône de collaboration communautaire." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000417_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:17</span>
+                        <span class="caption-text">Timeline graphique animée affichant l&#x27;année 2022 et le mois de septembre avec une icône de collaboration communautaire.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:34 - 00:04:53</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce sont tous des faux comptes. Et donc, ils viennent de prendre le contrôle du repo, qui ne paraît pas si important comme ça, c&#x27;est juste une librairie pour compresser. Mais en fait, cette librairie, elle est incluse dans plein d&#x27;autres programmes qui sont eux-mêmes inclus dans plein d&#x27;autres programmes. et ce qui est le cas de SSH, qui est le logiciel qui gère l&#x27;accès à distance sur ton ordinateur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur concernant la compromission d&#x27;un dépôt logiciel et ses répercussions sur les dépendances (comme SSH).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:53 - 00:05:14</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc même s&#x27;ils n&#x27;ont pas pris le contrôle du projet SSH, qui serait encore beaucoup plus dur, le programme SSH, dans plein de distributions, il inclut la librairie Systemd, et Systemd inclut la librairie XZ, parce que Systemd fait plein de choses sur les machines, et parmi toutes ces choses, par exemple, il a besoin de lire les logs et de les compresser une fois qu&#x27;ils prennent en place, et bien du coup, il a besoin d&#x27;une librairie pour compresser les fichiers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique explicatif animé de type schéma d&#x27;architecture logicielle.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Représentation visuelle des dépendances logicielles avec les libellés &#x27;SSH&#x27; et &#x27;System D&#x27;.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la chaîne de dépendances et de l&#x27;imbrication des composants logiciels (SSH et Systemd) dans les distributions Linux.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000458_seg12.jpg" alt="Schéma conceptuel montrant un bloc représentant le protocole et le programme SSH." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000458_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:04:58</span>
+                        <span class="caption-text">Schéma conceptuel montrant un bloc représentant le protocole et le programme SSH.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000503_seg12.jpg" alt="Schéma conceptuel illustrant l&#x27;imbrication de la dépendance Systemd à l&#x27;intérieur du contexte SSH." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000503_seg12.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:03</span>
+                        <span class="caption-text">Schéma conceptuel illustrant l&#x27;imbrication de la dépendance Systemd à l&#x27;intérieur du contexte SSH.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:14 - 00:05:34</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et cette fameuse librairie, c&#x27;est la fameuse librairie XZ, et c&#x27;est par là que va être inclue la backdoor. Mais même si maintenant, JIA, il a accès au projet, il a le contrôle du projet, il peut faire ce qu&#x27;il veut, entre guillemets, c&#x27;est toujours un projet open source. C&#x27;est-à-dire que tout le monde peut voir ce qui est fait dans ce rythme. Tu peux simplement faire une mise à jour, voilà les gars, j&#x27;ai mis une nouvelle backdoor installée, c&#x27;est trop bien. Tout le monde va le voir, ça va être grillé, c&#x27;est open source, c&#x27;est ouvert.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web GitHub (navigateur).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Dépôt tukaani-project/xz affichant la liste des dossiers (.github, src, m4, etc.) et des fichiers du projet open-source.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle de la structure du projet open-source XZ sur GitHub pour appuyer l&#x27;explication sur la transparence du code.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000524_seg13.jpg" alt="Capture du dépôt GitHub officiel du projet XZ montrant l&#x27;arborescence des fichiers sources." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000524_seg13.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:24</span>
+                        <span class="caption-text">Capture du dépôt GitHub officiel du projet XZ montrant l&#x27;arborescence des fichiers sources.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:35 - 00:06:00</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il y a plein de gens qui surveillent ça, en particulier ceux qui vont inclure ta librairie dans leur programme. Comment JIA s&#x27;est pris pour pouvoir mettre cette backdoor sans que personne ne le voit ? Normalement, c&#x27;est impossible. Pour faire ça, la première chose que JIA va faire, c&#x27;est rien faire. Ou pour être plus précis, il va faire que des commits legit. Il va faire que des bonnes modifications. Il va corriger des bugs, il va ajouter plein de fonctionnalités, il va faire plein de bons ajouts au repo pour pouvoir petit à petit gagner la confiance.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou console n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code source, commande, architecture réseau ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:00 - 00:06:19</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce qu&#x27;en tant que nouveau maintainer, on va vraiment regarder de très près tous tes nouveaux ajouts. Parce que peut-être que t&#x27;es nouveau, peut-être que t&#x27;as pas encore l&#x27;habitude de certains trucs. Donc on va vraiment faire gaffe à ce que tu rajoutes. Donc c&#x27;est vraiment pas le moment d&#x27;en rajouter un bout de code qui va te permettre de prendre le contrôle à distance de tous les ordis du monde. Et Jia, lui, il a vraiment la pêche. parce que pendant des années, il va faire des commits qui sont legit.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur concernant la revue de code rigoureuse pour les nouveaux contributeurs open-source.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:19 - 00:06:40</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pendant deux ans. Et on a même des soupçons qu&#x27;il aurait fait pendant encore un petit peu plus longtemps. Mais il y a quelque chose qu&#x27;on verra plus tard qui lui a un petit peu forcé la main à passer à l&#x27;action un petit peu plus vite. C&#x27;est presque même à se demander si ce n&#x27;est pas un développeur complètement legit qui s&#x27;est fait piquer son compte. Mais ça, comme tous les comptes sont à peu près récents, à peu près écrits au même moment et qu&#x27;une fois qu&#x27;on a découvert la faille, tout le monde a disparu, eh bien, on sait que ce n&#x27;est pas le cas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, commande, architecture, métrique).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;analyste face caméra (storytelling sur un cas de piratage de compte de développeur).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:40 - 00:07:05</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça veut dire que c&#x27;est vraiment quelqu&#x27;un qui est déter et qui est prêt à passer des années pour pouvoir mettre à exécution son plan machiavélique de prendre le contrôle de tous les serveurs du monde. Et c&#x27;est seulement au bout de deux ans qu&#x27;il va avoir son premier commit, son premier changement malicieux, entre guillemets. Donc ce commit-là, ce qu&#x27;il fait, c&#x27;est que c&#x27;est une expression régulière, une regexp, et ça a l&#x27;air de rien comme ça, c&#x27;est vraiment difficile de comprendre ce que ça fait, même quand on a un développeur expérimenté.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Éditeur de code (VS Code), timeline graphique animée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de code source dans les éditeurs et texte sur la timeline (&quot;2 ans&quot;, &quot;plusieurs commits legit&quot;, &quot;commit malicieux&quot;).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de la stratégie d&#x27;attaque à long terme (infiltration via des contributions légitimes avant l&#x27;insertion de code malveillant).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000647_seg17.jpg" alt="Vue de dos d&#x27;un développeur devant deux écrans affichant du code source et un éditeur type VS Code avec une thématique rouge." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000647_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:47</span>
+                        <span class="caption-text">Vue de dos d&#x27;un développeur devant deux écrans affichant du code source et un éditeur type VS Code avec une thématique rouge.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000653_seg17.jpg" alt="Schéma chronologique (timeline) sur 2 ans illustrant la transition entre plusieurs commits légitimes (verts) et un commit malicieux (rouge)." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000653_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:53</span>
+                        <span class="caption-text">Schéma chronologique (timeline) sur 2 ans illustrant la transition entre plusieurs commits légitimes (verts) et un commit malicieux (rouge).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:06 - 00:07:24</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et cette regex, ce qu&#x27;elle se fait, c&#x27;est qu&#x27;elle va prendre un fichier, un des fichiers de test qu&#x27;il y a dans le repo, et ça va remplacer des caractères. Ça va remplacer des tirets par des tirets des bas, ça va remplacer des tirets par des espaces, faire quelque chose qui a l&#x27;air comme ça, a priori, innocent, parce qu&#x27;en fait, ça l&#x27;est, ce changement-là. A lui tout seul, au pire, il ne fait rien, tu vois ce que je veux dire ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement d&#x27;une expression régulière (regex) modifiant des fichiers de test.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:24 - 00:07:44</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Au pire, il n&#x27;y a rien de malicieux. C&#x27;est-à-dire que dans le pire des cas, même si quelqu&#x27;un le voit, déjà, il peut simplement dire, ah oui, excuse-moi, c&#x27;est une erreur, j&#x27;ai fait un test sur ma machine et j&#x27;ai oublié de l&#x27;enlever, un truc comme ça. parce qu&#x27;il n&#x27;y a encore rien de magnifique, il n&#x27;y a pas de backdoor, il n&#x27;y a rien. C&#x27;est vraiment juste deux lignes qui disent « va chercher tel fichier » et puis « change tel type de caractère ». C&#x27;est vraiment quelque chose qui se fait souvent dans les projets, donc ça n&#x27;a rien de suspect.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;absence de malveillance ou de backdoor dans un code de test oublié.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:44 - 00:08:05</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là où c&#x27;est vraiment un génie du mal, c&#x27;est que ce fichier, il n&#x27;est pas ajouté dans le repo en lui-même. C&#x27;est-à-dire que quand tu vas sur le site, sur GitHub pour pouvoir voir le projet, tu ne verras pas ce fichier. Il est ajouté seulement dans l&#x27;archive que tu télécharges quand tu veux builder, quand tu veux compiler le projet pour pouvoir l&#x27;inclure quelque part. Donc déjà, ça enlève pas mal de regards potentiels sur ce fichier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale d&#x27;un concept de supply chain attack ou de dissimulation de fichier dans une archive de build, sans support visuel à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:05 - 00:08:26</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour le coup, ça passe crème parce que tout le monde le voit. Et puis personne ne se dit que c&#x27;est bizarre. Parce que ça ne l&#x27;est pas tant que ça, au final. Ensuite, un mois plus tard, donc entre-temps, il a fait plein de changements, les djits, pas de problème. Il va rajouter un fichier de test. Parce que dans un projet aussi compliqué, on veut quand même avoir des tests pour pouvoir savoir que si j&#x27;ai fait un changement à gauche, ça n&#x27;a pas tout pété à droite.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Animation graphique explicative (motion design).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Représentation visuelle abstraite d&#x27;une frise chronologique Git et d&#x27;un graphe de commits.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication schématique de l&#x27;historique des commits sur une période d&#x27;un mois.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:26 - 00:08:53</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parfois, ça peut être un peu difficile. Et surtout, on veut savoir que la librairie marche correctement. donc elle peut compresser et décompresser des fichiers normalement. Mais on voit aussi qu&#x27;elle bug pas, qu&#x27;elle fasse pas des dingueries dans le cas où ça se passe mal. C&#x27;est à dire que si on a un fichier qui est corrompu, on veut pas que la librairie commence à lire et puis elle pète un câble. Donc on a des fichiers de tests qui sont corrompus exprès pour pouvoir s&#x27;assurer que le code de la librairie, il va pas péter un câble, il va pas cracher, il va pas causer des problèmes quand il lit un fichier qui est un peu bizarre. Parce que ça peut arriver.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la robustesse d&#x27;une bibliothèque de compression face caméra, sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:53 - 00:09:11</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">T&#x27;as télécharché un fichier à moitié ou alors t&#x27;avais un fichier sur des clés USB qui s&#x27;est abîmé ou quelque chose comme ça. ça arrive tout le temps des fichiers qui se corromptent. Et donc ils rajoutent ce fichier. En plus de ça ce fichier c&#x27;est censé être un fichier corrompu comme il y en a plusieurs autres dans l&#x27;archive. Donc c&#x27;est à la fois normal et commun d&#x27;avoir des fichiers de tests qui ne sont pas dans le repo de base qui sont juste dans l&#x27;archive qu&#x27;on télécharge.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts liés à la corruption de fichiers et aux transferts (téléchargements partiels, clés USB endommagées).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:11 - 00:09:35</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais en même temps ce fichier est censé être corrompu donc qu&#x27;est ce qu&#x27;il y a à regarder dans un fichier corrompu ? C&#x27;est censé juste être un fichier binaire à moitié compressé avec des 1 et des 0. Il n&#x27;y a rien à voir là dedans. C&#x27;est vraiment l&#x27;endroit parfait pour planquer une dinguerie. Et pour être sûr et certain que vraiment tout le monde y voit que du feu, il va non seulement obfusquer, mais chiffrer et compresser ce fichier pour être vraiment sûr et certain que personne puisse voir et comprendre ce qu&#x27;il y a là-dedans.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil technique interactif affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Représentation visuelle de code binaire.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la dissimulation de données dans des fichiers corrompus.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_000917_seg24.jpg" alt="Flux de données binaires (zéros et uns) illustrant le contenu d&#x27;un fichier corrompu ou d&#x27;un dump mémoire." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_000917_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:17</span>
+                        <span class="caption-text">Flux de données binaires (zéros et uns) illustrant le contenu d&#x27;un fichier corrompu ou d&#x27;un dump mémoire.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:35 - 00:10:01</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est presque un système overkill. Et c&#x27;est là où le fameux commit d&#x27;il y a un mois, il va être utile. Il va prendre ce fichier-là et il va justement changer certains caractères. Là où il y a un tiré, il va mettre un tiré du bas. Là où il y a un espace, il va remettre un tiré, un truc du style. Et cette action-là, ça va décorrompre l&#x27;archive. Ensuite, cette archive, elle est compressée. Une fois que cette archive, elle est décompressée, elle est toujours lisible Donc c&#x27;est-à-dire que même si quelqu&#x27;un arrive à la décorrompre et à la décompresser, alors que c&#x27;est censé être un truc corrompu et lisible à la base, eh bien il ne peut toujours rien voir.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique affiché à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale d&#x27;un scénario de résolution de problème (décorrompre une archive via un commit Git spécifique).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:01 - 00:10:24</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et une fois qu&#x27;elle est déchiffrée, elle n&#x27;est toujours pas normalement lisible parce qu&#x27;il y a plein de charabes, il y a plein de trucs qui ne servent à rien dedans, à plein d&#x27;endroits dans le fichier. Donc c&#x27;est-à-dire qu&#x27;il faut connaître exactement la bonne technique pour enlever les morceaux du fichier qui ne servent à rien et recoller les bons fichiers pour avoir au final la backdoor. Et donc maintenant qu&#x27;on a notre petite backdoor, parce que maintenant qu&#x27;on a ce fameux fichier-là, qui est intégré dans XZ au moment du build, au moment de la compilation.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface logicielle n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique visible à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale par le créateur sur les techniques de nettoyage et de reconstruction manuelle de fichiers déchiffrés.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:24 - 00:10:46</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comment cette backdoor dans XZ, elle se retrouve sur tous les savoirs SSH de Biorendumont ? En fait, XZ est intégré dans une librairie qui s&#x27;appelle Systemd. Et Systemd, c&#x27;est un gros programme qui fait plein plein plein de trucs différents sur la machine. Et un autre truc qu&#x27;il fait, par exemple, c&#x27;est gérer les fichiers de logs sur la machine. Et de temps en temps, les fichiers de logs, quand ils deviennent trop gros, il va les compresser.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la propagation de la backdoor XZ via Systemd et les processus SSH.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:46 - 00:11:08</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Historiquement, on avait plein de programmes séparés, c&#x27;est un peu la philosophie de Linux. On a un programme qui gère les logs, on a un programme qui gère la compression, on a un programme qui gère le SSH, on a un programme qui gère ceci, cela. Mais Systemd a petit à petit ramené plein de choses au comté, et donc maintenant Systemd fait plein de choses. Et Systemd est maintenant dans beaucoup de distributions, c&#x27;est le cas de Ubuntu, de Debian, intégré dans SSH.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;historique et de l&#x27;évolution de Linux et Systemd par le créateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:08 - 00:11:27</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est-à-dire que quand le serveur SSH démarre, qui permet de recevoir les connexions depuis l&#x27;extérieur et de se connecter à la machine à distance, le serveur SSH intègre Systemd, et Systemd intègre XZ. et XZ intègre la backdoor qui permet d&#x27;avoir accès à distance à JIA. Et ce qui est super smart, c&#x27;est que le serveur SSH, il tourne en tant que route sur la machine.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Graphique de type schéma conceptuel / architecture en boîtes imbriquées.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Boîtes textuelles étiquetées SSH, System D, XZ et une icône d&#x27;alerte.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication schématique de l&#x27;imbrication des composants logiciels et de la vulnérabilité de la backdoor XZ.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001117_seg29.jpg" alt="Schéma imbriqué montrant le serveur SSH contenant Systemd." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001117_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:17</span>
+                        <span class="caption-text">Schéma imbriqué montrant le serveur SSH contenant Systemd.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001122_seg29.jpg" alt="Schéma imbriqué montrant Systemd contenant XZ avec une icône d&#x27;avertissement." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001122_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:22</span>
+                        <span class="caption-text">Schéma imbriqué montrant Systemd contenant XZ avec une icône d&#x27;avertissement.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:28 - 00:11:47</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc ça veut dire que la backdoor en elle-même, elle a les accès route, elle peut tout faire sur la machine, elle peut faire tout ce qu&#x27;elle veut. C&#x27;est-à-dire qu&#x27;une fois que ça, ça tourne sur une machine, JIA, il peut se connecter à distance sur n&#x27;importe lesquelles des machines qui tournent SSH, c&#x27;est-à-dire 99% des serveurs, et faire ce qu&#x27;il veut sur la machine sans qu&#x27;il n&#x27;y ait aucune trace, sans qu&#x27;il n&#x27;y ait aucun log, et sans qu&#x27;il n&#x27;y ait aucune restriction.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (SSH / CLI) sur un système Ubuntu Server.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Informations de login système, adresses IP réseau (Docker, Tailscale, interfaces locales) et prompt root actif (`root@homelab1:~#`).</p>
+                        <p><strong>Action / Démonstration :</strong> Affichage du statut système et des interfaces réseau pour illustrer l&#x27;accès root et la configuration des serveurs cibles.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001138_seg30.jpg" alt="Terminal Linux affichant les informations système (Ubuntu) avec la charge, l&#x27;utilisation mémoire et les adresses IP des différentes interfaces (cni0, docker0, eno1, tailscale0)." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001138_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:38</span>
+                        <span class="caption-text">Terminal Linux affichant les informations système (Ubuntu) avec la charge, l&#x27;utilisation mémoire et les adresses IP des différentes interfaces (cni0, docker0, eno1, tailscale0).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001143_seg30.jpg" alt="Terminal Linux montrant les dernières lignes de connexion SSH (`root@homelab1:~#`) et les notifications de mises à jour système en attente." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001143_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:43</span>
+                        <span class="caption-text">Terminal Linux montrant les dernières lignes de connexion SSH (`root@homelab1:~#`) et les notifications de mises à jour système en attente.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:47 - 00:12:21</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">donc c&#x27;est pour ça que l&#x27;échelle, le scale de ce hack est vraiment incroyable. Maintenant comment on va faire pour que cette toute nouvelle version de XZ se retrouve dans justement Ubuntu, dans Debian, dans toutes les distributions Linux ? Eh bien Gilles va reprendre sa bonne vieille méthode d&#x27;aller faire pression à droite à gauche parce qu&#x27;il a déjà tous ses faux comptes donc autant aller s&#x27;en servir et donc il va aller sur la mail inis de Debian et dire ah moi j&#x27;ai eu un petit problème avec cette version de bien ça serait bien que vous mettez en place la nouvelle version de xz parce que ça fixe des problèmes ensuite il va prendre un autre compte il va aller dire ah ça serait bien que</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface logicielle n&#x27;est visible sur ces images.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique technique n&#x27;est affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation ou explication technique n&#x27;est réalisée à l&#x27;écran, il s&#x27;agit d&#x27;une séquence narrative d&#x27;illustration (b-roll).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:21 - 00:12:52</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">vous mettiez la nouvelle version de xz à la pleine nouvelle fonctionnalité trop bien faire sa petite opération de communication un peu à droite à gauche pour aller pousser tous les maintainers des différents distributions linux a ajouté dans leur prochaine version la nouvelle version de l&#x27;execl qui contient la bacte or et d&#x27;eau qui pousse un peu partout et les premiers à à Morda Lamson, c&#x27;est Debian, qui vont dire « Ok, si tu insistes, ils vont rajouter cette nouvelle version de Exed dans leur nouvelle version de Debian.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la stratégie d&#x27;ingénierie sociale et de communication menée pour faire adopter la version compromise de xz par les mainteneurs de distributions Linux.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:53 - 00:13:16</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est une version qu&#x27;ils appellent « testing », parfois même « unstable ». Ça veut dire que c&#x27;est une version qui ne va pas être supportée sur le long terme, c&#x27;est une version un petit peu intermédiaire, où on va justement rajouter pas mal de nouvelles versions de nouveaux packages, qui sont censés normalement fonctionner sans problème, qui sont censés corriger plein de trucs, ajouter plein de fonctionnalités, mais qu&#x27;on n&#x27;a jamais encore vraiment testé en production sur des vrais serveurs où il y a vraiment de la charge qui tourne etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts liés aux versions de distribution Linux instables et de test.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:16 - 00:13:35</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc c&#x27;est pour ça qu&#x27;ils sortent cette version là. Ceux qui aiment vraiment avoir les toutes dernières fonctionnalités, les toutes dernières corrections, ils vont faire tourner cette version en production. Et puis au bout d&#x27;un certain moment, un an, deux ans, suivant les différentes distributions, à quel point ils sont frileux, ils vont dire ok, ces versions là on considère qu&#x27;elles sont stables et ils vont les mettre dans une version qui est définitive.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (commandes, code ou architecture).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur les cycles de vie des versions logicielles et leur utilisation en production.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:35 - 00:14:04</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc la nouvelle version de test de Debian est disponible. Et c&#x27;est là qu&#x27;on retrouve notre fameux développeur Postgre. Donc lui en gros il travaille sur Postgre qui est une base de données et il fait des micro benchmarks, c&#x27;est à dire des tests de performance mais vraiment à 1 ou 2% près pour savoir quelle fonction, quel code est le plus performant. Et donc pour pouvoir faire ça, il faut que tout ce qui tourne sur sa machine consomme le moins de ressources possibles parce que s&#x27;il a plein de processus qui consomment 3-4% de CPU, il ne pourra jamais savoir si telle version consomme 2% de plus ou 2% de moins que la version d&#x27;avant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux exécutant l&#x27;utilitaire de monitoring htop.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Affichage détaillé des 16 cœurs logiques CPU (0 à 15) avec leurs barres de charge, la barre d&#x27;utilisation de la mémoire (Mem), et la liste des processus système (K3s, Netdata, containerd) avec leurs PIDs, utilisateurs, priorités, consommation CPU/RAM et temps d&#x27;exécution.</p>
+                        <p><strong>Action / Démonstration :</strong> Surveillance en temps réel des performances système et de la charge des processus lors de tests ou benchmarks.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001357_seg35.jpg" alt="Vue rapprochée d&#x27;un écran de terminal affichant un outil de surveillance système (htop) avec les métriques d&#x27;utilisation des cœurs CPU et la liste des processus en cours." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001357_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:57</span>
+                        <span class="caption-text">Vue rapprochée d&#x27;un écran de terminal affichant un outil de surveillance système (htop) avec les métriques d&#x27;utilisation des cœurs CPU et la liste des processus en cours.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:04 - 00:14:30</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc dans l&#x27;idéal, il faut que tout consomme 0 à part sa base de données. Pour pouvoir voir le mieux possible les différences de performance entre deux versions, il va limiter le bruit sur sa machine. C&#x27;est-à-dire limiter le plus possible la consommation de ressources par tous les autres composants qui tournent sur sa machine, autre que sa base de données. Et donc, il regarde sur sa machine qu&#x27;est-ce qu&#x27;il consomme du CPU, il essaye de limiter un petit peu, et il se rend compte que parfois, le CPU qui est utilisé par le serveur SSH sur sa machine, il a des petits pics de CPU.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration ou métrique technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur l&#x27;optimisation des performances et la réduction du bruit système.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:31 - 00:15:03</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et il se dit, c&#x27;est quand même bizarre parce que je n&#x27;utilise pas SSH, je ne me connecte pas par SSH. donc comment ça se fait ? Et là on a encore de la chance parce qu&#x27;il se trouve que sa machine elle est exposée sur internet et que sur internet il y a plein de bots qui essayent des IP au hasard et qui essayent de se connecter en SSH peut-être avec juste mot de passe admin admin pour essayer de... voilà on sait jamais si vous avez un savoir qui est exposé sur internet allez regarder dans les logs vous verrez que c&#x27;est le cas de temps en temps il y a des gens qui essayent de se connecter à votre machine et lui il remarque qu&#x27;à chaque fois que quelqu&#x27;un se fait refuser la connexion et bah il y a un pic de CPU et il voit ce pic là et il se dit il ne devrait pas y avoir de pic parce que tu fais juste refuser la connexion,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:03 - 00:15:26</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">normalement, tu refuses, tu refuses. Tu sais, c&#x27;est vite fait. Il n&#x27;y a pas les trucs de fou à faire. Donc déjà, ça veut dire qu&#x27;il a l&#x27;intuition de savoir qu&#x27;est-ce qui est censé prendre des ressources ou pas pour un programme qu&#x27;il ne connaît pas. Mais il a quand même la confirmation de ça parce qu&#x27;il compare par rapport à la version d&#x27;avant, c&#x27;est-à-dire qu&#x27;il installe l&#x27;ancienne version de Bian, et il voit qu&#x27;effectivement, sur l&#x27;ancienne version, quand il y a une connexion SSH qui est refusée, il n&#x27;y a pas de pic de CP.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:26 - 00:15:48</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme ça, un mec qui a l&#x27;habitude des tests de performance, etc., Il connaît un petit peu tous les outils pour pouvoir débugger et comprendre qu&#x27;est-ce qui se passe. Il va même un petit peu plus loin. Pour accentuer les différences de performance, il va faire exprès d&#x27;utiliser une plus vieille machine. Parce que plus la machine est faible, plus les différences de performance vont se voir. En plus de ça, et ça c&#x27;est vraiment un coup de chance, il va désactiver le turbo boost dans son CPU.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les tests de performance et l&#x27;utilisation de machines plus anciennes pour accentuer les écarts de performance.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:48 - 00:16:08</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que dans la plupart des processeurs modernes, la fréquence va s&#x27;overclocker un petit peu automatiquement en fonction de s&#x27;il y a quelque chose à faire. Et s&#x27;il n&#x27;y a rien à faire, la fréquence diminue et comme ça, ça consomme moins d&#x27;énergie. et lui fait exprès de désactiver ça. Comme ça, son processeur, il va tout le temps tourner à une fréquence stable. Et donc, s&#x27;il y a quelque chose qui prend beaucoup de CPU, eh bien, on va avoir un pic dans l&#x27;utilisation du CPU.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface affichée (simple plan vidéo).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu textuel, code ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement de la gestion de la fréquence des processeurs et de la désactivation des modes d&#x27;économie d&#x27;énergie.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:08 - 00:16:31</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce que la plupart des autres personnes qui ont une machine normale ne vont jamais voir. Parce que s&#x27;il y a un petit pic d&#x27;utilisation, par exemple, s&#x27;il y a un programme qui utilise 5% de CPU, le CPU, il va doubler sa fréquence. Et en fait, ce pic de 5%, tu ne le verras jamais. Ou ça sera un pic de 1%. Donc, il commence à débugger son serveur SSH et se rendre compte que le pic de CPU, il vient de la fameuse librairie XZ de compression de fichiers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement de la fréquence CPU et du monitoring des pics de charge.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:32 - 00:16:52</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là il se dit, c&#x27;est vraiment bizarre parce que normalement la fonction qui est appelée à ce moment-là quand quelqu&#x27;un essaie de se connecter c&#x27;est une fonction de déchiffrement d&#x27;une clé SSH en fouillant profondément et en passant la nuit à chercher il vient à la conclusion que ça vient de la librairie XZ mais il y a bien et bien une backdoor et que c&#x27;est non pas juste sur sa machine mais que c&#x27;est sur toutes les machines qui ont cette version de Debian.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:52 - 00:17:11</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, lui-même il n&#x27;y croit pas. C&#x27;est-à-dire que la nuit il se dit « Ok, non, je ne veux pas m&#x27;afficher, je ne veux pas commencer à alerter tout le monde. » Alors que ça se trouve, c&#x27;est moi qui est en train d&#x27;halluciner. Là, il est 3h du mat&#x27;, je vais juste aller me coucher. Et puis, je re-regarderai demain matin parce que ce n&#x27;est pas possible. Ça paraît impossible qu&#x27;il y ait une bague d&#x27;or dans SSH. Et effectivement, le lendemain matin, il se réveille, il revérifie tout.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, de code ou de métriques.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication narrative illustrant le doute d&#x27;un administrateur système face à une anomalie détectée tard dans la nuit.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:12 - 00:17:31</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et à ce moment-là, c&#x27;est là qu&#x27;il alerte tout le monde. Il y a l&#x27;alerte Red Hat, il alerte Ubuntu, Debian. Et donc, très très rapidement, toute la communauté de sécurité commence à verrouiller, revenir en arrière, enlever ses versions de UXZ de partout. et très rapidement on comprend un petit peu ce qui s&#x27;est passé, on regarde le repo, on voit d&#x27;où ça vient. Et c&#x27;est là qu&#x27;on a découvert un peu toute la superchérie. Donc on a eu vraiment vraiment beaucoup de chance.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:31 - 00:17:51</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On a eu de la chance que le développeur de Postgre fasse ses tests juste un jour ou deux après que la nouvelle version de Debian soit sortie. Que cette version qui allait être poussée sur Red Hat, sur Ubuntu, sur plein d&#x27;autres, n&#x27;était pas encore sur ces versions-là. Que ce mec-là avait le background nécessaire pour pouvoir voir que c&#x27;était bizarre et faire toute l&#x27;investigation pour pouvoir trouver la source du problème.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Environnement de développement avec double écran, affichant du code et des consoles de commande.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de code source et terminaux Unix/Linux non détaillés lisiblement.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique sur les tests et la détection d&#x27;anomalies logiques par un développeur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001736_seg45.jpg" alt="Vue de dos d&#x27;un administrateur devant un double écran affichant du code source et des terminaux textuels." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001736_seg45.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:36</span>
+                        <span class="caption-text">Vue de dos d&#x27;un administrateur devant un double écran affichant du code source et des terminaux textuels.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:51 - 00:18:15</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et que par chance, sa machine était vraiment une machine bas de gamme, donc les différences de performance étaient exagérées. Il avait aussi désactivé le tourboboon, et que sa machine était exposée sur Internet, et qu&#x27;à ce moment-là, il y avait des bots qui essayaient de se connecter, et qui déclenchaient ce petit pic de CPU. Donc si on n&#x27;avait pas vu ce mec-là, s&#x27;il n&#x27;avait pas vu tout ça, s&#x27;il n&#x27;avait pas vu toutes ces coïncidences, la backdoor aurait continué sa vie, il y a plein de gens qui auraient commencé à utiliser ces nouvelles versions de tous ces OS.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux / htop</p>
+                        <p><strong>Contenu textuel & Code :</strong> Utilisation détaillée des cœurs CPU, consommation mémoire et processus système (k3s, containerd, netdata, htop)</p>
+                        <p><strong>Action / Démonstration :</strong> Surveillance en temps réel de la charge CPU et des processus pour illustrer l&#x27;impact des pics d&#x27;activité sur la machine.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001757_seg46.jpg" alt="Vue rapprochée d&#x27;un terminal Linux affichant l&#x27;utilitaire de surveillance système htop avec les barres d&#x27;utilisation CPU par cœur et la liste des processus en cours." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001757_seg46.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:57</span>
+                        <span class="caption-text">Vue rapprochée d&#x27;un terminal Linux affichant l&#x27;utilitaire de surveillance système htop avec les barres d&#x27;utilisation CPU par cœur et la liste des processus en cours.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:15 - 00:18:46</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là encore, ça n&#x27;aurait pas été si grave, parce que ce n&#x27;est pas tout le monde qui va utiliser des versions de testing en production, même si ça arrive. Et quelques mois plus tard, il allait y avoir une nouvelle version, cette fois-ci stable de toutes les distributions Linux, qui allait intégrer cette version de XZ. Et à partir de ce moment-là, le mec avait juste à attendre tranquillement, peut-être un an ou deux, mais ça fait déjà deux ans que le mec prépare son coup, il aurait eu accès à toutes les machines qui utilisent Red Hat, Debian, Linux, qui utilisent toutes les distributions qui intègrent Systemd à SSH.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:46 - 00:19:05</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et c&#x27;est la plupart, voire la majorité des distributions qui sont utilisées en production par toutes les entreprises dans le monde. Donc le mec aura eu en gros le passe-partout ultime. C&#x27;est-à-dire que n&#x27;importe quel serveur SSH sur la Terre, le mec a la backdoor, il peut se connecter et faire ce qu&#x27;il veut discrètement sans que personne ne voit jamais rien, sans qu&#x27;il n&#x27;y ait jamais aucun log partout et sans qu&#x27;il n&#x27;y ait personne pour l&#x27;arrêter.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande Linux / Console SSH.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Métriques d&#x27;utilisation système (mémoire, température CPU, processus, nombre d&#x27;utilisateurs connectés) et interfaces réseau IPv4/IPv6, accompagnées d&#x27;informations sur les mises à jour de sécurité Ubuntu.</p>
+                        <p><strong>Action / Démonstration :</strong> Affichage d&#x27;informations système et réseau au démarrage d&#x27;une session sur un serveur Linux.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001856_seg48.jpg" alt="Écran affichant un terminal Linux avec des informations système et réseau (adresses IP d&#x27;interfaces cni0, docker0, eno1, tailscale0) ainsi que le message MOTD d&#x27;Ubuntu." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001856_seg48.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:56</span>
+                        <span class="caption-text">Écran affichant un terminal Linux avec des informations système et réseau (adresses IP d&#x27;interfaces cni0, docker0, eno1, tailscale0) ainsi que le message MOTD d&#x27;Ubuntu.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-49">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:05 - 00:19:26</span>
+                <span class="segment-idx">Segment #49</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ça ouvre une plus grosse question, c&#x27;est qui est ce fameux Jihad ? Qui est Jihad ? C&#x27;est un hack d&#x27;une telle ampleur et avec une échelle de temps, une patience tellement longue et avec aussi des ressources tellement élevées dans le sens où c&#x27;est pas n&#x27;importe qui qui est capable de faire des commits legit pendant des années d&#x27;un projet open source en C sur la compression des données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminaux Linux, éditeur de code et fenêtres de monitoring en arrière-plan.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Lignes de code source et affichage de texte en colonnes (flux vert et interfaces de type IDE/terminal).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication contextuelle sur l&#x27;analyse d&#x27;un code compromis et le profil des attaquants dans un projet open source.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001921_seg49.jpg" alt="Vue de dos d&#x27;un opérateur face à deux grands écrans affichant du code source et des flux de données en terminal, illustrant le travail d&#x27;analyse ou de développement." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001921_seg49.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:21</span>
+                        <span class="caption-text">Vue de dos d&#x27;un opérateur face à deux grands écrans affichant du code source et des flux de données en terminal, illustrant le travail d&#x27;analyse ou de développement.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-50">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:26 - 00:19:45</span>
+                <span class="segment-idx">Segment #50</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est vraiment un truc profond. Donc ça laisse à penser que c&#x27;est pas forcément une personne, mais c&#x27;est peut-être un groupe de personnes, voire même une agence de surveillance gouvernementale. Évidemment, c&#x27;est pas personne va revendiquer. Sûrement qu&#x27;on saura jamais. Mais a priori, on pourrait penser que c&#x27;est une attaque peut-être qui vient de la Chine, potentiellement d&#x27;une agence de renseignement chinoise.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-51">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:45 - 00:20:04</span>
+                <span class="segment-idx">Segment #51</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Après tout, le mec s&#x27;appelle Jia Tan. En plus de ça, il y a des analystes qui ont vu que l&#x27;heure des commits qui ont été faits sur le repo, elle correspondait à la timezone de la Chine. Donc, ça laisse supposer. Mais il y a d&#x27;autres petits trucs qui laissent penser que c&#x27;est peut-être un leurre. Les IP qui ont été utilisées pour faire les commits, c&#x27;est une IP taïwanaise. Donc là, ça fait quand même plusieurs preuves.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Logiciel de cartographie ou vue satellite de type globe virtuel.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Carte géographique centrée sur l&#x27;Europe montrant les pays et les frontières terrestres et maritimes.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle de l&#x27;analyse géolocalisée (fuseaux horaires et origines des connexions/IP évoqués dans le discours).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_001959_seg51.jpg" alt="Vue satellite géographique de l&#x27;Europe et de ses frontières, illustrant l&#x27;analyse des origines géographiques ou des adresses IP." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_001959_seg51.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:59</span>
+                        <span class="caption-text">Vue satellite géographique de l&#x27;Europe et de ses frontières, illustrant l&#x27;analyse des origines géographiques ou des adresses IP.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-52">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:04 - 00:20:27</span>
+                <span class="segment-idx">Segment #52</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais probablement que c&#x27;est simplement des leurres. Parce que, premièrement, l&#x27;IP qui vient de Taïwan, on a vu que c&#x27;est une IP qui appartient en fait à un VPN. Donc c&#x27;est-à-dire que J.A. passait pour un VPN et probablement n&#x27;était pas à Taiwan. Deuxièmement, on voit que de temps en temps, la time zone, elle change et elle passe plutôt Europe de l&#x27;Est, juste quelques fois. Donc on pourrait se dire peut-être que c&#x27;est rien, peut-être qu&#x27;un jour J.A. il s&#x27;est réveillé à 2h du mat pour faire un décomit, ou alors peut-être qu&#x27;il a oublié de changer la time zone sur son ordi de temps en temps.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;analyse des adresses IP et des fuseaux horaires (VPN, leurres), sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-53">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:27 - 00:20:47</span>
+                <span class="segment-idx">Segment #53</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est peut-être quelque chose qui est probable aussi. Et quelque chose qui est encore plus flacrant, c&#x27;est qu&#x27;on voit que J.A. a travaillé pendant tous les jours fériés chinois. Par contre, il n&#x27;a pas travaillé pendant les fêtes plus occidentales comme Noël et choses comme ça. Donc ça l&#x27;aide plutôt à penser que le mec a changé la time zone sur son ordi, utilise un VPN et s&#x27;est mis un petit nom à consonance chinoise pour faire croire que c&#x27;est les chinois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou terminal affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture réseau ou métrique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur concernant l&#x27;analyse des fuseaux horaires et des jours de repos d&#x27;un contributeur (J.A.).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-54">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:47 - 00:21:20</span>
+                <span class="segment-idx">Segment #54</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce qu&#x27;après tout, c&#x27;est toujours les chinois. Voilà, le cancel incoming. Parce qu&#x27;après tout, les américains vont se dire de toute façon, c&#x27;est toujours les chinois. Alors qu&#x27;en fait, c&#x27;est peut-être, et c&#x27;est même ce qui est le plus probable, c&#x27;est ce qu&#x27;on pense en ce moment, que ça serait une agence de renseignement russe qui s&#x27;appelle le SVR. et pourquoi on pense que c&#x27;est elle parce que ça ressemble beaucoup à au mode opératoire qu&#x27;ils ont déjà utilisé auparavant premièrement l&#x27;excellence technique le fait que la backdoor soit over engineer faire que c&#x27;est caché dans un truc qui est caché qui est caché dans un truc qui est caché que c&#x27;est un projet en c&#x27;est sur la compression donc c&#x27;est vraiment un truc c&#x27;est pas</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (Wikipedia).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Article Wikipédia sur le SVR (Service des renseignements extérieurs de la fédération de Russie), incluant son historique et son emblème.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle du sujet abordé (l&#x27;agence de renseignement russe SVR) pour appuyer les explications du discours.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/Q5a92asc7hM/Q5a92asc7hM_002103_seg54.jpg" alt="Page Wikipédia en français concernant le Service des renseignements extérieurs de la fédération de Russie (SVR)." loading="lazy" onclick="openLightbox('../screenshots/Q5a92asc7hM/Q5a92asc7hM_002103_seg54.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:21:03</span>
+                        <span class="caption-text">Page Wikipédia en français concernant le Service des renseignements extérieurs de la fédération de Russie (SVR).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-55">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:20 - 00:21:55</span>
+                <span class="segment-idx">Segment #55</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">n&#x27;importe qui qui peut faire ça en termes de connaissances techniques et que en plus de ça c&#x27;est pas la première fois qu&#x27;ils mettent en place une attaque qui est pour le très long terme c&#x27;est à dire que ça les dérange pas qu&#x27;une attaque prennent deux ans quatre ans cinq ans ils s&#x27;en foutent et ils se disent de toute manière moi je m&#x27;en fous si j&#x27;étais en quatre ans, si dans quatre ans j&#x27;ai accès à tout le serveur de la terre. Pour eux ça vaut largement. Alors que pour une personne individuelle c&#x27;est déjà plus difficile de se dire que quelqu&#x27;un va penser comme ça. Donc on a eu vraiment chaud sur cette fête là. Mais ce qui fait le plus peur dans cette affaire, c&#x27;est pas qu&#x27;il y a plein de machines qui auraient pu attaquer, c&#x27;est qu&#x27;on n&#x27;avait jamais vu avant ce type d&#x27;attaque. Et donc ça laisse penser que peut-être cette attaque a déjà été utilisée</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la persistance et les compétences techniques requises pour mener des attaques informatiques à long terme, sans support technique interactif affiché.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-56">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:55 - 00:22:14</span>
+                <span class="segment-idx">Segment #56</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">dans le passé. Et d&#x27;ailleurs même J.A.Tan il a participé à plein d&#x27;autres projets open source. Donc finalement il se trouve qu&#x27;on a regardé et que tout était légit, le mec restait quand même le plus légit possible pour pas se faire cramer. Mais peut-être que si c&#x27;est une agence qui fait ça, peut-être qu&#x27;ils ont déjà fait ça plein de fois dans le passé. Et peut-être qu&#x27;il y a plein de backdoors dans plein de projets open source différents.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-57">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:22:14 - 00:22:46</span>
+                <span class="segment-idx">Segment #57</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en fait on le sait pas. Donc c&#x27;est ça qui fait le plus peur dans cette histoire. Parce que c&#x27;est une attaque qui au final qui est humaine. Tu vois on va trouver des projets open source fait par un mec tout seul qui a laissé un peu à l&#x27;abandon son projet. petit à petit on fait des trucs legit on reprend le contrôle du projet et après on va mettre ce qu&#x27;on veut là dedans et comme dans linux dans l&#x27;open source tout est un petit peu imbriqué l&#x27;un dans l&#x27;autre il ya beaucoup de projets comme dans le fameux mime xkcd il ya beaucoup de projets qui sont gérés par un ou deux mecs à droite à gauche qui sont utilisés dans plein de programmes qui sont eux-mêmes utilisés dans plein de programmes qui fait qu&#x27;en fait ça tombe partout</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur sur les attaques de supply chain et la compromission de projets open-source abandonnés, sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-58">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:22:46 - 00:23:06</span>
+                <span class="segment-idx">Segment #58</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">moi personnellement ce que j&#x27;en retire c&#x27;est que même si au final va toujours y avoir des des attaquants, des gens qui vont essayer de faire des dingueries. Au final, on a quand même fini par trouver cette attaque. Ça paraît incroyable qu&#x27;on ait trouvé ce genre de backdoor, ce genre d&#x27;attaque-là. Et en fait, on peut se dire que le point d&#x27;être open source, peut-être que c&#x27;est une faille, un inconvénient à cause justement de ce type d&#x27;attaque.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et analyse sur la détection de backdoors et la sécurité des systèmes.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-59">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:23:06 - 00:23:31</span>
+                <span class="segment-idx">Segment #59</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais en fait, à mon avis, ça montre vraiment sa force. Parce que même si dans le temps, il y a 1% de personnes qui vont être mal intentionnées, il y a tellement une grosse masse de personnes qui, elles, sont bien intentionnées qu&#x27;en fait, la chance est de notre côté, le temps est de notre côté. Et même si le développeur de Postgre n&#x27;aurait pas trouvé ça, très probablement, et même de son aveu à lui-même. Et là aussi, peut-être que ça aurait été par chance ou un peu par hasard, mais le fait que la communauté soit si grande et qu&#x27;il y ait autant de gens qui puissent regarder ce programme fait que la chance est de notre côté.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console n&#x27;est affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucune commande, code ou métrique technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans manipulation ou support visuel technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-60">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:23:31 - 00:23:35</span>
+                <span class="segment-idx">Segment #60</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, si comprendre ce genre de faille de sécurité t&#x27;intéresse, je te laisse aller voir la vidéo ici.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console technique visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sans support technique visuel à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>
