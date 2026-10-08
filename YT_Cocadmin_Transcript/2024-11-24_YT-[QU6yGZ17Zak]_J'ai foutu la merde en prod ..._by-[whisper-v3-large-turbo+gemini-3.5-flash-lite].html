@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J&#x27;ai foutu la merde en prod ... — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">J&#x27;ai foutu la merde en prod ...</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=QU6yGZ17Zak" target="_blank">Lien YouTube (<code>QU6yGZ17Zak</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2024-11-24</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:19:28</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>Cette vidéo de la chaîne *cocadmin* plonge dans le quotidien réaliste et parfois chaotique de l'administration système à travers deux anecdotes de production marquantes. La première se déroule sur une infrastructure AWS hébergeant le jeu mobile *Magic the Gathering*. Confronté à un bug mystérieux et intermittent provoquant des pannes sans surcharge apparente des ressources, l'ingénieur recourt à une « kill switch » pour afficher un message de maintenance et redémarrer le service en douceur. Faute de temps et de reproductibilité en environnement de développement, cette manipulation se transforme peu à peu en un rituel de contournement manuel non documenté, illustrant la dérive opérationnelle (« shadow process ») qui guette les équipes sous pression.<br><br>L'incident atteint son paroxysme lorsqu'un jour de grande fatigue, après avoir désactivé le jeu et s'être éclipsé pour une sieste réparatrice, l'ingénieur oublie de le réactiver. L'interruption prolongée déclenche l'inquiétude du client et du chef de produit (PM), qui finissent par le retrouver endormi dans une salle sombre. La seconde anecdote aborde les fondamentaux de la sécurité des infrastructures, en particulier l'isolation des bases de données orientées recherche (Elasticsearch) au sein de réseaux privés pour éviter toute exposition directe à l'Internet public, soulignant l'importance critique du cloisonnement réseau dès le premier poste d'administrateur système.<br><br>Sur le plan opérationnel, ces récits mettent en lumière la fragilité des solutions palliatives face à des bugs non résolus. Pour un administrateur système ou un développeur, la vidéo rappelle que le masquage d'un problème par des redémarrages fréquents ou l'utilisation d'outils d'urgence (comme un kill switch) sans investigation approfondie (Root Cause Analysis) conduit inévitablement à un point de rupture humain ou technique. Elle souligne également l'impératif d'automatiser le monitoring et la traçabilité des actions de maintenance pour éviter la dépendance à un individu unique et prévenir les angles morts opérationnels.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Amazon Web Services (AWS)** : Plateforme de cloud computing utilisée pour héberger l'infrastructure des serveurs de jeux et garantir l'extensibilité des ressources (CPU, mémoire).<br>* **Kill Switch** : Interface applicative d'urgence permettant de basculer instantanément le jeu en mode maintenance pour afficher un message aux utilisateurs et stabiliser les flux en cas de dysfonctionnement critique.<br>* **Elasticsearch** : Moteur de recherche et base de données textuelle avancé, configuré pour indexer et interroger rapidement des volumes de données textuelles complexes (utilisé à l'origine pour la recherche et la comparaison de produits).<br>* **Tendance Inno** : Podcast technologique de Docaposte explorant l'innovation, l'intelligence artificielle, la cybersécurité et l'entrepreneuriat au travers d'interviews d'experts.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Éviter le piège de la solution palliative (le "contournement magique")** : Redémarrer un service ou utiliser une kill switch de manière répétée sans identifier la cause racine crée une dette technique critique et masque un problème de code sous-jacent.<br>* **Le danger de la normalisation de la déviance** : Répéter une action manuelle de contournement tous les deux ou trois jours banalise l'incident et transforme une anomalie grave en une routine opérationnelle tacite.<br>* **L'impératif absolu de la traçabilité des actions en production** : Toute intervention manuelle sur un système critique (fermeture de service, maintenance) doit être journalisée, auditée et idéalement automatisée pour éviter l'effet de "boîte noire".<br>* **Ne jamais négliger l'analyse de cause racine (RCA)** : Face à un bug intermittent impossible à reproduire en développement, il est vital de mobiliser l'équipe de développement pour investiguer la base de code avant que la fatigue opérationnelle ne s'installe.<br>* **Le risque du SPOF (Single Point of Failure) humain** : Centraliser la gestion des incidents et des arrêts de service sur une seule personne sans documentation ni processus de suppléance expose l'entreprise à des pannes prolongées en cas d'indisponibilité (fatigue, absence).<br>* **L'isolement rigoureux des bases de données** : Les moteurs de recherche comme Elasticsearch et les bases de données d'entreprise doivent impérativement résider dans des réseaux privés isolés (VPC fermés), sans accès direct depuis l'Internet public, pour prémunir l'infrastructure contre les intrusions.<br>* **La gestion de la pression business vs dette technique** : La nécessité constante de livrer de nouvelles fonctionnalités (cartes, contenus) ne doit jamais éclipser la résolution des bugs structurels sous peine d'effondrement de la qualité perçue par les utilisateurs.<br>* **L'impact financier direct des temps d'indisponibilité** : Sur un modèle économique transactionnel (jeu mobile avec achats in-app), chaque seconde de coupure non planifiée représente une perte sèche de chiffre d'affaires qui pèse lourdement sur la rentabilité.<br>* **La fatigue opérationnelle comme vecteur d'erreur critique** : L'épuisement des administrateurs système, combiné à une charge d'astreinte mal répartie, multiplie les risques d'erreurs d'inattention aux conséquences désastreuses pour la production.<br>* **L'importance d'une communication transparente avec le management** : Masquer la récurrence d'un incident sous prétexte qu'on le résout rapidement de manière manuelle prive le management d'une vision objective des risques et retarde l'allocation des ressources nécessaires au vrai correctif.
+            <div class="tools-badges-cloud"><span class="tool-tag">Amazon Web Services (AWS)</span><span class="tool-tag">Kill Switch</span><span class="tool-tag">Elasticsearch</span><span class="tool-tag">Tendance Inno</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Éviter le piège de la solution palliative (le &quot;contournement magique&quot;)** : Redémarrer un service ou utiliser une kill switch de manière répétée sans identifier la cause racine crée une dette technique critique et masque un problème de code sous-jacent.</span></li><li><span class="point-bullet">✦</span><span>Le danger de la normalisation de la déviance** : Répéter une action manuelle de contournement tous les deux ou trois jours banalise l&#x27;incident et transforme une anomalie grave en une routine opérationnelle tacite.</span></li><li><span class="point-bullet">✦</span><span>L&#x27;impératif absolu de la traçabilité des actions en production** : Toute intervention manuelle sur un système critique (fermeture de service, maintenance) doit être journalisée, auditée et idéalement automatisée pour éviter l&#x27;effet de &quot;boîte noire&quot;.</span></li><li><span class="point-bullet">✦</span><span>Ne jamais négliger l&#x27;analyse de cause racine (RCA)** : Face à un bug intermittent impossible à reproduire en développement, il est vital de mobiliser l&#x27;équipe de développement pour investiguer la base de code avant que la fatigue opérationnelle ne s&#x27;installe.</span></li><li><span class="point-bullet">✦</span><span>Le risque du SPOF (Single Point of Failure) humain** : Centraliser la gestion des incidents et des arrêts de service sur une seule personne sans documentation ni processus de suppléance expose l&#x27;entreprise à des pannes prolongées en cas d&#x27;indisponibilité (fatigue, absence).</span></li><li><span class="point-bullet">✦</span><span>L&#x27;isolement rigoureux des bases de données** : Les moteurs de recherche comme Elasticsearch et les bases de données d&#x27;entreprise doivent impérativement résider dans des réseaux privés isolés (VPC fermés), sans accès direct depuis l&#x27;Internet public, pour prémunir l&#x27;infrastructure contre les intrusions.</span></li><li><span class="point-bullet">✦</span><span>La gestion de la pression business vs dette technique** : La nécessité constante de livrer de nouvelles fonctionnalités (cartes, contenus) ne doit jamais éclipser la résolution des bugs structurels sous peine d&#x27;effondrement de la qualité perçue par les utilisateurs.</span></li><li><span class="point-bullet">✦</span><span>L&#x27;impact financier direct des temps d&#x27;indisponibilité** : Sur un modèle économique transactionnel (jeu mobile avec achats in-app), chaque seconde de coupure non planifiée représente une perte sèche de chiffre d&#x27;affaires qui pèse lourdement sur la rentabilité.</span></li><li><span class="point-bullet">✦</span><span>La fatigue opérationnelle comme vecteur d&#x27;erreur critique** : L&#x27;épuisement des administrateurs système, combiné à une charge d&#x27;astreinte mal répartie, multiplie les risques d&#x27;erreurs d&#x27;inattention aux conséquences désastreuses pour la production.</span></li><li><span class="point-bullet">✦</span><span>L&#x27;importance d&#x27;une communication transparente avec le management** : Masquer la récurrence d&#x27;un incident sous prétexte qu&#x27;on le résout rapidement de manière manuelle prive le management d&#x27;une vision objective des risques et retarde l&#x27;allocation des ressources nécessaires au vrai correctif.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:02 - 00:00:21</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Bon ok, je vais tout avouer. Ça s&#x27;est passé il y a un peu plus de 10 ans maintenant. Je travaille dans une entreprise qui faisait des jeux vidéo, qui faisait des jeux mobiles. Et l&#x27;un des jeux les plus populaires sur lesquels on travaillait, c&#x27;était Magic the Gathering, le fameux jeu de cartes, mais la version mobile sur téléphone. Et on a lancé le jeu et ça a commencé à pas mal bien marcher.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE
+[CONTENU_TECH] AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Introduction narrative théâtralisée du récit d&#x27;un ancien incident de production.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:21 - 00:00:39</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On avait de plus en plus de joueurs, on rajoutait de plus en plus de fonctionnalités, de plus en plus de cartes, des choses comme ça. Et donc tout se passait bien jusqu&#x27;à un jour où je reçois une alerte. la fameuse alerte de monitoring que personne ne veut recevoir qui dit que le jeu ne fonctionne plus. Et donc moi, j&#x27;étais administrateur système sur ce jeu-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console active visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Narration et mise en scène du témoignage sur l&#x27;incident de production.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:39 - 00:01:06</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je m&#x27;occupais des serveurs qui étaient sur AWS à l&#x27;époque. Et quand je reçois ça, je prends mon téléphone et je commence à essayer de jouer au jeu pour voir ce qui ne va pas. Et je vois qu&#x27;il n&#x27;y a rien qui va. Je n&#x27;arrive même pas à me loguer. Tout est lent, tout est bugué, tout est bizarre. Et on pourrait se dire, un jeu mobile qui ne marche pas, ce n&#x27;est pas si grave. sauf que le problème, c&#x27;est que l&#x27;entreprise continue à payer les développeurs, continue à payer les serveurs, sauf que si les gens ne peuvent pas accéder au jeu, ils ne peuvent pas dépenser dans le jeu, et donc il n&#x27;y a pas d&#x27;argent qui rentre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou outil visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration d&#x27;illustration/narration sans lien avec une manipulation SysAdmin ou cloud.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:06 - 00:01:28</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est une situation qui est assez critique, ça veut dire qu&#x27;à chaque seconde qui passe, l&#x27;entreprise perd de l&#x27;argent. Et donc moi, comme je suis plus l&#x27;admin dans l&#x27;histoire, c&#x27;est moi qui reçois l&#x27;alerte, sauf que j&#x27;ai rien changé dans l&#x27;infrastructure. Et ça a marché hier, ça a marché ce matin, et ça ne marche plus maintenant. Donc je ne sais pas trop quoi faire. Et généralement, quand on ne sait pas trop quoi faire, quand même tu sais, on redémarre tout, on croise les doigts et on espère que ça va arriver au problème magiquement par miracle.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration narrative sous forme de mise en scène humoristique ou métaphorique d&#x27;une situation de crise critique en administration système.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:28 - 00:01:52</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc sur ce jeu, on avait ce qu&#x27;on appelait une kill switch, qui était une petite interface où on pouvait fermer le jeu. C&#x27;est-à-dire qu&#x27;au lieu que le jeu bug ou qu&#x27;il fasse des trucs bizarres ou qu&#x27;il soit lent, on pouvait faire en sorte que les joueurs avaient un petit message qui leur dit « le jeu est en maintenance, revenez plus tard ». Et donc j&#x27;utilise ça, j&#x27;active la kill switch et pendant ce temps-là, je regarde si les machines n&#x27;ont pas de problème, il n&#x27;y avait rien de spécial, elles n&#x27;avaient pas de problème de ressources, elles avaient largement assez de CPU, de mémoire, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou outil visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande, architecture ou métrique affiché.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication conceptuelle du mécanisme de kill switch et de gestion d&#x27;incident de maintenance pour un jeu.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:52 - 00:02:10</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc il n&#x27;y avait rien de particulier qui laissait penser que c&#x27;était un problème système au niveau de l&#x27;infrastructure des machines. Donc dans le doute, je redémarre un petit peu tout. Et puis pour retester, je désactive la kill switch. Et donc là, je prends mon téléphone et je rentre dans le jeu. Et je vois que par miracle, tout remarche.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du diagnostic système et de la désactivation du kill switch réseau</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:16 - 00:02:34</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc tout remarche, je suis un héros, je sauvais l&#x27;infrastructure, je sauvais le jeu. Les gens peuvent continuer à jouer, on continue à faire de l&#x27;argent, tout va bien. Tout va bien, mais pas vraiment. En fait, oui, le bug est résolu sur le moment, sauf que le problème, c&#x27;est qu&#x27;on ne sait pas vraiment d&#x27;où ça vient. Et a priori, ça ne vient pas vraiment de l&#x27;infrastructure, donc ça vient plus de peut-être un bug qui serait dans le code qu&#x27;il faudrait fouiller pour trouver.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et mise en scène narrative sans support technique affiché</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:34 - 00:02:52</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça, je ne peux pas vraiment le régler. Et donc, il faudrait commencer à aller demander aux développeurs d&#x27;aller fouiller dans toute la code base du backend pour essayer de trouver qu&#x27;est-ce qui peut reproduire ce bug, sachant que c&#x27;est très difficile à reproduire parce que ça arrive un peu au hasard comme ça. Et dans les environnements de développement, ça n&#x27;est jamais arrivé. Donc, si on ne peut pas le reproduire, c&#x27;est le genre de bug qui peut être assez difficile à répliquer.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale d&#x27;un problème de bug aléatoire dans le code backend à destination des développeurs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:52 - 00:03:13</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En plus de ça, il y a toujours la pression sur l&#x27;équipe parce que le jeu vient de démarrer, mais les joueurs en demandent toujours plus. Il faut rajouter constamment des nouvelles fonctionnalités, rajouter des nouvelles cartes, etc. Et ça laisse très peu de temps pour aller fouiller sur un bug qu&#x27;on ne sait même pas combien de temps ça va prendre pour le trouver, sachant que c&#x27;est quelque chose qui ne rapporte pas de l&#x27;argent directement. Et donc les jours passent, on commence à oublier un petit peu ces histoires, mais quelques jours plus tard, exactement le même bug réarrive.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale du contexte de pression et de gestion des bugs en production.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:13 - 00:03:41</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc je reçois l&#x27;alerte, je retourne, je revérifie. Là évidemment, j&#x27;ai un peu une meilleure idée de ce qui se passe, donc j&#x27;active la key switch, j&#x27;attends 5-10 minutes, je désactive la key switch sans rien même toucher à l&#x27;infrastructure ni rien du tout, et le jeu se remet hors marché. C&#x27;est vraiment un bug mystère. Et donc ça veut dire qu&#x27;on a quand même une solution temporaire, et donc ce bug continue à réapparaître de temps en temps, tous les 2-3 jours, et donc moi je continue à recevoir mon alerte, à fermer le jeu, à rouvrir le jeu, et puis boum boum, voilà, Thomas il est trop fort, il a réglé le problème à chaque fois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:42 - 00:04:03</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Sauf que le problème n&#x27;est toujours pas réglé. Et donc ça devient un petit peu une habitude, presque un rituel, tous les un ou deux jours, hop, on referme, on ouvre le jeu. Et donc, on s&#x27;habitue et donc ça devient plus trop un gros événement. Ah ok, bon, le jeu il est indisponible pendant quelques minutes, le temps que je le redémarre et puis voilà. Et donc ça fait que j&#x27;ai même plus besoin vraiment de communiquer trop. Je ne perds pas vraiment le temps à alerter le manager, demander la permission de pouvoir fermer le jeu, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou logiciel affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation ou explication technique réalisée (simple plan d&#x27;illustration humoristique).</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:03 - 00:04:22</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je fais juste fermer le jeu, rouvrir et puis bon, tranquille, fini. Et ça continue comme ça pendant une semaine ou deux. Et ça, ça continue. Ça continue pendant des semaines et des semaines. Je commence à fatiguer. Je peux recevoir des alertes à n&#x27;importe quel moment de la journée et je les reçois à n&#x27;importe quel moment de la journée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou de supervision visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou métrique.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune action technique réalisée.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:22 - 00:04:44</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et au bout de quelques jours, il y a un jour où particulièrement je suis assez fatigué. Je sais pas ce que j&#x27;ai fait la veille ou quoi. Mais ce jour-là, je sens que je suis un petit peu plus fatigué que d&#x27;habitude. Et donc, je commence la matinée tranquillement. Et puis arrive midi. Midi, je vais manger. Et là, évidemment, si t&#x27;es déjà un peu fatigué dans la journée, et en plus de ça, tu manges un bon repas et tout.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUN</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:44 - 00:05:03</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Dans l&#x27;entreprise du JT, il y a une bonne petite cafette, on mangeait bien, etc. Et à ce moment-là, devine quoi ? Je reçois encore une alerte. Donc, je retourne sur mon ordi. Comme d&#x27;habitude, c&#x27;est la 15e fois que je le fais. Je ferme le jeu. Je me dis, je vais attendre 5-10 minutes et je vais le rouvrir. Je finis de manger. Là, ça commence à être vraiment dur, dur. Là, je suis vraiment KO. Je suis vraiment...</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:03 - 00:05:25</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je suis fini. Et si je veux finir la journée, il faut vraiment que je recharge les batteries. Donc, je me dis, vas-y, je vais faire une petite sieste, j&#x27;y te fais, histoire de finir l&#x27;après. Donc, je me trouve une petite salle bien sombre où je me mets au fond. Je me trouve un petit canapé, là. Et là, je m&#x27;installe. Et là, c&#x27;est fini. Ça part pour une grosse sieste. Sauf que là, le client, ceux qui nous payent pour qu&#x27;on fasse le jeu, il remarque que le jeu est éteint.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique (code, terminal, architecture).</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation technique ou configuration réalisée.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:26 - 00:05:45</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">On ne peut plus accéder au jeu. Et donc, ils contactent tout de suite le manager de l&#x27;équipe et ils disent « C&#x27;est bizarre, est-ce qu&#x27;on avait programmé une maintenance aujourd&#x27;hui ? Je ne comprends pas, le jeu est éteint. C&#x27;est bizarre, je n&#x27;arrive pas à accéder. » Là, le PM, évidemment, il est vert. Il va sur le jeu, il voit que le jeu ne marche pas. Il me dit « C&#x27;est quoi ce bordel ? » Il n&#x27;a eu aucune alerte, aucun message, aucun rien du tout. Donc, vite, il commence à me chercher partout.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:46 - 00:06:07</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il va à mon bureau, je ne suis pas là. il va dans la café, je suis pas là. Donc là il se dit oh la la putain on est dans la merde, il commence à courir partout dans toutes les salles de réunion partout, il ne me trouve pas. Jusqu&#x27;à ce qu&#x27;il voit la petite salle sombre où il y a personne et les lumières sont éteintes et il rentre dans la salle et là il me voit tout au fond dans le fauteuil en train de taper ma meilleure salle. Et donc il allume les lumières et il se dit mais ça va, il y a un problème, qu&#x27;est-ce qui se passe ?</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou terminal visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Illustration visuelle d&#x27;une situation anecdotique du récit.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:07 - 00:06:29</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">À ce moment-là moi je sors de mes rêves, je me dis ah non non, tout va bien, il n&#x27;y a pas de problème. et il me dit, c&#x27;est parce qu&#x27;en fait là, le jeu il marche plus, on sait plus trop pourquoi, est-ce que tu peux jeter un oeil et regarder ce qu&#x27;il se passe ? Et là, instantanément, moi je sais ce qu&#x27;il se passe. Ce qu&#x27;il se passe, c&#x27;est que c&#x27;est moi qui ai fermé le jeu et je ne l&#x27;ai jamais réouvert. Donc là, je fais genre, ah oui, je vais regarder, puis je vais être sur mon ordi, je fais genre de regarder, puis je rouvre le jeu.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:29 - 00:06:48</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là, par magie, ah, tout remonte. Et ça, c&#x27;était seulement une seule fois où j&#x27;ai foutu la merde en prod. Juste avant la suite, je vais vous parler d&#x27;un projet auquel j&#x27;ai participé. En fait c&#x27;est un podcast qui est dédié aux dernières technologies, l&#x27;innovation, l&#x27;IA, la cybersécurité, l&#x27;entrepreneuriat etc. Et ça s&#x27;appelle Tendance Inno. C&#x27;est le podcast de Docapos que vous connaissez peut-être déjà.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou éditeur de code affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou diagramme visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Séquence narrative d&#x27;illustration (storytelling) sans manipulation technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:48 - 00:07:09</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et en fait pour chaque épisode il y a un expert différent sur le thème en question pour pouvoir discuter des sujets un petit peu plus en profondeur. Et moi j&#x27;étais sur l&#x27;épisode de la cybersécurité sur comment protéger ses données etc. Et j&#x27;étais accompagné par Simo Renich qui lui est un petit peu plus calé là-dessus, c&#x27;est un vrai expert. C&#x27;est le cofondateur d&#x27;un réseau privé sur les pros de la cybersécurité. Et donc on a partagé pas mal de petites astuces pratiques pour pouvoir savoir comment protéger ces données, éviter les cyberattaques, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console technique affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique visible (plans face-caméra uniquement).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;intervenant sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:10 - 00:07:29</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Etant dans Sino, c&#x27;est quand même assez bien vulgarisé, donc c&#x27;est cool pour ceux qui veulent suivre les dernières technos. Mais quand même toujours en approfondissant les sujets avec des experts, comme je le fais un petit peu sur ma chaîne. Et donc c&#x27;est dispo sur toutes les plateformes de podcast. Il y a le lien dans la description vers mon épisode, mais si ça t&#x27;intéresse, je te mets aussi les liens vers les autres épisodes. Donc je te laisse me dire ce que t&#x27;en penses, et puis si t&#x27;aimes ça, peut-être que j&#x27;en ferai plus dans ce format.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou de ligne de commande visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration ou diagramme présent à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation orale et explication générale du podcast &quot;Tendances Inno&quot;.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:29 - 00:07:49</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre fois, je travaillais dans une boîte qui faisait un moteur de recherche pour pouvoir chercher des produits, comparer les prix, les spécifications, les choses comme ça. J&#x27;étais le premier administrateur système de l&#x27;entreprise, c&#x27;était aussi mon premier job d&#x27;adminsys. Et donc j&#x27;ai mis en place un petit peu l&#x27;infrastructure.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Le créateur raconte son expérience de premier administrateur système dans une entreprise de moteur de recherche, sans manipulation ni démonstration technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:49 - 00:08:11</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parmi les technologies qu&#x27;on utilisait, on utilisait principalement Elasticsearch, qui est un système de base de données pour pouvoir chercher dans du texte. Donc aujourd&#x27;hui, c&#x27;est plus utilisé pour gérer les logs, peut-être un petit peu des métriques, des choses comme ça. mais à la base c&#x27;était vraiment un engin de recherche pour pouvoir chercher du texte. Si par exemple je cherche quelque chose et que je fais une faute d&#x27;orthographe, ça peut quand même trouver le bon mot que je voulais.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une interface graphique de type tableau de bord ou console de recherche (Kibana / Elasticsearch UI).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Listes de données textuelles tabulaires ou logs structurés affichés à l&#x27;écran.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation et explication de l&#x27;utilisation d&#x27;Elasticsearch comme moteur de recherche et outil de gestion de logs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_000800_seg23.jpg" alt="Vue par-dessus l&#x27;épaule d&#x27;un écran d&#x27;ordinateur affichant une interface web ou des listes de données textuelles/logs." loading="lazy" onclick="openLightbox('../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_000800_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:00</span>
+                        <span class="caption-text">Vue par-dessus l&#x27;épaule d&#x27;un écran d&#x27;ordinateur affichant une interface web ou des listes de données textuelles/logs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:11 - 00:08:32</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Si par exemple je cherche table, ça peut me proposer bureau ou des choses comme ça. Et donc cette base de données, comme beaucoup de bases de données, même maintenant, elles sont faites principalement pour être utilisées en interne. C&#x27;est-à-dire dans un réseau privé qui n&#x27;est pas exposé sur Internet. Parce qu&#x27;évidemment tu ne peux pas exposer tes bases de données à tout le monde. Et donc c&#x27;est la manière dont je les ai configurées. Je les ai mis dans un réseau privé qui n&#x27;a pas accès à Internet depuis l&#x27;extérieur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;utilisation interne des bases de données et la sécurité réseau.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:32 - 00:08:51</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et comme ça, nos machines de back-end où il y a notre application qui tourne, elles peuvent accéder à l&#x27;application, mais on ne peut pas accéder depuis l&#x27;extérieur. Et puis, c&#x27;était nickel. Tout se passait bien, l&#x27;infrastructure tournait bien, solide, redondée, haute disponibilité, plusieurs serveurs et tout, c&#x27;était nickel. Et on utilisait un petit peu AWS, c&#x27;était pareil, c&#x27;était un petit peu au début.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts d&#x27;architecture réseau et d&#x27;infrastructure hautement disponible par le présentateur.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:51 - 00:09:20</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme on avait parfois un peu plus de charges ou parfois on avait des démos à faire, des choses comme ça, c&#x27;était un petit peu plus pratique de pouvoir démarrer et arrêter des machines sur AWS que de devoir prendre des machines au moins ou de les avoir dans notre propre salle serveur, un truc comme ça. Ce qui est un petit peu plus chiant à gérer, un petit peu moins agile. Et tout se passe bien comme ça pendant des mois et des mois où l&#x27;infra tourne et les gens continuent à aller sur le site.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou console affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;orateur sans support technique visuel.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:20 - 00:09:43</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça tourne bien, il n&#x27;y a pas de problème. Sauf qu&#x27;un jour... Là, il faut que je prenne mon souffle. Sauf qu&#x27;un jour, il y a un des développeurs qui commence à mettre en place des statistiques dans l&#x27;application, dans la base de données, pour pouvoir savoir c&#x27;est quoi les requêtes qui sont les plus fréquentes pour potentiellement optimiser des trucs. Et à un moment, il vient me voir et il me dit « Mais Thomas, est-ce que tu peux venir voir un truc vite fait ? » Parce que c&#x27;est bizarre, il y a un truc que je ne comprends pas.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication narrative du créateur sans support technique visuel.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:43 - 00:10:02</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc moi, je vais voir et tout. Et en fait, il montre les requêtes les plus fréquentes, le top 5, top 10 des requêtes de la base de données. Et en gros, dans le top 3, top 4, les requêtes, elles ne font pas de sens. Elles sont vraiment bizarres. Ce n&#x27;est pas des requêtes comme des trucs que les gens cherchent ou des choses comme ça. c&#x27;est des requêtes vraiment bizarres comme user, delete, des choses comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Interface web Kibana (Elasticsearch) / Dashboard de monitoring</p>
+                        <p><strong>Contenu textuel & Code :</strong> Graphique top 5/10 des requêtes agrégées, panneau de configuration latéral (Filebeat, agrégation Terms, champ url.original)</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse des logs et des requêtes les plus fréquentes dans le système de supervision pour identifier des anomalies ou du trafic suspect.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_000952_seg28.jpg" alt="Vue d&#x27;un écran affichant une interface d&#x27;observabilité (Kibana/Elastic) avec un graphique à barres horizontales représentant le classement des requêtes les plus fréquentes." loading="lazy" onclick="openLightbox('../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_000952_seg28.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:52</span>
+                        <span class="caption-text">Vue d&#x27;un écran affichant une interface d&#x27;observabilité (Kibana/Elastic) avec un graphique à barres horizontales représentant le classement des requêtes les plus fréquentes.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:02 - 00:10:20</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et il me dit, au départ je pensais qu&#x27;on s&#x27;était fait hacker, qu&#x27;il y avait quelque chose dans le backend ou quoi. Et donc j&#x27;ai tout revérifié, j&#x27;ai logué la même chose dans le backend. Et ces requêtes-là, je ne les reçois pas dans le backend. Donc ça veut dire que ce n&#x27;est pas notre application qui envoie ces requêtes à la base de données. Et pourtant, c&#x27;est la majorité des requêtes qui sont envoyées à notre base de données. Donc il dit, je ne sais pas, c&#x27;est bizarre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;analyse des logs backend et du diagnostic d&#x27;intrusion.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:20 - 00:10:41</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Est-ce que tu peux regarder du côté de la base de données, du côté des ASIC search, s&#x27;il n&#x27;y a pas quelque chose de chelou ? Moi je regarde parce qu&#x27;il y a évidemment quelque chose de chelou, ça ne devrait pas être le cas. En fait je me perçois que dans AWS, ton réseau privé, il est privé mais privé avec tous les autres clients de chez AWS. Ça veut dire que n&#x27;importe qui qui crée un compte AWS, il peut accéder directement à la machine dans le même réseau privé dispo à quelque chose.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface graphique visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou architecture réseau visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation ou explication technique n&#x27;est réalisée à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:41 - 00:11:01</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et l&#x27;ACC Search c&#x27;est un système de base de données qui est fait pour être en interne et donc du coup qui n&#x27;a pas d&#x27;authentification par défaut. C&#x27;est à dire quand tu l&#x27;installes, n&#x27;importe qui qui a accès au port 9200, il peut faire des requêtes à la base de données. Et donc ça veut dire que depuis des mois, toute cette base de données qui est utilisée par l&#x27;entreprise, elle est exposée à presque tout le monde, n&#x27;importe qui qui veut créer un compte AWS.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (Google Chrome)</p>
+                        <p><strong>Contenu textuel & Code :</strong> URL contenant un proxy (`/proxy/9200/_cat/indices`) et liste des index Elasticsearch au format texte brut (`green open .apm-custom-link`, `.kibana_task_manager_1`, `filebeat-...`).</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation et consultation directe d&#x27;une instance Elasticsearch non sécurisée exposée via un port de proxy.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_001051_seg31.jpg" alt="Navigateur web affichant une barre d&#x27;adresse avec des URLs d&#x27;accès à un proxy pointant vers Kibana ou Elasticsearch." loading="lazy" onclick="openLightbox('../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_001051_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:51</span>
+                        <span class="caption-text">Navigateur web affichant une barre d&#x27;adresse avec des URLs d&#x27;accès à un proxy pointant vers Kibana ou Elasticsearch.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_001056_seg31.jpg" alt="Navigateur web affichant le résultat brut d&#x27;une requête HTTP vers l&#x27;endpoint Elasticsearch `/_cat/indices`." loading="lazy" onclick="openLightbox('../screenshots/QU6yGZ17Zak/QU6yGZ17Zak_001056_seg31.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:56</span>
+                        <span class="caption-text">Navigateur web affichant le résultat brut d&#x27;une requête HTTP vers l&#x27;endpoint Elasticsearch `/_cat/indices`.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:01 - 00:11:20</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc ce qui arrivait, c&#x27;est que des gens créaient des comptes et ensuite ils mettaient des bots qui allaient scanner la plupart des machines sur le réseau privé d&#x27;AWS. Et ils tapaient sur les ports de ce type de base de données là qui n&#x27;ont pas d&#x27;authentification par défaut, ce qui est le cas de beaucoup de systèmes de gestion de base de données. Et pour pouvoir facilement aller essayer de fouiller dedans, récupérer des informations, essayer de voir ce qu&#x27;ils peuvent faire avec.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique ou code visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts de sécurité sur le cloud AWS.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:20 - 00:11:45</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc évidemment c&#x27;était il y a pas mal de temps. Maintenant depuis AWS a une fonctionnalité qui s&#x27;appelle Virtual Private Network qui fait en sorte que chaque client a son propre réseau privé virtuel même si c&#x27;est techniquement son même réseau physique. Et bien il n&#x27;y a pas un client qui peut aller pinguer toutes les machines d&#x27;un autre client. Dans une autre boîte où j&#x27;ai travaillé longtemps, un jour on vient me voir avec une requête un petit peu bizarre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée (plans vidéo purement narratifs).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique du concept de réseau privé virtuel (VPC) sur le cloud AWS.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:46 - 00:12:15</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En gros on avait une infrime un petit peu compliquée avec des services un petit peu partout. Et dans un certain pays, je ne dirais pas lequel, certains types de données, je ne sais pas lesquelles non plus, doivent absolument rester dans ce pays-là. Donc ça veut dire que pour le monde entier, les bases de données, elles sont centralisées et donc tout arrive au même endroit, pour cette application-là en particulier. Mais pour ce pays très spécifique, il y a quelque part dans des locaux là-bas, sous le bureau de quelqu&#x27;un, un petit ordi qui traîne, et c&#x27;est là-dedans qu&#x27;il y a la base de données qui gère les données des citoyens de ce pays-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;architecture d&#x27;infrastructure et des contraintes de souveraineté des données.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:15 - 00:12:41</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et moi, j&#x27;étais en train de m&#x27;occuper de faire une migration vers le cloud, et on arrive au moment où ce service-là, pareil, il doit être migré vers le cloud. Et donc, les services en question, on n&#x27;a plus les migrer dans le cloud, mais vraiment, la base de données en elle-même, il faut absolument que légalement, elle soit dans ce pays. Donc, on fait la migration. Et ma mission à moi, c&#x27;est de faire en sorte que quand les données viennent de quelqu&#x27;un qui est dans ce pays-là, que les données soient redirigées vers cette fameuse base de données mystère, secrète.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale d&#x27;une problématique de migration cloud et de contraintes légales sur la localisation des bases de données.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:41 - 00:13:01</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, à la base, la première chose à laquelle on pense, c&#x27;est de mettre en place un proxy. Un proxy, c&#x27;est un espèce d&#x27;intermédiaire qui va recevoir la requête pour pouvoir la renvoyer de l&#x27;autre côté. Mais c&#x27;est une application en plus à devoir gérer, à devoir connaître, à devoir administrer, à devoir backuper, sécuriser, etc. Je ne sais pas pourquoi, moi à ce moment-là, je me dis que peut-être qu&#x27;on peut faire sans. Peut-être que ça serait beaucoup plus simple d&#x27;utiliser les IP tables.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de la notion de proxy et des contraintes liées à son administration.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:01 - 00:13:21</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Les IP tables, c&#x27;est en gros les règles de Firewall dans Linux qui sont intégrées à Linux. Et donc c&#x27;est géré directement par le kernel. Donc c&#x27;est super performant, c&#x27;est super sécurisé. C&#x27;est aussi beaucoup plus facile et robuste à mettre en place. Donc je fais mes petits tests, je mets ça en place petit à petit. Et je fais ça nickel, infras, code, serveur qui se répare automatiquement, CACD, monitoring, tout ça, tout ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, terminal ou outil affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou commande visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Aucune manipulation ou configuration technique en cours.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:21 - 00:13:40</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tout est vraiment carré, parfait, dans les règles de là. Et donc, on envoie ça en production. Et tout le monde est content. Parce que voilà, on a réglé le problème. C&#x27;était un sujet un peu touchy. Boum, boum, ça redirige. Et on peut garder toute notre infra dans le cloud. Et on garde juste ce petit truc qui traîne là-bas. Mais voilà, c&#x27;est vraiment juste un cas particulier.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou éditeur de code visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique, code ou schéma d&#x27;infrastructure visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Le créateur s&#x27;exprime face caméra pour illustrer métaphoriquement une situation d&#x27;infrastructure IT complexe.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:40 - 00:14:04</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais voilà, ça marche nickel. Et quelques semaines plus tard, il y a un des DBA. donc c&#x27;est les personnes qui s&#x27;occupent des bases de données, qui vient me voir et qui me dit « Thomas, il faudrait que tu regardes quelque chose qui est bizarre ». Moi, évidemment, je commence à connaître un petit peu ce genre de requête de « viens voir, il y a un truc bizarre ». Donc, je commence à stresser un petit peu. On regarde ensemble et il me dit « c&#x27;est bizarre, je regarde les logs de toutes les bases de données ».</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:04 - 00:14:22</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour cette base de données-là en particulier, je vois qu&#x27;il y a vraiment beaucoup de requêtes d&#x27;authentification. Quelqu&#x27;un qui essaye de se connecter à la base de données. Et là c&#x27;est un petit peu critique parce que pareil, cette base de données elle est en interne. Donc ça veut dire que potentiellement il y a peut-être une de nos applications qui est compromise et qui essaye d&#x27;accéder directement à la base de données. Donc ça sent vraiment pas très bon.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:22 - 00:14:40</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là je me souviens qu&#x27;il y a cette fameuse histoire de proxy, donc je commence à jeter un oeil et je me rends compte qu&#x27;en fait tout simplement, le proxy est ouvert à tout l&#x27;Internet. Donc là c&#x27;est encore pire que la dernière fois, c&#x27;est pas juste à tous les clients AWS, c&#x27;est vraiment à tout le monde, la terre entière. Et donc il y a plein de bots qui traînent sur Internet et qui essayent de se connecter sur des ports.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de l&#x27;incident de sécurité sur le proxy réseau sans support visuel technique</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:40 - 00:14:59</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">et donc ils ont détecté ce proxy là comme étant une base de données. Et donc même si la base de données en elle-même elle est dans un réseau privé d&#x27;un réseau privé de quelque part, le proxy en lui-même lui il est exposé sur internet et donc il se prend plein de tentatives de connexion échouée de gens ou de bots qui sont en train de spammer le proxy pour essayer de trouver le login et le mot de passe à la base de données.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du concept d&#x27;exposition de proxy et de tentatives de connexion de bots sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:00 - 00:15:19</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Cette fois-ci on avait un petit peu plus de chance parce que ce type de base de données là avait de l&#x27;authentification donc ça veut dire que c&#x27;est pas juste open bar quoi. Mais quand même, exposer une base de données sur Internet, c&#x27;est vraiment le dernier truc que t&#x27;as envie de faire. C&#x27;est un peu une erreur de noob, comme on pourrait dire. La morale de ces histoires, c&#x27;est que j&#x27;ai été la plupart du temps dans des entreprises où il n&#x27;y avait pas de culture du blâme.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts de sécurité et de vulnérabilités sur l&#x27;exposition de bases de données, sans manipulation technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:19 - 00:15:42</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, je ne me suis jamais senti attaqué ou quoi d&#x27;avoir fait des erreurs. C&#x27;est ça qui fait que j&#x27;ai pu apprendre et donc, du coup, ça ne me gêne pas d&#x27;en parler avec vous aujourd&#x27;hui. Et ça m&#x27;a fait comprendre aussi une chose, c&#x27;est que la culture du blâme, de toujours vouloir dire « Qui a fait ça ? C&#x27;est de la faute à qui ? Lui, il faudra le virer. C&#x27;est de la compétence, etc. » Tout ça, ça sert à rien et c&#x27;est même contre-productif pour trois raisons. La première, c&#x27;est que s&#x27;il y a une culture comme ça dans l&#x27;entreprise, et puis même en général, dans l&#x27;informatique, parfois on a un peu tendance à faire ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:42 - 00:16:03</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il y a pas mal de gens qui vont avoir tendance à vouloir cacher leurs erreurs et le problème. Et du coup, ça empire le problème parce que maintenant, tu as un problème quelque part dans ton infrastructure et on ne le sait pas. Donc c&#x27;est encore pire. Et même si jamais on finit par le savoir, comme les gens vont essayer un peu de camoufler, cacher leurs traces, ça va être encore plus difficile de savoir ce qui s&#x27;est vraiment passé. Deuxièmement, la meilleure façon de jamais faire d&#x27;erreur, c&#x27;est de rien faire.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique ou de code visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts liés à la gestion des erreurs et à la culture d&#x27;entreprise dans l&#x27;infrastructure.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:03 - 00:16:23</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc du coup ça va impacter la productivité, ça va complètement détruire l&#x27;initiative, c&#x27;est-à-dire qu&#x27;on ne va plus jamais prendre le risque de vouloir faire quelque chose de nouveau, de vouloir essayer quelque chose, et donc du coup c&#x27;est complètement contre-productif. Et la troisième chose, ce qui est la pire, c&#x27;est que quand on pointe du doigt et qu&#x27;on dit juste « Ah bah c&#x27;était sa faute, on l&#x27;a viré, c&#x27;est bon, ça a réglé le problème », bah en fait ça ne règle pas le problème. Parce que la cause source du problème, c&#x27;est presque jamais la personne.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:24 - 00:16:43</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Soit c&#x27;est un oubli ou une faute d&#x27;inattention, et dans ce cas-là, ça arrive à cette personne-là, demain ça arrivera à une autre personne. Et donc du coup, blâmer cette personne-là en particulier, ça fait pas de sens, puisque c&#x27;est juste une question de temps avant que quelqu&#x27;un d&#x27;autre fasse une erreur. Soit c&#x27;est un manque d&#x27;expertise, c&#x27;est-à-dire que juste on savait pas. Dans ce cas-là, on pourrait aussi dire que c&#x27;est aussi la faute de toutes les autres personnes dans l&#x27;entreprise qui savaient et qui n&#x27;ont rien fait.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication verbale sur la gestion des erreurs et la culture post-mortem en DevOps, sans manipulation technique affichée.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:43 - 00:17:04</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et si jamais cette personne en question, c&#x27;est essentiel à être l&#x27;expert, ce qu&#x27;ils devaient savoir, maintenant au moins elle sait et c&#x27;est comme ça qu&#x27;on apprend et au moins maintenant on va vouloir vraiment régler le problème. Et surtout faire en sorte que ça ne réarrive plus. Donc qu&#x27;est-ce qu&#x27;on peut faire à la place ? Parce que forcément, pointer du doigt, c&#x27;est facile, mais régler le problème, c&#x27;est un petit peu plus difficile. On a deux types de solutions. On a des solutions humaines et des solutions techniques. Mais la plupart du temps, quand on a un problème technique, on va essayer d&#x27;appliquer une solution qui est technique.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> AUCUNE</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-49">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:05 - 00:17:30</span>
+                <span class="segment-idx">Segment #49</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Par exemple, pour l&#x27;histoire où j&#x27;ai ouvert les bases de données à tout l&#x27;Internet, une solution humaine qu&#x27;on pourrait utiliser, c&#x27;est de faire des peer reviews. C&#x27;est quelque chose qu&#x27;on fait souvent dans le monde du développement, mais pas trop dans le monde de l&#x27;administration système. Et comme on fait de plus en plus d&#x27;infrastructures ASCODE, du coup, le métier se rapproche de plus en plus à un métier de développeur. et donc ça fait du sens d&#x27;adopter des pratiques de développement. Peut-être qu&#x27;avoir une peer review, c&#x27;est-à-dire que juste avant de mettre en production, quelqu&#x27;un vient voir ce que j&#x27;ai fait pour pouvoir donner son avis, améliorer et puis voir s&#x27;il n&#x27;y a pas d&#x27;erreur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-50">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:30 - 00:17:48</span>
+                <span class="segment-idx">Segment #50</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Peut-être que ça aurait pu éviter d&#x27;avoir ce problème. Ça, c&#x27;est une solution un peu plus humaine. Mais ce qui est encore mieux, ça aurait été d&#x27;appliquer une solution technique. Ça aurait pu être, par exemple, dans toute l&#x27;infrastructure, de mettre des règles en place qui empêchent l&#x27;ajout de règles de firewall qui sont ouvertes à tout l&#x27;Internet. Donc c&#x27;est quelque chose qui est complètement automatisé. il y a plein de solutions qui existent pour faire ça, et ça aurait évité que ça réarrive dans n&#x27;importe qui dans le futur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique, console ou terminal affiché à l&#x27;écran.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, configuration de pare-feu, commande ou diagramme d&#x27;infrastructure visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts DevOps et de sécurité réseau (mise en place de politiques de pare-feu restrictives) sans support visuel technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-51">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:49 - 00:18:10</span>
+                <span class="segment-idx">Segment #51</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Pour l&#x27;histoire de la sieste, bon, ça c&#x27;était un petit peu abusé, mais une solution humaine, ça aurait été de prioriser la correction des bugs en production, des bugs critiques, par rapport à l&#x27;ajout de fonctionnalités. Parce que c&#x27;est sûr que sur le moment, on veut toujours ajouter plus de fonctions, plus de fonctionnalités pour avoir des nouveaux utilisateurs, avoir plus d&#x27;argent, etc. Mais si on accumule de la dette technique, du coup, ça finit par revenir nous embêter un jour ou l&#x27;autre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Discussion générale sur la gestion des priorités en production.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-52">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:10 - 00:18:45</span>
+                <span class="segment-idx">Segment #52</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et sinon, si on voulait vraiment trouver une solution plus technique pour ça, ça va être de faire en sorte que la fameuse kill switch, au moment où elle est activée par exemple, déjà elle peut envoyer un email aux personnes qui sont concernées, comme ça les gens ne tombent pas des nues quand ils voient que le jeu est fermé. Et justement par exemple ajouter une option pour pouvoir automatiquement la réouvrir au bout d&#x27;un certain temps, quelque chose comme ça. Ce qui pourrait même être encore mieux, ça serait que la kill switch soit un petit peu plus intelligente, puisse envoyer des requêtes aux différents services du backend, et quand ils sont tous ok, là elle peut commencer à envoyer du trafic, et si jamais il y en a certains qui ne fonctionnent pas, là on met automatiquement le jeu en maintenance, Et donc ça pourrait éviter même d&#x27;autres types de problèmes qui n&#x27;ont rien à voir avec celui-là.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface visible</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun contenu technique visible</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale de concepts techniques (kill switch et automatisation de notifications) sans support visuel technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-53">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:45 - 00:19:04</span>
+                <span class="segment-idx">Segment #53</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et pour l&#x27;histoire des bases de données Elasticsearch qui étaient ouvertes à tout AWS, là c&#x27;est un petit peu la même chose, c&#x27;était un manque d&#x27;information, un manque d&#x27;expertise. Et donc avec cette nouvelle information, on peut revoir l&#x27;infrastructure pour vérifier qu&#x27;on n&#x27;a pas d&#x27;autres choses qui sont potentiellement ouvertes à tout le monde. Et pareil, mettre en place des outils qui vont nous empêcher de mettre ces règles dangereuses qui sont ouvertes à tout le monde.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur la sécurité des bases de données et la configuration des infrastructures cloud.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-54">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:04 - 00:19:26</span>
+                <span class="segment-idx">Segment #54</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Comme ça, pareil, ça règle le problème une bonne fois pour toutes, quelle que soit la personne qui déploie l&#x27;infrastructure ou qui déploie des règles de firewall. Ce qui m&#x27;a inspiré de faire cette vidéo, c&#x27;est certains retours sur certaines de mes dernières vidéos où je parle par exemple de failles de sécurité ou les problèmes qu&#x27;il y a eu avec CrowdStrike etc. Et si ce genre de problème ça t&#x27;intéresse et surtout comment est-ce qu&#x27;on a fait pour pouvoir les détecter et les régler, je te laisse aller voir cette vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface technique affiché.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible (plans face-caméra uniquement).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale et discussion sur la gestion des infrastructures et des règles de firewall.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

@@ -26,7 +26,8 @@
     "mdxKBz5QUTo",
     "080p5Y2_wpg",
     "nmUBSX6BEak",
-    "SXv9JCCUqXQ"
+    "SXv9JCCUqXQ",
+    "QU6yGZ17Zak"
   ],
   "processed_videos": [
     {
@@ -352,6 +353,18 @@
       "screenshots_count": 14,
       "audit_score": 100.0,
       "audit_passed": true
+    },
+    {
+      "id": "QU6yGZ17Zak",
+      "title": "J'ai foutu la merde en prod ...",
+      "upload_date": "20241124",
+      "duration": 1168,
+      "duration_str": "00:19:28",
+      "md_file": "YT_Cocadmin_Transcript/2024-11-24_YT-[QU6yGZ17Zak]_J'ai foutu la merde en prod ..._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md",
+      "html_file": "YT_Cocadmin_Transcript/2024-11-24_YT-[QU6yGZ17Zak]_J'ai foutu la merde en prod ..._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html",
+      "screenshots_count": 4,
+      "audit_score": 100.0,
+      "audit_passed": true
     }
   ],
   "known_baseline_ids": [
@@ -499,7 +512,7 @@
     "4jlPZtc17l8"
   ],
   "last_run_timestamp": "2026-10-08T00:17:10Z",
-  "completed_count": 27,
+  "completed_count": 28,
   "total_catalog_count": 142,
   "status": "ready"
 }
