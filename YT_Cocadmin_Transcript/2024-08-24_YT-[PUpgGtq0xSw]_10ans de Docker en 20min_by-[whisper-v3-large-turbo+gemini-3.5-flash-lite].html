@@ -1,0 +1,2849 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10ans de Docker en 20min — Transcription Intégrale | cocadmin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #0a0e17;
+            --bg-card: #111827;
+            --bg-card-alt: #162032;
+            --border: #1f2937;
+            --border-highlight: #374151;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --secondary: #818cf8;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-faint: #6b7280;
+            --quote-bg: rgba(17, 24, 39, 0.7);
+            --visual-bg: rgba(15, 23, 42, 0.75);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            line-height: 1.65;
+            padding: 2rem 1rem 6rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header.hero-header {
+            background: linear-gradient(145deg, #131b2e 0%, #0c1222 100%);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header.hero-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .badge-channel {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 9999px;
+            padding: 0.35rem 0.85rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-decoration: none;
+        }
+
+        h1.video-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            line-height: 1.25;
+            color: #ffffff;
+            margin-bottom: 1.2rem;
+        }
+
+        .video-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .meta-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        /* Summary Section */
+        .executive-summary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tools-badges-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin: 1.2rem 0;
+        }
+
+        .tool-tag {
+            background: var(--bg-card-alt);
+            color: var(--primary);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-sm);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.85rem;
+            font-family: var(--font-mono);
+            font-weight: 500;
+        }
+
+        .key-points-list {
+            list-style: none;
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .key-points-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .point-bullet {
+            color: var(--accent);
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        /* Timeline Blocks */
+        .timeline-section {
+            position: relative;
+        }
+
+        .timeline-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.15s ease, border-color 0.15s ease;
+        }
+
+        .timeline-block:hover {
+            border-color: var(--border-highlight);
+        }
+
+        .timeline-time {
+            background: var(--bg-card-alt);
+            padding: 0.85rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .time-badge {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: var(--radius-sm);
+        }
+
+        .segment-idx {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-faint);
+            font-weight: 700;
+        }
+
+        .timeline-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        /* Verbatim Box */
+        .verbatim-box {
+            background: var(--quote-bg);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            padding: 1.2rem;
+        }
+
+        .verbatim-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .verbatim-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #ffffff;
+            font-weight: 400;
+        }
+
+        /* Visual Box */
+        .visual-box {
+            background: var(--visual-bg);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+        }
+
+        .visual-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .visual-details p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .visual-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .visual-details strong {
+            color: var(--text-main);
+        }
+
+        /* Screenshots Grid */
+        .segment-screenshots-wrapper {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .screenshots-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 0.85rem;
+        }
+
+        .segment-screenshots-grid {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .screenshot-card {
+            background: var(--bg-card-alt);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            background: #000;
+            aspect-ratio: 16 / 9;
+        }
+
+        .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.25s ease;
+        }
+
+        .img-wrapper:hover img {
+            transform: scale(1.03);
+        }
+
+        .zoom-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+            padding: 0.2rem 0.5rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            backdrop-filter: blur(4px);
+            pointer-events: none;
+        }
+
+        .screenshot-caption {
+            padding: 0.75rem;
+            font-size: 0.82rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .caption-time {
+            font-family: var(--font-mono);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .caption-text {
+            color: var(--text-muted);
+        }
+
+        /* Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(6px);
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--border-highlight);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #fff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        footer.site-footer {
+            text-align: center;
+            padding-top: 4rem;
+            color: var(--text-faint);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            h1.video-title {
+                font-size: 1.6rem;
+            }
+            .video-meta-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .timeline-content {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="hero-header">
+            <a href="https://www.youtube.com/@cocadmin" target="_blank" class="badge-channel">
+                <span>📺</span>
+                <span>cocadmin</span>
+            </a>
+            <h1 class="video-title">10ans de Docker en 20min</h1>
+            <div class="video-meta-bar">
+                <div class="meta-item">
+                    <span>🔗</span>
+                    <a href="https://www.youtube.com/watch?v=PUpgGtq0xSw" target="_blank">Lien YouTube (<code>PUpgGtq0xSw</code>)</a>
+                </div>
+                <div class="meta-item">
+                    <span>📅</span>
+                    <span>Publication : 2024-08-24</span>
+                </div>
+                <div class="meta-item">
+                    <span>⏱️</span>
+                    <span>Durée : 00:21:34</span>
+                </div>
+                <div class="meta-item">
+                    <span>🤖</span>
+                    <span>Modèles : <code>whisper-v3-large-turbo+gemini-3.5-flash-lite</code></span>
+                </div>
+            </div>
+        </header>
+
+        <section class="executive-summary">
+            <div class="section-header">
+                <span>📌</span>
+                <span>Synthèse Exécutive & Enseignements Stratégiques</span>
+            </div>
+            ### 💡 Résumé<br><br>La gestion des conteneurs s'est considérablement industrialisée au fil des années, mais de nombreux ingénieurs et développeurs ignorent encore l'existence de fonctionnalités avancées et de commandes modernes intégrées à l'écosystème Docker. Cette présentation met en lumière des techniques méconnues et des outils natifs récents permettant d'optimiser radicalement le flux de travail (workflow) de développement, de test et de débogage, tout en s'affranchissant des limitations matérielles ou logistiques habituelles.<br><br>L'une des capacités les plus spectaculaires abordées est l'exécution d'applications graphiques et de navigateurs complets au sein de conteneurs Linux, y compris l'émulation d'architectures x86 sur des stations de travail ARM (comme les puces Apple Silicon M1). Grâce au serveur de fenêtrage X11 et à des outils de pontage adaptés comme XQuartz sur macOS, il devient possible de lancer des jeux ou de tester instantanément des versions spécifiques de navigateurs sans polluer l'environnement hôte. Cette approche s'avère particulièrement puissante pour l'assurance qualité et le débogage multi-plateforme.<br><br>Sur le plan de l'expérience de développement (DX), Docker a introduit des fonctionnalités majeures telles que `docker init`, `Docker Compose Watch` et `Docker Debug`. L'initialisation automatisée génère instantanément les fichiers de configuration conformes aux meilleures pratiques (Dockerfiles multi-étapes, sécurité sans root, configurations WSGI) à partir d'une simple analyse du code source. De plus, la synchronisation intelligente des répertoires et le redémarrage à chaud via Compose Watch éliminent la nécessité de reconstruire manuellement les images à chaque modification, accélérant ainsi la boucle de rétroaction des développeurs.<br><br>### 🛠️ Outils, Modèles & Logiciels Présentés<br><br>* **Docker** : La plateforme de conteneurisation de référence, enrichie de nouvelles commandes natives facilitant l'initialisation et le débogage.<br>* **X11 / XQuartz** : Le système de fenêtrage graphique (et son implémentation pour macOS) indispensable pour afficher des interfaces graphiques Linux sur un système hôte non-Linux.<br>* **Doom 2 / DOSBox** : Un jeu vidéo historique exécuté ici dans un conteneur Linux pour démontrer la viabilité des applications graphiques et émulées.<br>* **Mozilla Firefox** : Un navigateur web utilisé pour illustrer la capacité à lancer des versions ciblées et isolées pour des tests de régression.<br>* **Python / Flask** : Le langage et le framework web utilisés comme cas pratique pour l'initialisation de projets et le déploiement local.<br>* **Gunicorn (WSGI)** : Le serveur HTTP Python configuré automatiquement pour la mise en production d'applications web.<br>* **Docker Compose** : L'orchestrateur de conteneurs multi-services utilisé pour piloter le cycle de vie applicatif et intégrer des dépendances (comme des bases de données).<br>* **Docker Compose Watch** : La fonctionnalité de surveillance et de synchronisation à chaud des fichiers pour accélérer l'itération en environnement de développement.<br>* **Nginx** : Le serveur web et proxy inverse couramment utilisé, souvent déployé sous forme d'image conteneurisée minimale.<br>* **Docker Debug** : Un outil avancé conçu pour inspecter et dépanner des conteneurs légers ou minimalistes dépourvus d'utilitaires système classiques.<br><br>### 🔑 Points Clés & Enseignements Stratégiques<br><br>* **Déportation graphique X11** : Il est possible de faire tourner des applications graphiques lourdes (jeux, navigateurs) dans des conteneurs Linux et d'afficher leur interface sur macOS ou Windows en configurant correctement les variables d'environnement (`DISPLAY`) et les volumes de sockets X11 (`/tmp/.X11-unix`).<br>* **Émulation d'architecture multi-plateforme** : Docker gère nativement l'émulation d'architecture (ex. : exécuter du code x86 sur un processeur ARM Apple Silicon M1), permettant de tester des environnements hétérogènes sans disposer du matériel physique dédié.<br>* **Isolation et tests de régression navigateurs** : Lancer des versions spécifiques de navigateurs via des conteneurs évite l'installation locale de multiples binaires et garantit un environnement de test strictement reproductible pour le débogage web.<br>* **Initialisation automatisée avec `docker init`** : Cette commande analyse la base de code existante (ex. : Python, Node.js) pour générer automatiquement des Dockerfiles optimisés, des fichiers `docker-compose.yml` et des configurations `.dockerignore` adaptés.<br>* **Application des meilleures pratiques de sécurité par défaut** : Les fichiers générés par `docker init` intègrent d'office les standards de l'art, tels que l'évitement de l'exécution en tant qu'utilisateur `root` et la configuration rigoureuse des points d'entrée.<br>* **Architecture modulaire via Docker Compose** : La commande d'initialisation propose d'inclure des services additionnels prêts à l'emploi (comme des bases de données PostgreSQL) qu'il suffit de décommenter pour constituer un stack complet.<br>* **Accélération du développement avec Docker Compose Watch** : L'option `develop` surveille l'arborescence du code source pour synchroniser les modifications de fichiers en temps réel et redémarrer le conteneur sans passer par une phase de reconstruction complète (`docker build`).<br>* **Arbitrage des stratégies de mise à jour** : Selon la nature de l'application, il est possible de configurer Watch pour une simple synchronisation de fichiers, un redémarrage de service ou un re-build complet, optimisant ainsi le compromis entre vitesse et exactitude de l'environnement.<br>* **Éviter le piège des images minimalistes pour le debug** : Les images de production (comme Nginx) sont souvent "minifiées" (distroless ou Alpine épuré) et ne contiennent ni shell interactif (`bash`), ni éditeur, ni outils de diagnostic (`ps`), rendant les commandes `docker exec` inefficaces.<br>* **Nécessité d'outils de diagnostic modernes** : Face à des conteneurs de production durcis et dépourvus d'outils d'administration basiques, l'utilisation de solutions dédiées comme `Docker Debug` devient indispensable pour auditer l'état interne sans corrompre l'intégrité de l'image.
+            <div class="tools-badges-cloud"><span class="tool-tag">Docker</span><span class="tool-tag">X11 / XQuartz</span><span class="tool-tag">Doom 2 / DOSBox</span><span class="tool-tag">Mozilla Firefox</span><span class="tool-tag">Python / Flask</span><span class="tool-tag">Gunicorn (WSGI)</span><span class="tool-tag">Docker Compose</span><span class="tool-tag">Docker Compose Watch</span><span class="tool-tag">Nginx</span><span class="tool-tag">Docker Debug</span></div>
+            <ul class="key-points-list"><li><span class="point-bullet">✦</span><span>&amp; Enseignements Stratégiques</span></li><li><span class="point-bullet">✦</span><span>Déportation graphique X11** : Il est possible de faire tourner des applications graphiques lourdes (jeux, navigateurs) dans des conteneurs Linux et d&#x27;afficher leur interface sur macOS ou Windows en configurant correctement les variables d&#x27;environnement (`DISPLAY`) et les volumes de sockets X11 (`/tmp/.X11-unix`).</span></li><li><span class="point-bullet">✦</span><span>Émulation d&#x27;architecture multi-plateforme** : Docker gère nativement l&#x27;émulation d&#x27;architecture (ex. : exécuter du code x86 sur un processeur ARM Apple Silicon M1), permettant de tester des environnements hétérogènes sans disposer du matériel physique dédié.</span></li><li><span class="point-bullet">✦</span><span>Isolation et tests de régression navigateurs** : Lancer des versions spécifiques de navigateurs via des conteneurs évite l&#x27;installation locale de multiples binaires et garantit un environnement de test strictement reproductible pour le débogage web.</span></li><li><span class="point-bullet">✦</span><span>Initialisation automatisée avec `docker init`** : Cette commande analyse la base de code existante (ex. : Python, Node.js) pour générer automatiquement des Dockerfiles optimisés, des fichiers `docker-compose.yml` et des configurations `.dockerignore` adaptés.</span></li><li><span class="point-bullet">✦</span><span>Application des meilleures pratiques de sécurité par défaut** : Les fichiers générés par `docker init` intègrent d&#x27;office les standards de l&#x27;art, tels que l&#x27;évitement de l&#x27;exécution en tant qu&#x27;utilisateur `root` et la configuration rigoureuse des points d&#x27;entrée.</span></li><li><span class="point-bullet">✦</span><span>Architecture modulaire via Docker Compose** : La commande d&#x27;initialisation propose d&#x27;inclure des services additionnels prêts à l&#x27;emploi (comme des bases de données PostgreSQL) qu&#x27;il suffit de décommenter pour constituer un stack complet.</span></li><li><span class="point-bullet">✦</span><span>Accélération du développement avec Docker Compose Watch** : L&#x27;option `develop` surveille l&#x27;arborescence du code source pour synchroniser les modifications de fichiers en temps réel et redémarrer le conteneur sans passer par une phase de reconstruction complète (`docker build`).</span></li><li><span class="point-bullet">✦</span><span>Arbitrage des stratégies de mise à jour** : Selon la nature de l&#x27;application, il est possible de configurer Watch pour une simple synchronisation de fichiers, un redémarrage de service ou un re-build complet, optimisant ainsi le compromis entre vitesse et exactitude de l&#x27;environnement.</span></li><li><span class="point-bullet">✦</span><span>Éviter le piège des images minimalistes pour le debug** : Les images de production (comme Nginx) sont souvent &quot;minifiées&quot; (distroless ou Alpine épuré) et ne contiennent ni shell interactif (`bash`), ni éditeur, ni outils de diagnostic (`ps`), rendant les commandes `docker exec` inefficaces.</span></li><li><span class="point-bullet">✦</span><span>Nécessité d&#x27;outils de diagnostic modernes** : Face à des conteneurs de production durcis et dépourvus d&#x27;outils d&#x27;administration basiques, l&#x27;utilisation de solutions dédiées comme `Docker Debug` devient indispensable pour auditer l&#x27;état interne sans corrompre l&#x27;intégrité de l&#x27;image.</span></li></ul>
+        </section>
+
+        <section class="timeline-section">
+            <div class="section-header">
+                <span>⏱️</span>
+                <span>Chronologie & Transcription Complète Audio & Visuelle</span>
+            </div>
+            
+        <div class="timeline-block" id="segment-1">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:00 - 00:00:22</span>
+                <span class="segment-idx">Segment #01</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">J&#x27;ai mis 10 ans avant de découvrir qu&#x27;on pouvait faire ça sur Docker. C&#x27;est vraiment des astuces, des hacks, de pros, d&#x27;experts, de beaux gosses même. Et la première, c&#x27;est que dans Docker, on n&#x27;est pas obligé d&#x27;utiliser des applications en ligne de commande. On peut très bien utiliser des applications qui sont graphiques, comme des jeux, des navigateurs. Et donc pour ça, tu as besoin du système de fenêtre X11 qui est par défaut sur Linux, mais que tu peux quand même avoir sur Windows ou sur Mac.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web sur moniteur externe affichant une page de documentation technique (Quartz), ordinateur portable (MacBook) sur support, et poste de travail.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page web de téléchargement rapide et informations de licence de l&#x27;outil open-source Quartz (quartz 4.2.3).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation d&#x27;astuces et de fonctionnalités avancées et méconnues autour de Docker, en illustrant avec des outils et navigateurs sur le poste de travail.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000016_seg1.jpg" alt="Vue du poste de travail avec le moniteur externe affichant la documentation d&#x27;un outil open-source (Quartz) et le MacBook portable ouvert." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000016_seg1.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:16</span>
+                        <span class="caption-text">Vue du poste de travail avec le moniteur externe affichant la documentation d&#x27;un outil open-source (Quartz) et le MacBook portable ouvert.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-2">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:22 - 00:00:42</span>
+                <span class="segment-idx">Segment #02</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc par exemple sur Mac, pour pouvoir l&#x27;installer, on peut utiliser XQuartz. Donc là on peut soit l&#x27;installer ici, soit arriver et faire directement brou install xquartz. Ensuite il faut récupérer son adresse IP locale, donc là pour moi c&#x27;est 2.100. Et on va autoriser notre adresse IP à se connecter à notre serveur X, qui va être notre serveur de fenêtre.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal macOS (CLI).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Invite de commande du terminal : `-2 repos %`.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation de la configuration d&#x27;un serveur X sur macOS pour du déport d&#x27;affichage graphique.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000027_seg2.jpg" alt="Un terminal macOS affichant l&#x27;invite de commande, avec une incrustation vidéo du présentateur en bas à droite." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000027_seg2.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:27</span>
+                        <span class="caption-text">Un terminal macOS affichant l&#x27;invite de commande, avec une incrustation vidéo du présentateur en bas à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-3">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:00:42 - 00:01:00</span>
+                <span class="segment-idx">Segment #03</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc pour ça on va faire xhost plus pour autoriser et l&#x27;adresse IP. Là ça me dit que mon adresse IP a été ajouté à la liste. Et ensuite je peux lancer ma commande Docker comme d&#x27;habitude avec une petite modification. c&#x27;est que ici je vais lancer un conteneur qui s&#x27;appelle Doom 2 pour pouvoir jouer à Doom, qui est une application qui a besoin d&#x27;une fenêtre pour pouvoir être utilisée.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Unix / macOS (zsh sur l&#x27;hôte coca@canette-2)</p>
+                        <p><strong>Contenu textuel & Code :</strong> echo $ip (affiche 192.168.2.100), xhost + $ip (ajoute l&#x27;IP à la liste de contrôle d&#x27;accès X11)</p>
+                        <p><strong>Action / Démonstration :</strong> Configuration des permissions du serveur X11 pour permettre l&#x27;affichage graphique d&#x27;un conteneur Docker distant sur la machine hôte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000047_seg3.jpg" alt="Terminal Linux affichant la commande xhost pour autoriser l&#x27;adresse IP à accéder au serveur X11." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000047_seg3.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:00:47</span>
+                        <span class="caption-text">Terminal Linux affichant la commande xhost pour autoriser l&#x27;adresse IP à accéder au serveur X11.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-4">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:00 - 00:01:20</span>
+                <span class="segment-idx">Segment #04</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et il y a deux arguments spéciaux que je vais rajouter. Un, je vais lui passer une variable d&#x27;environnement qui s&#x27;appelle Display. Et Display, ça va être mon IP 2.0 et utilise ça comme fenêtre. Et ensuite ici, je vais lui passer un volume qui va faire en sorte que X11 peut marcher en gros. Et donc si je fais ça, j&#x27;ai une nouvelle fenêtre qui s&#x27;ouvre ici, qui est en train de charger et qui est Doom.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Bureau macOS avec une fenêtre de terminal X11/XQuartz active en haut à gauche et la webcam du présentateur en incrustation.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logs d&#x27;initialisation du jeu DOOM (vérification des WADs, allocation mémoire, chargement des graphismes) affichés dans une fenêtre graphique.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration du résultat du conteneur Docker configuré avec la variable d&#x27;environnement DISPLAY et le partage de volume X11, permettant d&#x27;afficher une application graphique (jeu DOOM) sur l&#x27;hôte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000115_seg4.jpg" alt="Fenêtre graphique de terminal affichant l&#x27;exécution réussie de DOOM dans un conteneur via X11." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000115_seg4.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:15</span>
+                        <span class="caption-text">Fenêtre graphique de terminal affichant l&#x27;exécution réussie de DOOM dans un conteneur via X11.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-5">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:20 - 00:01:47</span>
+                <span class="segment-idx">Segment #05</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là, j&#x27;ai Doom qui tourne dans DOS Box, qui est animateur pour les vieux ordinateurs DOS. Et normalement, je peux faire une nouvelle partie. Voilà. Et si je me souviens bien, je crois que c&#x27;est 0 pour tirer. Bam, bam, bam, bam, bam. Allez, tiens, tiens, tiens, tiens ! Tu veux quoi, toi ? Bon, bref, tout ça pour dire que là, je suis en train de jouer à une application qui tourne dans Linux, dans un conteneur, alors que je suis sur macOS, et qui est visuel, qui est dans une fenêtre, et donc je peux interagir avec.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Émulateur DOSBox 0.74-3 (interface de jeu DOS).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Menu principal et phases de gameplay du jeu Doom 2 avec affichage des statistiques (munitions, santé, armure).</p>
+                        <p><strong>Action / Démonstration :</strong> Lancement et démonstration d&#x27;un jeu rétro (Doom 2) dans un environnement émulé sous DOSBox.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000127_seg5.jpg" alt="Écran principal affichant le menu du jeu Doom 2 émulé dans DOSBox 0.74-3." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000127_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:27</span>
+                        <span class="caption-text">Écran principal affichant le menu du jeu Doom 2 émulé dans DOSBox 0.74-3.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000134_seg5.jpg" alt="Scène de gameplay de Doom 2 en cours d&#x27;exécution dans l&#x27;émulateur DOSBox, montrant le joueur face à des ennemis." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000134_seg5.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:34</span>
+                        <span class="caption-text">Scène de gameplay de Doom 2 en cours d&#x27;exécution dans l&#x27;émulateur DOSBox, montrant le joueur face à des ennemis.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-6">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:01:47 - 00:02:08</span>
+                <span class="segment-idx">Segment #06</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, bon, Doom, ce n&#x27;est pas super utile, même si ça peut être sympa pour certains jeux, des choses comme ça, qui peuvent tourner que sur Linux. Mais un truc qui peut être cool, c&#x27;est que par exemple, imagine que tu veux lancer une version particulière d&#x27;un navigateur pour débuguer qu&#x27;un bug qui est juste sur telle ou telle version de Firefox. Eh bien, je peux lancer Firefox dans Linux, choisir une version particulière en trouvant l&#x27;image qu&#x27;il y a besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande (shell) sur macOS avec une fenêtre active.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Invite de commande du terminal : `coca@canette-2 repos %`.</p>
+                        <p><strong>Action / Démonstration :</strong> Le présentateur introduit l&#x27;utilisation pratique de conteneurs pour exécuter des versions spécifiques de logiciels (comme des navigateurs pour du débogage).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000157_seg6.jpg" alt="Affichage d&#x27;un terminal de commande macOS dans un environnement de travail, avec le prompt utilisateur actif et une incrustation vidéo du présentateur." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000157_seg6.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:01:57</span>
+                        <span class="caption-text">Affichage d&#x27;un terminal de commande macOS dans un environnement de travail, avec le prompt utilisateur actif et une incrustation vidéo du présentateur.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-7">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:08 - 00:02:31</span>
+                <span class="segment-idx">Segment #07</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là, de la même manière, j&#x27;ai une fenêtre qui est Mozilla Firefox, que je n&#x27;ai pas eu besoin d&#x27;installer sur mon ordi, de retrouver avec 19 versions, etc. Je peux faire tourner autant de versions en parallèle que ce que je veux d&#x27;autant de navigateurs. Donc là, je peux aller sur youtube.com slash coqadmin pour pouvoir aller m&#x27;abonner, pourquoi pas, quand ça aura fini de charger. D&#x27;ailleurs, comme vous voyez, on est proche des 200 000, donc ce serait le moment pour être peut-être le 200 000ème.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Système d&#x27;exploitation hôte macOS avec affichage d&#x27;une application conteneurisée (Mozilla Firefox) et incrustation vidéo de l&#x27;orateur en bas à droite.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface graphique du navigateur Firefox sur le bureau, barre d&#x27;adresse avec l&#x27;URL de la chaîne YouTube cocadmin.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;exécution d&#x27;une application de bureau (navigateur web) isolée sans installation locale directe sur l&#x27;ordinateur hôte.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000214_seg7.jpg" alt="Fenêtre du navigateur Mozilla Firefox affichant la page d&#x27;accueil d&#x27;installation, exécutée de manière isolée sur le système." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000214_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:14</span>
+                        <span class="caption-text">Fenêtre du navigateur Mozilla Firefox affichant la page d&#x27;accueil d&#x27;installation, exécutée de manière isolée sur le système.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000225_seg7.jpg" alt="Navigation vers l&#x27;URL youtube.com/cocadmin dans la fenêtre Mozilla Firefox isolée." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000225_seg7.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:25</span>
+                        <span class="caption-text">Navigation vers l&#x27;URL youtube.com/cocadmin dans la fenêtre Mozilla Firefox isolée.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-8">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:31 - 00:02:56</span>
+                <span class="segment-idx">Segment #08</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ce qui est cool aussi, c&#x27;est que là, si tu vois, je suis dans une version qui est x86, alors que je suis sur un MacBook M1 qui est un processeur ARM. C&#x27;est-à-dire que je peux lancer des applications qui sont en x86, qui vont être émulées par la machine virtuelle Docker et qui ont des fenêtres avec lesquelles je peux interagir, cliquer, etc. Donc c&#x27;est vraiment super stylé pour pouvoir tester différents types d&#x27;applications sans avoir rien à installer sur sa machine, même si on n&#x27;a pas le bon type de CPU, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur Web (interface de configuration de build/environnement), bureau macOS et fenêtre d&#x27;application GUI émulée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Menu de configuration d&#x27;environnement (&quot;Build Configuration&quot;) et retour d&#x27;une application x86 s&#x27;exécutant de manière interactive au sein d&#x27;un conteneur ou d&#x27;une machine virtuelle Docker.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration de l&#x27;interopérabilité et de la capacité de Docker à émuler et faire tourner des applications graphiques x86 sur un processeur Apple Silicon ARM (M1).</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000237_seg8.jpg" alt="Plan de l&#x27;espace de travail montrant un écran avec une page web de configuration technique (&quot;Build Configuration&quot;) et un MacBook M1 exécutant une interface applicative graphique émulée." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000237_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:37</span>
+                        <span class="caption-text">Plan de l&#x27;espace de travail montrant un écran avec une page web de configuration technique (&quot;Build Configuration&quot;) et un MacBook M1 exécutant une interface applicative graphique émulée.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000243_seg8.jpg" alt="Vue similaire du poste de travail avec le créateur expliquant le fonctionnement de l&#x27;émulation x86 sur l&#x27;architecture ARM du MacBook." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000243_seg8.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:02:43</span>
+                        <span class="caption-text">Vue similaire du poste de travail avec le créateur expliquant le fonctionnement de l&#x27;émulation x86 sur l&#x27;architecture ARM du MacBook.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-9">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:02:56 - 00:03:23</span>
+                <span class="segment-idx">Segment #09</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, comme certains d&#x27;entre vous savent, moi, quand j&#x27;ai commencé mes vidéos, les plus anciens d&#x27;entre vous se souviendront que j&#x27;ai commencé en faisant des tutos Docker. Salut à tous, si vous cherchez un tuto pour découvrir les bases de Docker, vous êtes au bon endroit. Donc je suis super content aujourd&#x27;hui de faire une vidéo en partenariat avec Docker carrément. Et donc depuis le temps il y a quand même pas mal de petites fonctionnalités en plus et de petites astuces sympas qui ont été ajoutées à Docker. Donc c&#x27;est l&#x27;occasion de découvrir tout ça ensemble.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console active affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou architecture visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Introduction de la vidéo et rappel historique sur les débuts de la chaîne avec les tutoriels Docker.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-10">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:03:23 - 00:04:00</span>
+                <span class="segment-idx">Segment #10</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre astuce qui vient d&#x27;être ajoutée il n&#x27;y a pas si longtemps que ça dans Docker, c&#x27;est la commande Docker init. Et cette commande est assez stylée parce que parfois on a une application peut-être parce que c&#x27;est une vieille appli ou alors c&#x27;est un nouveau projet et c&#x27;est un peu chiant, on a un petit peu la flemme de dockeriser cette application parce qu&#x27;il faut créer un docker file, il faut créer un docker compose, il faut aller se re-souvenir de toutes les options etc. Mais cette option, elle permet de faire tout ça automatiquement tout seul. Donc là par exemple je viens de cloner une application qui est une application d&#x27;exemple en python. Donc j&#x27;ai simplement tapé docker init et là ça va me dire bah on va te créer un docker ignore, un docker file,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux / macOS.</p>
+                        <p><strong>Contenu textuel & Code :</strong> `git clone https://github.com/mishankov/flask-gunicorn-sample-app.git`</p>
+                        <p><strong>Action / Démonstration :</strong> Clonage d&#x27;un projet d&#x27;application d&#x27;exemple pour préparer sa dockerisation.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000332_seg10.jpg" alt="Terminal affichant la commande git clone d&#x27;un dépôt d&#x27;exemple Flask/Gunicorn." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000332_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:32</span>
+                        <span class="caption-text">Terminal affichant la commande git clone d&#x27;un dépôt d&#x27;exemple Flask/Gunicorn.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000351_seg10.jpg" alt="Terminal affichant la fin du clonage réussi du dépôt git." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000351_seg10.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:03:51</span>
+                        <span class="caption-text">Terminal affichant la fin du clonage réussi du dépôt git.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-11">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:00 - 00:04:33</span>
+                <span class="segment-idx">Segment #11</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">un docker compose et même un petit remy pour savoir comment utiliser. Et juste après ça me pose quelques petites questions avec des défauts qui sont un petit peu intelligents. Donc là, il m&#x27;a dit qu&#x27;il m&#x27;a détecté que mon application était une application Python, ce qui est le cas. Donc, j&#x27;ai même pas besoin de changer. Mais si jamais j&#x27;avais une application un peu compliquée où il y avait deux projets, deux applis ou quoi, j&#x27;aurais pu choisir vraiment c&#x27;était lequel que j&#x27;avais besoin. Donc là, Python, ok. Quelle version de Python tu veux utiliser ? 3.10, moi ça me va. Quel port tu veux utiliser ? Le port UIL, pourquoi pas ? Et là, il me dit quelle commande tu voudrais utiliser pour pouvoir lancer ton application dans le conteneur. Donc ça, c&#x27;est normalement, en tant que développeur, je suis censé savoir ça. Mais il me propose quand même quelque chose,</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-12">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:04:33 - 00:05:05</span>
+                <span class="segment-idx">Segment #12</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">chose qui fait du sens d&#x27;utiliser un unicorn WSJ bla bla bla. Moi je vais juste changer un petit truc parce que je sais que cette application en particulier il faut rajouter deux points app ici parce que c&#x27;est le nom d&#x27;application c&#x27;est une application flasque. Entrée et bam boum bim ça m&#x27;a tout créé déjà. Mes Dockerfiles sont ready et donc si je fais lsla et bah je vois que j&#x27;ai mes nouveaux fichiers qui ont été créés mon Dockerfile mon readme etc. Donc si je veux on va regarder par exemple mon Dockerfile ça m&#x27;a créé automatiquement un Dockerfile qui utilise Python 3.10.9.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-13">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:05 - 00:05:27</span>
+                <span class="segment-idx">Segment #13</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça m&#x27;a automatiquement mis toutes les bonnes pratiques. Le fait de ne pas utiliser l&#x27;utilisateur root, etc. De configurer le WGI, les mounts, l&#x27;user, blablabla. Et ma commande. Donc ça m&#x27;a tout fait. Je n&#x27;ai rien eu à faire. On peut voir aussi le Docker Compose. Ça m&#x27;a créé un service qui m&#x27;expose le port 8000 automatiquement. Et ça m&#x27;a même rajouté en commentaire si jamais j&#x27;ai besoin.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-14">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:27 - 00:05:46</span>
+                <span class="segment-idx">Segment #14</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Je peux rajouter une base de données. Naïk m&#x27;a dit, pourquoi pas si tu veux une base de données Postgre. Tu as juste à décommenter ça. Et boum, tu la dirais. C&#x27;est vraiment un truc qui peut faire gagner beaucoup de temps. Donc ça fait que maintenant, je peux simplement faire Docker Compose. Et ça va me lancer mon application. Donc là, boum, ça crée mon image avec le Dockerfile. Et crée un conteneur à partir de cette image.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-15">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:05:46 - 00:06:06</span>
+                <span class="segment-idx">Segment #15</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça m&#x27;a lancé mon application dans ce conteneur. Et là, l&#x27;application, elle tourne. Donc là, en théorie, si je vais sur mon port 8000, sur localhost, 2.8000. Boum, j&#x27;ai mon appli qui tourne là. Amflask, ASD, ASD. C&#x27;est mon application d&#x27;exemple. Elle tourne, elle fonctionne. et tout ça dans Docker, dans Docker Compose. Et ça m&#x27;a créé une image qui peut être prête à envoyer dans un répertoire, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web Google Chrome.</p>
+                        <p><strong>Contenu textuel & Code :</strong> - Image 1 : Site officiel de XQuartz (xquartz.org).
+- Image 2 : Message de l&#x27;application Flask : &quot;Hello. I&#x27;m flask, asdsad&quot; à l&#x27;adresse `http://localhost:8000`.</p>
+                        <p><strong>Action / Démonstration :</strong> Validation du démarrage et du bon fonctionnement de l&#x27;application Python Flask s&#x27;exécutant dans un conteneur Docker en interrogeant le port exposé 8000 en local.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000551_seg15.jpg" alt="Page d&#x27;accueil du projet open-source XQuartz (X.Org X Window System pour macOS) affichant le lien de téléchargement de la version 2.8.5." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000551_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:51</span>
+                        <span class="caption-text">Page d&#x27;accueil du projet open-source XQuartz (X.Org X Window System pour macOS) affichant le lien de téléchargement de la version 2.8.5.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000556_seg15.jpg" alt="Navigateur web affichant le rendu de l&#x27;application de démonstration Flask accessible sur localhost sur le port 8000." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000556_seg15.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:05:56</span>
+                        <span class="caption-text">Navigateur web affichant le rendu de l&#x27;application de démonstration Flask accessible sur localhost sur le port 8000.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-16">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:07 - 00:06:28</span>
+                <span class="segment-idx">Segment #16</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Tout ça en genre une commande Docker init, boom, boom, c&#x27;était fini. Une autre fonction que tu ne connectes pas, qui vient d&#x27;être ajoutée récemment aussi, c&#x27;est Docker Compose Watch. Et un truc qui est chiant quand tu utilises des conteneurs pour développer, c&#x27;est que si tu fais des modifications, soit il faut que tu aies un volume qui soit monté dans ton conteneur, et donc du coup, ce n&#x27;est pas vraiment ce qu&#x27;il y a dans l&#x27;image, soit il faut que tu rebuild toute l&#x27;image à chaque fois que tu fais une modification.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande, macOS, OBS Studio sur l&#x27;ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Interface de terminal sombre (non lisible en détail sur ce plan large).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique et présentation générale de Docker Compose Watch et des problématiques de volumes montés pour le développement.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000618_seg16.jpg" alt="Vue de profil du poste de travail montrant un ordinateur portable surélevé et un écran externe affichant un terminal en arrière-plan." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000618_seg16.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:18</span>
+                        <span class="caption-text">Vue de profil du poste de travail montrant un ordinateur portable surélevé et un écran externe affichant un terminal en arrière-plan.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-17">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:28 - 00:06:49</span>
+                <span class="segment-idx">Segment #17</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça, ça peut être un petit peu chiant dans certains cas. Et Docker Watch, ça peut résoudre ce problème. Donc là, par exemple, si je vais dans mon Compose, je vois mon service ici. Je vais lui rajouter une petite option qui s&#x27;appelle Develop. Et Develop, ça va faire en sorte que là, je suis dans mon environnement de développement, je suis sur mon ordi. Et bien, tu vas watcher, tu vas surveiller un répertoire en question.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Unix (zsh)</p>
+                        <p><strong>Contenu textuel & Code :</strong> `coca@canette-2 flask-gunicorn-sample-app % `</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation dans l&#x27;arborescence du projet pour préparer la modification du fichier Docker Compose.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000633_seg17.jpg" alt="Terminal ouvert dans le répertoire du projet flask-gunicorn-sample-app sur une machine macOS, avec incrustation vidéo du présentateur." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000633_seg17.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:06:33</span>
+                        <span class="caption-text">Terminal ouvert dans le répertoire du projet flask-gunicorn-sample-app sur une machine macOS, avec incrustation vidéo du présentateur.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-18">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:06:49 - 00:07:09</span>
+                <span class="segment-idx">Segment #18</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, je vais surveiller le répertoire Slash App, parce que c&#x27;est là où est mon application, là où je vais faire mes modifications. Et je vais lui dire, quand tu vois qu&#x27;il y a un changement qui est fait dans un des fichiers de ce répertoire, et bien tu vas synchroniser les fichiers et restarter le conteneur. Il y a deux ou trois actions. Tu peux demander de rebuilder complètement le conteneur de zéro, tu peux demander de juste restarter le conteneur si tu as déjà un volume qui est synchronique, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-19">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:10 - 00:07:28</span>
+                <span class="segment-idx">Segment #19</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ou tu peux demander de juste synchroniser. Synchroniser, ça peut être bien si ton application, automatiquement, elle détecte les changements et elle réfraîche la page. Si c&#x27;est une webapp, par exemple, moi, comme c&#x27;est une simple app flasque, elle détecte rien du tout, elle fait juste un hello world, si tu veux. Donc, je vais lui dire que tu vas synchroniser, c&#x27;est-à-dire changer les fichiers, et tu vas restarter.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran de monitoring et ordinateur portable en arrière-plan flou.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier de configuration docker-compose visible partiellement sur le moniteur de gauche.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication théorique sur la synchronisation des applications et la gestion des conteneurs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-20">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:28 - 00:07:46</span>
+                <span class="segment-idx">Segment #20</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça, c&#x27;est sans avoir besoin de rebuilder toute l&#x27;image. Donc, c&#x27;est beaucoup plus rapide. Donc, on s&#x27;en va regarder ici. On va voir un nouvel onglet. Ici, on va faire Docker Compose Watch. Donc là, j&#x27;ai mon application qui tourne actuellement. Donc là, mon répertoire, il est en train d&#x27;être surveillé. Et pourquoi j&#x27;ai mis Slash App ? Parce que Slash App, c&#x27;est le répertoire dans le conteneur qui s&#x27;appelle comme ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal macOS (CLI)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Message de connexion : &quot;Last login: Wed Jun 26 16:20:09 on ttys005&quot;</p>
+                        <p><strong>Action / Démonstration :</strong> Préparation de l&#x27;ouverture d&#x27;un nouvel onglet de terminal pour lancer la commande Docker Compose Watch.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000732_seg20.jpg" alt="Un terminal de commande macOS affichant l&#x27;historique de connexion, avec une pastille vidéo du présentateur en bas à droite." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000732_seg20.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:07:32</span>
+                        <span class="caption-text">Un terminal de commande macOS affichant l&#x27;historique de connexion, avec une pastille vidéo du présentateur en bas à droite.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-21">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:07:46 - 00:08:10</span>
+                <span class="segment-idx">Segment #21</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et c&#x27;est là où il y a mon application. Ce qui fait que si maintenant, je viens ici et je viens modifier mon testapp.pi, là, de le dire Hello, I&#x27;m Flask, Je vais lui dire subscribe to coqadmin avec un seul C. J&#x27;enregistre. Là, ici, ça m&#x27;a dit, ah, j&#x27;ai détecté que tu as changé le test.app.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-22">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:10 - 00:08:32</span>
+                <span class="segment-idx">Segment #22</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, je vais synchroniser mes fichiers et redémarrer le conteneur pour que tu puisses accéder à la nouvelle version automatiquement sans que tu fasses rien. Ce qui fait que si je reviens dans mon navigateur ici et que je fais refresh, j&#x27;ai hello and flask subscribe to coqadmin. Bim bam boum. Plus besoin de se casser la tête avec des volumes ou quoi. ou avec des systèmes d&#x27;auto-refresh, Docker Watch, ça le fait tout seul.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web (Google Chrome / Safari) affichant localhost sur un port local.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Texte affiché dans la page web : &quot;Hello. I&#x27;m flask, subscribe to cocadmin&quot;.</p>
+                        <p><strong>Action / Démonstration :</strong> Test et validation dans le navigateur du bon fonctionnement de l&#x27;application Flask suite au redémarrage et à la synchronisation automatique du conteneur.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000821_seg22.jpg" alt="Navigateur web affichant le résultat de l&#x27;application Flask avec le texte mis à jour &quot;Hello. I&#x27;m flask, subscribe to cocadmin&quot; et la caméra du créateur en incrustation." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000821_seg22.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:21</span>
+                        <span class="caption-text">Navigateur web affichant le résultat de l&#x27;application Flask avec le texte mis à jour &quot;Hello. I&#x27;m flask, subscribe to cocadmin&quot; et la caméra du créateur en incrustation.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-23">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:32 - 00:08:55</span>
+                <span class="segment-idx">Segment #23</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Une autre nouvelle option, il ne chante pas un Docker, il rajoute quand même des nouveaux trucs. Ça s&#x27;appelle Docker Debug. C&#x27;est grave utile si tu travailles beaucoup avec des conteneurs et que tu as souvent des trucs qui ne vont pas, tu dois essayer de débuguer, des trucs comme ça. Ça te permet de rentrer dans un conteneur et d&#x27;essayer de voir ce qui ne va pas. Donc là, je vais lancer un conteneur Docker Run-D pour lancer en arrière-plan, Tiret Name pour l&#x27;appeler mon site, par exemple.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande macOS (Zsh)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Invite de commande affichant `coca@canette-2 repos % docker run` avec le curseur actif.</p>
+                        <p><strong>Action / Démonstration :</strong> Saisie et démonstration d&#x27;une commande Docker dans le terminal pour illustrer l&#x27;utilisation des conteneurs.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000849_seg23.jpg" alt="Capture d&#x27;écran d&#x27;un terminal de commande montrant l&#x27;utilisation de Docker avec l&#x27;invite de commande utilisateur." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000849_seg23.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:08:49</span>
+                        <span class="caption-text">Capture d&#x27;écran d&#x27;un terminal de commande montrant l&#x27;utilisation de Docker avec l&#x27;invite de commande utilisateur.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-24">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:08:55 - 00:09:22</span>
+                <span class="segment-idx">Segment #24</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et ça va être le conteneur qui s&#x27;appelle Nginx. Voilà, je ne sais jamais trop comment écrire. Et normalement, ça devrait me lancer en arrière-plan. Si je fais Docker PS, j&#x27;ai mon conteneur qui s&#x27;appelle Nginx qui vient d&#x27;être lancé. Imagine que dans ce conteneur-là, j&#x27;ai un problème. D&#x27;habitude, la façon de faire, ça serait de faire Docker exec-ti, mon site pour pouvoir entrer dans ce conteneur qui a ce nom, et de lancer Bash.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal macOS (zsh)</p>
+                        <p><strong>Contenu textuel & Code :</strong> coca@canette-2 repos % docker ex</p>
+                        <p><strong>Action / Démonstration :</strong> Saisie d&#x27;une commande Docker dans le terminal pour interagir avec un conteneur Nginx.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000915_seg24.jpg" alt="Terminal macOS affichant une ligne de commande Docker en cours de saisie." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000915_seg24.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:15</span>
+                        <span class="caption-text">Terminal macOS affichant une ligne de commande Docker en cours de saisie.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-25">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:22 - 00:09:41</span>
+                <span class="segment-idx">Segment #25</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, je suis dans le conteneur. J&#x27;aurais voulu pouvoir faire PS pour pouvoir voir la liste des processus qui tournent. Mais je ne fais pas parce que c&#x27;est un conteneur qui a été minifié. Donc, en fait, il n&#x27;y a pas grand-chose dedans. Tu vois, si je vais ici et que je veux voir, par exemple, le entrypoint, si je fais vdocker entrypoint.sh, eh bien, v, ce n&#x27;est pas notre file non plus. Donc, en fait, je peux rentrer, mais c&#x27;est chiant.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-26">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:09:41 - 00:10:04</span>
+                <span class="segment-idx">Segment #26</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Là, j&#x27;ai eu de la chance qu&#x27;il y avait bash dans l&#x27;image du conteneur et que je puisse me connecter. Parfois, tu n&#x27;as pas bash, tu n&#x27;as PSH, donc tu as l&#x27;autocomplétion qui ne marche pas ou parfois, tu n&#x27;as même pas SH. C&#x27;est vraiment chiant. Et surtout, tu n&#x27;as aucun des outils que tu as besoin pour pouvoir commencer à débugger. Tu ne peux même pas éditer un fichier si tu as besoin. Tu ne peux même pas voir ce qui se passe. Donc, ça veut dire que d&#x27;habitude, pour pouvoir régler ce problème-là, tu te retrouves à réinstaller pour la cinquantième fois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Écran de bureau et terminal affichant des lignes de commande en environnement Linux / Docker.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes Docker exécutées dans le terminal et affichage des répertoires du conteneur.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication des difficultés de débogage et d&#x27;accès aux conteneurs légers ne disposant pas de shell complet.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000958_seg26.jpg" alt="Vue du créateur en studio avec un écran externe affichant un terminal de commande et un ordinateur portable en arrière-plan." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_000958_seg26.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:09:58</span>
+                        <span class="caption-text">Vue du créateur en studio avec un écran externe affichant un terminal de commande et un ordinateur portable en arrière-plan.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-27">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:04 - 00:10:29</span>
+                <span class="segment-idx">Segment #27</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">APT, install, vim, c&#x27;est trop chiant. À la place, on peut utiliser la commande docker-debug, parce que c&#x27;est ce que je veux faire. Je vais débugger et mon site, parce que c&#x27;est comme ça que ça s&#x27;appelle mon conteneur. Je vais débugger mon conteneur qui s&#x27;appelle mon site. Et là, ce que ça va faire, c&#x27;est que ça va prendre une image spécialement faite par Docker Donc ça va monter tout le file system et tout le nivespace dans mon conteneur où j&#x27;ai tout ce qu&#x27;il faut pour pouvoir débugger, etc.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commandes &#x27;docker ps&#x27; et &#x27;docker debug&#x27;, affichage de la liste des conteneurs dont &#x27;monsite&#x27; (basé sur nginx) et un conteneur flask-gunicorn.</p>
+                        <p><strong>Action / Démonstration :</strong> Listage des conteneurs Docker actifs pour identifier la cible à déboguer et initialisation de la commande docker debug.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001010_seg27.jpg" alt="Terminal affichant l&#x27;exécution de la commande docker ps listant les conteneurs en cours d&#x27;exécution, puis la saisie de la commande docker debug." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001010_seg27.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:10:10</span>
+                        <span class="caption-text">Terminal affichant l&#x27;exécution de la commande docker ps listant les conteneurs en cours d&#x27;exécution, puis la saisie de la commande docker debug.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-28">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:29 - 00:10:52</span>
+                <span class="segment-idx">Segment #28</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, tu vois, j&#x27;ai un shell. Si je fais ls, je retrouve, tu vois, mes entry points, etc. Et donc là, je peux bien faire mon vim docker entry point.sh. J&#x27;ai même une commande directement qui s&#x27;appelle entry point et qui permet d&#x27;expliquer dans ce conteneur-là qu&#x27;est-ce qui a été configuré en tant que CMD et en tant qu&#x27;entry point. alors que si je n&#x27;avais pas ça, c&#x27;est-à-dire qu&#x27;il faut que j&#x27;aille voir dans les sources de l&#x27;image, de retrouver sur GitHub ou je ne sais pas quoi.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-29">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:10:52 - 00:11:13</span>
+                <span class="segment-idx">Segment #29</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Bref, tu vas perdre 5 minutes. Là, je l&#x27;ai direct. Et surtout, j&#x27;ai tous mes outils. Je peux faire PS, Nano, j&#x27;ai tous les outils que j&#x27;ai besoin de base pour pouvoir savoir ce qui se passe, débugger, trouver l&#x27;entrepont, voir ce qu&#x27;il y a à l&#x27;intérieur de cette image-là. Tout ça avec la simple commande Docker Debug, qui est mille fois plus simple que docker exec-ti slash bin slash base.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux / iTerm2 sur écran externe, IDE ou console de debug.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Logs d&#x27;exécution Docker, messages d&#x27;erreur de ENTRYPOINT, commandes shell interactives (zsh, ps).</p>
+                        <p><strong>Action / Démonstration :</strong> Explication de l&#x27;utilisation de Docker Debug pour inspecter et dépanner rapidement une image conteneurisée.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001103_seg29.jpg" alt="Vue de profil du créateur présentant son écran avec un terminal montrant des logs de debug Docker et des commandes shell." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001103_seg29.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:03</span>
+                        <span class="caption-text">Vue de profil du créateur présentant son écran avec un terminal montrant des logs de debug Docker et des commandes shell.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-30">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:14 - 00:11:34</span>
+                <span class="segment-idx">Segment #30</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est mille fois mieux. Le seul bémol entre guillemets c&#x27;est que Docker Debug c&#x27;est disponible que si tu as la version pro de Docker. Pour 5 dollars par mois c&#x27;est à dire genre 4 euros. Et à mon avis si tu manipules beaucoup de conteneurs tous les jours juste pour cette feature ça vaut largement les 4 euros par mois. Ensuite puisqu&#x27;on est dans les nouvelles features on va continuer avec Docker Scout.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant la page de tarification (pricing) de Docker.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tableau comparatif des abonnements Docker : Personal à 0$, Pro à 5$ par mois incluant notamment la fonctionnalité &quot;Docker Debug&quot;, Team à 9$ et Business à 24$.</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation des différents plans tarifaires de Docker pour illustrer le coût de la version Pro nécessaire à l&#x27;utilisation de Docker Debug.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001124_seg30.jpg" alt="Capture d&#x27;écran du navigateur affichant la grille des tarifs officiels de Docker, montrant les offres Personal ($0), Pro ($5/mois), Team ($9/mois) et Business ($24/mois)." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001124_seg30.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:11:24</span>
+                        <span class="caption-text">Capture d&#x27;écran du navigateur affichant la grille des tarifs officiels de Docker, montrant les offres Personal ($0), Pro ($5/mois), Team ($9/mois) et Business ($24/mois).</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-31">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:11:34 - 00:12:04</span>
+                <span class="segment-idx">Segment #31</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Qui est un outil qui va permettre de fouiller dans les images pour voir non seulement s&#x27;il y a des vulnérabilités dedans. Mais surtout à quel endroit est cette vulnérabilité. parce que souvent quand tu crées une image, elle est basée sur une autre image qui elle-même est peut-être basée sur une autre image et en fait la vulnérabilité elle peut être trois images plus haut. Donc parfois ça peut être difficile de savoir qui ou quoi a introduit quelle faille à quel endroit. Avec Docker Scout on peut très facilement voir d&#x27;où ça vient, comparer différentes versions etc. On peut faire ici Docker Scout Quick View pour pouvoir voir qu&#x27;est ce qui se passe.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUN</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;analyse de vulnérabilités dans les images conteneurs.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-32">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:04 - 00:12:36</span>
+                <span class="segment-idx">Segment #32</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et là ça me donne un petit résumé de c&#x27;est quoi les problèmes de sécurité potentiels que peut y y avoir dans mon image d&#x27;exemple la flasque que j&#x27;utilisais tout à l&#x27;heure. Donc là ça me dit qu&#x27;il y a 0 faille critique, ça va, mais il y a quand même 6 failles qui sont de type high qui sont quand même un peu gênantes, 14 médium et 23 low. Donc bon en général je dirais que les médium et les low ça va être des trucs quand même tu vois assez durs à exploiter mais les high si on pouvait les diminuer ça pourrait être bien. Et donc là ça me dit qu&#x27;en fait ça vient de l&#x27;image</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (zsh) sur macOS avec incrustation vidéo du présentateur.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `docker scout quickview` affichant un tableau récapitulatif des failles de sécurité (Critical: 0, High: 6, Medium: 14, Low: 23) pour l&#x27;image `flask-gunicorn-sample-app-server:latest` basée sur `python:3.10-slim`, ainsi que des recommandations de mise à jour vers `python:3.12-slim`.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse rapide de la sécurité d&#x27;une image Docker pour identifier les vulnérabilités et comparer l&#x27;impact d&#x27;une mise à jour de l&#x27;image de base.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001212_seg32.jpg" alt="Exécution de la commande Docker Scout pour analyser les vulnérabilités d&#x27;une image conteneurisée." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001212_seg32.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:12:12</span>
+                        <span class="caption-text">Exécution de la commande Docker Scout pour analyser les vulnérabilités d&#x27;une image conteneurisée.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-33">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:12:36 - 00:13:02</span>
+                <span class="segment-idx">Segment #33</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">de base de Python 3.10 Slim. C&#x27;est celle-là qui rajoute le plus de problèmes. Et il me fait même une suggestion. Il me dit bon là tu utilises 3.10 Slim mais ce que tu pourrais faire c&#x27;est simplement passer sur 3.12. Tu serais toujours sur une version Slim, tu serais toujours sur Python. Probablement que de 10 à 12 tu n&#x27;auras pas trop de problèmes d&#x27;incompatibilité mais tu vas réduire à une seule vulnérabilité high, 0 médium et tu vas garder 28 lots quand même.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-34">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:02 - 00:13:21</span>
+                <span class="segment-idx">Segment #34</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">En fait même c&#x27;est pire parce que là il te dit t&#x27;as plus 5. T&#x27;as moins 5, moins 14 et plus 5. Donc bon c&#x27;est à toi de voir si tu veux rajouter des lots pour enlever des rags mais je pense que ça vaut le coup. Si on veut un petit peu plus d&#x27;infos sur ok tu me dis qu&#x27;il y a des failles etc mais j&#x27;aimerais bien savoir qu&#x27;est-ce que c&#x27;est. Ça se trouve c&#x27;est pas si grave que ça. Donc on peut faire ici CVE.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux / CLI Docker Scout</p>
+                        <p><strong>Contenu textuel & Code :</strong> Sortie de la commande `docker scout` affichant des métriques de vulnérabilités par sévérité (carrés rouge/orange/vert) et des recommandations de mise à jour d&#x27;images.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et analyse des résultats d&#x27;audit de sécurité des conteneurs via Docker Scout, illustrant les failles détectées.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001316_seg34.jpg" alt="Vue de profil du créateur avec un écran d&#x27;ordinateur montrant un terminal affichant les résultats de Docker Scout et l&#x27;analyse de vulnérabilités." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001316_seg34.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:16</span>
+                        <span class="caption-text">Vue de profil du créateur avec un écran d&#x27;ordinateur montrant un terminal affichant les résultats de Docker Scout et l&#x27;analyse de vulnérabilités.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-35">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:21 - 00:13:45</span>
+                <span class="segment-idx">Segment #35</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc CVE c&#x27;est le nom des failles. Là ça me donne toutes les différentes failles avec directement le lien pour aller voir c&#x27;est quoi le problème. Donc là si je vois par exemple ça, tac, on va aller voir qu&#x27;est-ce que c&#x27;est. Donc là, cette file est sortie en 2023 et c&#x27;est un problème avec OpenSSL. Donc là, ça me dit qu&#x27;avec cette version spécifique d&#x27;OpenSSL, on pourrait faire une dinguerie avec les certificats.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux et navigateur web (interface Docker Scout)</p>
+                        <p><strong>Contenu textuel & Code :</strong> Rapports de vulnérabilités listant des CVE (HIGH CVE-2023-0464, CVE-2023-0286) ciblant des paquets OpenSSL sur Debian avec les versions affectées et corrigées.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et analyse des vulnérabilités de sécurité (CVE) détectées sur une image conteneurisée à l&#x27;aide de Docker Scout, avec consultation des liens détaillés.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001327_seg35.jpg" alt="Terminal Linux affichant le rapport de vulnérabilités de Docker Scout avec le détail des CVE (dont CVE-2023-0464 sur OpenSSL)." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001327_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:27</span>
+                        <span class="caption-text">Terminal Linux affichant le rapport de vulnérabilités de Docker Scout avec le détail des CVE (dont CVE-2023-0464 sur OpenSSL).</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001333_seg35.jpg" alt="Navigateur web affichant l&#x27;interface de Docker Scout avec les détails de la vulnérabilité CVE-2023-0464 et les packages Debian affectés." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001333_seg35.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:33</span>
+                        <span class="caption-text">Navigateur web affichant l&#x27;interface de Docker Scout avec les détails de la vulnérabilité CVE-2023-0464 et les packages Debian affectés.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-36">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:13:45 - 00:14:09</span>
+                <span class="segment-idx">Segment #36</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc c&#x27;est quand même assez high. Maintenant, c&#x27;est à toi de voir. Peut-être que dans ton application, tu n&#x27;utilisent jamais OpenSSL. Et donc, ce n&#x27;est pas vraiment un problème pour toi. Mais peut-être que oui. Donc tu vois, c&#x27;est comme ça que tu peux savoir qu&#x27;est-ce qui est un problème ou pas en regardant la liste de tous les problèmes potentiels qu&#x27;il peut y avoir dans ton image. Un autre truc qui est cool aussi, c&#x27;est que comme on a vu dans le Quick View, on peut faire Recommendations. Par contre, il faut savoir l&#x27;écrire et Recommendations, c&#x27;est avec deux M.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux, interface CLI Docker Scout, écran externe et ordinateur portable.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Rapports de vulnérabilités CVE (ex: CVE-2023-47038, CVE-2017-18018, coreutils), résumé des vulnérabilités (50 total : 7 unspecified, 23 low, 14 medium, 6 high, 0 critical), et commandes `docker scout cves | less` / `docker scout rec`.</p>
+                        <p><strong>Action / Démonstration :</strong> Analyse et explication des vulnérabilités de sécurité détectées dans une image de conteneur par Docker Scout, expliquant comment trier et identifier les problèmes pertinents.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001357_seg36.jpg" alt="Vue de profil du créateur devant un double écran affichant des résultats de scan de vulnérabilités Docker Scout." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001357_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:13:57</span>
+                        <span class="caption-text">Vue de profil du créateur devant un double écran affichant des résultats de scan de vulnérabilités Docker Scout.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001403_seg36.jpg" alt="Capture plein écran d&#x27;un terminal affichant un rapport de vulnérabilités Docker Scout avec les compteurs (High, Medium, Low) et la commande docker scout cves." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001403_seg36.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:14:03</span>
+                        <span class="caption-text">Capture plein écran d&#x27;un terminal affichant un rapport de vulnérabilités Docker Scout avec les compteurs (High, Medium, Low) et la commande docker scout cves.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-37">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:09 - 00:14:44</span>
+                <span class="segment-idx">Segment #37</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc là, ça va pousser un petit peu plus loin. Au lieu de juste mettre une recommandation, ça te donne un peu plus en fonction de... Ok, peut-être que si tu n&#x27;avais pas la Alpine, peut-être que ça irait mieux, mais peut-être etc. Donc là, il me dit, tu vois, si tu passes à la 12 Slim, ça me donne une liste de bénéfices. Tu gardes le SameOS, la différence de version de Python, elle est mineure. L&#x27;image, elle a une taille à peu près similaire, etc. Mais si ça ne te convient pas parce que par exemple tu dis ah bah non impossible je peux pas passer à la point 12, il te dit ok mais si à la place tu veux la 11 et bah voilà t&#x27;as tel ou tel bénéfice là tu vois que c&#x27;est à peu près pareil. Là par exemple il nous dit ok à la place tu pourrais prendre la Alpine et la Alpine elle elle a 0 low, 0 critique elle a juste une high. Par contre</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-38">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:14:44 - 00:15:02</span>
+                <span class="segment-idx">Segment #38</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">du coup c&#x27;est pas le même OS parce que t&#x27;es pas avec un debu en small, t&#x27;es avec une Alpine. Le fait de tourner sur Alpine il y a des choses qui vont pas forcément tourner exactement pareil donc c&#x27;est peut-être pas quelque chose que tu veux mais si ton application elle est 100% en Python normalement ça devrait pas... ça devrait... ça pourrait... je sais pas. Mais si tu sais que ton application sur Alpine elle tourne bien, bah peut-être que ça serait la meilleure des solutions.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console affichée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code ou commande visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur les différences d&#x27;OS et de compatibilité logicielle entre Debian et Alpine.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-39">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:02 - 00:15:39</span>
+                <span class="segment-idx">Segment #39</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait ça te donne un peu plus de solutions possibles pour pouvoir réduire au maximum le nombre de vulnérabilités dans tes images Docker. Un autre truc qui peut te faire gagner pas mal de temps, c&#x27;est utiliser la nouvelle commande toujours, Docker Build Cloud. Il y a pas mal de petits trucs qui peut te faire perdre un petit peu de temps quand par exemple tu build une image sur ton ordi, sur ton laptop et que ton laptop sert à un laptop ARM, si tu as un MacBook ou si tu as les nouveaux laptop Windows ARM. Et bien ce n&#x27;est pas la même architecture que ce que tournent la plupart des serveurs qui est X86, même si maintenant on commence à avoir des serveurs ARM. Et donc ça veut dire que pour pouvoir les builder en X86, tu peux quand même le faire mais tu passes par une espèce</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun outil, terminal ou interface graphique visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou métrique technique visible.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du créateur sur l&#x27;utilisation de Docker Build Cloud et la réduction des vulnérabilités, sans support visuel technique à l&#x27;écran.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-40">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:15:39 - 00:16:15</span>
+                <span class="segment-idx">Segment #40</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">de couche d&#x27;émulation sur ta machine qui fait que les bulles peuvent prendre deux fois, trois fois, 4 fois le temps que ce qui prendrait sur une machine équivalente en x86. A l&#x27;inverse, si ton pipeline de CI-CD ou tes images elles sont buildées pour x86 parce qu&#x27;elles tournent sur des serveurs x86, si toi tu veux les utiliser sur ta machine qui est machine ARM, et bien pareil tu dois passer par une couche de simulation et les performances elles sont moins bien. Mais avec Docker Cloud Build tout ça c&#x27;est fini. En gros Cloud Build ça va permettre de builder ton image sur un serveur à distance donc c&#x27;est pas ton ordi qui va le builder et ce compatible avec toutes les architectures, que ce soit ARM, X86 ou même les autres différents types d&#x27;architecture. Donc ce</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> AUCUNE</p>
+                        <p><strong>Contenu textuel & Code :</strong> AUCUNE</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale des problématiques d&#x27;émulation et de compatibilité d&#x27;architecture dans les pipelines de CI/CD.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-41">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:15 - 00:16:48</span>
+                <span class="segment-idx">Segment #41</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">qui fait que ton image elle est disponible pour toutes les architectures en même temps. Donc quand tu utilises sur ton laptop Windows ARM ou sur ton Mac ARM c&#x27;est rapide parce que l&#x27;image a été buildée en ARM et quand tu utilises sur tes serveurs qui sont en S86 c&#x27;est rapide aussi parce que ça a été buildé en S86. Et le processus de build est lui-même aussi beaucoup plus rapide parce que non seulement c&#x27;est fait en parallèle, l&#x27;ARM et le X86 ils sont faits en même temps, et en plus de ça c&#x27;est quelque chose que tu peux partager entre différents utilisateurs. Donc ce Ce qui fait que si Jean-Martin, il a buildé un truc ce matin et que toi tu rebuldes un truc cet après-midi, et bien comme vous utilisez le même cache, parce que c&#x27;est le cache du serveur, et bien toi ton build, il va être 10 fois plus rapide.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune interface technique ou console visible.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun code, commande ou diagramme d&#x27;architecture affiché.
+[N/A] Explication verbale de la disponibilité des images pour différentes architectures (ARM et x86).</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-42">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:16:48 - 00:17:09</span>
+                <span class="segment-idx">Segment #42</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Parce que ça va prendre en compte tous les layers de cache qui ont déjà été buildés pour Jean-Martin ce matin. Donc bref, ça, que des avantages. Donc là, j&#x27;ai lancé un build en local avec Docker BuildX Build. Je lui ai passé un repo à builder et je lui ai dit de le builder en AMD64 ou x86 qui est à peu près la même chose. Donc ça veut dire que ce n&#x27;est pas la même plateforme que ce qui est mon ordi. Mon ordi, c&#x27;est un ARM, que je le redis encore une fois.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal de commande sous macOS/Linux avec affichage de la sortie standard d&#x27;un build Docker.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande exécutée : `docker buildx build https://github.com/dockersamples/buildme.git --platform linux/amd64`, avec affichage des étapes du build (étapes cachées [CACHED], téléchargement des dépendances Go, exportation de l&#x27;image).</p>
+                        <p><strong>Action / Démonstration :</strong> Lancement d&#x27;un build Docker multi-plateforme/spécifique (AMD64) directement à partir d&#x27;un dépôt Git distant en exploitant le cache local.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001658_seg42.jpg" alt="Terminal affichant l&#x27;exécution d&#x27;une commande Docker BuildX avec utilisation du cache et ciblage d&#x27;une architecture spécifique." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001658_seg42.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:16:58</span>
+                        <span class="caption-text">Terminal affichant l&#x27;exécution d&#x27;une commande Docker BuildX avec utilisation du cache et ciblage d&#x27;une architecture spécifique.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-43">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:09 - 00:17:27</span>
+                <span class="segment-idx">Segment #43</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Il peut quand même builder pour des processeurs X86 AMD64. Mais là, on voit que ça a pris 30 secondes à peu près. Et là maintenant, je vais le builder. Mais dans le cloud, j&#x27;ai juste rajouté ici &quot;-builder&quot;, cloud.coqadmin.builder. C&#x27;est comme ça que ça s&#x27;appelle mon builder. Pour avoir un builder, il faut simplement créer un compte sur build.docker.com.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-44">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:28 - 00:17:49</span>
+                <span class="segment-idx">Segment #44</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">C&#x27;est gratuit. Et ensuite, tu peux créer un builder, lui donner le nom que tu veux. Et ensuite, ce que ça va faire, c&#x27;est qu&#x27;au lieu de builder localement sur ma machine, Ça va builder tout ça directement dans le cloud et ça va builder dans la plateforme que j&#x27;ai envie. Donc là pour AMD64 et là on voit que ça a pris une seconde. Ça a pris une seconde parce que en fait c&#x27;était déjà en cache. Et comme je te disais, s&#x27;il y a déjà quelqu&#x27;un qui l&#x27;a fait avant, et bien ça va être en cache et donc ça va être beaucoup plus rapide.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-45">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:17:49 - 00:18:23</span>
+                <span class="segment-idx">Segment #45</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Mais là je l&#x27;ai lancé sans le cache pour que vraiment ça soit comparable avec ce qu&#x27;a fait mon ordi, qui est quand même un ordi puissant. Quand j&#x27;étais en local, ça m&#x27;a pris 30 secondes, alors que dans le cloud ça a pris 9 secondes. Pas parce que mon ordi il est lent, c&#x27;est juste parce que mon ordi c&#x27;est pas la même plateforme, donc il doit émuler. et donc du coup ça prend trois fois le temps. Et ce que j&#x27;aurais même pu faire c&#x27;est demander à builder les deux en même temps à la fois le MD64 et à la fois le RM64 et en espace de 10 secondes j&#x27;aurais buildé deux plateformes avant même que mon ordi ait fini de builder pour une seule plateforme. C&#x27;est aussi utile dans ton pipeline le CI-CD parce que ton pipeline souvent il va tourner lui-même sous Docker donc pour pouvoir</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal CLI, Docker Buildx, macOS / bash.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Commande `docker buildx build https://github.com/dockersamples/buildme.git --platform linux/amd64` montrant un temps de build total de 30.5s sur une architecture non native (émulation).</p>
+                        <p><strong>Action / Démonstration :</strong> Exécution d&#x27;un build d&#x27;image Docker à distance depuis un dépôt Git avec spécification de la plateforme cible pour démontrer l&#x27;impact de l&#x27;émulation sur les performances.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001757_seg45.jpg" alt="Terminal Linux affichant l&#x27;exécution d&#x27;une commande Docker Buildx avec les détails des différentes étapes de build et le temps total écoulé." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001757_seg45.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:17:57</span>
+                        <span class="caption-text">Terminal Linux affichant l&#x27;exécution d&#x27;une commande Docker Buildx avec les détails des différentes étapes de build et le temps total écoulé.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-46">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:23 - 00:18:45</span>
+                <span class="segment-idx">Segment #46</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">builder des images Docker dans Docker il faut faire du Docker in Docker qui peut être un petit peu chiant ou un petit peu insécurisé etc. Là quand tu utilises BuildX eh ben, t&#x27;as plus de problème de sécurité. Le cache est gardé entre les différents builds si t&#x27;as envie, donc c&#x27;est beaucoup plus rapide, ce qui n&#x27;est pas forcément toujours le cas dans un pipeline de CNC-D. Et en plus de ça, c&#x27;est multi-architecture, donc les développeurs qui ont un ordi ARM, c&#x27;est rapide, les serveurs, c&#x27;est rapide, c&#x27;est tout mieux en fait.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucun</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale sur l&#x27;utilisation de Docker BuildX par rapport au Docker-in-Docker.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-47">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:18:45 - 00:19:07</span>
+                <span class="segment-idx">Segment #47</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Est-ce que c&#x27;est payant par contre ? Si je vais sur build.docker.com, je crois qu&#x27;il y a une version gratuite. Je vais juste vérifier pour être sûr. Ouais, c&#x27;est ça. Ça, c&#x27;est une des fonctionnalités qui est gratuite. Ou du moins, t&#x27;as un plan qui est gratuit où tu as 100 minutes de build gratuite par mois. Donc, pour un petit projet, c&#x27;est parfait. Et puis, si jamais tu as besoin de plus, pareil, tu as différents plans qui ne sont pas très chers.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web Google Chrome, interface de tarification SaaS Build Cloud.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Tableau comparatif des plans de tarification (Personal à 0$, Pro à 5$, Team à 9$) détaillant les minutes de build incluses, le cache et les builds parallèles.</p>
+                        <p><strong>Action / Démonstration :</strong> Vérification de la tarification et des fonctionnalités gratuites de Docker Build Cloud.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001851_seg47.jpg" alt="Navigateur web affichant une recherche Google sur build.docker.com." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001851_seg47.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:51</span>
+                        <span class="caption-text">Navigateur web affichant une recherche Google sur build.docker.com.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001856_seg47.jpg" alt="Page de tarification de Build Cloud montrant les plans Personal, Pro et Team avec leurs quotas respectifs." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001856_seg47.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:18:56</span>
+                        <span class="caption-text">Page de tarification de Build Cloud montrant les plans Personal, Pro et Team avec leurs quotas respectifs.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-48">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:07 - 00:19:28</span>
+                <span class="segment-idx">Segment #48</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc là, je vais vous montrer une astuce que j&#x27;ai découverte il n&#x27;y a pas longtemps qui paraît carrément trop beau pour être vrai. En gros, il y a un repo qui s&#x27;appelle Docker avec un U à la place du E et qui propose simplement Windows. Voilà, Windows dans Docker, voire même macOS. Pourquoi pas ? Pourquoi pas ? Tu peux voir Windows ou macOS comme ça en lançant juste une simple ligne de commandes.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant une interface GitHub (dépôt Dockur).</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page README du projet GitHub &quot;dockur/windows&quot; présentant les fonctionnalités (Multi-language, ISO downloader, KVM acceleration, Web-based viewer).</p>
+                        <p><strong>Action / Démonstration :</strong> Présentation du dépôt GitHub non officiel Dockur permettant d&#x27;exécuter des machines virtuelles Windows au sein de conteneurs Docker.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001917_seg48.jpg" alt="Capture d&#x27;écran du navigateur affichant le dépôt GitHub du projet Dockur permettant de faire tourner Windows dans un conteneur Docker." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001917_seg48.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:17</span>
+                        <span class="caption-text">Capture d&#x27;écran du navigateur affichant le dépôt GitHub du projet Dockur permettant de faire tourner Windows dans un conteneur Docker.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-49">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:28 - 00:19:47</span>
+                <span class="segment-idx">Segment #49</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc soit via Docker Compose, soit carrément via juste une ligne de commande, Docker Run, bababam. Donc j&#x27;ai testé pour vous, pour voir si ça marchait vraiment. Et donc cette ligne de commande, c&#x27;est une commande Docker Run, comme d&#x27;habitude. Il y a quelques petits arguments classiques. Et là, on arrive ici, on voit « device.dev.kvm ». Et c&#x27;est là où on voit la petite astuce.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur web affichant un dépôt GitHub (README.md) avec le flux vidéo incrusté du créateur.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Fichier YAML de configuration Docker Compose (image dockurr/windows, version win11, devices /dev/kvm, cap_add NET_ADMIN, ports 8006 et 3389) et commande CLI `docker run -it --rm -p 8006:8006 --device=/dev/kvm --cap-add NET_ADMIN ...`.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication et démonstration des différentes méthodes de déploiement (Docker Compose et Docker CLI) pour lancer Windows dans Docker avec l&#x27;accélération matérielle KVM.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001932_seg49.jpg" alt="Documentation GitHub montrant un fichier Docker Compose et une commande Docker CLI pour exécuter un conteneur Windows avec KVM." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_001932_seg49.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:19:32</span>
+                        <span class="caption-text">Documentation GitHub montrant un fichier Docker Compose et une commande Docker CLI pour exécuter un conteneur Windows avec KVM.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-50">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:19:47 - 00:20:12</span>
+                <span class="segment-idx">Segment #50</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ce conteneur, il va utiliser le KVM, c&#x27;est-à-dire l&#x27;hyperviseur de la machine haute. Donc tu as besoin d&#x27;être sur Linux pour pouvoir utiliser ça. Donc du coup, KVM va lancer une machine Windows. Et ce qui va être dans ce conteneur, ça va être un espèce de VNC qui va capturer l&#x27;écran de la machine virtuelle Windows et le renvoyer dans notre navigateur pour qu&#x27;on puisse accéder à notre Windows ou notre Mac OS dans le confort de notre navigateur.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-51">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:12 - 00:20:33</span>
+                <span class="segment-idx">Segment #51</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Donc en fait, pour résumer, ce n&#x27;est pas vraiment un Windows dans Docker, c&#x27;est un Windows dans KVM via le VNC du Docker renvoyé dans le navigateur dans ton ordi. Donc on va quand même voir si ça marche bien. Je lancé un petit peu à la vente parce que ça met quand même un petit peu de temps. On parle quand même de démarrer Windows. Et donc là, j&#x27;ai tapé l&#x27;adresse IP de ma machine sur le port 8.6.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Terminal Linux (bash/shell) sous Ubuntu</p>
+                        <p><strong>Contenu textuel & Code :</strong> `docker run -it --rm -p 8006:8006 --device=/dev/kvm --cap-add NET_ADMIN --stop-timeout 120 dockurr/windows` ainsi que les logs d&#x27;initialisation, le téléchargement de l&#x27;ISO Windows 11 (6.34 Go) et le démarrage de QEMU v8.2.4.</p>
+                        <p><strong>Action / Démonstration :</strong> Explication technique du fonctionnement réel de l&#x27;image Docker (virtualisation KVM sous-jacente avec export VNC) et observation du processus de démarrage dans le terminal.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (1) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-1">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002022_seg51.jpg" alt="Terminal Linux affichant le lancement de la commande Docker pour exécuter l&#x27;image dockurr/windows avec les paramètres KVM et réseau." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002022_seg51.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:20:22</span>
+                        <span class="caption-text">Terminal Linux affichant le lancement de la commande Docker pour exécuter l&#x27;image dockurr/windows avec les paramètres KVM et réseau.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-52">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:33 - 00:20:51</span>
+                <span class="segment-idx">Segment #52</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et donc, j&#x27;ai un Windows qui a l&#x27;air à peu près de fonctionner. Donc là, tu as vu, j&#x27;ai mon Edge. Je peux aller sur Docker.com, le sponsor de cette vidéo. Et donc, j&#x27;ai un Windows qui est accessible comme ça assez rapidement en simplement une seule ligne du commande à partir du moment où tu tournes sur Linux ou alors que tu as un serveur de dispo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Navigateur Microsoft Edge, bureau Windows virtualisé dans un navigateur/conteneur.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Page d&#x27;accueil de Docker.com (« Docker Builds: Now Lightning Fast »).</p>
+                        <p><strong>Action / Démonstration :</strong> Navigation sur le site web de Docker depuis un environnement Windows conteneurisé accessible via le web.</p>
+                    </div>
+                </div>
+                
+            <div class="segment-screenshots-wrapper">
+                <div class="screenshots-header">
+                    <span class="media-icon">📸</span>
+                    <strong>Capture(s) d'écran clé en timeline (2) :</strong>
+                </div>
+                <div class="segment-screenshots-grid count-2">
+                    
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002038_seg52.jpg" alt="Navigateur Microsoft Edge affichant le site officiel Docker.com au sein d&#x27;un bureau Windows conteneurisé." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002038_seg52.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:20:38</span>
+                        <span class="caption-text">Navigateur Microsoft Edge affichant le site officiel Docker.com au sein d&#x27;un bureau Windows conteneurisé.</span>
+                    </div>
+                </div>
+                
+                <div class="screenshot-card">
+                    <div class="img-wrapper">
+                        <img src="../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002042_seg52.jpg" alt="Vue similaire montrant le site Docker.com sur un navigateur web dans l&#x27;environnement Windows virtuel." loading="lazy" onclick="openLightbox('../screenshots/PUpgGtq0xSw/PUpgGtq0xSw_002042_seg52.jpg')">
+                        <span class="zoom-badge">🔍 Zoom</span>
+                    </div>
+                    <div class="screenshot-caption">
+                        <span class="caption-time">⏱️ 00:20:42</span>
+                        <span class="caption-text">Vue similaire montrant le site Docker.com sur un navigateur web dans l&#x27;environnement Windows virtuel.</span>
+                    </div>
+                </div>
+                
+                </div>
+            </div>
+            
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-53">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:20:51 - 00:21:12</span>
+                <span class="segment-idx">Segment #53</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ils ont aussi une version macOS que j&#x27;ai testée vite fait. Mais c&#x27;est pareil, ça télécharge l&#x27;ISO des serveurs d&#x27;Apple ou l&#x27;ISO des serveurs de Microsoft. Et tu passes à travers tout le setup d&#x27;installation. Donc ça peut être cool si tu le fais une fois puis tu le gardes en coin. Mais sinon, pour booter vite fait un Windows, c&#x27;est pas si vite fait que ça.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Aucune</p>
+                        <p><strong>Contenu textuel & Code :</strong> Aucun</p>
+                        <p><strong>Action / Démonstration :</strong> Explication orale du fonctionnement des installations d&#x27;OS sur macOS.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-54">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:12 - 00:21:32</span>
+                <span class="segment-idx">Segment #54</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Ça prend au moins une demi-heure le temps de tout télécharger et de tout installer, etc. Mais le fait que c&#x27;est possible grâce à Docker, c&#x27;est quand même un truc de fou. Et donc encore une fois, merci beaucoup à Docker pour avoir sponsorisé cette vidéo. Moi c&#x27;est un outil que j&#x27;utilisais tout le temps dans mon taf et que je continue à beaucoup utiliser presque tous les jours aujourd&#x27;hui. Donc si tu veux jeter un coup d&#x27;œil à leurs nouvelles fonctionnalités, je te laisse un petit lien dans la description.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+
+        <div class="timeline-block" id="segment-55">
+            <div class="timeline-time">
+                <span class="time-badge">⏱️ 00:21:32 - 00:21:33</span>
+                <span class="segment-idx">Segment #55</span>
+            </div>
+            <div class="timeline-content">
+                <div class="verbatim-box">
+                    <div class="verbatim-header">
+                        <span class="speaker-icon">🔊</span>
+                        <strong>Audio Verbatim (Mot pour Mot en Français) :</strong>
+                    </div>
+                    <blockquote class="verbatim-text">Et on se retrouve très vite dans la prochaine vidéo.</blockquote>
+                </div>
+                <div class="visual-box">
+                    <div class="visual-header">
+                        <span class="eye-icon">👁️</span>
+                        <strong>Analyse Visuelle d'Écran (gemini-3.5-flash-lite) :</strong>
+                    </div>
+                    <div class="visual-details">
+                        <p><strong>Interface & Outils :</strong> Présentation ou face-caméra sans interface informatique partagée.</p>
+                        <p><strong>Contenu textuel & Code :</strong> Explications orales des concepts, architectures et retours d&#x27;expérience.</p>
+                        <p><strong>Action / Démonstration :</strong> Démonstration pédagogique et mise en perspective technique.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        </section>
+
+        <footer class="site-footer">
+            <p>Veille Multimodale Automatisée Antigravity sur VPS — Chaîne <strong>cocadmin</strong></p>
+            <p>100% Verbatim Français Audio (Whisper) & Analyse Visuelle d'Écran (Gemini)</p>
+        </footer>
+    </div>
+
+    <div id="lightbox" class="lightbox-modal" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Capture agrandie">
+    </div>
+
+    <script>
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

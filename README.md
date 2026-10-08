@@ -9,7 +9,7 @@
 - **Captures d'écran par timeline** : archivées dans **`screenshots/<video_id>/`**
 
 ## 📊 Statistiques de l'Automatisation
-- **Vidéos traitées** : `29 / 142` (`20.4%`)
+- **Vidéos traitées** : `30 / 142` (`21.1%`)
 - **Modèle Audio** : `Whisper-v3-large-turbo` (100% Verbatim Français mot pour mot)
 - **Modèle Vision d'écran** : `gemini-3.5-flash-lite` (Terminaux, code, consoles Cloud, architectures)
 - **Signature de traitement** : `whisper-v3-large-turbo+gemini-3.5-flash-lite`
@@ -48,6 +48,7 @@
 | 2025-01-26 | [SXv9JCCUqXQ](https://www.youtube.com/watch?v=SXv9JCCUqXQ) | **Comment faire une infra prête pour la prod** | [2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2025-01-26_YT-[SXv9JCCUqXQ]_Comment faire une infra prête pour la prod_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `14` |
 | 2024-11-24 | [QU6yGZ17Zak](https://www.youtube.com/watch?v=QU6yGZ17Zak) | **J'ai foutu la merde en prod ...** | [2024-11-24_YT-[QU6yGZ17Zak]_J'ai foutu la merde en prod ..._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2024-11-24_YT-[QU6yGZ17Zak]_J'ai foutu la merde en prod ..._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2024-11-24_YT-[QU6yGZ17Zak]_J'ai foutu la merde en prod ..._by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `4` |
 | 2024-09-10 | [Q5a92asc7hM](https://www.youtube.com/watch?v=Q5a92asc7hM) | **Comment la pire faille de Linux a été trouvé par pure chance ?** | [2024-09-10_YT-[Q5a92asc7hM]_Comment la pire faille de Linux a été trouvé par pure chance_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2024-09-10_YT-[Q5a92asc7hM]_Comment la pire faille de Linux a été trouvé par pure chance_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2024-09-10_YT-[Q5a92asc7hM]_Comment la pire faille de Linux a été trouvé par pure chance_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `20` |
+| 2024-08-24 | [PUpgGtq0xSw](https://www.youtube.com/watch?v=PUpgGtq0xSw) | **10ans de Docker en 20min** | [2024-08-24_YT-[PUpgGtq0xSw]_10ans de Docker en 20min_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md](YT_Cocadmin_Transcript/2024-08-24_YT-[PUpgGtq0xSw]_10ans de Docker en 20min_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].md) | [Voir Rapport HTML](YT_Cocadmin_Transcript/2024-08-24_YT-[PUpgGtq0xSw]_10ans de Docker en 20min_by-[whisper-v3-large-turbo+gemini-3.5-flash-lite].html) | `40` |
 
 ---
 *Généré automatiquement par l'agent de veille multimodale Antigravity sur VPS.*
